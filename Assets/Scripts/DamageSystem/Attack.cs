@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine.Serialization;
 
 namespace DamageSystem
 {
@@ -8,12 +7,7 @@ namespace DamageSystem
     {
         public int NormalDamage;
         public int PiercingDamage;
+        public int FireDamage;
         public DamageSender Sender;
-
-        public Attack(int normalDamage, int piercingDamage = 0)
-        {
-            NormalDamage = normalDamage;
-            PiercingDamage = piercingDamage;
-        }
     }
 }
