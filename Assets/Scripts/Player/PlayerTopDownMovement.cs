@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerTopDownMovement : MonoBehaviour
 {
-    [Range(0.1f, 60)] public float speed = 3f;
-    [Range(0.0001f, 1)] public float maxAcceleration = .5f;
+    [Range(0.1f, 60)] public float speed = 4f;
+    [Range(0.0001f, 2)] public float maxAcceleration = 1;
 
 
     private Rigidbody2D rb2d;
@@ -20,13 +20,13 @@ public class PlayerTopDownMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
 
-        if (playerInput == null)
+        if (playerInput)
         {
-            Debug.LogError($"PlayerInput component not found on the GameObject {gameObject.name}.");
+            moveAction = playerInput.actions["Move"];
         }
         else
         {
-            moveAction = playerInput.actions["Move"];
+            Debug.LogError($"PlayerInput component not found on the GameObject {gameObject.name}.");
         }
     }
 
