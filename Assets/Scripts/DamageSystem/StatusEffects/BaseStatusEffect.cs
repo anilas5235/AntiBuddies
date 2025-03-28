@@ -7,6 +7,8 @@ namespace DamageSystem.StatusEffects
     {
         public float Duration;
         public float RemainingDuration;
+        public int StackCount;
+        public int MaxStackCount;
         public bool Expired;
         
         public BaseStatusEffect(float duration)

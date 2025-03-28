@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace DamageSystem
 {
@@ -9,5 +10,16 @@ namespace DamageSystem
         public int PiercingDamage;
         public int FireDamage;
         public DamageSender Sender;
+        
+        public Attack GetMultipliedAttack(float multiplier)
+        {
+            return new Attack
+            {
+                NormalDamage = Mathf.FloorToInt(NormalDamage * multiplier),
+                PiercingDamage = Mathf.FloorToInt(PiercingDamage * multiplier),
+                FireDamage = Mathf.FloorToInt(FireDamage * multiplier),
+                Sender = Sender
+            };
+        }
     }
 }

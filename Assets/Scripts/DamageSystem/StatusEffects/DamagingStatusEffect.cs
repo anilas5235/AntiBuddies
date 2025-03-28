@@ -11,9 +11,6 @@
             DamagePerTick = damagePerTick;
         }
         
-        public override void Tick()
-        {
-            Target.TakeDamage(DamagePerTick);
-        }
+        public override void Tick() => Target.TakeDamage(DamagePerTick.GetMultipliedAttack(StackCount));
     }
 }
