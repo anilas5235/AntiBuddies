@@ -13,12 +13,27 @@ namespace DamageSystem
             healthComponent = GetComponent<HealthComponent>();
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(Attack attack)
         {
-            if (damage < 0) return;
+            int totalDamage = HandleNormalDamage(attack.NormalDamage);
+            totalDamage += HandlePiercingDamage(attack.PiercingDamage);
+            totalDamage = Mathf.Max(0, totalDamage);
+            healthComponent.TakeDamage(totalDamage);
+        }
+        
+        protected int HandleNormalDamage(int damage)
+        {
+            if (damage <= 0) return 0;
             damage -= flatDamageReduction;
             damage = Mathf.RoundToInt(damage * Mathf.Max(1 - percentageDamageReduction,0));
-            healthComponent.TakeDamage(damage);
+            return damage;
+        }
+        
+        protected int HandlePiercingDamage(int damage)
+        {
+            if (damage <= 0) return 0;
+            damage -= flatDamageReduction;
+            return damage;
         }
     }
 }
