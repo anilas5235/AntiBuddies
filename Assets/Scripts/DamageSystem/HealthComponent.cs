@@ -7,7 +7,7 @@ namespace DamageSystem
     {
         [SerializeField] private int currentHealth;
         [SerializeField] private int maxHealth = 10;
-        
+
         public Action OnDeath;
 
         public int CurrentHealth => currentHealth;
@@ -20,13 +20,11 @@ namespace DamageSystem
 
         public void TakeDamage(int damage)
         {
+            if (damage <= 0) return;
             currentHealth -= damage;
-            if (currentHealth <= 0)
-            {
-                Die();
-            }
+            if (currentHealth <= 0) Die();
         }
-        
+
         public void Heal(int amount)
         {
             currentHealth += amount;
@@ -35,14 +33,15 @@ namespace DamageSystem
                 currentHealth = maxHealth;
             }
         }
-        
-        public void FullHeal(){
+
+        public void FullHeal()
+        {
             currentHealth = maxHealth;
         }
 
         protected void Die()
         {
-            OnDeath?.Invoke(); 
+            OnDeath?.Invoke();
         }
     }
 }
