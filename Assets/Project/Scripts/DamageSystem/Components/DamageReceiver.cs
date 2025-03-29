@@ -1,40 +1,53 @@
-﻿using UnityEngine;
+﻿using System;
+using Project.Scripts.DamageSystem.Attacks;
+using Project.Scripts.DamageSystem.Events;
+using Project.Scripts.DamageSystem.Resistance;
+using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
 {
     [RequireComponent(typeof(HealthComponent))]
     public class DamageReceiver : MonoBehaviour , IDamageable
     {
-        private HealthComponent healthComponent;
-        [SerializeField] private int flatDamageReduction;
-        [SerializeField,Range(0,1)] private float percentageDamageReduction;
+        // Event for damage received
+        public event Action<DamageEvent> OnDamageReceived;
+        
+        private HealthComponent _healthComponent;
+        [Header("Damage Reduction")]
+        [SerializeField] protected ResistanceData resistances;
 
         private void Awake()
         {
-            healthComponent = GetComponent<HealthComponent>();
+            _healthComponent = GetComponent<HealthComponent>();
         }
 
-        public void TakeDamage(Attack attack)
+        public void TakeDamage(AttackPackage attackPackage)
         {
-            int totalDamage = HandleNormalDamage(attack.NormalDamage);
-            totalDamage += HandlePiercingDamage(attack.PiercingDamage);
-            totalDamage = Mathf.Max(0, totalDamage);
-            healthComponent.TakeDamage(totalDamage);
+            int totalDamage = 0;
+            foreach (IDamage damageInfo in attackPackage.AttackDataComponents)
+            {
+                int damage = damageInfo.CalcDamage(resistances);
+                if (damage <= 0) continue;
+                
+                totalDamage += damage;
+                SendDamageEvent(damage, damageInfo.GetDamageType() ,attackPackage.Sender);
+            }
+            
+            // Apply the total damage to the health component
+            if(totalDamage > 0) _healthComponent.TakeDamage(totalDamage);
         }
-        
-        protected int HandleNormalDamage(int damage)
+
+        private void SendDamageEvent(int damage,DamageType damageType ,IDamageDealer damageSource)
         {
-            if (damage <= 0) return 0;
-            damage -= flatDamageReduction;
-            damage = Mathf.RoundToInt(damage * Mathf.Max(1 - percentageDamageReduction,0));
-            return damage;
-        }
-        
-        protected int HandlePiercingDamage(int damage)
-        {
-            if (damage <= 0) return 0;
-            damage -= flatDamageReduction;
-            return damage;
+            // Create a new DamageEvent and invoke the event
+            DamageEvent damageEvent = new (
+                damage, 
+                damageType,
+                transform.position, 
+                damageSource, 
+                gameObject
+            );
+            OnDamageReceived?.Invoke(damageEvent);
         }
     }
 }
