@@ -2,6 +2,7 @@
 
 namespace Project.Scripts.DamageSystem.Components
 {
+    [RequireComponent(typeof(HealthComponent))]
     public class DamageReceiver : MonoBehaviour , IDamageable
     {
         private HealthComponent healthComponent;

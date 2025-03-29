@@ -6,11 +6,16 @@ namespace Project.Scripts.DamageSystem.Components
     {
         [SerializeField] private Attack currAttack;
 
-        void IDamageDealer.Attack(GameObject target, Attack attack)
+        public void Attack(GameObject target, Attack attack)
         {
-            IDamageable comp = target.GetComponent<IDamageable>();
+            IDamageable damageable = target.GetComponent<IDamageable>();
             attack.Sender = this;
-            comp?.TakeDamage(attack);
+            damageable?.TakeDamage(attack);
+        }
+
+        protected void Attack(GameObject target)
+        {
+            Attack(target, currAttack);
         }
     }
 }
