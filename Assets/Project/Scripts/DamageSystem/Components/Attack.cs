@@ -1,5 +1,4 @@
 ﻿using System;
-using DamageSystem;
 using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
