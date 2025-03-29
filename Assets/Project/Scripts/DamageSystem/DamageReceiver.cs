@@ -4,7 +4,7 @@ namespace DamageSystem
 {
     public class DamageReceiver : MonoBehaviour , IDamageable
     {
-        [SerializeField] private HealthComponent healthComponent;
+        private HealthComponent healthComponent;
         [SerializeField] private int flatDamageReduction;
         [SerializeField,Range(0,1)] private float percentageDamageReduction;
 

@@ -1,73 +1,76 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerTopDownMovement : MonoBehaviour
+namespace Project.Scripts.Player
 {
-    [Range(0.1f, 60)] public float speed = 4f;
-    [Range(0.0001f, 2)] public float maxAcceleration = 1;
-
-
-    private Rigidbody2D rb2d;
-
-    // Input System Variablen
-    private PlayerInput playerInput;
-    private InputAction moveAction;
-    private Vector2 moveInput;
-
-    private void Awake()
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class PlayerTopDownMovement : MonoBehaviour
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        playerInput = GetComponent<PlayerInput>();
+        [Range(0.1f, 60)] public float speed = 4f;
+        [Range(0.0001f, 2)] public float maxAcceleration = 1;
 
-        if (playerInput)
+
+        private Rigidbody2D _rb2d;
+
+        // Input System Variables
+        private PlayerInput _playerInput;
+        private InputAction _moveAction;
+        private Vector2 _moveInput;
+
+        private void Awake()
         {
-            moveAction = playerInput.actions["Move"];
+            _rb2d = GetComponent<Rigidbody2D>();
+            _playerInput = GetComponent<PlayerInput>();
+
+            if (_playerInput)
+            {
+                _moveAction = _playerInput.actions["Move"];
+            }
+            else
+            {
+                Debug.LogError($"PlayerInput component not found on the GameObject {gameObject.name}.");
+            }
         }
-        else
+
+        private void OnEnable()
         {
-            Debug.LogError($"PlayerInput component not found on the GameObject {gameObject.name}.");
+            if (_moveAction != null)
+            {
+                _moveAction.performed += OnMovePerformed;
+                _moveAction.canceled += OnMoveCanceled;
+            }
         }
-    }
 
-    private void OnEnable()
-    {
-        if (moveAction != null)
+        private void OnDisable()
         {
-            moveAction.performed += OnMovePerformed;
-            moveAction.canceled += OnMoveCanceled;
+            if (_moveAction != null)
+            {
+                _moveAction.performed -= OnMovePerformed;
+                _moveAction.canceled -= OnMoveCanceled;
+            }
         }
-    }
 
-    private void OnDisable()
-    {
-        if (moveAction != null)
+        private void OnMovePerformed(InputAction.CallbackContext context)
         {
-            moveAction.performed -= OnMovePerformed;
-            moveAction.canceled -= OnMoveCanceled;
+            _moveInput = context.ReadValue<Vector2>();
         }
-    }
 
-    private void OnMovePerformed(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
+        private void OnMoveCanceled(InputAction.CallbackContext context)
+        {
+            _moveInput = Vector2.zero;
+        }
 
-    private void OnMoveCanceled(InputAction.CallbackContext context)
-    {
-        moveInput = Vector2.zero;
-    }
+        private void FixedUpdate()
+        {
+            HandleMovement();
+        }
 
-    private void FixedUpdate()
-    {
-        HandleMovement();
-    }
+        private void HandleMovement()
+        {
+            Vector2 targetVelocity = _moveInput.normalized * speed;
 
-    private void HandleMovement()
-    {
-        Vector2 targetVelocity = moveInput * speed;
-
-        rb2d.linearVelocity =
-            Vector2.MoveTowards(rb2d.linearVelocity, targetVelocity, Time.fixedDeltaTime * 10 * maxAcceleration);
+            _rb2d.linearVelocity =
+                Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, Time.fixedDeltaTime * 10 * maxAcceleration);
+        }
     }
 }

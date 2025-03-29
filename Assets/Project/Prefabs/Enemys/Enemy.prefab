@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1459104983487598962}
   - component: {fileID: 2740992555734098473}
   - component: {fileID: 7679437470409611216}
+  - component: {fileID: 6211520244055357206}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -98,7 +99,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4919007744789787044}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -107,9 +108,9 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
+  m_Height: 0.2
+  m_BaseOffset: 0
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 2
 --- !u!114 &7679437470409611216
 MonoBehaviour:
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_Graph: {fileID: -5982234347715306647, guid: 5fa40753ef217d647b7a0c100d3ef1b4, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 5809074639028617483
+  - rid: 5809074639028617686
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -139,3 +141,23 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 4919007744789787044}
+    - rid: 5809074639028617686
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17256126375871897305
+          m_Value1: 12403424371290604585
+        Name: Speed
+        m_Value: 2
+--- !u!114 &6211520244055357206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919007744789787044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9ce43646e9de74b8ca098706701cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
