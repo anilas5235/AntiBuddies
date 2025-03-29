@@ -7,16 +7,21 @@ namespace Project.Scripts.DamageSystem.Visuals
     public class FloatingDamageNumber : MonoBehaviour
     {
         public DamageInfo damageInfo;
-        [SerializeField] private bool living;
+        [SerializeField] private bool living = true;
+        [SerializeField] private float TimeToLive = 1f;
 
 
         private float _timeRemaining;
-        private const float TimeToLive = 1f;
         private TextMesh _textMesh;
 
         private void Awake()
         {
             _textMesh = GetComponent<TextMesh>();
+        }
+
+        private void Start()
+        {
+            UpdateText();
         }
 
         private void FixedUpdate()
@@ -41,8 +46,14 @@ namespace Project.Scripts.DamageSystem.Visuals
             }
 
             damage.damage += damage.GetDamage();
-            _textMesh.text = damageInfo.damage.ToString();
             _timeRemaining = TimeToLive;
+            UpdateText();
+        }
+
+        public void UpdateText()
+        {
+            _textMesh.text = damageInfo.damage.ToString();
+            _textMesh.color = damageInfo.damageType.GetColor();
         }
     }
 }
