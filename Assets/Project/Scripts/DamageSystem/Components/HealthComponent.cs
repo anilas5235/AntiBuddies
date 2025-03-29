@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace DamageSystem
+namespace Project.Scripts.DamageSystem.Components
 {
     public class HealthComponent : MonoBehaviour
     {

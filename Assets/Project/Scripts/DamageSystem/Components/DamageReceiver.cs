@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using DamageSystem;
+using UnityEngine;
 
-namespace DamageSystem
+namespace Project.Scripts.DamageSystem.Components
 {
     public class DamageReceiver : MonoBehaviour , IDamageable
     {

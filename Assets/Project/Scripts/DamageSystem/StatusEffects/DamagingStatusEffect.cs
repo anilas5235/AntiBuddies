@@ -1,4 +1,6 @@
-﻿namespace DamageSystem.StatusEffects
+﻿using Project.Scripts.DamageSystem.Components;
+
+namespace Project.Scripts.DamageSystem.StatusEffects
 {
     public abstract class DamagingStatusEffect : BaseStatusEffect
     {

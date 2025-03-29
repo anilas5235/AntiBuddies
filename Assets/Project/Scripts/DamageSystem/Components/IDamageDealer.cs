@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DamageSystem
+namespace Project.Scripts.DamageSystem.Components
 {
     public interface IDamageDealer
     {

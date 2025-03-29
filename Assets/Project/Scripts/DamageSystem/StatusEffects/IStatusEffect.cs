@@ -1,4 +1,4 @@
-﻿namespace DamageSystem.StatusEffects
+﻿namespace Project.Scripts.DamageSystem.StatusEffects
 {
     public interface IStatusEffect
     {

@@ -1,7 +1,8 @@
 ﻿using System;
+using DamageSystem;
 using UnityEngine;
 
-namespace DamageSystem
+namespace Project.Scripts.DamageSystem.Components
 {
     [Serializable]
     public class Attack

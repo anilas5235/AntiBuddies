@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DamageSystem.StatusEffects
+namespace Project.Scripts.DamageSystem.StatusEffects
 {
     [Serializable]
     public abstract class BaseStatusEffect: IStatusEffect

@@ -1,6 +1,6 @@
-using UnityEngine;
+using Project.Scripts.DamageSystem.Components;
 
-namespace DamageSystem.StatusEffects
+namespace Project.Scripts.DamageSystem.StatusEffects
 {
     public class FireStatusEffect : DamagingStatusEffect
     {
