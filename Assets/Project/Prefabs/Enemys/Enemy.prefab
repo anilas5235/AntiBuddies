@@ -243,8 +243,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currAttack:
-    NormalDamage: 0
-    PiercingDamage: 0
-    FireDamage: 0
-    Sender: {fileID: 0}

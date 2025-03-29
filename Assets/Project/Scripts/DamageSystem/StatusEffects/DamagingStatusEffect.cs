@@ -1,9 +1,10 @@
 ﻿using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.DamageSystem.Components;
+using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.StatusEffects
 {
-    public abstract class DamagingStatusEffect : BaseStatusEffect
+    public abstract class DamagingStatusEffect : BaseStatusEffect, IDamageDealer
     {
         protected IDamageable Target;
         protected IDamage DamagePerTick;
@@ -13,10 +14,13 @@ namespace Project.Scripts.DamageSystem.StatusEffects
             Target = target;
             DamagePerTick = damagePerTick;
         }
-        
-        public override void Tick() => Target.TakeDamage( GetAttack());
+
+        public override void Tick()
+        {
+            Target.TakeDamage(GetAttack());
+        }
 
         protected abstract AttackPackage GetAttack();
-
+        
     }
 }

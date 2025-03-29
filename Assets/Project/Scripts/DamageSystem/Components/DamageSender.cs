@@ -1,21 +1,29 @@
-﻿using Project.Scripts.DamageSystem.Attacks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Project.Scripts.DamageSystem.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
 {
     public class DamageSender : MonoBehaviour, IDamageDealer
     {
-        [SerializeField] private AttackPackage _currAttackPackage;
+        [SerializeField] protected List<DamageInfo> damageInfos = new List<DamageInfo>();
 
         public void Attack(GameObject target, AttackPackage attackPackage)
         {
-            IDamageable damageable = target.GetComponent<IDamageable>();
-            damageable?.TakeDamage(attackPackage);
+            var damageable = target.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                // Verknüpfe den Sender mit dem Angriff
+                attackPackage.SetSender(this);
+                damageable.TakeDamage(attackPackage);
+            }
         }
 
         protected void Attack(GameObject target)
         {
-            Attack(target, _currAttackPackage);
+            var attackPackage = new AttackPackage(damageInfos);
+            Attack(target, attackPackage);
         }
     }
 }

@@ -4,11 +4,17 @@ namespace Project.Scripts.DamageSystem.Components
 {
     public class ContactDamageSender : DamageSender
     {
+        [SerializeField] private string[] targetTags = {"Player"};
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            foreach (var tag in targetTags)
             {
-                Attack(other.gameObject);
+                if (other.CompareTag(tag))
+                {
+                    Attack(other.gameObject);
+                    break;
+                }
             }
         }
     }

@@ -32,17 +32,17 @@ namespace Project.Scripts.DamageSystem.Visuals
 
         private void HandleDamageReceived(DamageEvent damageEvent)
         {
-            if (damageEvent.DamageAmount <= 0 || damageNumberPrefab == null) return;
+            if (damageEvent.DamageAmount <= 0 || !damageNumberPrefab) return;
             
-            SpawnDamageNumber(damageEvent.DamageAmount, damageEvent.Position);
+            SpawnDamageNumber(damageEvent.DamageAmount);
         }
 
-        private void SpawnDamageNumber(int damageAmount, Vector3 position)
+        private void SpawnDamageNumber(int damageAmount)
         {
-            GameObject damageNumberInstance = Instantiate(damageNumberPrefab, position + offset, Quaternion.identity);
+            GameObject damageNumberInstance = Instantiate(damageNumberPrefab, offset, Quaternion.identity);
             TextMeshPro textMesh = damageNumberInstance.GetComponent<TextMeshPro>();
             
-            if (textMesh != null)
+            if (textMesh)
             {
                 textMesh.text = damageAmount.ToString();
                 StartCoroutine(AnimateDamageNumber(damageNumberInstance));

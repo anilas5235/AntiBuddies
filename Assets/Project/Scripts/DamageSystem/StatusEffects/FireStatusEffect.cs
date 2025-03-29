@@ -6,13 +6,17 @@ namespace Project.Scripts.DamageSystem.StatusEffects
     public class FireStatusEffect : DamagingStatusEffect
     {
         public FireStatusEffect(IDamageable target, int fireDamagePerTick, float duration)
-            : base(target, new FireAttack(fireDamagePerTick), duration)
+            : base(target, new DamageInfo(fireDamagePerTick, DamageType.Fire), duration)
         {
         }
 
         protected override AttackPackage GetAttack()
         {
-            return new AttackPackage(new FireAttack(DamagePerTick.GetDamage() * StackCount));
+            return new AttackPackage(
+                new DamageInfo(
+                    DamagePerTick.GetDamage() * StackCount,DamagePerTick.GetDamageType()
+                    )
+                ,this);
         }
     }
 }

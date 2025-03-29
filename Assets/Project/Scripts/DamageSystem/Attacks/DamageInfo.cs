@@ -5,20 +5,26 @@ using UnityEngine;
 namespace Project.Scripts.DamageSystem.Attacks
 {
     [Serializable]
-    public abstract class DamageInfo : IDamage
+    public class DamageInfo : IDamage
     {
-        public readonly int Damage;
-        public readonly DamageType DamageType;
+        public int damage;
+        public DamageType damageType;
 
-        protected DamageInfo(int damage, DamageType damageType)
+        public DamageInfo(int damage, DamageType damageType)
         {
-            Damage = damage;
-            DamageType = damageType;
+            this.damage = damage;
+            this.damageType = damageType;
         }
 
-        public abstract int CalcDamage(IResistance resistance);
+        public int CalcDamage(IResistance resistance)
+        {
+            float d = GetDamage();
+            d -= resistance.GetFlatDamageReduction(GetDamageType());
+            d *= 1 - resistance.GetResistance(GetDamageType());
+            return Mathf.RoundToInt(d);
+        }
 
-        public DamageType GetDamageType() => DamageType;
-        public int GetDamage() => Damage;
+        public DamageType GetDamageType() => damageType;
+        public int GetDamage() => damage;
     }
 }

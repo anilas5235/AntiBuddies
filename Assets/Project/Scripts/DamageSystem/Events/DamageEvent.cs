@@ -8,15 +8,13 @@ namespace Project.Scripts.DamageSystem.Events
     {
         public int DamageAmount { get; private set; }
         public DamageType DamageType { get; private set; }
-        public Vector3 Position { get; private set; }
         public IDamageDealer DamageDealer { get; private set; }
         public GameObject Target { get; private set; }
 
-        public DamageEvent(int damageAmount, DamageType damageType, Vector3 position, IDamageDealer damageDealer,
+        public DamageEvent(int damageAmount, DamageType damageType, IDamageDealer damageDealer,
             GameObject target)
         {
             DamageAmount = damageAmount;
-            Position = position;
             DamageDealer = damageDealer;
             Target = target;
             DamageType = damageType;

@@ -1,22 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Project.Scripts.DamageSystem.Components;
 
 namespace Project.Scripts.DamageSystem.Attacks
 {
-    public struct AttackPackage
+    [Serializable]
+    public class AttackPackage
     {
-        public readonly List<IDamage> AttackDataComponents;
-        public readonly DamageSender Sender;
+        private List<IDamage> _damageComponents;
+        private IDamageDealer _sender;
 
-        public AttackPackage(List<IDamage> attackDataComponents, DamageSender sender = null)
+        public List<IDamage> DamageComponents => _damageComponents;
+        public IDamageDealer Sender => _sender;
+
+        public AttackPackage(List<IDamage> damageComponents)
         {
-            AttackDataComponents = attackDataComponents;
-            Sender = sender;
+            _damageComponents = damageComponents ?? new List<IDamage>();
+            _sender = null;
         }
 
-        public AttackPackage(IDamage attackDataComponents, DamageSender sender = null)
-            : this(new List<IDamage> { attackDataComponents }, sender)
+        public AttackPackage(IDamage attackDataComponent) 
+            : this(new List<IDamage> { attackDataComponent })
         {
+        }
+
+        public void SetSender(IDamageDealer sender)
+        {
+            _sender = sender;
+        }
+
+        public void AddDamageComponent(IDamage damageComponent)
+        {
+            if (damageComponent != null)
+            {
+                _damageComponents.Add(damageComponent);
+            }
         }
     }
 }
