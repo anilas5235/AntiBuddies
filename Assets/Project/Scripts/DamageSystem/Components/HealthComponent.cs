@@ -1,37 +1,54 @@
 using System;
+using Project.Scripts.DamageSystem.Attacks;
+using Project.Scripts.DamageSystem.Events;
+using Project.Scripts.DamageSystem.Resistance;
 using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
 {
-    public class HealthComponent : MonoBehaviour
+    public class HealthComponent : MonoBehaviour, IDamageable
     {
         [SerializeField] private int currentHealth;
         [SerializeField] private int maxHealth = 10;
+        
+        [SerializeField] protected ResistanceData resistances;
 
-        public Action OnDeath;
+        public event Action<DamageEvent> OnDamageReceived;
+        public event Action OnDeath;
 
-        public int CurrentHealth => currentHealth;
+        public int CurrentHealth
+        {
+            get => currentHealth;
+            protected set
+            {
+                currentHealth = Math.Clamp(value, 0, maxHealth);
+                if (currentHealth <= 0) Die();
+            }
+        }
+
         public int MaxHealth => maxHealth;
 
         private void Awake()
         {
             FullHeal();
         }
-
-        public void TakeDamage(int damage)
+        
+        public void TakeDamage(DamageInfo attackPackage, Component attacker)
         {
-            if (damage <= 0) return;
-            currentHealth -= damage;
-            if (currentHealth <= 0) Die();
+            if (attackPackage == null || attackPackage.GetDamage() <= 0) return;
+            CurrentHealth -= DamageUtils.CalcDamage(attackPackage,resistances);
+            OnDamageReceived?.Invoke(new DamageEvent(CurrentHealth, attackPackage.damageType, attacker, gameObject));
         }
 
         public void Heal(int amount)
         {
             currentHealth += amount;
-            if (currentHealth > maxHealth)
-            {
-                currentHealth = maxHealth;
-            }
+        }
+        
+        public void SetMaxHealth(int amount)
+        {
+            maxHealth = amount;
+            currentHealth = Math.Clamp(currentHealth, 0, maxHealth);
         }
 
         public void FullHeal()

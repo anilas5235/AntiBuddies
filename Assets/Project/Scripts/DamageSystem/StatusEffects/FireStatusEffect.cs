@@ -10,13 +10,9 @@ namespace Project.Scripts.DamageSystem.StatusEffects
         {
         }
 
-        protected override AttackPackage GetAttack()
+        protected override DamageInfo GetAttack()
         {
-            return new AttackPackage(
-                new DamageInfo(
-                    DamagePerTick.GetDamage() * StackCount,DamagePerTick.GetDamageType()
-                    )
-                ,this);
+            return new DamageInfo(DamagePerTick.GetDamage() * StackCount, DamagePerTick.GetDamageType());
         }
     }
 }

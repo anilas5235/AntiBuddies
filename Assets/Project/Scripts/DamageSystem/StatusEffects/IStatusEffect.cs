@@ -1,7 +1,9 @@
-﻿namespace Project.Scripts.DamageSystem.StatusEffects
+﻿using UnityEngine;
+
+namespace Project.Scripts.DamageSystem.StatusEffects
 {
     public interface IStatusEffect
     {
-        void Tick(float dt);
+        void Tick(float dt,Component ticker);
     }
 }

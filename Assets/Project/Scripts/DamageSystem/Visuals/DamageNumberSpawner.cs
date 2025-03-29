@@ -13,21 +13,21 @@ namespace Project.Scripts.DamageSystem.Visuals
         [SerializeField] private Vector3 offset = new Vector3(0, 0.5f, 0);
         [SerializeField] private float floatSpeed = 1.0f;
         
-        private DamageReceiver damageReceiver;
+        private HealthComponent _healthComponent;
 
         private void Awake()
         {
-            damageReceiver = GetComponent<DamageReceiver>();
+            _healthComponent = GetComponent<HealthComponent>();
         }
 
         private void OnEnable()
         {
-            damageReceiver.OnDamageReceived += HandleDamageReceived;
+            _healthComponent.OnDamageReceived += HandleDamageReceived;
         }
 
         private void OnDisable()
         {
-            damageReceiver.OnDamageReceived -= HandleDamageReceived;
+            _healthComponent.OnDamageReceived -= HandleDamageReceived;
         }
 
         private void HandleDamageReceived(DamageEvent damageEvent)

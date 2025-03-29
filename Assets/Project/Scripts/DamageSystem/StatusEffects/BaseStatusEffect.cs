@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.StatusEffects
 {
@@ -8,7 +9,6 @@ namespace Project.Scripts.DamageSystem.StatusEffects
         public float Duration;
         public float RemainingDuration;
         public int StackCount;
-        public int MaxStackCount;
         public bool Expired;
         
         public BaseStatusEffect(float duration)
@@ -18,9 +18,9 @@ namespace Project.Scripts.DamageSystem.StatusEffects
             Expired = false;
         }
 
-        public abstract void Tick();
+        public abstract void Tick(Component ticker);
         
-        public void Tick(float dt)
+        public void Tick(float dt,Component ticker)
         {
             RemainingDuration -= dt;
             if (RemainingDuration <= 0)
@@ -30,7 +30,7 @@ namespace Project.Scripts.DamageSystem.StatusEffects
             }
             else
             {
-                Tick();
+                Tick(ticker);
             }
         }
     }

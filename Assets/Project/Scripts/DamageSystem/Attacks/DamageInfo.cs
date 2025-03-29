@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.Scripts.DamageSystem.Attacks
 {
     [Serializable]
-    public class DamageInfo : IDamage
+    public class DamageInfo
     {
         public int damage;
         public DamageType damageType;
@@ -16,7 +16,7 @@ namespace Project.Scripts.DamageSystem.Attacks
             this.damageType = damageType;
         }
 
-        public int CalcDamage(IResistance resistance)
+        public int CalcDamage(ResistanceData resistance)
         {
             float d = GetDamage();
             d -= resistance.GetFlatDamageReduction(GetDamageType());

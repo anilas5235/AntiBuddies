@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.Scripts.DamageSystem.Resistance
 {
     [Serializable]
-    public class ResistanceData : IResistance
+    public class ResistanceData
     {
         [SerializeField,Range(0,100)] private int flatDamageReduction;
         [SerializeField,Range(0,1)] private float damageReduction;
@@ -45,7 +45,7 @@ namespace Project.Scripts.DamageSystem.Resistance
         {
             return damageType switch
             {
-                DamageType.Normal => damageReduction,
+                DamageType.Physical => damageReduction,
                 DamageType.Piercing => piercingResistance,
                 DamageType.Fire => fireResistance,
                 _ => throw new ArgumentOutOfRangeException(nameof(damageType), damageType, null)

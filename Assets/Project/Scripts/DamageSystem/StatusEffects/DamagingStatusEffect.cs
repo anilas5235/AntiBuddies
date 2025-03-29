@@ -6,21 +6,21 @@ namespace Project.Scripts.DamageSystem.StatusEffects
 {
     public abstract class DamagingStatusEffect : BaseStatusEffect, IDamageDealer
     {
-        protected IDamageable Target;
-        protected IDamage DamagePerTick;
-        
-        public DamagingStatusEffect(IDamageable target, IDamage damagePerTick, float duration) : base(duration)
+        private readonly IDamageable _target;
+        protected readonly DamageInfo DamagePerTick;
+
+        protected DamagingStatusEffect(IDamageable target, DamageInfo damagePerTick, float duration) : base(duration)
         {
-            Target = target;
+            _target = target;
             DamagePerTick = damagePerTick;
         }
 
-        public override void Tick()
+        public override void Tick(Component ticker)
         {
-            Target.TakeDamage(GetAttack());
+            DamageUtils.Attack(_target, DamagePerTick, ticker);
         }
 
-        protected abstract AttackPackage GetAttack();
+        protected abstract DamageInfo GetAttack();
         
     }
 }
