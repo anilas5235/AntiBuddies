@@ -6,7 +6,6 @@ namespace DamageSystem
     {
         [SerializeField] private Attack currAttack;
 
-
         void IDamageDealer.Attack(GameObject target, Attack attack)
         {
             IDamageable comp = target.GetComponent<IDamageable>();
