@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
 {
@@ -8,13 +9,9 @@ namespace Project.Scripts.DamageSystem.Components
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            foreach (var tag in targetTags)
+            if (targetTags.Any(other.CompareTag))
             {
-                if (other.CompareTag(tag))
-                {
-                    Attack(other.gameObject);
-                    break;
-                }
+                Attack(other.gameObject);
             }
         }
     }
