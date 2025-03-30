@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.DamageSystem.Events;
 using Project.Scripts.DamageSystem.Resistance;
@@ -41,11 +42,19 @@ namespace Project.Scripts.DamageSystem.Components
             FullHeal();
         }
         
-        public void TakeDamage(EffectInfo effectInfo, Component attacker)
+        public void Apply(EffectInfo effectInfo, Component source)
         {
             if (effectInfo == null || effectInfo.GetAmount() <= 0) return;
             CurrentHealth -= DamageUtils.CalcDamage(effectInfo,resistances);
-            OnDamageReceived?.Invoke(new EffectEvent(effectInfo, attacker, gameObject));
+            OnDamageReceived?.Invoke(new EffectEvent(effectInfo, source, gameObject));
+        }
+
+        public void Apply(List<EffectInfo> effectInfos, Component source)
+        {
+            foreach (EffectInfo effectInfo in effectInfos)
+            {
+                Apply(effectInfo, source);
+            }
         }
 
         public void Heal(int amount)

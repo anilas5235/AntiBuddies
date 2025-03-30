@@ -23,7 +23,7 @@ namespace Project.Scripts.DamageSystem.Attacks
         public static void Attack(IEffectable target, EffectInfo effectInfo, Component attacker)
         {
             if (target == null || effectInfo == null) return;
-            target.TakeDamage(effectInfo,attacker);
+            target.Apply(effectInfo,attacker);
         }
     }
 }
