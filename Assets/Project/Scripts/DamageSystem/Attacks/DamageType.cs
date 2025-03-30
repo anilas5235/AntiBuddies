@@ -2,7 +2,7 @@
 
 namespace Project.Scripts.DamageSystem.Attacks
 {
-    public enum DamageType
+    public enum DamageType : byte
     {
         Physical,
         Piercing,
