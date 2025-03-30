@@ -5,6 +5,6 @@ namespace Project.Scripts.DamageSystem.Components
 {
     public interface IDamageable
     {
-        void TakeDamage(DamageInfo attackPackage, Component attacker);
+        void TakeDamage(DamageInfo damageInfo, Component attacker);
     }
 }

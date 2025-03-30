@@ -6,18 +6,16 @@ namespace Project.Scripts.DamageSystem.Events
 {
     public struct DamageEvent
     {
-        public int DamageAmount { get; private set; }
-        public DamageType DamageType { get; private set; }
+        public DamageInfo Damage { get; private set; }
         public Component Source { get; private set; }
         public GameObject Target { get; private set; }
 
-        public DamageEvent(int damageAmount, DamageType damageType, Component source,
+        public DamageEvent(DamageInfo damage, Component source,
             GameObject target)
         {
-            DamageAmount = damageAmount;
+            Damage = damage;
             Source = source;
             Target = target;
-            DamageType = damageType;
         }
     }
 }

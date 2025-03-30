@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Project.Scripts.DamageSystem.Attacks;
 using UnityEngine;
 
@@ -6,54 +7,40 @@ namespace Project.Scripts.DamageSystem.Visuals
 {
     public class FloatingDamageNumber : MonoBehaviour
     {
-        public DamageInfo damageInfo;
-        [SerializeField] private bool living = true;
-        [SerializeField] private float TimeToLive = 1f;
+        [SerializeField] private FloatingNumberData data;
+        [SerializeField] private TextMesh textMesh;
 
-
-        private float _timeRemaining;
-        private TextMesh _textMesh;
-
-        private void Awake()
-        {
-            _textMesh = GetComponent<TextMesh>();
+        public void Setup(FloatingNumberData floatingNumberData){
+            data = floatingNumberData;
+            
+            Vector3 pos = transform.position;
+            pos.z = -1;
+            transform.position = pos;
+                
+            UpdateText();
+            StartCoroutine(LifeCycle());
         }
 
-        private void Start()
+        public void Setup(DamageInfo damageInfo, float lifeTime)
         {
-            UpdateText();
+            Setup(new FloatingNumberData(damageInfo, lifeTime));
         }
 
         private void FixedUpdate()
         {
-            _timeRemaining -= Time.fixedDeltaTime;
-            if (_timeRemaining <= 0)
-            {
-                living = false;
-            }
+            transform.position += Vector3.up * (Time.fixedDeltaTime * 2);
         }
 
-        public void AddDamage(DamageInfo damage)
+        private void UpdateText()
         {
-            if (living)
-            {
-                if (damage.damageType != damage.GetDamageType()) throw new Exception("Damage types do not match");
-            }
-            else
-            {
-                damage.damageType = damage.GetDamageType();
-                living = true;
-            }
-
-            damage.damage += damage.GetDamage();
-            _timeRemaining = TimeToLive;
-            UpdateText();
+            textMesh.text = data.ToString();
+            textMesh.color = data.GetColor();
         }
 
-        public void UpdateText()
+        private IEnumerator LifeCycle()
         {
-            _textMesh.text = damageInfo.damage.ToString();
-            _textMesh.color = damageInfo.damageType.GetColor();
+            yield return new WaitForSeconds(data.lifeTime);
+            Destroy(gameObject);
         }
     }
 }

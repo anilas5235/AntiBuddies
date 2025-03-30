@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4113ad47bc974e288f23844d5f07fadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageInfo:
-    damage: 99
-    damageType: 0
-  living: 1
-  TimeToLive: 1
+  data:
+    damageInfo:
+      damage: 0
+      damageType: 0
+    lifeTime: 0
+  textMesh: {fileID: 3487260599637648475}
 --- !u!23 &4198645418732729387
 MeshRenderer:
   m_ObjectHideFlags: 0

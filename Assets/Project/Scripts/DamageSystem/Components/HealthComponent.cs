@@ -26,18 +26,26 @@ namespace Project.Scripts.DamageSystem.Components
             }
         }
 
-        public int MaxHealth => maxHealth;
+        public int MaxHealth
+        {
+            get => maxHealth;
+            set
+            {
+                maxHealth = value;
+                currentHealth = Math.Clamp(currentHealth, 0, maxHealth);
+            }
+        }
 
         private void Awake()
         {
             FullHeal();
         }
         
-        public void TakeDamage(DamageInfo attackPackage, Component attacker)
+        public void TakeDamage(DamageInfo damageInfo, Component attacker)
         {
-            if (attackPackage == null || attackPackage.GetDamage() <= 0) return;
-            CurrentHealth -= DamageUtils.CalcDamage(attackPackage,resistances);
-            OnDamageReceived?.Invoke(new DamageEvent(CurrentHealth, attackPackage.damageType, attacker, gameObject));
+            if (damageInfo == null || damageInfo.GetDamage() <= 0) return;
+            CurrentHealth -= DamageUtils.CalcDamage(damageInfo,resistances);
+            OnDamageReceived?.Invoke(new DamageEvent(damageInfo, attacker, gameObject));
         }
 
         public void Heal(int amount)
@@ -45,12 +53,6 @@ namespace Project.Scripts.DamageSystem.Components
             currentHealth += amount;
         }
         
-        public void SetMaxHealth(int amount)
-        {
-            maxHealth = amount;
-            currentHealth = Math.Clamp(currentHealth, 0, maxHealth);
-        }
-
         public void FullHeal()
         {
             currentHealth = maxHealth;
@@ -58,6 +60,7 @@ namespace Project.Scripts.DamageSystem.Components
 
         protected void Die()
         {
+            Debug.Log($"<color=yellow>{gameObject.name} died </color>");
             OnDeath?.Invoke();
         }
     }
