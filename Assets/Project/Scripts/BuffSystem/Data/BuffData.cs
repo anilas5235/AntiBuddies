@@ -3,12 +3,15 @@ using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data
 {
+    [CreateAssetMenu(fileName = "NewBuff", menuName = "BuffSystem/BuffData")]
     public class BuffData : ScriptableObject
     {
-        public float duration;
-        public StackBehavior stackBehavior;
-        public int ticksPerSecond;
+        public float Duration;
+        public StackBehavior StackBehavior;
+        public TickBehavior TickBehavior;
+        public int TicksPerSecond;
         
-        public EffectInfo[] effects;
+        public EffectInfo[] Effects;
+        public float TickInterval => 1f / TicksPerSecond;
     }
 }
