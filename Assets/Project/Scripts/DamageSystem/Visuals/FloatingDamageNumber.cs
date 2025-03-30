@@ -21,9 +21,9 @@ namespace Project.Scripts.DamageSystem.Visuals
             StartCoroutine(LifeCycle());
         }
 
-        public void Setup(DamageInfo damageInfo, float lifeTime)
+        public void Setup(EffectInfo effectInfo, float lifeTime)
         {
-            Setup(new FloatingNumberData(damageInfo, lifeTime));
+            Setup(new FloatingNumberData(effectInfo, lifeTime));
         }
 
         private void FixedUpdate()

@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
 {
-    public class HealthComponent : MonoBehaviour, IDamageable
+    public class HealthComponent : MonoBehaviour, IEffectable
     {
         [SerializeField] private int currentHealth;
         [SerializeField] private int maxHealth = 10;
         
         [SerializeField] protected ResistanceData resistances;
 
-        public event Action<DamageEvent> OnDamageReceived;
+        public event Action<EffectEvent> OnDamageReceived;
         public event Action OnDeath;
 
         public int CurrentHealth
@@ -41,11 +41,11 @@ namespace Project.Scripts.DamageSystem.Components
             FullHeal();
         }
         
-        public void TakeDamage(DamageInfo damageInfo, Component attacker)
+        public void TakeDamage(EffectInfo effectInfo, Component attacker)
         {
-            if (damageInfo == null || damageInfo.GetDamage() <= 0) return;
-            CurrentHealth -= DamageUtils.CalcDamage(damageInfo,resistances);
-            OnDamageReceived?.Invoke(new DamageEvent(damageInfo, attacker, gameObject));
+            if (effectInfo == null || effectInfo.GetDamage() <= 0) return;
+            CurrentHealth -= DamageUtils.CalcDamage(effectInfo,resistances);
+            OnDamageReceived?.Invoke(new EffectEvent(effectInfo, attacker, gameObject));
         }
 
         public void Heal(int amount)

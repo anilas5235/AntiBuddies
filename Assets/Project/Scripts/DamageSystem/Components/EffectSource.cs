@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
 {
-    public class DamageDealer : MonoBehaviour, IDamageDealer
+    public class EffectSource : MonoBehaviour, IEffectSource
     {
-        public DamageInfo damageInfo = new(1, DamageType.Physical);
+        public EffectInfo effectInfo = new(1, EffectType.Physical);
 
         public void Attack(GameObject target)
         {
-            DamageUtils.Attack(target, damageInfo, this);
+            DamageUtils.Attack(target, effectInfo, this);
         }
     }
 }

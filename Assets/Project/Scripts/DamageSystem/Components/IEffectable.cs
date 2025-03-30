@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
 {
-    public interface IDamageable
+    public interface IEffectable
     {
-        void TakeDamage(DamageInfo damageInfo, Component attacker);
+        void TakeDamage(EffectInfo effectInfo, Component attacker);
     }
 }

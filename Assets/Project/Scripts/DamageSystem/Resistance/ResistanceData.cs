@@ -41,18 +41,18 @@ namespace Project.Scripts.DamageSystem.Resistance
             set => fireResistance = Mathf.Clamp(value, 0, _maxFireResistance);
         }
 
-        public float GetResistance(DamageType damageType)
+        public float GetResistance(EffectType effectType)
         {
-            return damageType switch
+            return effectType switch
             {
-                DamageType.Physical => damageReduction,
-                DamageType.Piercing => piercingResistance,
-                DamageType.Fire => fireResistance,
-                _ => throw new ArgumentOutOfRangeException(nameof(damageType), damageType, null)
+                EffectType.Physical => damageReduction,
+                EffectType.Piercing => piercingResistance,
+                EffectType.Fire => fireResistance,
+                _ => throw new ArgumentOutOfRangeException(nameof(effectType), effectType, null)
             };
         }
 
-        public int GetFlatDamageReduction(DamageType damageType)
+        public int GetFlatReduction(EffectType effectType)
         {
             return flatDamageReduction;
         }

@@ -29,20 +29,20 @@ namespace Project.Scripts.DamageSystem.Visuals
             _healthComponent.OnDamageReceived -= HandleDamageReceived;
         }
 
-        private void HandleDamageReceived(DamageEvent damageEvent)
+        private void HandleDamageReceived(EffectEvent effectEvent)
         {
             if (!damageNumberPrefab) return;
 
-            SpawnDamageNumber(damageEvent.Damage);
+            SpawnDamageNumber(effectEvent.Effect);
         }
 
-        private void SpawnDamageNumber(DamageInfo damage)
+        private void SpawnDamageNumber(EffectInfo effect)
         {
             FloatingDamageNumber damageNumberInstance = Instantiate(damageNumberPrefab, transform.position + (Vector3)offset, Quaternion.identity)
                 .GetComponent<FloatingDamageNumber>();
 
 
-            damageNumberInstance.Setup(damage, displayDuration);
+            damageNumberInstance.Setup(effect, displayDuration);
             damageNumberInstance.transform.SetParent(transform);
         }
     }

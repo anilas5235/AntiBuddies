@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components
 {
-    public class ContactDamageDealer : DamageDealer
+    public class ContactEffectSource : EffectSource
     {
         [SerializeField] private string[] targetTags = {"Player"};
         

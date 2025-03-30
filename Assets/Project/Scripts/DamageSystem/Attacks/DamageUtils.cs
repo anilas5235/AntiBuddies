@@ -6,24 +6,24 @@ namespace Project.Scripts.DamageSystem.Attacks
 {
     public static class DamageUtils
     {
-        public static int CalcDamage(DamageInfo damageInfo,ResistanceData resistance)
+        public static int CalcDamage(EffectInfo effectInfo,ResistanceData resistance)
         {
-            float d = damageInfo.GetDamage();
-            DamageType t = damageInfo.damageType;
-            d -= resistance.GetFlatDamageReduction(t);
+            float d = effectInfo.GetDamage();
+            EffectType t = effectInfo.effectType;
+            d -= resistance.GetFlatReduction(t);
             d *= 1 - resistance.GetResistance(t);
             return Mathf.RoundToInt(d);
         }
         
-        public static void Attack(GameObject target, DamageInfo damageInfo, Component attacker)
+        public static void Attack(GameObject target, EffectInfo effectInfo, Component attacker)
         {
-            Attack(target.GetComponent<IDamageable>(), damageInfo,attacker);
+            Attack(target.GetComponent<IEffectable>(), effectInfo,attacker);
         }
         
-        public static void Attack(IDamageable target, DamageInfo damageInfo, Component attacker)
+        public static void Attack(IEffectable target, EffectInfo effectInfo, Component attacker)
         {
-            if (target == null || damageInfo == null) return;
-            target.TakeDamage(damageInfo,attacker);
+            if (target == null || effectInfo == null) return;
+            target.TakeDamage(effectInfo,attacker);
         }
     }
 }

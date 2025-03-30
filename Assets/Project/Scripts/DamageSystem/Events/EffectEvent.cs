@@ -1,19 +1,18 @@
 using Project.Scripts.DamageSystem.Attacks;
-using Project.Scripts.DamageSystem.Components;
 using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Events
 {
-    public struct DamageEvent
+    public struct EffectEvent
     {
-        public DamageInfo Damage { get; private set; }
+        public EffectInfo Effect { get; private set; }
         public Component Source { get; private set; }
         public GameObject Target { get; private set; }
 
-        public DamageEvent(DamageInfo damage, Component source,
+        public EffectEvent(EffectInfo effect, Component source,
             GameObject target)
         {
-            Damage = damage;
+            Effect = effect;
             Source = source;
             Target = target;
         }
