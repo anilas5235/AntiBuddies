@@ -43,7 +43,7 @@ namespace Project.Scripts.DamageSystem.Components
         
         public void TakeDamage(EffectInfo effectInfo, Component attacker)
         {
-            if (effectInfo == null || effectInfo.GetDamage() <= 0) return;
+            if (effectInfo == null || effectInfo.GetAmount() <= 0) return;
             CurrentHealth -= DamageUtils.CalcDamage(effectInfo,resistances);
             OnDamageReceived?.Invoke(new EffectEvent(effectInfo, attacker, gameObject));
         }

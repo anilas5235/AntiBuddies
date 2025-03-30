@@ -8,8 +8,8 @@ namespace Project.Scripts.DamageSystem.Attacks
     {
         public static int CalcDamage(EffectInfo effectInfo,ResistanceData resistance)
         {
-            float d = effectInfo.GetDamage();
-            EffectType t = effectInfo.effectType;
+            float d = effectInfo.GetAmount();
+            EffectType t = effectInfo.GetEffectType();
             d -= resistance.GetFlatReduction(t);
             d *= 1 - resistance.GetResistance(t);
             return Mathf.RoundToInt(d);

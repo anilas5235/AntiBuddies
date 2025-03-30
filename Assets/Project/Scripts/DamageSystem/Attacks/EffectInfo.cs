@@ -8,24 +8,30 @@ namespace Project.Scripts.DamageSystem.Attacks
     [Serializable]
     public class EffectInfo
     {
-        public int amount;
-        public EffectType effectType;
+        [SerializeField] private int amount;
+        [SerializeField] private EffectType effectType;
+        [SerializeField] private bool isPercentage;
 
-        public EffectInfo(int amount, EffectType effectType)
+        public EffectInfo(int amount, EffectType effectType, bool isPercentage = false)
         {
             this.amount = amount;
             this.effectType = effectType;
+            this.isPercentage = isPercentage;
         }
 
         public int CalcAmount(ResistanceData resistance)
         {
-            float d = GetDamage();
-            d -= resistance.GetFlatReduction(GetDamageType());
-            d *= 1 - resistance.GetResistance(GetDamageType());
+            float d = GetAmount();
+            d -= resistance.GetFlatReduction(GetEffectType());
+            d *= 1 - resistance.GetResistance(GetEffectType());
             return Mathf.RoundToInt(d);
         }
 
-        public EffectType GetDamageType() => effectType;
-        public int GetDamage() => amount;
+        public EffectType GetEffectType() => effectType;
+        public int GetAmount() => amount;
+
+        public bool IsPercentage() => isPercentage;
+
+        public Color GetColor() => effectType.GetColor();
     }
 }

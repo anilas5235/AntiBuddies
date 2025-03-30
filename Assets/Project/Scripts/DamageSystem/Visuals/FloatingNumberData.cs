@@ -19,12 +19,12 @@ namespace Project.Scripts.DamageSystem.Visuals
 
         public override string ToString()
         {
-            return effectInfo.amount.ToString();
+            return effectInfo.GetAmount().ToString();
         }
         
         public Color GetColor()
         {
-            return effectInfo.effectType.GetColor();
+            return effectInfo.GetColor();
         }
     }
 }
