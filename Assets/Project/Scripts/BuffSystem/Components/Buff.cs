@@ -1,33 +1,31 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Project.Scripts.BuffSystem.Data;
-using Project.Scripts.DamageSystem.Attacks;
-using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Components
 {
     [Serializable]
-    public class ActiveBuff
+    public abstract class Buff<T>: IBuff
     {
         [SerializeField] private BuffData buffData;
         [SerializeField] private float remainingDuration;
         [SerializeField] private float timeSinceLastTick;
         [SerializeField] private int accumulatedTicks;
-        public ActiveBuff(BuffData buffData)
+        [SerializeField] protected T target;
+
+        protected Buff(BuffData buffData, T target)
         {
             this.buffData = buffData;
+            this.target = target;
             remainingDuration = buffData.Duration;
         }
-        
-        public void OnBuffStart()
+
+        public virtual void OnBuffAdded()
         {
             accumulatedTicks++;
         }
 
-        public void Tick(float deltaTime)
+        public virtual void OnBuffTick(float deltaTime)
         {
             remainingDuration -= deltaTime;
             
@@ -36,26 +34,29 @@ namespace Project.Scripts.BuffSystem.Components
             timeSinceLastTick -= buffData.TickInterval;
             accumulatedTicks++;
         }
+
+        public virtual void OnBuffApply()
+        {
+            if (accumulatedTicks <= 0) return;
+            for (int i = 0; i < accumulatedTicks; i++)
+            {
+                ExecuteEffect();
+            }
+            accumulatedTicks = 0;
+        }
         
-        public void OnBuffEnd()
+        protected abstract void ExecuteEffect();
+
+        public virtual void OnBuffRemove()
         {
             
         }
         
-        public void Refresh()
+        public void OnBuffRefresh()
         {
             if (buffData.StackBehavior == StackBehavior.Refresh) remainingDuration = buffData.Duration;
         }
-        
-        public List<EffectInfo> GetEffect() => buffData.Effects.ToList();
 
-        public bool IsExpired() => remainingDuration <= 0;
-
-        public int PickUpAccumulatedTicks()
-        {
-            int ticks = accumulatedTicks;
-            accumulatedTicks = 0;
-            return ticks;
-        }
+        public bool IsBuffExpired() => remainingDuration <= 0;
     }
 }

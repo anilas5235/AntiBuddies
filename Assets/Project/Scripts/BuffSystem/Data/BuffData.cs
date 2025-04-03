@@ -12,7 +12,7 @@ namespace Project.Scripts.BuffSystem.Data
         public TickBehavior TickBehavior;
         public int TicksPerSecond;
         
-        public EffectInfo[] Effects;
+        public EffectInfo Effect;
         public float TickInterval => 1f / TicksPerSecond;
     }
 }

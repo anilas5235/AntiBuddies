@@ -1,19 +1,17 @@
 ﻿using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.DamageSystem.Resistance;
-using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public class PhysicalAttack : Attack
     {
-        public PhysicalAttack(IDamageable target, IDamageDealer source, float amount) 
-            : base(target, source, amount,EffectType.Physical)
+        public PhysicalAttack(IDamageDealer source, float amount) 
+            : base(source, amount,EffectType.Physical)
         {
         }
 
-        public override int CalculateDamage()
+        public override int CalculateDamage(ResistanceData resData)
         {
-            ResistanceData resData = Target.GetResistanceData();
             return CalculateDamage(resData.FlatDamageReduction, resData.PhysicalResistance);
         }
     }

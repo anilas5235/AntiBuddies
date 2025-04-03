@@ -22,16 +22,16 @@ namespace Project.Scripts.EffectSystem.Effects
 
         public Color GetColor() => effectType.GetColor();
 
-        public Attack ToAttack(IDamageable target, IDamageDealer source)
+        public Attack ToAttack(IDamageDealer source)
         {
             switch (effectType)
             {
                 case EffectType.Physical:
-                    return new PhysicalAttack(target, source, amount);
+                    return new PhysicalAttack( source, amount);
                 case EffectType.Piercing:
-                    return new PiercingAttack(target, source, amount);
+                    return new PiercingAttack( source, amount);
                 case EffectType.Fire:
-                    return new FireAttack(target, source, amount);
+                    return new FireAttack( source, amount);
             }
             throw new ArgumentException($"{effectType} effect type is not an a ApplyTo");
         }

@@ -5,14 +5,13 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public class PiercingAttack : Attack
     {
-        public PiercingAttack(IDamageable target, IDamageDealer source, float amount) 
-            : base(target, source, amount, EffectType.Piercing)
+        public PiercingAttack(IDamageDealer source, float amount)
+            : base(source, amount, EffectType.Piercing)
         {
         }
 
-        public override int CalculateDamage()
+        public override int CalculateDamage(ResistanceData resData)
         {
-            ResistanceData resData = Target.GetResistanceData();
             return CalculateDamage(resData.FlatDamageReduction, resData.PiercingResistance);
         }
     }

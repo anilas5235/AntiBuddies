@@ -1,5 +1,4 @@
-﻿using Project.Scripts.DamageSystem.Resistance;
-using Project.Scripts.EffectSystem.Effects.Attacks;
+﻿using Project.Scripts.EffectSystem.Effects.Attacks;
 
 namespace Project.Scripts.EffectSystem.Effects
 {
@@ -12,7 +11,5 @@ namespace Project.Scripts.EffectSystem.Effects
         bool IsAlive();
         
         void Die();
-        
-        ResistanceData GetResistanceData();
     }
 }

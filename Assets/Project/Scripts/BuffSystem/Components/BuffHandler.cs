@@ -9,53 +9,38 @@ namespace Project.Scripts.BuffSystem.Components
 {
     public class BuffHandler : MonoBehaviour
     {
-        public List<ActiveBuff> activeBuffs = new();
+        public List<IBuff> ActiveBuffs = new();
 
         public void AddBuff(BuffData buffData)
         {
-            if(!buffData) return;
-            ActiveBuff newBuff = new(buffData);
-            activeBuffs.Add(newBuff);
-            newBuff.OnBuffStart();
+            //TODO: Check if the buff can be added based on the stack behavior
         }
 
         private void FixedUpdate()
         {
-            List<ActiveBuff> expiredBuffs = new();
-            List<EffectInfo> effects = new();
+            List<IBuff> expiredBuffs = new();
             
-            foreach (ActiveBuff buff in activeBuffs)
+            foreach (IBuff buff in ActiveBuffs)
             {
-                GetBuffEffects(buff, effects);
+                buff.OnBuffApply();
                 LifeCycle(buff, expiredBuffs);
             }
             
             RemoveBuffs(expiredBuffs);
         }
         
-        private void RemoveBuffs(List<ActiveBuff> buffs)
+        private void RemoveBuffs(List<IBuff> buffs)
         {
-            foreach (ActiveBuff expiredBuff in buffs)
+            foreach (IBuff expiredBuff in buffs)
             {
-                activeBuffs.Remove(expiredBuff);
+                ActiveBuffs.Remove(expiredBuff);
             }
         }
 
-        private static void LifeCycle(ActiveBuff buff, List<ActiveBuff> expiredBuffs)
+        private static void LifeCycle(IBuff buff, List<IBuff> expiredBuffs)
         {
-            buff.Tick(Time.deltaTime);
-            if (buff.IsExpired()) expiredBuffs.Add(buff);
-        }
-
-        private static void GetBuffEffects(ActiveBuff buff, List<EffectInfo> effects)
-        {
-            int ticks = buff.PickUpAccumulatedTicks();
-            if (ticks <= 0) return;
-            List<EffectInfo> effect = buff.GetEffect();
-            for (int i = 0; i < ticks; i++)
-            {
-                effects.AddRange(effect);
-            }
+            buff.OnBuffTick(Time.deltaTime);
+            if (buff.IsBuffExpired()) expiredBuffs.Add(buff);
         }
     }
 }

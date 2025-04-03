@@ -43,7 +43,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void TakeDamage(Attack attack)
         {
-            int damage = attack.CalculateDamage();
+            int damage = attack.CalculateDamage(resistances);
             CurrentHealth -= damage;
             OnDamageReceived?.Invoke(new EffectInfo(damage,attack.GetEffectType()));
         }

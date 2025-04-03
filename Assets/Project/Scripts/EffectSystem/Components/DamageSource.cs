@@ -1,4 +1,5 @@
-﻿using Project.Scripts.DamageSystem.Attacks;
+﻿using System;
+using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
@@ -11,11 +12,16 @@ namespace Project.Scripts.EffectSystem.Components
 
         public GameObject GetGameObject() => gameObject;
 
+        protected Attack Attack;
+
+        private void Awake()
+        {
+            Attack = effectInfo.ToAttack( this);
+        }
+
         public void ApplyDamage(IDamageable target)
         {
-            if (target == null) return;
-            Attack attack = effectInfo.ToAttack(target, this);
-            attack?.Apply();
+            target?.TakeDamage(Attack);
         }
     }
 }

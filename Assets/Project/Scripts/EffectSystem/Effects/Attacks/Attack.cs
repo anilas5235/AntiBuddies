@@ -1,4 +1,5 @@
 ﻿using Project.Scripts.DamageSystem.Attacks;
+using Project.Scripts.DamageSystem.Resistance;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
@@ -6,17 +7,16 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
     public abstract class Attack: Effect<IDamageDealer, IDamageable>
     {
         protected float Amount;
-        protected Attack(IDamageable target, IDamageDealer source, float amount, EffectType effectType) : base(target, source,effectType)
+        protected Attack(IDamageDealer source, float amount, EffectType effectType) : base(source,effectType)
         {
             Amount = amount;
         }
 
-        public override void Apply()
+        public override void Apply(IDamageable target)
         {
-            Target.TakeDamage(this);
+            target.TakeDamage(this);
         }
-        
-        public abstract int CalculateDamage();
+        public abstract int CalculateDamage(ResistanceData resData);
 
 
         protected virtual int CalculateDamage(int flatDamageReduction, float resistance)
