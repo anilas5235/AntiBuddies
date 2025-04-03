@@ -1,21 +1,19 @@
 using System;
-using System.Collections.Generic;
-using Project.Scripts.DamageSystem.Attacks;
-using Project.Scripts.DamageSystem.Events;
 using Project.Scripts.DamageSystem.Resistance;
-using Project.Scripts.EffectSystem.Attacks;
+using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
 
-namespace Project.Scripts.DamageSystem.Components
+namespace Project.Scripts.EffectSystem.Components
 {
-    public class HealthComponent : MonoBehaviour, IEffectable
+    public class HealthComponent : MonoBehaviour, IDamageable
     {
         [SerializeField] private int currentHealth;
         [SerializeField] private int maxHealth = 10;
-        
+
         [SerializeField] protected ResistanceData resistances;
 
-        public event Action<EffectEvent> OnDamageReceived;
+        public event Action<EffectInfo> OnDamageReceived;
         public event Action OnDeath;
 
         public int CurrentHealth
@@ -42,33 +40,34 @@ namespace Project.Scripts.DamageSystem.Components
         {
             FullHeal();
         }
-        
-        public void Apply(EffectInfo effectInfo, Component source)
+
+        public void TakeDamage(Attack attack)
         {
-            if (effectInfo == null || effectInfo.GetAmount() <= 0) return;
-            CurrentHealth -= DamageUtils.CalcDamage(effectInfo,resistances);
-            OnDamageReceived?.Invoke(new EffectEvent(effectInfo, source, gameObject));
+            int damage = attack.CalculateDamage();
+            CurrentHealth -= damage;
+            OnDamageReceived?.Invoke(new EffectInfo(damage,attack.GetEffectType()));
         }
 
-        public void Apply(List<EffectInfo> effectInfos, Component source)
-        {
-            foreach (EffectInfo effectInfo in effectInfos)
-            {
-                Apply(effectInfo, source);
-            }
-        }
+        public bool IsDead() => currentHealth <= 0;
 
+        public bool IsAlive() => !IsDead();
+
+
+        public ResistanceData GetResistanceData()
+        {
+            return resistances;
+        }
         public void Heal(int amount)
         {
             currentHealth += amount;
         }
-        
+
         public void FullHeal()
         {
             currentHealth = maxHealth;
         }
 
-        protected void Die()
+        public void Die()
         {
             Debug.Log($"<color=yellow>{gameObject.name} died </color>");
             OnDeath?.Invoke();

@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Project.Scripts.DamageSystem.Components
+namespace Project.Scripts.EffectSystem.Components
 {
     public interface IEffectSource
     {
-        public void Attack(GameObject target);
+        public void ApplyTo(GameObject target);
+
+        public GameObject GetGameObject();
     }
 }

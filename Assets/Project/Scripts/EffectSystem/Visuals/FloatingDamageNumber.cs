@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
-using Project.Scripts.DamageSystem.Attacks;
-using Project.Scripts.EffectSystem.Attacks;
+﻿using System.Collections;
+using Project.Scripts.DamageSystem.Visuals;
 using UnityEngine;
 
-namespace Project.Scripts.DamageSystem.Visuals
+namespace Project.Scripts.EffectSystem.Visuals
 {
     public class FloatingDamageNumber : MonoBehaviour
     {
@@ -21,11 +19,7 @@ namespace Project.Scripts.DamageSystem.Visuals
             UpdateText();
             StartCoroutine(LifeCycle());
         }
-
-        public void Setup(EffectInfo effectInfo, float lifeTime)
-        {
-            Setup(new FloatingNumberData(effectInfo, lifeTime));
-        }
+        
 
         private void FixedUpdate()
         {

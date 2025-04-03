@@ -1,6 +1,6 @@
 ﻿using System;
 using Project.Scripts.DamageSystem.Attacks;
-using Project.Scripts.EffectSystem.Attacks;
+using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,7 +9,7 @@ namespace Project.Scripts.DamageSystem.Visuals
     [Serializable]
     public class FloatingNumberData
     {
-        [FormerlySerializedAs("damageInfo")] public EffectInfo effectInfo;
+        public EffectInfo effectInfo;
         public float lifeTime;
         
         public FloatingNumberData(EffectInfo effectInfo, float lifeTime)

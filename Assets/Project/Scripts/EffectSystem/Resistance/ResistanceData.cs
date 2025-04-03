@@ -1,6 +1,7 @@
 ﻿using System;
 using Project.Scripts.DamageSystem.Attacks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.DamageSystem.Resistance
 {
@@ -8,7 +9,7 @@ namespace Project.Scripts.DamageSystem.Resistance
     public class ResistanceData
     {
         [SerializeField,Range(0,100)] private int flatDamageReduction;
-        [SerializeField,Range(0,1)] private float damageReduction;
+        [SerializeField,Range(0,1)] private float physicalResistance;
         [SerializeField,Range(0,1)] private float piercingResistance;
         [SerializeField,Range(0,1)] private float fireResistance;
         
@@ -23,10 +24,10 @@ namespace Project.Scripts.DamageSystem.Resistance
             set => flatDamageReduction = Mathf.Clamp(value, 0, (int)_maxFlatDamageReduction);
         }
         
-        public float DamageReduction
+        public float PhysicalResistance
         {
-            get => damageReduction;
-            set => damageReduction = Mathf.Clamp(value, 0, _maxDamageReduction);
+            get => physicalResistance;
+            set => physicalResistance = Mathf.Clamp(value, 0, _maxDamageReduction);
         }
         
         public float PiercingResistance
@@ -39,22 +40,6 @@ namespace Project.Scripts.DamageSystem.Resistance
         {
             get => fireResistance;
             set => fireResistance = Mathf.Clamp(value, 0, _maxFireResistance);
-        }
-
-        public float GetResistance(EffectType effectType)
-        {
-            return effectType switch
-            {
-                EffectType.Physical => damageReduction,
-                EffectType.Piercing => piercingResistance,
-                EffectType.Fire => fireResistance,
-                _ => throw new ArgumentOutOfRangeException(nameof(effectType), effectType, null)
-            };
-        }
-
-        public int GetFlatReduction(EffectType effectType)
-        {
-            return flatDamageReduction;
         }
     }
 }
