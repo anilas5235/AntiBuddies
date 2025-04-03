@@ -1,9 +1,9 @@
 ﻿using System;
+using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.DamageSystem.Resistance;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Project.Scripts.DamageSystem.Attacks
+namespace Project.Scripts.EffectSystem.Attacks
 {
     [Serializable]
     public class EffectInfo

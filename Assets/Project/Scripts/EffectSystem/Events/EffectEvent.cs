@@ -1,4 +1,5 @@
 using Project.Scripts.DamageSystem.Attacks;
+using Project.Scripts.EffectSystem.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Events

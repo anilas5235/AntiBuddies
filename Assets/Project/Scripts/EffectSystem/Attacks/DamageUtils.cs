@@ -1,5 +1,6 @@
 ﻿using Project.Scripts.DamageSystem.Components;
 using Project.Scripts.DamageSystem.Resistance;
+using Project.Scripts.EffectSystem.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Attacks

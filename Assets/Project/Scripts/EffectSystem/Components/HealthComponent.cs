@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.DamageSystem.Events;
 using Project.Scripts.DamageSystem.Resistance;
+using Project.Scripts.EffectSystem.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Components

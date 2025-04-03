@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.DamageSystem.Attacks;
+using Project.Scripts.EffectSystem.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Components

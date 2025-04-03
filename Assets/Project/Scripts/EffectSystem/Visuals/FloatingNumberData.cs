@@ -1,5 +1,6 @@
 ﻿using System;
 using Project.Scripts.DamageSystem.Attacks;
+using Project.Scripts.EffectSystem.Attacks;
 using UnityEngine;
 using UnityEngine.Serialization;
 

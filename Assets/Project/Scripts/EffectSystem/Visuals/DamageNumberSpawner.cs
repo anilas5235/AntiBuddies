@@ -1,6 +1,7 @@
 using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.DamageSystem.Components;
 using Project.Scripts.DamageSystem.Events;
+using Project.Scripts.EffectSystem.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.DamageSystem.Visuals
