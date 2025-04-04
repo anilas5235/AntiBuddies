@@ -16,7 +16,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         private void Awake()
         {
-            Attack = effectInfo.ToAttack( this);
+            Attack = effectInfo.ToAttack( gameObject);
         }
 
         public void ApplyDamage(IDamageable target)

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
-    public abstract class Attack: Effect<IDamageDealer, IDamageable>
+    public abstract class Attack: Effect<IDamageable>
     {
-        protected float Amount;
-        protected Attack(IDamageDealer source, float amount, EffectType effectType) : base(source,effectType)
+        private readonly float _amount;
+        protected Attack(GameObject source, float amount, EffectType effectType) : base(source,effectType)
         {
-            Amount = amount;
+            _amount = amount;
         }
 
         public override void Apply(IDamageable target)
@@ -21,7 +21,7 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
 
         protected virtual int CalculateDamage(int flatDamageReduction, float resistance)
         {
-            float damage = Amount;
+            float damage = _amount;
             damage -= flatDamageReduction;
             damage *= 1 - resistance;
             return Mathf.RoundToInt(damage);

@@ -1,62 +1,38 @@
-﻿using System;
-using Project.Scripts.BuffSystem.Data;
-using UnityEngine;
+﻿using Project.Scripts.BuffSystem.Data;
+using Project.Scripts.EffectSystem.Effects;
 
 namespace Project.Scripts.BuffSystem.Components
 {
-    [Serializable]
-    public abstract class Buff<T>: IBuff
+    public abstract class Buff<TTarget> : IBuff
     {
-        [SerializeField] private BuffData buffData;
-        [SerializeField] private float remainingDuration;
-        [SerializeField] private float timeSinceLastTick;
-        [SerializeField] private int accumulatedTicks;
-        [SerializeField] protected T target;
+        private readonly float _duration;
+        private float _remainingDuration;
+        private readonly TTarget _target;
+        private readonly Effect<TTarget> _effect;
+        public StackBehavior StackBehavior { get; private set; }
 
-        protected Buff(BuffData buffData, T target)
+        protected Buff(Effect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target)
         {
-            this.buffData = buffData;
-            this.target = target;
-            remainingDuration = buffData.Duration;
+            _target = target;
+            StackBehavior = stackBehavior;
+            _effect = effect;
+            _duration = duration;
+            ResetDuration();
         }
 
-        public virtual void OnBuffAdded()
-        {
-            accumulatedTicks++;
-        }
+        public virtual void OnBuffAdded(){}
 
         public virtual void OnBuffTick(float deltaTime)
         {
-            remainingDuration -= deltaTime;
-            
-            if (buffData.TickBehavior != TickBehavior.Ticking || !(timeSinceLastTick >= buffData.TickInterval)) return;
-            timeSinceLastTick += deltaTime;
-            timeSinceLastTick -= buffData.TickInterval;
-            accumulatedTicks++;
+            _remainingDuration -= deltaTime;
         }
 
-        public virtual void OnBuffApply()
-        {
-            if (accumulatedTicks <= 0) return;
-            for (int i = 0; i < accumulatedTicks; i++)
-            {
-                ExecuteEffect();
-            }
-            accumulatedTicks = 0;
-        }
+        public virtual void OnBuffApply() => _effect.Apply(_target);
+
+        public virtual void OnBuffRemove(){}
+
+        public bool IsBuffExpired() => _remainingDuration <= 0;
         
-        protected abstract void ExecuteEffect();
-
-        public virtual void OnBuffRemove()
-        {
-            
-        }
-        
-        public void OnBuffRefresh()
-        {
-            if (buffData.StackBehavior == StackBehavior.Refresh) remainingDuration = buffData.Duration;
-        }
-
-        public bool IsBuffExpired() => remainingDuration <= 0;
+        protected void ResetDuration() => _remainingDuration = _duration;
     }
 }

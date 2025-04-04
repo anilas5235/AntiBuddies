@@ -22,7 +22,7 @@ namespace Project.Scripts.EffectSystem.Effects
 
         public Color GetColor() => effectType.GetColor();
 
-        public Attack ToAttack(IDamageDealer source)
+        public Attack ToAttack(GameObject source)
         {
             switch (effectType)
             {

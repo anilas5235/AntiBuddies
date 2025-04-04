@@ -1,5 +1,4 @@
-﻿using Project.Scripts.DamageSystem.Attacks;
-using Project.Scripts.EffectSystem.Effects;
+﻿using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data

@@ -1,12 +1,13 @@
 ﻿using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.DamageSystem.Resistance;
 using Unity.Cinemachine;
+using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public class FireAttack : Attack
     {
-        public FireAttack(IDamageDealer source, float amount)
+        public FireAttack(GameObject source, float amount)
             : base(source, amount, EffectType.Fire)
         {
         }

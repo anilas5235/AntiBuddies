@@ -4,7 +4,6 @@
     {
         None,
         Refresh,
-        Additive,
-        Multiplicative
+        Stacking,
     }
 }

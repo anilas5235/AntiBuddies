@@ -1,11 +1,12 @@
 ﻿using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.DamageSystem.Resistance;
+using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public class PiercingAttack : Attack
     {
-        public PiercingAttack(IDamageDealer source, float amount)
+        public PiercingAttack(GameObject source, float amount)
             : base(source, amount, EffectType.Piercing)
         {
         }

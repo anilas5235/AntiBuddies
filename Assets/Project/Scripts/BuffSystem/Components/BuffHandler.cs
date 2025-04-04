@@ -1,46 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Project.Scripts.BuffSystem.Data;
-using Project.Scripts.DamageSystem.Attacks;
-using Project.Scripts.EffectSystem.Effects;
-using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Components
 {
-    public class BuffHandler : MonoBehaviour
+    public abstract class BuffHandler<TBuffType> where TBuffType : IBuff
     {
-        public List<IBuff> ActiveBuffs = new();
+        private readonly BuffManager _manager;
+        private readonly StackBehavior _stackBehavior;
 
-        public void AddBuff(BuffData buffData)
+        private readonly List<TBuffType> _buffs;
+
+        protected BuffHandler(BuffManager manager, StackBehavior stackBehavior)
         {
-            //TODO: Check if the buff can be added based on the stack behavior
+            _manager = manager;
+            _stackBehavior = stackBehavior;
         }
 
-        private void FixedUpdate()
+        public abstract void AddBuff(TBuffType buff);
+
+        public virtual void UpdateBuffs(float deltaTime)
         {
-            List<IBuff> expiredBuffs = new();
-            
-            foreach (IBuff buff in ActiveBuffs)
+            List<TBuffType> expiredBuffs = new List<TBuffType>();
+            foreach (TBuffType buff in _buffs)
             {
-                buff.OnBuffApply();
-                LifeCycle(buff, expiredBuffs);
+                buff.OnBuffTick(deltaTime);
+                if (buff.IsBuffExpired()) expiredBuffs.Add(buff);
             }
             
             RemoveBuffs(expiredBuffs);
         }
-        
-        private void RemoveBuffs(List<IBuff> buffs)
-        {
-            foreach (IBuff expiredBuff in buffs)
-            {
-                ActiveBuffs.Remove(expiredBuff);
-            }
-        }
 
-        private static void LifeCycle(IBuff buff, List<IBuff> expiredBuffs)
+        protected void RemoveBuffs(List<TBuffType> buffs)
         {
-            buff.OnBuffTick(Time.deltaTime);
-            if (buff.IsBuffExpired()) expiredBuffs.Add(buff);
+            foreach (TBuffType expiredBuff in buffs)
+            {
+                _buffs.Remove(expiredBuff);
+            }
         }
     }
 }

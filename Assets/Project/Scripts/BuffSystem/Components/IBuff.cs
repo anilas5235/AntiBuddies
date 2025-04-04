@@ -1,14 +1,15 @@
-﻿namespace Project.Scripts.BuffSystem.Components
+﻿using Project.Scripts.BuffSystem.Data;
+
+namespace Project.Scripts.BuffSystem.Components
 {
     public interface IBuff
     {
-        public void OnBuffAdded();
-        public void OnBuffTick(float deltaTime);
-        public void OnBuffApply();
-        public void OnBuffRemove();
-
-        public void OnBuffRefresh();
+        StackBehavior StackBehavior { get; }
         
-        public bool IsBuffExpired();
+        void OnBuffAdded();
+        void OnBuffTick(float deltaTime);
+        void OnBuffApply();
+        void OnBuffRemove();
+        bool IsBuffExpired();
     }
 }
