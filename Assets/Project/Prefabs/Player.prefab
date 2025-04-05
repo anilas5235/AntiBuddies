@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4412279362573788579}
   - component: {fileID: 855197769961472900}
   - component: {fileID: 5961228089469582901}
+  - component: {fileID: 1304199053460124670}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -138,7 +139,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b03a9a91ea0baa4a9cc71e92677617b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alieGroup: 1
   healthComponent: {fileID: 4307234338099689046}
+--- !u!114 &1304199053460124670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293653513685770464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ef4bcaf3644c35b2c99bfd14b51799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4412279362573788579}
+  rg2D: {fileID: 8293573683347230753}
+  idleMat: {fileID: 2100000, guid: 39910e5d53319ee41af2d2a041353e0c, type: 2}
+  moveMat: {fileID: 2100000, guid: 4de9d3f503ce79244a334bfabeeea1cd, type: 2}
 --- !u!1 &2029995827079385713
 GameObject:
   m_ObjectHideFlags: 0

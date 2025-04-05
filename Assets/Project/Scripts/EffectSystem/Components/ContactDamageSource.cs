@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
@@ -6,15 +7,30 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class ContactDamageSource : DamageSource
     {
-        [SerializeField] private string[] targetTags = {"Player"};
+        private const float CooldownTime = 0.5f;
+            
+        [SerializeField] private AlieGroup alieGroup;
         
+        private Coroutine _cooldownCoroutine;
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (targetTags.Any(other.CompareTag) && other.TryGetComponent(out EffectRelay effectRelay))
+            if (other.TryGetComponent(out EffectRelay effectRelay))
             {
-                HealthComponent health = effectRelay.HealthComponent;
-                if (health)ApplyDamage(health);
+                HandleContact(effectRelay);
             }
+        }
+
+        protected virtual void HandleContact(EffectRelay effectRelay)
+        {
+            if(_cooldownCoroutine != null || effectRelay.AlieGroup == alieGroup) return;
+            ApplyDamage(effectRelay.HealthComponent);
+            _cooldownCoroutine = StartCoroutine(CoolDown());
+        }
+
+        private IEnumerator CoolDown()
+        {
+            yield return new WaitForSeconds(CooldownTime);
         }
     }
 }
