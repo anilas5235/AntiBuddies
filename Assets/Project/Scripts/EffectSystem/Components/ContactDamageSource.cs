@@ -10,9 +10,10 @@ namespace Project.Scripts.EffectSystem.Components
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (targetTags.Any(other.CompareTag) && other.TryGetComponent<IDamageable>(out IDamageable component))
+            if (targetTags.Any(other.CompareTag) && other.TryGetComponent(out EffectRelay effectRelay))
             {
-                ApplyDamage(component);
+                HealthComponent health = effectRelay.HealthComponent;
+                if (health)ApplyDamage(health);
             }
         }
     }
