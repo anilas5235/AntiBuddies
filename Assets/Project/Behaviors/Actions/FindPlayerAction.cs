@@ -18,9 +18,12 @@ namespace Project.Behaviors.Actions
             if (Player.Value) return Status.Success;
             // Find the player in the scene
             GameObject player = GameObject.FindWithTag("Player"); // Find the player by tag
-            Debug.Log($"{player} is at {player.transform.position}");
 
-            if (!player) return Status.Failure;
+            if (!player)
+            {
+                Debug.LogWarning("Could not find player in FindPlayerAction");
+                return Status.Failure;
+            }
             Player.Value = player.GetComponent<Transform>();
 
             return Status.Success;
