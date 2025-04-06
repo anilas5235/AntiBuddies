@@ -3,6 +3,7 @@ using Project.Scripts.DamageSystem.Resistance;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Project.Scripts.EffectSystem.Components
 {
@@ -14,6 +15,8 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] protected ResistanceData resistances;
 
         public event Action<EffectInfo> OnDamageReceived;
+        
+        public UnityEvent OnDamageReceivedUE;
         public event Action OnDeath;
 
         public int CurrentHealth
@@ -46,6 +49,7 @@ namespace Project.Scripts.EffectSystem.Components
             int damage = attack.CalculateDamage(resistances);
             CurrentHealth -= damage;
             OnDamageReceived?.Invoke(new EffectInfo(damage,attack.GetEffectType()));
+            OnDamageReceivedUE?.Invoke();
         }
 
         public bool IsDead() => currentHealth <= 0;

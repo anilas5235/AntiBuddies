@@ -6,7 +6,7 @@ namespace Project.Scripts.UtilComponents
     public class FlashColor : MonoBehaviour
     {
         [SerializeField] private Color color = Color.red;
-        [SerializeField] private float duration = 0.5f;
+        [SerializeField] private float duration = 0.1f;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
         private Color _originalColor;
@@ -28,7 +28,7 @@ namespace Project.Scripts.UtilComponents
 
         private IEnumerator FlashCoroutine(float flashDuration)
         {
-            if (flashDuration > 0) yield break;
+            if (flashDuration < 0) yield break;
             spriteRenderer.color = color;
             yield return new WaitForSeconds(duration);
             spriteRenderer.color = _originalColor;
