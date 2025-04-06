@@ -1,27 +1,25 @@
 ﻿using System;
-using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.EffectSystem.Components
 {
     public class DamageSource : MonoBehaviour, IDamageDealer
     {
-        public EffectInfo effectInfo = new(1, EffectType.Physical);
+        public AttackInfo attackInfo = new(1, AttackType.Physical);
 
-        public GameObject GetGameObject() => gameObject;
-
-        protected Attack Attack;
+        private Attack _attack;
 
         private void Awake()
         {
-            Attack = effectInfo.ToAttack( gameObject);
+            _attack = attackInfo.ToAttack(gameObject);
         }
 
         public void ApplyDamage(IDamageable target)
         {
-            target?.TakeDamage(Attack);
+            target?.TakeDamage(_attack);
         }
     }
 }

@@ -1,31 +1,26 @@
 ﻿using System;
-using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Project.Scripts.DamageSystem.Visuals
+namespace Project.Scripts.EffectSystem.Visuals
 {
     [Serializable]
     public class FloatingNumberData
     {
-        public EffectInfo effectInfo;
+        public int amount;
+        public Color color;
         public float lifeTime;
-        
-        public FloatingNumberData(EffectInfo effectInfo, float lifeTime)
+
+        public FloatingNumberData(int amount, Color color, float lifeTime)
         {
-            this.effectInfo = effectInfo;
+            this.amount = amount;
+            this.color = color;
             this.lifeTime = lifeTime;
         }
 
-        public override string ToString()
-        {
-            return effectInfo.GetAmount().ToString();
-        }
-        
-        public Color GetColor()
-        {
-            return effectInfo.GetColor();
-        }
+        public override string ToString() => amount.ToString();
+
+        public Color GetColor() => color;
     }
 }

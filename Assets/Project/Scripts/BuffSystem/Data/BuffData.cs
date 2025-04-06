@@ -1,5 +1,6 @@
 ﻿using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.BuffSystem.Data
 {
@@ -11,7 +12,7 @@ namespace Project.Scripts.BuffSystem.Data
         public TickBehavior TickBehavior;
         public int TicksPerSecond;
         
-        public EffectInfo Effect;
+        [FormerlySerializedAs("Effect")] public AttackInfo attack;
         public float TickInterval => 1f / TicksPerSecond;
     }
 }

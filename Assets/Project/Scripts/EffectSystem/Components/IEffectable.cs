@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using Project.Scripts.DamageSystem.Attacks;
 using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
-namespace Project.Scripts.DamageSystem.Components
+namespace Project.Scripts.EffectSystem.Components
 {
     public interface IEffectable
     {
-        void Apply(EffectInfo effectInfo, Component source);
+        void Apply(AttackInfo attackInfo, Component source);
         
-        void Apply(List<EffectInfo> effectInfos, Component source);
+        void Apply(List<AttackInfo> effectInfos, Component source);
     }
 }

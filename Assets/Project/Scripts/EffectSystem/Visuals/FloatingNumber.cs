@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using Project.Scripts.DamageSystem.Visuals;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Visuals
 {
-    public class FloatingDamageNumber : MonoBehaviour
+    public class FloatingNumber : MonoBehaviour
     {
         [SerializeField] private FloatingNumberData data;
         [SerializeField] private TextMesh textMesh;

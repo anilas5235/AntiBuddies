@@ -1,11 +1,11 @@
-using Project.Scripts.DamageSystem.Visuals;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Visuals
 {
-    public class DamageNumberSpawner : MonoBehaviour
+    public class FloatingNumberSpawner : MonoBehaviour
     {
         [SerializeField] private GameObject damageNumberPrefab;
         [SerializeField] private float displayDuration = 1.0f;
@@ -29,16 +29,16 @@ namespace Project.Scripts.EffectSystem.Visuals
             _healthComponent.OnDamageReceived -= HandleDamageReceived;
         }
 
-        private void HandleDamageReceived(EffectInfo effect)
+        private void HandleDamageReceived(AttackInfo attack)
         {
             if (!damageNumberPrefab) return;
-            
-            FloatingDamageNumber damageNumberInstance = Instantiate(damageNumberPrefab, transform.position + (Vector3)offset, Quaternion.identity)
-                .GetComponent<FloatingDamageNumber>();
 
+            FloatingNumber numberInstance =
+                Instantiate(damageNumberPrefab, transform.position + (Vector3)offset, Quaternion.identity)
+                    .GetComponent<FloatingNumber>();
 
-            damageNumberInstance.Setup(new FloatingNumberData(effect, displayDuration));
-            damageNumberInstance.transform.SetParent(transform);
+            numberInstance.Setup(new FloatingNumberData(attack.GetAmount(), attack.GetColor(), displayDuration));
+            numberInstance.transform.SetParent(transform);
         }
     }
 }

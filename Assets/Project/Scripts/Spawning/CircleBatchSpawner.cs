@@ -47,11 +47,13 @@ namespace Project.Scripts.Spawning
             }
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             // Draw the spawn area
             Gizmos.color = new Color(1, 0, 0, 1);
             Gizmos.DrawWireSphere(transform.position, spawnRadius);
         }
+#endif
     }
 }

@@ -1,23 +1,26 @@
 using System;
-using Project.Scripts.DamageSystem.Resistance;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
+using Project.Scripts.EffectSystem.Effects.Positive;
+using Project.Scripts.EffectSystem.Resistance;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class HealthComponent : MonoBehaviour, IDamageable
+    public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
         [SerializeField] private int currentHealth;
         [SerializeField] private int maxHealth = 10;
 
         [SerializeField] protected ResistanceData resistances;
 
-        public event Action<EffectInfo> OnDamageReceived;
-        
+        public event Action<AttackInfo> OnDamageReceived;
+
         public UnityEvent OnDamageReceivedUE;
         public event Action OnDeath;
+
+        public UnityEvent OnDeathUE;
 
         public int CurrentHealth
         {
@@ -48,7 +51,7 @@ namespace Project.Scripts.EffectSystem.Components
         {
             int damage = attack.CalculateDamage(resistances);
             CurrentHealth -= damage;
-            OnDamageReceived?.Invoke(new EffectInfo(damage,attack.GetEffectType()));
+            OnDamageReceived?.Invoke(new AttackInfo(damage,attack.AttackType));
             OnDamageReceivedUE?.Invoke();
         }
 
@@ -56,25 +59,17 @@ namespace Project.Scripts.EffectSystem.Components
 
         public bool IsAlive() => !IsDead();
 
+        public ResistanceData GetResistanceData() => resistances;
 
-        public ResistanceData GetResistanceData()
-        {
-            return resistances;
-        }
-        public void Heal(int amount)
-        {
-            currentHealth += amount;
-        }
+        public void Heal(int amount) => currentHealth += amount;
 
-        public void FullHeal()
-        {
-            currentHealth = maxHealth;
-        }
+        public void FullHeal() => currentHealth = maxHealth;
 
         public void Die()
         {
             Debug.Log($"<color=yellow>{gameObject.name} died </color>");
             OnDeath?.Invoke();
+            OnDeathUE?.Invoke();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Project.Scripts.DamageSystem.Attacks;
-using Project.Scripts.DamageSystem.Resistance;
+﻿using Project.Scripts.EffectSystem.Resistance;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
@@ -7,7 +6,7 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
     public class PhysicalAttack : Attack
     {
         public PhysicalAttack(GameObject source, float amount) 
-            : base(source, amount,EffectType.Physical)
+            : base(source, amount, AttackType.Physical)
         {
         }
 

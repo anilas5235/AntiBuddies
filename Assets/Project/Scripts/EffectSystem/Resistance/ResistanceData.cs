@@ -1,9 +1,7 @@
 ﻿using System;
-using Project.Scripts.DamageSystem.Attacks;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Project.Scripts.DamageSystem.Resistance
+namespace Project.Scripts.EffectSystem.Resistance
 {
     [Serializable]
     public class ResistanceData

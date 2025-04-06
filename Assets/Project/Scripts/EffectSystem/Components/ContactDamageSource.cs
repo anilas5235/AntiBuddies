@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Linq;
-using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components

@@ -1,20 +1,15 @@
-﻿using Project.Scripts.DamageSystem.Attacks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects
 {
-    public abstract class Effect<TTarget>
+    public abstract class Effect<TTarget> : IEffect<TTarget>
     {
         protected readonly GameObject Source;
-        private readonly EffectType _effectType;
-        protected Effect(GameObject source, EffectType effectType)
+        protected Effect(GameObject source)
         {
             Source = source;
-            _effectType = effectType;
         }
         
         public abstract void Apply(TTarget target);
-        
-        public EffectType GetEffectType() => _effectType;
     }
 }
