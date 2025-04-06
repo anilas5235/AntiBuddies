@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Effects
+namespace Project.Scripts.EffectSystem.Effects.Heal
 {
     public enum HealingType
     {

@@ -1,7 +1,7 @@
 using System;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
-using Project.Scripts.EffectSystem.Effects.Positive;
+using Project.Scripts.EffectSystem.Effects.Heal;
 using Project.Scripts.EffectSystem.Resistance;
 using UnityEngine;
 using UnityEngine.Events;

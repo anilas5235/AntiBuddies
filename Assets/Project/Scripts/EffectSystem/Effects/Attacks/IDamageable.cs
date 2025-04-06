@@ -1,6 +1,4 @@
-﻿using Project.Scripts.EffectSystem.Effects.Attacks;
-
-namespace Project.Scripts.EffectSystem.Effects
+﻿namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public interface IDamageable
     {

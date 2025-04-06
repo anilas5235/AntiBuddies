@@ -1,4 +1,5 @@
 ﻿using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
 using UnityEngine.Serialization;
 

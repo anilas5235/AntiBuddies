@@ -1,8 +1,7 @@
 ﻿using System;
-using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Effects
+namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     [Serializable]
     public class AttackInfo

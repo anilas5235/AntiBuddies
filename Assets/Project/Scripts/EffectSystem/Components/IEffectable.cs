@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components

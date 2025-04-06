@@ -1,4 +1,4 @@
-﻿namespace Project.Scripts.EffectSystem.Effects
+﻿namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public interface IDamageDealer
     {

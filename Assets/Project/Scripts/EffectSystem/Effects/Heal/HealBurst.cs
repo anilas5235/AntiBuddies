@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Effects.Positive
+namespace Project.Scripts.EffectSystem.Effects.Heal
 {
     public class HealBurst : Effect<IHealable>
     {
