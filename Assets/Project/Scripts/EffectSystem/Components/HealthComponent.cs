@@ -8,8 +8,7 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private int currentHealth;
-        [SerializeField] private int maxHealth = 10;
+        [SerializeField] private Stat health = new(0, 10);
 
         [SerializeField] private ResistanceComponent resistanceComponent;
 
@@ -20,26 +19,6 @@ namespace Project.Scripts.EffectSystem.Components
 
         public UnityEvent onDeath;
 
-        public int CurrentHealth
-        {
-            get => currentHealth;
-            protected set
-            {
-                currentHealth = Math.Clamp(value, 0, maxHealth);
-                if (currentHealth <= 0) Die();
-            }
-        }
-
-        public int MaxHealth
-        {
-            get => maxHealth;
-            set
-            {
-                maxHealth = value;
-                currentHealth = Math.Clamp(currentHealth, 0, maxHealth);
-            }
-        }
-
         private void Awake()
         {
             FullHeal();
@@ -48,20 +27,21 @@ namespace Project.Scripts.EffectSystem.Components
         public void TakeDamage(Attack attack)
         {
             int damage = attack.CalculateDamage(resistanceComponent);
-            CurrentHealth -= damage;
-            OnDamageReceived?.Invoke(new AttackInfo(damage,attack.AttackType));
+            health.Value -= damage;
+            OnDamageReceived?.Invoke(new AttackInfo(damage, attack.AttackType));
             onDamageReceived?.Invoke();
+            if (health.Value <= 0) Die();
         }
 
-        public bool IsDead() => currentHealth <= 0;
+        public bool IsDead() => health.Value <= 0;
 
         public bool IsAlive() => !IsDead();
 
         public ResistanceComponent GetResistance() => resistanceComponent;
 
-        public void Heal(int amount) => currentHealth += amount;
+        public void Heal(int amount) => health.Value += amount;
 
-        public void FullHeal() => currentHealth = maxHealth;
+        public void FullHeal() => health.Value = health.MaxValue;
 
         public void Die()
         {

@@ -1,5 +1,4 @@
 using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
 
@@ -38,7 +37,6 @@ namespace Project.Scripts.EffectSystem.Visuals
                     .GetComponent<FloatingNumber>();
 
             numberInstance.Setup(new FloatingNumberData(attack.GetAmount(), attack.GetColor(), displayDuration));
-            numberInstance.transform.SetParent(transform);
         }
     }
 }

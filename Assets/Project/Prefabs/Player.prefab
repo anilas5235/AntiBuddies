@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 8293573683347230753}
   - component: {fileID: 3356991902276083124}
   - component: {fileID: 4458083661349159689}
+  - component: {fileID: 3699389999355936274}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -236,14 +237,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e9c2d10c80b5044a4beea02aa69801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 10
-  resistances:
-    flatDamageReduction: 0
-    physicalResistance: 0
-    piercingResistance: 0
-    fireResistance: 0
-  OnDamageReceivedUE:
+  health:
+    currValue: 0
+    maxValue: 10
+    minValue: 0
+  resistanceComponent: {fileID: 3699389999355936274}
+  onDamageReceived:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4396818464361325487}
@@ -258,6 +257,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &8293573683347230753
 Rigidbody2D:
   serializedVersion: 5
@@ -331,3 +333,31 @@ MonoBehaviour:
   displayDuration: 1
   offset: {x: 0, y: 0.5}
   floatSpeed: 1
+--- !u!114 &3699389999355936274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029995827079385713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d253c15e88ba433eb133b4b2de8796c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flatDamageReduction:
+    currValue: 0
+    maxValue: 100
+    minValue: 0
+  physicalResistance:
+    currValue: 0
+    maxValue: 100
+    minValue: 0
+  piercingResistance:
+    currValue: 0
+    maxValue: 100
+    minValue: 0
+  fireResistance:
+    currValue: 0
+    maxValue: 100
+    minValue: 0

@@ -10,6 +10,20 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private int maxValue;
         [SerializeField] private int minValue;
         
+        public Stat()
+        {
+            currValue = 0;
+            maxValue = 100;
+            minValue = 0;
+        }
+        
+        public Stat(int currValue, int maxValue, int minValue = 0)
+        {
+            this.currValue = currValue;
+            this.maxValue = maxValue;
+            this.minValue = minValue;
+        }
+        
         public int Value
         {
             get => currValue;
