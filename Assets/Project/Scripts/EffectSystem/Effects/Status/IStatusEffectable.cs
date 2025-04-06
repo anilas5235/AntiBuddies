@@ -2,6 +2,6 @@
 {
     public interface IStatusEffectable
     {
-        
+        void Apply(Status target);
     }
 }
