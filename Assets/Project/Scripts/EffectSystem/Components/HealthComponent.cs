@@ -1,8 +1,6 @@
 using System;
-using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using Project.Scripts.EffectSystem.Effects.Heal;
-using Project.Scripts.EffectSystem.Resistance;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,14 +11,14 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private int currentHealth;
         [SerializeField] private int maxHealth = 10;
 
-        [SerializeField] protected ResistanceData resistances;
+        [SerializeField] private ResistanceComponent resistanceComponent;
 
         public event Action<AttackInfo> OnDamageReceived;
 
-        public UnityEvent OnDamageReceivedUE;
+        public UnityEvent onDamageReceived;
         public event Action OnDeath;
 
-        public UnityEvent OnDeathUE;
+        public UnityEvent onDeath;
 
         public int CurrentHealth
         {
@@ -49,17 +47,17 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void TakeDamage(Attack attack)
         {
-            int damage = attack.CalculateDamage(resistances);
+            int damage = attack.CalculateDamage(resistanceComponent);
             CurrentHealth -= damage;
             OnDamageReceived?.Invoke(new AttackInfo(damage,attack.AttackType));
-            OnDamageReceivedUE?.Invoke();
+            onDamageReceived?.Invoke();
         }
 
         public bool IsDead() => currentHealth <= 0;
 
         public bool IsAlive() => !IsDead();
 
-        public ResistanceData GetResistanceData() => resistances;
+        public ResistanceComponent GetResistance() => resistanceComponent;
 
         public void Heal(int amount) => currentHealth += amount;
 
@@ -69,7 +67,7 @@ namespace Project.Scripts.EffectSystem.Components
         {
             Debug.Log($"<color=yellow>{gameObject.name} died </color>");
             OnDeath?.Invoke();
-            OnDeathUE?.Invoke();
+            onDeath?.Invoke();
         }
     }
 }

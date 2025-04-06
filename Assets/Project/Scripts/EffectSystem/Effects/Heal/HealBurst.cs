@@ -2,18 +2,13 @@
 
 namespace Project.Scripts.EffectSystem.Effects.Heal
 {
-    public class HealBurst : Effect<IHealable>
+    public class HealBurst : Heal
     {
-        private readonly int _amount;
-        
-        public HealBurst(GameObject source, int amount) : base(source)
+        public HealBurst(GameObject source, int amount) 
+            : base(source, amount, HealingType.HealBurst)
         {
-            _amount = amount;
         }
 
-        public override void Apply(IHealable target)
-        {
-            target?.Heal(_amount);
-        }
+        protected override int CalculateHealing(IHealable target) => GetAmount();
     }
 }

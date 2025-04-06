@@ -5,6 +5,8 @@ namespace Project.Scripts.EffectSystem.Effects.Heal
     public enum HealingType
     {
         HealBurst,
+        HealPercent,
+        Vampiric,
     }
 
     public static class HealingTypeExtensions

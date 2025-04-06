@@ -4,23 +4,22 @@ using UnityEngine;
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     [Serializable]
-    public class AttackInfo
+    public class AttackInfo : IEffectInfo<Attack,AttackType>
     {
         [SerializeField] private int amount;
         [SerializeField] private AttackType attackType;
 
-        public AttackInfo(int amount, AttackType attackType, bool isPercentage = false)
+        public AttackInfo(int amount, AttackType attackType)
         {
             this.amount = amount;
             this.attackType = attackType;
         }
+        public AttackType GetEffectType() => attackType;
 
-        public AttackType GetAttackType() => attackType;
         public int GetAmount() => amount;
 
         public Color GetColor() => attackType.GetColor();
-
-        public Attack ToAttack(GameObject source)
+        public Attack ToEffect(GameObject source)
         {
             switch (attackType)
             {

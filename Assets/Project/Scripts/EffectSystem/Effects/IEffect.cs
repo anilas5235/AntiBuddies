@@ -2,6 +2,7 @@
 {
     public interface IEffect<in TTarget>
     {
-        public void Apply(TTarget target);
+        void Apply(TTarget target);
+        int GetAmount();
     }
 }

@@ -1,19 +1,18 @@
-﻿using Project.Scripts.EffectSystem.Resistance;
-using Unity.Cinemachine;
+﻿using Project.Scripts.EffectSystem.Components;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public class FireAttack : Attack
     {
-        public FireAttack(GameObject source, float amount) 
+        public FireAttack(GameObject source, int amount) 
             : base(source, amount, AttackType.Fire) 
         {
         }
 
-        public override int CalculateDamage(ResistanceData resData)
+        public override int CalculateDamage(ResistanceComponent resData)
         {
-            return CalculateDamage(resData.FlatDamageReduction, resData.FireResistance);
+            return CalculateDamage(resData.flatDamageReduction, resData.fireResistance);
         }
     }
 }

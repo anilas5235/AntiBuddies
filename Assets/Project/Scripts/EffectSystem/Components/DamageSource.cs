@@ -1,8 +1,5 @@
-﻿using System;
-using Project.Scripts.EffectSystem.Effects;
-using Project.Scripts.EffectSystem.Effects.Attacks;
+﻿using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.EffectSystem.Components
 {
@@ -14,7 +11,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         private void Awake()
         {
-            _attack = attackInfo.ToAttack(gameObject);
+            _attack = attackInfo.ToEffect(gameObject);
         }
 
         public void ApplyDamage(IDamageable target)
