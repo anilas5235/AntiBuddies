@@ -9,14 +9,14 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private int currValue;
         [SerializeField] private int maxValue;
         [SerializeField] private int minValue;
-        
+
         public Stat()
         {
             currValue = 0;
             maxValue = 100;
             minValue = 0;
         }
-        
+
         public Stat(int currValue, int maxValue, int minValue = 0)
         {
             this.currValue = currValue;
@@ -24,13 +24,7 @@ namespace Project.Scripts.EffectSystem.Components
             this.minValue = minValue;
         }
         
-        public int Value
-        {
-            get => currValue;
-            set => currValue = Mathf.Clamp(value, minValue, maxValue);
-        }
-        
-        public float Percent => currValue / 100f;
+        protected int CurrValue => currValue;
 
         public int MaxValue
         {
@@ -41,7 +35,7 @@ namespace Project.Scripts.EffectSystem.Components
                 currValue = Mathf.Clamp(currValue, minValue, maxValue);
             }
         }
-        
+
         public int MinValue
         {
             get => minValue;
@@ -51,5 +45,18 @@ namespace Project.Scripts.EffectSystem.Components
                 currValue = Mathf.Clamp(currValue, minValue, maxValue);
             }
         }
+
+        public virtual int GetTransformedValue(int baseValue)
+        {
+            return baseValue + currValue;
+        }
+
+        public bool IsBelowOrZero() => currValue <= 0;
+
+        public void ReduceValue(int amount) => currValue = Mathf.Clamp(currValue - amount, minValue, maxValue);
+
+        public void IncreaseValue(int amount) => currValue = Mathf.Clamp(currValue - amount, minValue, maxValue);
+        
+        public void MaximizeValue() => currValue = maxValue;
     }
 }

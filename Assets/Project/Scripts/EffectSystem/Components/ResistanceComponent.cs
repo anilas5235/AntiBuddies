@@ -4,12 +4,15 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class ResistanceComponent : MonoBehaviour
     {
-        [Header("Damage Reduction")]
+        [Header("Damage Resistance")]
         public Stat flatDamageReduction;
-        public Stat physicalResistance;
-        public Stat piercingResistance;
+        public PercentStat physicalResistance;
+        public PercentStat piercingResistance;
         
         [Header("Elemental Resistance")]
-        public Stat fireResistance;
+        public PercentStat fireResistance;
+        public PercentStat iceResistance;
+        public PercentStat lightningResistance;
+        public PercentStat poisonResistance;
     }
 }
