@@ -10,14 +10,11 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private int maxValue;
         [SerializeField] private int minValue;
 
-        public Stat()
+        public Stat(): this(0, 100, -100)
         {
-            currValue = 0;
-            maxValue = 100;
-            minValue = 0;
         }
-
-        public Stat(int currValue, int maxValue, int minValue = 0)
+        
+        public Stat(int currValue, int maxValue, int minValue)
         {
             this.currValue = currValue;
             this.maxValue = maxValue;
@@ -46,10 +43,9 @@ namespace Project.Scripts.EffectSystem.Components
             }
         }
 
-        public virtual int GetTransformedValue(int baseValue)
-        {
-            return baseValue + currValue;
-        }
+        public virtual int TransformPositive(int baseValue) => baseValue + currValue;
+
+        public virtual int TransformNegative(int baseValue) => baseValue - currValue;
 
         public bool IsBelowOrZero() => currValue <= 0;
 

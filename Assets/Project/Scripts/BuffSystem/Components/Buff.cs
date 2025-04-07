@@ -9,7 +9,7 @@ namespace Project.Scripts.BuffSystem.Components
         private float _remainingDuration;
         private readonly TTarget _target;
         private readonly Effect<TTarget> _effect;
-        public StackBehavior StackBehavior { get; private set; }
+        public StackBehavior StackBehavior { get; }
 
         protected Buff(Effect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target)
         {

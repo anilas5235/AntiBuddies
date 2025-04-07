@@ -6,15 +6,20 @@ namespace Project.Scripts.EffectSystem.Components
     [Serializable]
     public class PercentStat : Stat
     {
-        public PercentStat()
+        public PercentStat() : base(0,100,0)
         {
         }
         
-        public PercentStat(int currValue, int maxValue, int minValue = 0) : base(currValue,maxValue,minValue)
+        public PercentStat(int currValue, int maxValue, int minValue) : base(currValue,maxValue,minValue)
         {
         }
+
+        public override int TransformPositive(int baseValue)
+        {
+            return Mathf.RoundToInt((1+CurrValue/100f) * baseValue);
+        }
         
-        public override int GetTransformedValue(int baseValue)
+        public override int TransformNegative(int baseValue)
         {
             return Mathf.RoundToInt((1-CurrValue/100f) * baseValue);
         }

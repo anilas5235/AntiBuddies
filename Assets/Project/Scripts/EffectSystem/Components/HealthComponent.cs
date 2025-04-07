@@ -8,7 +8,7 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private Stat health = new(0, 10);
+        [SerializeField] private Stat health = new(0, 10,0);
         public PercentStat healingAmplifier;
 
         [SerializeField] private ResistanceComponent resistanceComponent;
@@ -40,7 +40,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         public ResistanceComponent GetResistance() => resistanceComponent;
 
-        public void Heal(int amount) => health.IncreaseValue( healingAmplifier.GetTransformedValue(amount));
+        public void Heal(int amount) => health.IncreaseValue( healingAmplifier.TransformPositive(amount));
 
         public void FullHeal() => health.MaximizeValue();
 

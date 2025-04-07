@@ -21,15 +21,15 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
         public abstract int CalculateDamage(ResistanceComponent resistanceComponent);
 
 
-        protected virtual int CalculateDamage(Stat flatDamageReduction, PercentStat resistance)
+        protected int CalculateDamage(Stat flatDamageReduction, PercentStat resistance)
         {
             int damage = GetAmount();
             // Apply flat damage reduction
-            damage = flatDamageReduction.GetTransformedValue(damage);
+            damage = flatDamageReduction.TransformNegative(damage);
             if(damage <= 0) return 0;
             
             // Apply resistance
-            damage = resistance.GetTransformedValue(damage);
+            damage = resistance.TransformNegative(damage);
             return damage <= 0 ? 0 : Mathf.RoundToInt(damage);
         }
     }
