@@ -1,19 +1,21 @@
 ﻿using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Effects;
+using UnityEngine;
 
-namespace Project.Scripts.BuffSystem.Components
+namespace Project.Scripts.BuffSystem.Buffs
 {
-    public abstract class Buff<TTarget> : IBuff
+    public class Buff<TTarget> : IBuff<TTarget>
     {
         private readonly float _duration;
         private float _remainingDuration;
-        private readonly TTarget _target;
         private readonly Effect<TTarget> _effect;
         public StackBehavior StackBehavior { get; }
+        public TTarget Target { get; }
+        public GameObject Source=> _effect.Source;
 
-        protected Buff(Effect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target)
+        public Buff(Effect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target)
         {
-            _target = target;
+            Target = target;
             StackBehavior = stackBehavior;
             _effect = effect;
             _duration = duration;
@@ -27,7 +29,7 @@ namespace Project.Scripts.BuffSystem.Components
             _remainingDuration -= deltaTime;
         }
 
-        public virtual void OnBuffApply() => _effect.Apply(_target);
+        public virtual void OnBuffApply() => _effect.Apply(Target);
 
         public virtual void OnBuffRemove(){}
 

@@ -1,19 +1,19 @@
-﻿using Project.Scripts.EffectSystem.Effects;
-using Project.Scripts.EffectSystem.Effects.Attacks;
+﻿using System;
+using Project.Scripts.BuffSystem.Buffs;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.BuffSystem.Data
 {
-    [CreateAssetMenu(fileName = "NewBuff", menuName = "BuffSystem/BuffData")]
-    public class BuffData : ScriptableObject
+    public abstract class BuffData<TEffectInfo,TTarget> : ScriptableObject
     {
         public float Duration;
         public StackBehavior StackBehavior;
         public TickBehavior TickBehavior;
         public int TicksPerSecond;
-        
-        [FormerlySerializedAs("Effect")] public AttackInfo attack;
+
+        public TEffectInfo Effect;
         public float TickInterval => 1f / TicksPerSecond;
+
+        public abstract IBuff<TTarget> ToBuff(TTarget target, GameObject source);
     }
 }

@@ -1,39 +1,49 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Project.Scripts.BuffSystem.Buffs;
+using Project.Scripts.EffectSystem.Effects.Attacks;
+using Project.Scripts.EffectSystem.Effects.Heal;
+using Project.Scripts.EffectSystem.Effects.Status;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Components
 {
+    /// <summary>
+    /// CentralBuffTicker is a singleton class that manages the central buff ticker in the game.
+    /// </summary>
     public class CentralBuffTicker : MonoBehaviour
     {
-        // This class is responsible for managing the central buff ticker in the game.
-        // The class will be a singleton to ensure only one instance exists in the scene.
-
         private static CentralBuffTicker _instance;
         private const float TickInterval = 0.1f;
-
-        public static event Action<float> OnDamageBuffTick;
-        public static event Action<float> OnHealBuffTick;
-        public static event Action<float> OnStatusBuffTick;
+        private static event Action<float> OnDamageBuffTick;
+        private static event Action<float> OnHealBuffTick;
+        private static event Action<float> OnStatusBuffTick;
 
         public static CentralBuffTicker Instance
         {
             get
             {
                 if (_instance) return _instance;
-                // Try to find an existing instance in the scene
-                _instance = FindFirstObjectByType<CentralBuffTicker>();
+                _instance = FindFirstObjectByType<CentralBuffTicker>(); // Try to find an existing instance in the scene
                 if (_instance) return _instance;
-                // If no instance is found, create a new one
-                GameObject obj = new("CentralBuffTicker");
+                GameObject obj = new("CentralBuffTicker"); // If no instance is found, create a new one
                 _instance = obj.AddComponent<CentralBuffTicker>();
                 return _instance;
             }
         }
 
         private Coroutine _coroutine;
-        private List<Action<float>> _tickEvents = new() { OnDamageBuffTick, OnHealBuffTick, OnStatusBuffTick };
+        private readonly List<Action<float>> _tickEvents = new() { OnDamageBuffTick, OnHealBuffTick, OnStatusBuffTick };
+
+        public void RegisterBuff([NotNull] IBuff<IDamageable> buff) => OnDamageBuffTick += buff.OnBuffTick;
+        public void UnregisterBuff([NotNull] IBuff<IDamageable> buff) => OnDamageBuffTick -= buff.OnBuffTick;
+        public void RegisterBuff([NotNull] IBuff<IHealable> buff) => OnHealBuffTick += buff.OnBuffTick;
+        public void UnregisterBuff([NotNull] IBuff<IHealable> buff) => OnHealBuffTick -= buff.OnBuffTick;
+        public void RegisterBuff([NotNull] IBuff<IStatusEffectable> buff) => OnStatusBuffTick += buff.OnBuffTick;
+        public void UnregisterBuff([NotNull] IBuff<IStatusEffectable> buff) => OnStatusBuffTick -= buff.OnBuffTick;
+
 
         private void Awake()
         {
@@ -61,7 +71,7 @@ namespace Project.Scripts.BuffSystem.Components
         {
             _coroutine ??= StartCoroutine(Tick(_tickEvents, TickInterval));
         }
-        
+
         private void StopTicking()
         {
             if (_coroutine == null) return;
@@ -81,7 +91,7 @@ namespace Project.Scripts.BuffSystem.Components
                     float now = Time.time;
                     float deltaTime = now - lastTickTime;
                     lastTickTime = now;
-                    
+
                     // Invoke the tick event with the delta time
                     tickEvent?.Invoke(deltaTime);
                     yield return wait;

@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using Project.Scripts.BuffSystem.Data;
+﻿using Project.Scripts.BuffSystem.Data;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Components
 {
     public class BuffManager : MonoBehaviour
     {
-        
+        private DamageBuffHandler _damageBuffHandler;
+        private HealBuffHandler _healBuffHandler;
+        private StatBuffHandler _statBuffHandler;
 
-        public void AddBuff(BuffData buff)
+        private void Awake()
         {
-            
+            _damageBuffHandler = new DamageBuffHandler(this);
+            _healBuffHandler = new HealBuffHandler(this);
+            _statBuffHandler = new StatBuffHandler(this);
         }
 
-        private void FixedUpdate()
+        public void AddBuff(DamageBuffData buff)
         {
-           
         }
     }
 }

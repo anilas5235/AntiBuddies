@@ -4,15 +4,17 @@ namespace Project.Scripts.EffectSystem.Effects
 {
     public abstract class Effect<TTarget> : IEffect<TTarget>
     {
-        protected readonly GameObject Source;
-        private readonly int _amount;
+        public GameObject Source { get; }
+
+        public int Amount { get; }
+
         protected Effect(GameObject source, int amount)
         {
             Source = source;
-            _amount = amount;
+            Amount = amount;
         }
         
         public abstract void Apply(TTarget target);
-        public int GetAmount() => _amount;
+        public int GetAmount() => Amount;
     }
 }

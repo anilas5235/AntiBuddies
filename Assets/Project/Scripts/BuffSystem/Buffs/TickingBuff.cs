@@ -1,15 +1,15 @@
 ﻿using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Effects;
 
-namespace Project.Scripts.BuffSystem.Components
+namespace Project.Scripts.BuffSystem.Buffs
 {
-    public abstract class TickingBuff<TTarget> : Buff<TTarget>
+    public class TickingBuff<TTarget> : Buff<TTarget>
     {
         private float _timeSinceLastTick;
         private int _accumulatedTicks;
         private readonly float _tickInterval;
 
-        protected TickingBuff(Effect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target, float tickInterval) 
+        public TickingBuff(Effect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target, float tickInterval) 
             : base(effect, duration, stackBehavior, target)
         {
             _tickInterval = tickInterval;
