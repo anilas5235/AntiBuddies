@@ -188,11 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectInfo:
+  attackInfo:
     amount: 1
-    effectType: 0
-  targetTags:
-  - Player
+  alieGroup: 0
 --- !u!212 &5458632804673224790
 SpriteRenderer:
   m_ObjectHideFlags: 0

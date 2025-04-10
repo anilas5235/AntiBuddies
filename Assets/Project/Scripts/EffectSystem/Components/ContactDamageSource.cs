@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class ContactDamageSource : DamageSource
+    public class ContactDamageSource : DamageSource<PhysicalAttack>
     {
         private const float CooldownTime = 0.5f;
             

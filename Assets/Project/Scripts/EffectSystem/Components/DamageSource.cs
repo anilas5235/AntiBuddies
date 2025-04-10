@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class DamageSource : MonoBehaviour, IDamageDealer
+    public class DamageSource<T> : MonoBehaviour, IDamageDealer where T : IAttack
     {
-        public EffectInfo attackInfo = new();
+        public EffectInfo<T> attackInfo;
 
         private IAttack _attack;
 
         private void Awake()
         {
-            ///_attack = attackInfo.ToEffect(gameObject);
+            _attack = attackInfo.GetEffect(gameObject);
         }
 
         public void ApplyDamage(IDamageable target)
