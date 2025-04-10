@@ -9,7 +9,7 @@ namespace Project.Scripts.BuffSystem.Buffs
         private int _accumulatedTicks;
         private readonly float _tickInterval;
 
-        public TickingBuff(Effect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target, float tickInterval) 
+        public TickingBuff(IEffect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target, float tickInterval) 
             : base(effect, duration, stackBehavior, target)
         {
             _tickInterval = tickInterval;

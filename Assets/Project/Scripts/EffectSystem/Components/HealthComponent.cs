@@ -9,9 +9,9 @@ namespace Project.Scripts.EffectSystem.Components
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
         [SerializeField] private Stat health = new(0, 10,0);
-        public PercentStat healingAmplifier;
 
         [SerializeField] private ResistanceComponent resistanceComponent;
+        [SerializeField] private HealingStats healingStats;
 
         public event Action<AttackInfo> OnDamageReceived;
 
@@ -25,22 +25,25 @@ namespace Project.Scripts.EffectSystem.Components
             FullHeal();
         }
 
-        public void TakeDamage(Attack attack)
+        public int ApplyDamage(IAttack attack)
         {
             int damage = attack.CalculateDamage(resistanceComponent);
             health.ReduceValue(damage);
             OnDamageReceived?.Invoke(new AttackInfo(damage, attack.AttackType));
             onDamageReceived?.Invoke();
             if (IsDead()) Die();
+            return damage;
         }
 
         public bool IsDead() => health.IsBelowOrZero();
 
         public bool IsAlive() => !IsDead();
-
-        public ResistanceComponent GetResistance() => resistanceComponent;
-
-        public void Heal(int amount) => health.IncreaseValue( healingAmplifier.TransformPositive(amount));
+        public void Heal(IHeal amount)
+        {
+            int heal = amount.CalculateHealing(healingStats);
+            if (heal <= 0) return;
+            health.IncreaseValue(heal);
+        }
 
         public void FullHeal() => health.MaximizeValue();
 

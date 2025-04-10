@@ -7,7 +7,7 @@ namespace Project.Scripts.EffectSystem.Components
     {
         public AttackInfo attackInfo = new(1, AttackType.Physical);
 
-        private Attack _attack;
+        private IAttack _attack;
 
         private void Awake()
         {
@@ -16,7 +16,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void ApplyDamage(IDamageable target)
         {
-            target?.TakeDamage(_attack);
+            target?.ApplyDamage(_attack);
         }
     }
 }

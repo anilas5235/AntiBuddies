@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     [Serializable]
-    public class AttackInfo : IEffectInfo<Attack,AttackType>
+    public class AttackInfo : IEffectInfo<IAttack,AttackType>
     {
         [SerializeField] private int amount;
         [SerializeField] private AttackType attackType;
@@ -19,7 +19,7 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
         public int GetAmount() => amount;
 
         public Color GetColor() => attackType.GetColor();
-        public Attack ToEffect(GameObject source)
+        public IAttack ToEffect(GameObject source)
         {
             switch (attackType)
             {

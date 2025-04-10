@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Project.Scripts.EffectSystem.Effects.Heal
 {
     [Serializable]
-    public class HealInfo : IEffectInfo<Heal,HealingType>
+    public class HealInfo : IEffectInfo<IHeal,HealingType>
     {
         [SerializeField] private int amount;
         [SerializeField] private HealingType healingType;
@@ -21,11 +21,11 @@ namespace Project.Scripts.EffectSystem.Effects.Heal
 
         public Color GetColor() => healingType.GetColor();
 
-        public Heal ToEffect(GameObject source)
+        public IHeal ToEffect(GameObject source)
         {
             switch (healingType)
             {
-                case HealingType.HealBurst: return new HealBurst(source, amount);
+                case HealingType.HealBurst: return new NormalHeal(source, amount);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

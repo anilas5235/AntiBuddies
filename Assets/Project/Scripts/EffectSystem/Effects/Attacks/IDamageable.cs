@@ -1,12 +1,8 @@
-﻿using Project.Scripts.EffectSystem.Components;
-
-namespace Project.Scripts.EffectSystem.Effects.Attacks
+﻿namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public interface IDamageable
     {
-        void TakeDamage(Attack attack);
-
-        ResistanceComponent GetResistance();
+        int ApplyDamage(IAttack attack);
         
         bool IsDead();
         

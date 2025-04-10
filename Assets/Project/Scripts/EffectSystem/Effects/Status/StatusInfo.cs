@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Project.Scripts.EffectSystem.Effects.Status
 {
     [Serializable]
-    public class StatusInfo : IEffectInfo<Status,StatusType>
+    public class StatusInfo : IEffectInfo<IStatus,StatusType>
     {
         [SerializeField] private int amount;
         [SerializeField] private StatusType statusType;
@@ -21,7 +21,7 @@ namespace Project.Scripts.EffectSystem.Effects.Status
 
         public Color GetColor() => statusType.GetColor();
 
-        public Status ToEffect(GameObject source)
+        public IStatus ToEffect(GameObject source)
         {
             switch (statusType)
             {

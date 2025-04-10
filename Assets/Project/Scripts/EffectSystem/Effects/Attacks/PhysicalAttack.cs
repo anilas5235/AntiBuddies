@@ -3,16 +3,27 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
-    public class PhysicalAttack : Attack
+    public class PhysicalAttack : IAttack
     {
-        public PhysicalAttack(GameObject source, int amount) 
-            : base(source, amount, AttackType.Physical)
+        public GameObject Source { get; }
+        public int Amount { get; }
+        public string Name { get; } = "Physical Attack";
+        public string Description { get; } = "Damages the Target with a Physical Type Damage";
+        public Color Color { get; } = Color.white;
+        public AttackType AttackType { get; }
+
+        public PhysicalAttack(GameObject source, int amount)
         {
+            Source = source;
+            Amount = amount;
+            AttackType = AttackType.Physical;
         }
 
-        public override int CalculateDamage(ResistanceComponent resData)
-        {
-            return CalculateDamage(resData.flatDamageReduction, resData.physicalResistance);
-        }
+        public void Apply(IDamageable target)
+            => target.ApplyDamage(this);
+
+        public int CalculateDamage(ResistanceComponent resistanceComponent)
+            => IAttack.CalculateDamage(Amount, resistanceComponent.flatDamageReduction,
+                resistanceComponent.physicalResistance);
     }
 }

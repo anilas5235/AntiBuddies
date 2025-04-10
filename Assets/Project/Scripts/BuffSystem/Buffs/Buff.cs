@@ -8,12 +8,12 @@ namespace Project.Scripts.BuffSystem.Buffs
     {
         private readonly float _duration;
         private float _remainingDuration;
-        private readonly Effect<TTarget> _effect;
+        private readonly IEffect<TTarget> _effect;
         public StackBehavior StackBehavior { get; }
         public TTarget Target { get; }
         public GameObject Source=> _effect.Source;
 
-        public Buff(Effect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target)
+        public Buff( IEffect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target)
         {
             Target = target;
             StackBehavior = stackBehavior;

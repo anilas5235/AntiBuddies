@@ -15,7 +15,7 @@ namespace Project.Scripts.EffectSystem.Effects.Heal
         {
             return healingType switch
             {
-                HealingType.HealBurst => "Heal Burst",
+                HealingType.HealBurst => "NormalHeal Burst",
                 _ => "Unknown"
             };
         }
