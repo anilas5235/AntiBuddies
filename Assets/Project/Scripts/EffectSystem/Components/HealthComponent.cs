@@ -13,7 +13,7 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private ResistanceComponent resistanceComponent;
         [SerializeField] private HealingStats healingStats;
 
-        public event Action<AttackInfo> OnDamageReceived;
+        public event Action<IAttack,int> OnDamageReceived;
 
         public UnityEvent onDamageReceived;
         public event Action OnDeath;
@@ -29,7 +29,7 @@ namespace Project.Scripts.EffectSystem.Components
         {
             int damage = attack.CalculateDamage(resistanceComponent);
             health.ReduceValue(damage);
-            OnDamageReceived?.Invoke(new AttackInfo(damage, attack.AttackType));
+            OnDamageReceived?.Invoke(attack,damage);
             onDamageReceived?.Invoke();
             if (IsDead()) Die();
             return damage;

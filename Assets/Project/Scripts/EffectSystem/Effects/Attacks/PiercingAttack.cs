@@ -10,13 +10,11 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
         public string Name { get; } = "Piercing Attack";
         public string Description { get; } = "Damages the Target with a Piercing Type Damage";
         public Color Color { get; } = new Color(0.83f, 0.48f, 1f);
-        public AttackType AttackType { get; }
         
         public PiercingAttack(GameObject source, int amount)
         {
             Source = source;
             Amount = amount;
-            AttackType = AttackType.Piercing;
         }
 
         public void Apply(IDamageable target)

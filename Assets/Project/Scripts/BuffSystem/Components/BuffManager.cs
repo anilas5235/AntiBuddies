@@ -1,4 +1,5 @@
 ﻿using Project.Scripts.BuffSystem.Data;
+using Project.Scripts.EffectSystem.Effects.Attacks;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Components
@@ -16,7 +17,7 @@ namespace Project.Scripts.BuffSystem.Components
             _statBuffHandler = new StatBuffHandler(this);
         }
 
-        public void AddBuff(DamageBuffData buff)
+        public void AddBuff(BuffData<IDamageable> buff)
         {
         }
     }

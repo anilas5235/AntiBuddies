@@ -6,8 +6,6 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public interface IAttack : IEffect<IDamageable>
     {
-        public AttackType AttackType { get; }
-
         public int CalculateDamage(ResistanceComponent resistanceComponent);
         
         public static int CalculateDamage(int damage,Stat flatDamageReduction, PercentStat resistance)

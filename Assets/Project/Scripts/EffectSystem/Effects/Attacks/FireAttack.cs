@@ -10,13 +10,11 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
         public string Name { get; } = "Fire Attack";
         public string Description { get; } = "Damages the Target with a Fire Type Damage";
         public Color Color { get; } = new(1f, 0.7f, 0.18f);
-        public AttackType AttackType { get; }
 
         public FireAttack(GameObject source, int amount)
         {
             Source = source;
             Amount = amount;
-            AttackType = AttackType.Fire;
         }
 
         public void Apply(IDamageable target) => target.ApplyDamage(this);

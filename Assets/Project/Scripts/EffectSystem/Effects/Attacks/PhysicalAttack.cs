@@ -10,13 +10,11 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
         public string Name { get; } = "Physical Attack";
         public string Description { get; } = "Damages the Target with a Physical Type Damage";
         public Color Color { get; } = Color.white;
-        public AttackType AttackType { get; }
 
         public PhysicalAttack(GameObject source, int amount)
         {
             Source = source;
             Amount = amount;
-            AttackType = AttackType.Physical;
         }
 
         public void Apply(IDamageable target)
