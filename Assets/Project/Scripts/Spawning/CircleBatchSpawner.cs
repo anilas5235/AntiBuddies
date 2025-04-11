@@ -14,8 +14,19 @@ namespace Project.Scripts.Spawning
         [Header("Spawn Area")]
         [SerializeField, Range(1, 15)] private float spawnRadius = 3;
 
+		public void CircleBatchSpawner(GameObject prefabToSpawn, int spawnPerBatch, float spawnDelay, int numberOfBatches, float spawnRadius, Vector2 position)
+        {
+        	this.prefabToSpawn = prefabToSpawn;
+			this.spawnPerBatch = spawnPerBatch;
+			this.spawnDelay = spawnDelay;
+            this.numberOfBatches = numberOfBatches;
+            this.spawnRadius = spawnRadius;
+			transform.position = position;
+		}
+
         private void Start()
         {
+			//Instantiate(this, transform.position, Quaternion.identity);
             StartCoroutine(SpawnBatches());
         }
         
