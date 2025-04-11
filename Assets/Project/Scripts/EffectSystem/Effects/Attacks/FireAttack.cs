@@ -17,9 +17,9 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
             Amount = amount;
         }
 
-        public void Apply(IDamageable target) => target.ApplyDamage(this);
-
         public int CalculateDamage(ResistanceComponent resistanceComponent)
             => IAttack.CalculateDamage(Amount, resistanceComponent.fireResistance);
+
+        public void Apply(IDamageable applyTarget) => applyTarget.Apply(this);
     }
 }

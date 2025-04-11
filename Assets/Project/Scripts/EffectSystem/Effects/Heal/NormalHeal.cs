@@ -16,10 +16,7 @@ namespace Project.Scripts.EffectSystem.Effects.Heal
             Source = source;
             Amount = amount;
         }
-        public void Apply(IHealable target)
-        {
-            target.Heal(this);
-        }
+        public void Apply(IHealable target) => target.Apply(this);
 
         public int CalculateHealing(HealingStats stats)
         {

@@ -13,11 +13,12 @@ namespace Project.Scripts.BuffSystem.Buffs
         public TTarget Target { get; }
         public GameObject Source=> _effect.Source;
 
-        public Buff( IEffect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target)
+        public Buff(IEffect<TTarget> effect, float duration, IStackBehavior stackBehavior, ITickBehavior tickBehavior, TTarget target)
         {
             Target = target;
             _effect = effect;
             _duration = duration;
+            _tickBehavior = tickBehavior;
             ResetDuration();
         }
 

@@ -1,9 +1,7 @@
 ﻿namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
-    public interface IDamageable
+    public interface IDamageable : ITarget<IAttack>
     {
-        int ApplyDamage(IAttack attack);
-        
         bool IsDead();
         
         bool IsAlive();

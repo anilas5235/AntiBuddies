@@ -1,9 +1,7 @@
 ﻿namespace Project.Scripts.BuffSystem.Data
 {
-    public enum StackBehavior : byte
+    public interface IStackBehavior 
     {
-        None,
-        Refresh,
-        Stacking,
+        
     }
 }

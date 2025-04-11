@@ -10,15 +10,14 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
         public string Name { get; } = "Piercing Attack";
         public string Description { get; } = "Damages the Target with a Piercing Type Damage";
         public Color Color { get; } = new Color(0.83f, 0.48f, 1f);
-        
+
         public PiercingAttack(GameObject source, int amount)
         {
             Source = source;
             Amount = amount;
         }
-
-        public void Apply(IDamageable target)
-            => target.ApplyDamage(this);
+        
+        public void Apply(IDamageable applyTarget) => applyTarget.Apply(this);
 
         public int CalculateDamage(ResistanceComponent resistanceComponent)
             => IAttack.CalculateDamage(Amount, resistanceComponent.flatDamageReduction,

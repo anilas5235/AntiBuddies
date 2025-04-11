@@ -5,7 +5,7 @@ namespace Project.Scripts.BuffSystem.Data
     public class Ticking : ITickBehavior
     {
         private float _timeSinceLastTick;
-        private int _accumulatedTicks;
+        private int _accumulatedTicks = 1;
         private readonly float _tickInterval;
         public void Tick(float deltaTime, IBuff buff)
         {

@@ -3,20 +3,20 @@ using Project.Scripts.EffectSystem.Effects.Heal;
 
 namespace Project.Scripts.BuffSystem.Components
 {
-    public class HealBuffHandler : BuffHandler<IHealable>
+    public class HealBuffHandler : BuffHandler
     {
         public HealBuffHandler(BuffManager manager) : base(manager)
         {
         }
 
-        public override void AddBuff(IBuff<IHealable> buff)
+        public override void AddBuff(IBuff buff)
         {
-            CentralBuffTicker.Instance.RegisterBuff(buff);
+            CentralBuffTicker.Instance.HealBuffGroup.RegisterBuff(buff);
         }
 
-        public override void RemoveBuff(IBuff<IHealable> buff)
+        public override void RemoveBuff(IBuff buff)
         {
-            CentralBuffTicker.Instance.UnregisterBuff(buff);
+            CentralBuffTicker.Instance.HealBuffGroup.UnregisterBuff(buff);
         }
     }
 }

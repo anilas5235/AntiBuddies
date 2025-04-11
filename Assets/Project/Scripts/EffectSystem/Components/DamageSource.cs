@@ -31,7 +31,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void ApplyDamage(IDamageable target)
         {
-            target?.ApplyDamage(_attack);
+            target?.Apply(_attack);
         }
 
         public IAttack GetEffect(GameObject source)

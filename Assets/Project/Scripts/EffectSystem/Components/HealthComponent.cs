@@ -1,4 +1,5 @@
 using System;
+using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using Project.Scripts.EffectSystem.Effects.Heal;
 using UnityEngine;
@@ -24,26 +25,10 @@ namespace Project.Scripts.EffectSystem.Components
         {
             FullHeal();
         }
-
-        public int ApplyDamage(IAttack attack)
-        {
-            int damage = attack.CalculateDamage(resistanceComponent);
-            health.ReduceValue(damage);
-            OnDamageReceived?.Invoke(attack,damage);
-            onDamageReceived?.Invoke();
-            if (IsDead()) Die();
-            return damage;
-        }
-
+        
         public bool IsDead() => health.IsBelowOrZero();
 
         public bool IsAlive() => !IsDead();
-        public void Heal(IHeal amount)
-        {
-            int heal = amount.CalculateHealing(healingStats);
-            if (heal <= 0) return;
-            health.IncreaseValue(heal);
-        }
 
         public void FullHeal() => health.MaximizeValue();
 
@@ -52,6 +37,22 @@ namespace Project.Scripts.EffectSystem.Components
             Debug.Log($"<color=yellow>{gameObject.name} died </color>");
             OnDeath?.Invoke();
             onDeath?.Invoke();
+        }
+
+        public void Apply(IAttack attack)
+        {
+            int damage = attack.CalculateDamage(resistanceComponent);
+            health.ReduceValue(damage);
+            OnDamageReceived?.Invoke(attack,damage);
+            onDamageReceived?.Invoke();
+            if (IsDead()) Die();
+        }
+
+        public void Apply(IHeal heal)
+        {
+            int amount = heal.CalculateHealing(healingStats);
+            if (amount <= 0) return;
+            health.IncreaseValue(amount);
         }
     }
 }

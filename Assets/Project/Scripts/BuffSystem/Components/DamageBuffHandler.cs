@@ -3,20 +3,20 @@ using Project.Scripts.EffectSystem.Effects.Attacks;
 
 namespace Project.Scripts.BuffSystem.Components
 {
-    public class DamageBuffHandler : BuffHandler<IDamageable>
+    public class DamageBuffHandler : BuffHandler
     {
         public DamageBuffHandler(BuffManager manager) : base(manager)
         {
         }
 
-        public override void AddBuff(IBuff<IDamageable> buff)
+        public override void AddBuff(IBuff buff)
         {
-            CentralBuffTicker.Instance.RegisterBuff(buff);
+            CentralBuffTicker.Instance.DamageBuffGroup.RegisterBuff(buff);
         }
 
-        public override void RemoveBuff(IBuff<IDamageable> buff)
+        public override void RemoveBuff(IBuff buff)
         {
-            CentralBuffTicker.Instance.UnregisterBuff(buff);
+            CentralBuffTicker.Instance.DamageBuffGroup.UnregisterBuff(buff);
         }
     }
 }

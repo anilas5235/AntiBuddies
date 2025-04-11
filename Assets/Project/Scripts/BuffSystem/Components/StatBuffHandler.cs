@@ -1,22 +1,21 @@
 ﻿using Project.Scripts.BuffSystem.Buffs;
-using Project.Scripts.EffectSystem.Effects.Status;
 
 namespace Project.Scripts.BuffSystem.Components
 {
-    public class StatBuffHandler : BuffHandler<IStatusEffectable>
+    public class StatBuffHandler : BuffHandler
     {
         public StatBuffHandler(BuffManager manager) : base(manager)
         {
         }
 
-        public override void AddBuff(IBuff<IStatusEffectable> buff)
+        public override void AddBuff(IBuff buff)
         {
-            CentralBuffTicker.Instance.RegisterBuff(buff);
+            CentralBuffTicker.Instance.StatusBuffGroup.RegisterBuff(buff);
         }
 
-        public override void RemoveBuff(IBuff<IStatusEffectable> buff)
+        public override void RemoveBuff(IBuff buff)
         {
-            CentralBuffTicker.Instance.UnregisterBuff(buff);
+            CentralBuffTicker.Instance.StatusBuffGroup.UnregisterBuff(buff);
         }
     }
 }
