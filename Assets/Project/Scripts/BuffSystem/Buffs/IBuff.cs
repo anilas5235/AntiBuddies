@@ -3,17 +3,13 @@ using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {
-    public interface IBuff<out TTarget>
+    public interface IBuff
     {
-        StackBehavior StackBehavior { get; }
-        TTarget Target { get; }
-        
-        GameObject Source { get; }
-        
         void OnBuffAdded();
         void OnBuffTick(float deltaTime);
         void OnBuffApply();
         void OnBuffRemove();
         bool IsBuffExpired();
+        void ReduceDuration(float amount);
     }
 }

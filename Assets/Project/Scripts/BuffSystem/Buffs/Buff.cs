@@ -4,19 +4,18 @@ using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {
-    public class Buff<TTarget> : IBuff<TTarget>
+    public class Buff<TTarget> : IBuff
     {
         private readonly float _duration;
         private float _remainingDuration;
         private readonly IEffect<TTarget> _effect;
-        public StackBehavior StackBehavior { get; }
+        private ITickBehavior _tickBehavior;
         public TTarget Target { get; }
         public GameObject Source=> _effect.Source;
 
         public Buff( IEffect<TTarget> effect, float duration, StackBehavior stackBehavior, TTarget target)
         {
             Target = target;
-            StackBehavior = stackBehavior;
             _effect = effect;
             _duration = duration;
             ResetDuration();
@@ -24,9 +23,9 @@ namespace Project.Scripts.BuffSystem.Buffs
 
         public virtual void OnBuffAdded(){}
 
-        public virtual void OnBuffTick(float deltaTime)
+        public void OnBuffTick(float deltaTime)
         {
-            _remainingDuration -= deltaTime;
+            _tickBehavior.Tick(deltaTime, this);
         }
 
         public virtual void OnBuffApply() => _effect.Apply(Target);
@@ -36,5 +35,14 @@ namespace Project.Scripts.BuffSystem.Buffs
         public bool IsBuffExpired() => _remainingDuration <= 0;
         
         protected void ResetDuration() => _remainingDuration = _duration;
+        
+        public void ReduceDuration(float amount)
+        {
+            _remainingDuration -= amount;
+            if (_remainingDuration < 0)
+            {
+                _remainingDuration = 0;
+            }
+        }
     }
 }

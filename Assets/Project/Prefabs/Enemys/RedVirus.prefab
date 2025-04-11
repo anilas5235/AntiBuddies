@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackInfo:
-    amount: 1
+  amount: 1
+  type: 0
   alieGroup: 0
 --- !u!212 &5458632804673224790
 SpriteRenderer:
