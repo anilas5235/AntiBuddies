@@ -1,5 +1,6 @@
-﻿using Project.Scripts.BuffSystem.Components;
-using Project.Scripts.BuffSystem.Data;
+﻿using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
+using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
+using Project.Scripts.BuffSystem.Components;
 using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
@@ -11,9 +12,10 @@ namespace Project.Scripts.BuffSystem.Buffs
         private float _remainingDuration;
         private readonly IEffect<TTarget> _effect;
         private ITickBehavior _tickBehavior;
+        private IStackBehavior _stackBehavior;
         public TTarget Target { get; }
         public GameObject Source=> _effect.Source;
-        public BuffManager BuffManager { get; set; }
+        public BuffManager BuffManager { get; protected set; }
 
         public string Name { get; }
 
@@ -23,8 +25,15 @@ namespace Project.Scripts.BuffSystem.Buffs
             _effect = effect;
             _duration = duration;
             _tickBehavior = tickBehavior;
+            _stackBehavior = stackBehavior;
             Name = _effect.Name + "_Buff";
             ResetDuration();
+        }
+
+        public void AddBuff(BuffManager buffManager)
+        {
+            BuffManager = buffManager;
+            _stackBehavior.AddingBuff(this);
         }
 
         public virtual void OnBuffAdded(){}
@@ -39,8 +48,8 @@ namespace Project.Scripts.BuffSystem.Buffs
         public virtual void OnBuffRemove(){}
 
         public bool IsBuffExpired() => _remainingDuration <= 0;
-        
-        protected void ResetDuration() => _remainingDuration = _duration;
+
+        private void ResetDuration() => _remainingDuration = _duration;
         
         public void ReduceDuration(float amount)
         {
@@ -49,6 +58,11 @@ namespace Project.Scripts.BuffSystem.Buffs
             {
                 _remainingDuration = 0;
             }
+        }
+        
+        public void Refresh()
+        {
+            ResetDuration();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Project.Scripts.BuffSystem.Buffs;
-
-namespace Project.Scripts.BuffSystem.Data
+﻿namespace Project.Scripts.BuffSystem.Buffs.TickBehaviour
 {
     public class Ticking : ITickBehavior
     {
