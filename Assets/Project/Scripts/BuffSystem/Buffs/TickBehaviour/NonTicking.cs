@@ -1,8 +1,12 @@
 ﻿namespace Project.Scripts.BuffSystem.Buffs.TickBehaviour
 {
-    public class NonTicking : ITickBehavior
+    public class NonTicking : ITickBehaviour
     {
-        public void Tick(float deltaTime, IBuff buff)
+        private const string ConstName = "NonTicking";
+
+        public string Name => ConstName;
+
+        public void Tick(IBuff buff, float deltaTime)
         {
             buff.ReduceDuration(deltaTime);
         }

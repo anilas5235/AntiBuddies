@@ -5,11 +5,14 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public class PiercingAttack : IAttack
     {
+        private static readonly EffectConstants Constants = new(
+            "Piercing",
+            "Damages the Target with a Piercing Type Damage"
+        );
+
+        public EffectConstants EffectConstants => Constants;
         public GameObject Source { get; }
         public int Amount { get; }
-        public string Name { get; } = "Piercing Attack";
-        public string Description { get; } = "Damages the Target with a Piercing Type Damage";
-        public Color Color { get; } = new Color(0.83f, 0.48f, 1f);
 
         public PiercingAttack(GameObject source, int amount)
         {

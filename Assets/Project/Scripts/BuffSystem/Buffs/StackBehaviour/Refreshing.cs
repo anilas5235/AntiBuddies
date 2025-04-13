@@ -1,16 +1,22 @@
-﻿namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
+﻿using Project.Scripts.BuffSystem.Components;
+
+namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
 {
-    public class Refreshing : IStackBehavior
+    public class Refreshing : IStackBehaviour
     {
-        public void AddingBuff(IBuff buff)
+        private const string ConstName = "Refreshing";
+
+        public string Name => ConstName;
+
+        public void AddingBuff(IBuff buff, BuffManager buffManager)
         {
-            if (buff.BuffManager.TryGetFirstBuff(buff.Name, out IBuff presentBuff))
+            if (buffManager.TryGetFirstBuff(buff.Name, out IBuff presentBuff))
             {
                 presentBuff.Refresh();
             }
             else
             {
-                buff.BuffManager.AddBuffToDictionary(buff);
+                buffManager.AddBuffToDictionary(buff);
             }
         }
     }

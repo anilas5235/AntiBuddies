@@ -5,11 +5,14 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
     public class FireAttack : IAttack
     {
+        private static readonly EffectConstants Constants = new(
+            "Fire",
+            "Damages the Target with a Fire Type Damage",
+            new Color(1f, 0.7f, 0.18f));
+
+        public EffectConstants EffectConstants => Constants;
         public GameObject Source { get; }
         public int Amount { get; }
-        public string Name { get; } = "Fire Attack";
-        public string Description { get; } = "Damages the Target with a Fire Type Damage";
-        public Color Color { get; } = new(1f, 0.7f, 0.18f);
 
         public FireAttack(GameObject source, int amount)
         {

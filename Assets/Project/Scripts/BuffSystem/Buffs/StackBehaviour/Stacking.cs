@@ -1,10 +1,15 @@
-﻿namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
+﻿using Project.Scripts.BuffSystem.Components;
+
+namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
 {
-    public class Stacking : IStackBehavior
+    public class Stacking : IStackBehaviour
     {
-        public void AddingBuff(IBuff buff)
+        private const string ConstName = "Stacking";
+        public string Name => ConstName;
+
+        public void AddingBuff(IBuff buff, BuffManager buffManager)
         {
-            buff.BuffManager.AddBuffToDictionary(buff);
+            buffManager.AddBuffToDictionary(buff);
         }
     }
 }

@@ -3,5 +3,6 @@
     public interface IHealable : ITarget<IHeal>
     {
         public void FullHeal();
+        int MaxHealth { get;}
     }
 }

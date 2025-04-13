@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using Project.Scripts.BuffSystem.Buffs;
+using Project.Scripts.EffectSystem.Effects.Attacks;
+using Project.Scripts.EffectSystem.Effects.Heal;
+using Project.Scripts.EffectSystem.Effects.Status;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Components
@@ -13,13 +16,44 @@ namespace Project.Scripts.BuffSystem.Components
     public class CentralBuffTicker : MonoBehaviour
     {
         private static CentralBuffTicker _instance;
-        [SerializeField] private List<BuffGroup> buffGroups;
-        [SerializeField] private int initialBuffGroups = 3;
-        [SerializeField] private int maxBuffGroups = 30;
-
-        private Coroutine _coroutine;
-        private BuffGroup _currBuffGroup;
-
+        private const float TickInterval = 0.1f;
+        
+        /// <summary>
+        /// Represents a group of buffs that will be ticked together
+        /// </summary>
+        public class BuffGroup
+        {
+            public string Name { get; }
+            public event Action<float> OnBuffTick;
+            
+            public BuffGroup(string name)
+            {
+                Name = name;
+            }
+            
+            public void RegisterBuff([NotNull] IBuff buff)
+            {
+                OnBuffTick += buff.OnBuffTick;
+            }
+            
+            public void UnregisterBuff([NotNull] IBuff buff)
+            {
+                OnBuffTick -= buff.OnBuffTick;
+            }
+            
+            public void Tick(float deltaTime)
+            {
+                OnBuffTick?.Invoke(deltaTime);
+            }
+        }
+        
+        // Predefined buff groups
+        private readonly List<BuffGroup> _buffGroups = new();
+        
+        // Common buff groups that can be accessed directly
+        public BuffGroup DamageBuffs { get; private set; }
+        public BuffGroup HealBuffs { get; private set; }
+        public BuffGroup StatusBuffs { get; private set; }
 
         public static CentralBuffTicker Instance
         {
@@ -34,103 +68,99 @@ namespace Project.Scripts.BuffSystem.Components
             }
         }
 
+        private Coroutine _coroutine;
+
+        public void RegisterBuffToDamageGroup([NotNull] IBuff buff) => DamageBuffs.RegisterBuff(buff);
+        public void RegisterBuffToHealGroup([NotNull] IBuff buff) => HealBuffs.RegisterBuff(buff);
+        public void RegisterBuffToStatusGroup([NotNull] IBuff buff) => StatusBuffs.RegisterBuff(buff);
+        
+        public void UnregisterBuffFromDamageGroup([NotNull] IBuff buff) => DamageBuffs.UnregisterBuff(buff);
+        public void UnregisterBuffFromHealGroup([NotNull] IBuff buff) => HealBuffs.UnregisterBuff(buff);
+        public void UnregisterBuffFromStatusGroup([NotNull] IBuff buff) => StatusBuffs.UnregisterBuff(buff);
+
+        // For backward compatibility
+        public void RegisterBuff([NotNull] IBuff buff) => DamageBuffs.RegisterBuff(buff);
+        public void UnregisterBuff([NotNull] IBuff buff) => DamageBuffs.UnregisterBuff(buff);
+        
+        // Create custom buff groups
+        public BuffGroup CreateBuffGroup(string name)
+        {
+            var group = new BuffGroup(name);
+            _buffGroups.Add(group);
+            return group;
+        }
+
         private void Awake()
         {
-            if (_instance && _instance != this)
-            {
-                Destroy(gameObject);
-            }
+            if (_instance && _instance != this) Destroy(gameObject);
             else
             {
                 _instance = this;
-                InitBuffGroups();
+                InitializeBuffGroups();
             }
+        }
+        
+        private void InitializeBuffGroups()
+        {
+            // Initialize the predefined buff groups
+            DamageBuffs = new BuffGroup("Damage");
+            HealBuffs = new BuffGroup("Heal");
+            StatusBuffs = new BuffGroup("Status");
+            
+            // Add them to the list
+            _buffGroups.Add(DamageBuffs);
+            _buffGroups.Add(HealBuffs);
+            _buffGroups.Add(StatusBuffs);
         }
 
         private void OnEnable()
         {
-            _coroutine = StartCoroutine(Ticking());
+            StartTicking();
         }
 
         private void OnDisable()
         {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-                _coroutine = null;
-            }
+            StopTicking();
         }
 
-        private void InitBuffGroups()
+        private void OnDestroy()
         {
-            for (int i = 0; i < initialBuffGroups; i++)
-            {
-                CreateBuffGroup();
-            }
+            StopTicking();
+            if (_instance == this) _instance = null;
         }
 
-        public BuffGroup RegisterBuff(IBuff buff)
+        private void StartTicking()
         {
-            if (buff == null)
-            {
-                Debug.LogError("Buff is null");
-                return null;
-            }
+            _coroutine ??= StartCoroutine(Tick(TickInterval));
+        }
 
-            if (_currBuffGroup.RegisterBuff(buff))
-            {
-                return _currBuffGroup;
-            }
+        private void StopTicking()
+        {
+            if (_coroutine == null) return;
+            StopCoroutine(_coroutine);
+            _coroutine = null;
+        }
 
-            UpdateCurrentBuffGroup();
+        private IEnumerator Tick(float tickInterval)
+        {
+            WaitForSeconds wait = new(tickInterval / _buffGroups.Count);
+            float lastTickTime = Time.time;
             
-            if (_currBuffGroup.RegisterBuff(buff))
-            {
-                return _currBuffGroup;
-            }
-            
-            Debug.LogError("No available buff groups");
-            return null;
-        }
-
-        private BuffGroup GetGroupForNextBuffs()
-        {
-            BuffGroup group = buffGroups.Where(group => group.HasSpace)
-                .OrderBy(group => group.BuffCount)
-                .FirstOrDefault();
-            return group ?? CreateBuffGroup();
-        }
-
-        private void UpdateCurrentBuffGroup()
-        {
-            _currBuffGroup = GetGroupForNextBuffs();
-        }
-
-        private BuffGroup CreateBuffGroup()
-        {
-            if (buffGroups.Count >= maxBuffGroups)
-            {
-                throw new Exception("Max buff groups reached");
-            }
-
-            BuffGroup buffGroup = new();
-            buffGroups.Add(buffGroup);
-            return buffGroup;
-        }
-
-
-        private IEnumerator Ticking()
-        {
-            WaitForFixedUpdate wait = new();
-            int index = 0;
             while (true)
             {
-                UpdateCurrentBuffGroup();
-                
-                buffGroups[index].Tick();
-                index = (index + 1) % buffGroups.Count;
-                
-                yield return wait;
+                foreach (BuffGroup buffGroup in _buffGroups)
+                {
+                    // Calculate the time since the last tick
+                    float now = Time.time;
+                    float deltaTime = now - lastTickTime;
+                    lastTickTime = now;
+
+                    // Tick this buff group
+                    buffGroup.Tick(deltaTime);
+                    
+                    // Wait before processing the next group
+                    yield return wait;
+                }
             }
         }
     }

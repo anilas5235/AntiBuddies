@@ -1,11 +1,16 @@
-﻿namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
+﻿using Project.Scripts.BuffSystem.Components;
+
+namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
 {
-    public class NotStacking : IStackBehavior
+    public class NotStacking : IStackBehaviour
     {
-        public void AddingBuff(IBuff buff)
+        private const string ConstName = "NotStacking";
+        public string Name => ConstName;
+
+        public void AddingBuff(IBuff buff, BuffManager buffManager)
         {
-            if (buff.BuffManager.HasBuff(buff.Name)) return;
-            buff.BuffManager.AddBuffToDictionary(buff);
+            if (buffManager.HasBuff(buff.Name)) return;
+            buffManager.AddBuffToDictionary(buff);
         }
     }
 }

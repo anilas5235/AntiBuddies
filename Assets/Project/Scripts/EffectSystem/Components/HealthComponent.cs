@@ -31,6 +31,7 @@ namespace Project.Scripts.EffectSystem.Components
         public bool IsAlive() => !IsDead();
 
         public void FullHeal() => health.MaximizeValue();
+        public int MaxHealth => health.MaxValue;
 
         public void Die()
         {
@@ -50,7 +51,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void Apply(IHeal heal)
         {
-            int amount = heal.CalculateHealing(healingStats);
+            int amount = heal.CalculateHealing(healingStats,this);
             if (amount <= 0) return;
             health.IncreaseValue(amount);
         }

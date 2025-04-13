@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using Project.Scripts.BuffSystem.Buffs;
+using Project.Scripts.BuffSystem.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,6 +24,7 @@ namespace Project.Scripts.BuffSystem.Components
         {
             if(IsFull) return false;
             OnBuffTick += buff.OnBuffTick;
+            buff.RegisteredAtBuffGroup(this);
             buffCount++;
             return true;
         }

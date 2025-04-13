@@ -4,10 +4,11 @@ namespace Project.Scripts.EffectSystem.Effects
 {
     public interface IEffect<in TTarget> : IApplyable<TTarget>
     {
+        EffectConstants EffectConstants { get; }
         GameObject Source { get; }
         int Amount { get; }
-        string Name { get; }
-        string Description { get; }
-        Color Color { get; }
+        string Name => EffectConstants.Name;
+        string Description => EffectConstants.Description;
+        Color Color => EffectConstants.Color;
     }
 }
