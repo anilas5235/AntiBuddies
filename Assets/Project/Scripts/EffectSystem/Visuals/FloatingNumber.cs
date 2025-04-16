@@ -5,6 +5,9 @@ namespace Project.Scripts.EffectSystem.Visuals
 {
     public class FloatingNumber : MonoBehaviour
     {
+        private const float XOffsetRange = .7f;
+        private const float YOffset = .5f;
+
         [SerializeField] private FloatingNumberData data;
         [SerializeField] private TextMesh textMesh;
 
@@ -13,17 +16,14 @@ namespace Project.Scripts.EffectSystem.Visuals
             
             Vector3 pos = transform.position;
             pos.z = -1;
+            pos.x += Random.Range(-XOffsetRange, XOffsetRange);
+            pos.y += YOffset;
             transform.position = pos;
                 
             UpdateText();
             StartCoroutine(LifeCycle());
         }
-        
-
-        private void FixedUpdate()
-        {
-            transform.position += Vector3.up * (Time.fixedDeltaTime * 2);
-        }
+     
 
         private void UpdateText()
         {
