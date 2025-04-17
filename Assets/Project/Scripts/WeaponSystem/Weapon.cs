@@ -13,15 +13,23 @@ namespace Project.Scripts.WeaponSystem
 
         public void Attack()
         {
-            attackBehaviour.PerformAttack(this);
+            if (target && !attackBehaviour.IsPerforming)
+            {
+                attackBehaviour.PerformAttack(this);
+            }
         }
 
         private void FixedUpdate()
         {
             target ??= targetingBehaviour.FindTarget(transform, 10f);
-            if(target){
-                Vector3 position = target.position;
-                transform.LookAt(new Vector3(position.x, position.y, transform.position.z));
+            if (target)
+            {
+                // Rotate the weapon to face the target in 2D space => only rotate Z axis
+                Vector3 direction = transform.InverseTransformPoint(target.position);
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.Rotate(0,0, angle);
+                
+                Attack();
             }
         }
 

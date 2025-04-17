@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2740992555734098473}
   - component: {fileID: 7679437470409611216}
   - component: {fileID: 6211520244055357206}
+  - component: {fileID: 30313915423617477}
+  - component: {fileID: 821334034517289629}
   m_Layer: 0
   m_Name: RedVirus
   m_TagString: Enemy
@@ -106,6 +108,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9ce43646e9de74b8ca098706701cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &30313915423617477
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919007744789787044}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &821334034517289629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919007744789787044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e9c2d10c80b5044a4beea02aa69801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health:
+    currValue: 0
+    maxValue: 10
+    minValue: 0
+  resistanceComponent: {fileID: 0}
+  healingStats: {fileID: 0}
+  onDamageReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7691238699623227762
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +171,7 @@ GameObject:
   - component: {fileID: 3029921411028985526}
   - component: {fileID: 1847879552277608203}
   - component: {fileID: 5458632804673224790}
+  - component: {fileID: 5854833170621524535}
   m_Layer: 7
   m_Name: Body
   m_TagString: Enemy
@@ -245,3 +299,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5854833170621524535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691238699623227762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b03a9a91ea0baa4a9cc71e92677617b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alieGroup: 0
+  healthComponent: {fileID: 821334034517289629}

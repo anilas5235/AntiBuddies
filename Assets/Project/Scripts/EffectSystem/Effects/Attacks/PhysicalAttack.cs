@@ -23,7 +23,10 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
         public void Apply(IDamageable applyTarget) => applyTarget.Apply(this);
 
         public int CalculateDamage(ResistanceComponent resistanceComponent)
-            => IAttack.CalculateDamage(Amount, resistanceComponent.flatDamageReduction,
+        {
+            if (!resistanceComponent) return Amount;
+            return IAttack.CalculateDamage(Amount, resistanceComponent.flatDamageReduction,
                 resistanceComponent.physicalResistance);
+        }
     }
 }
