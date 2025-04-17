@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3517425991637323063}
   - component: {fileID: 4198645418732729387}
   - component: {fileID: 3487260599637648475}
+  - component: {fileID: 5718301372832122031}
   m_Layer: 0
   m_Name: DamgeNumber
   m_TagString: Untagged
@@ -47,9 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    damageInfo:
-      damage: 0
-      damageType: 0
+    amount: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
     lifeTime: 0
   textMesh: {fileID: 3487260599637648475}
 --- !u!23 &4198645418732729387
@@ -119,3 +119,20 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!111 &5718301372832122031
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766984190451043708}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: e45794b4e3c086c42aef7eda6c636b3b, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e45794b4e3c086c42aef7eda6c636b3b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 1
+  m_CullingType: 0

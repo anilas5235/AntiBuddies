@@ -1,7 +1,6 @@
 ﻿namespace Project.Scripts.EffectSystem.Effects.Status
 {
-    public interface IStatusEffectable
+    public interface IStatusEffectable : ITarget<IStatus>
     {
-        void Apply(Status target);
     }
 }

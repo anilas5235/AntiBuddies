@@ -3,20 +3,13 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class DamageSource : MonoBehaviour, IDamageDealer
+    public abstract class DamageSource : MonoBehaviour, IDamageDealer
     {
-        public AttackInfo attackInfo = new(1, AttackType.Physical);
-
-        private Attack _attack;
-
-        private void Awake()
-        {
-            _attack = attackInfo.ToEffect(gameObject);
-        }
+        [SerializeField] private AttackData attack;
 
         public void ApplyDamage(IDamageable target)
         {
-            target?.TakeDamage(_attack);
+            target?.Apply(attack.GetEffect(gameObject));
         }
     }
 }
