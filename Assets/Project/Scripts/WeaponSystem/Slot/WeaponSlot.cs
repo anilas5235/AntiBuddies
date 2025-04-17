@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Project.Scripts.WeaponSystem
+namespace Project.Scripts.WeaponSystem.Slot
 {
     public class WeaponSlot : MonoBehaviour
     {

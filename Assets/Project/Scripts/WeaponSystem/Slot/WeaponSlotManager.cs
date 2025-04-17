@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Project.Scripts.WeaponSystem
+namespace Project.Scripts.WeaponSystem.Slot
 {
     public class WeaponSlotManager : MonoBehaviour
     {
