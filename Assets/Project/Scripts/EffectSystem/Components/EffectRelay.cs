@@ -1,7 +1,6 @@
-using Project.Scripts.EffectSystem.Components;
 using UnityEngine;
 
-namespace Project.Scripts.EffectSystem
+namespace Project.Scripts.EffectSystem.Components
 {
     public class EffectRelay : MonoBehaviour
     {
