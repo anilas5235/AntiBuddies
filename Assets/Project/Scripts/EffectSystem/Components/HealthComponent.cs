@@ -2,6 +2,7 @@ using System;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using Project.Scripts.EffectSystem.Effects.Heal;
+using Project.Scripts.EffectSystem.Visuals;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,7 +15,7 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private ResistanceComponent resistanceComponent;
         [SerializeField] private HealingStats healingStats;
 
-        public event Action<IAttack,int> OnDamageReceived;
+        public event Action<GameObject,IAttack,int> OnDamageReceived;
 
         public UnityEvent onDamageReceived;
         public event Action OnDeath;
@@ -25,7 +26,17 @@ namespace Project.Scripts.EffectSystem.Components
         {
             FullHeal();
         }
+
+        private void OnEnable()
+        {
+            if (FloatingNumberSpawner.Instance) OnDamageReceived += FloatingNumberSpawner.Instance.SpawnDamageNumber;
+        }
         
+        private void OnDisable()
+        {
+            if (FloatingNumberSpawner.Instance) OnDamageReceived -= FloatingNumberSpawner.Instance.SpawnDamageNumber;
+        }
+
         public bool IsDead() => health.IsBelowOrZero();
 
         public bool IsAlive() => !IsDead();
@@ -44,7 +55,7 @@ namespace Project.Scripts.EffectSystem.Components
         {
             int damage = attack.CalculateDamage(resistanceComponent);
             health.ReduceValue(damage);
-            OnDamageReceived?.Invoke(attack,damage);
+            OnDamageReceived?.Invoke(gameObject,attack,damage);
             onDamageReceived?.Invoke();
             if (IsDead()) Die();
         }

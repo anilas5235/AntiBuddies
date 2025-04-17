@@ -186,7 +186,6 @@ GameObject:
   - component: {fileID: 4307234338099689046}
   - component: {fileID: 8293573683347230753}
   - component: {fileID: 3356991902276083124}
-  - component: {fileID: 4458083661349159689}
   - component: {fileID: 3699389999355936274}
   - component: {fileID: 6364770945690560736}
   m_Layer: 0
@@ -320,21 +319,6 @@ MonoBehaviour:
   m_DefaultActionMap: Default
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4458083661349159689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029995827079385713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5334093c2b753d947a4cb17f73a729a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageNumberPrefab: {fileID: 5766984190451043708, guid: 2e4e39724878a0e46885f61a2bcd6184, type: 3}
-  displayDuration: 1
-  offset: {x: 0, y: 0.5}
 --- !u!114 &3699389999355936274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,3 +422,4 @@ MonoBehaviour:
   slotCircleRadius: 1
   numberOfSlots: 6
   weaponSlotPrefab: {fileID: 4847109733002469394, guid: 24ab6752f857f1144bf800314df430ba, type: 3}
+  defaultWeaponData: {fileID: 0}
