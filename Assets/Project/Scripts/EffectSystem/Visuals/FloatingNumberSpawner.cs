@@ -9,7 +9,6 @@ namespace Project.Scripts.EffectSystem.Visuals
         [SerializeField] private GameObject damageNumberPrefab;
         [SerializeField] private float displayDuration = 1.0f;
         [SerializeField] private Vector2 offset = new(0, 0);
-        [SerializeField] private float floatSpeed = 1.0f;
 
         private HealthComponent _healthComponent;
 

@@ -7,5 +7,7 @@ namespace Project.Scripts.WeaponSystem
     {
         [SerializeField] private string weaponName;
         [SerializeField] private GameObject prefab;
+        
+        public GameObject Prefab => prefab;
     }
 }
