@@ -1,14 +1,13 @@
 ﻿using System;
-using Project.Scripts.EffectSystem.Effects.Status;
 
-namespace Project.Scripts.EffectSystem.Effects.Heal
+namespace Project.Scripts.EffectSystem.Effects.Interfaces
 {
     public interface IHealable
     {
+        int MaxHealth { get; }
         event Action<EffectPackage> OnHealApplied;
         event Action OnDeath;
         void ApplyHeal(int amount, EffectType type);
         void FullHeal();
-        int MaxHealth { get;}
     }
 }

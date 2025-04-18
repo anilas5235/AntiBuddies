@@ -1,6 +1,5 @@
 using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects.Attacks;
-using Project.Scripts.EffectSystem.Effects.Status;
+using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Visuals

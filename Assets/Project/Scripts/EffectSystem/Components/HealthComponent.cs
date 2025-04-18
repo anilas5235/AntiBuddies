@@ -1,9 +1,7 @@
 using System;
 using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
-using Project.Scripts.EffectSystem.Effects.Attacks;
-using Project.Scripts.EffectSystem.Effects.Heal;
-using Project.Scripts.EffectSystem.Effects.Status;
+using Project.Scripts.EffectSystem.Effects.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,11 +10,8 @@ namespace Project.Scripts.EffectSystem.Components
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
         [SerializeField] private ClampedStat health = new(0, 10, 0);
-        public event Action<EffectType, int> OnDamageReceived;
 
         public UnityEvent<EffectType, int> onDamageReceived;
-        public event Action<EffectPackage> OnHealApplied;
-        public event Action OnDeath;
 
         public UnityEvent onDeath;
 
@@ -34,17 +29,15 @@ namespace Project.Scripts.EffectSystem.Components
             if (IsDead()) Die();
         }
 
-        public bool IsDead() => health.IsBelowOrZero();
-        public bool IsAlive() => !IsDead();
-
-        public void ApplyHeal(int amount, EffectType type)
+        public bool IsDead()
         {
-            if (amount <= 0) return;
-            health.IncreaseValue(amount);
+            return health.IsBelowOrZero();
         }
 
-        public void FullHeal() => health.MaximizeValue();
-        public int MaxHealth => health.MaxValue;
+        public bool IsAlive()
+        {
+            return !IsDead();
+        }
 
         public void Die()
         {
@@ -52,5 +45,22 @@ namespace Project.Scripts.EffectSystem.Components
             OnDeath?.Invoke();
             onDeath?.Invoke();
         }
+
+        public event Action<EffectPackage> OnHealApplied;
+        public event Action OnDeath;
+
+        public void ApplyHeal(int amount, EffectType type)
+        {
+            if (amount <= 0) return;
+            health.IncreaseValue(amount);
+        }
+
+        public void FullHeal()
+        {
+            health.MaximizeValue();
+        }
+
+        public int MaxHealth => health.MaxValue;
+        public event Action<EffectType, int> OnDamageReceived;
     }
 }

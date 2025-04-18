@@ -6,7 +6,7 @@ namespace Project.Scripts.EffectSystem.Components.Stats
     [Serializable]
     public class PercentStat : BaseStat
     {
-        public PercentStat(int statValue = 0): base(new PercentStatBehaviour(), statValue)
+        public PercentStat(int statValue = 0) : base(new PercentStatBehaviour(), statValue)
         {
         }
     }

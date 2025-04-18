@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Effects.Status
+namespace Project.Scripts.EffectSystem.Effects
 {
     [CreateAssetMenu(fileName = "NewEffectType", menuName = "EffectsSys/EffectType")]
     public class EffectType : ScriptableObject
@@ -12,7 +12,7 @@ namespace Project.Scripts.EffectSystem.Effects.Status
         [SerializeField] private bool affectedByReduction;
         [SerializeField] private bool affectedByPercentageReduction;
         [SerializeField] private bool affectedByFlatDamageReduction;
-        
+
         public EffectCategory EffectCategory => effectCategory;
         public string Name => title;
         public string Description => description;
@@ -20,6 +20,5 @@ namespace Project.Scripts.EffectSystem.Effects.Status
         public bool AffectedByReduction => affectedByReduction;
         public bool AffectedByPercentageReduction => affectedByPercentageReduction;
         public bool AffectedByFlatDamageReduction => affectedByFlatDamageReduction;
-        
     }
 }

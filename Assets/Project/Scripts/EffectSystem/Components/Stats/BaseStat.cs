@@ -9,10 +9,21 @@ namespace Project.Scripts.EffectSystem.Components.Stats
     public class BaseStat : IStat
     {
         [SerializeField] private int statValue;
+        public UnityEvent<int> OnChanged;
         private IStatBehaviour _statBehaviour;
 
-        public event Action<int> OnChange;
-        public UnityEvent<int> OnChanged;
+        internal BaseStat(IStatBehaviour statBehaviour, int statValue)
+        {
+            _statBehaviour = statBehaviour;
+        }
+
+        public BaseStat() : this(new FlatStatBehaviour(), 0)
+        {
+        }
+
+        public BaseStat(int statValue) : this(new FlatStatBehaviour(), statValue)
+        {
+        }
 
         protected int StatValue
         {
@@ -27,31 +38,35 @@ namespace Project.Scripts.EffectSystem.Components.Stats
             }
         }
 
-        internal BaseStat(IStatBehaviour statBehaviour,int statValue)
+        public bool IsBelowOrZero()
         {
-            _statBehaviour = statBehaviour;
+            return StatValue <= 0;
         }
 
-        public BaseStat() : this(new FlatStatBehaviour(),0)
+        public virtual void ReduceValue(int amount)
         {
+            StatValue -= amount;
         }
-        
-        public BaseStat(int statValue) : this(new FlatStatBehaviour(),statValue)
+
+        public virtual void IncreaseValue(int amount)
         {
+            StatValue += amount;
         }
+
+        public virtual int TransformPositive(int baseValue)
+        {
+            return _statBehaviour.TransformPositive(StatValue, baseValue);
+        }
+
+        public virtual int TransformNegative(int baseValue)
+        {
+            return _statBehaviour.TransformNegative(StatValue, baseValue);
+        }
+
+        public event Action<int> OnChange;
 
         protected virtual void OnStatValueChanged()
         {
         }
-
-        public bool IsBelowOrZero() => StatValue <= 0;
-
-        public virtual void ReduceValue(int amount) => StatValue -= amount;
-
-        public virtual void IncreaseValue(int amount) => StatValue += amount;
-
-        public virtual int TransformPositive(int baseValue) => _statBehaviour.TransformPositive(StatValue, baseValue);
-
-        public virtual int TransformNegative(int baseValue) => _statBehaviour.TransformNegative(StatValue, baseValue);
     }
 }

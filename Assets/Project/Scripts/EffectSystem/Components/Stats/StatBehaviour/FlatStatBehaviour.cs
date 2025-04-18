@@ -2,11 +2,24 @@
 {
     internal class FlatStatBehaviour : IStatBehaviour
     {
-        private static int Raise(int stat, int baseValue) => baseValue + stat;
+        public int TransformPositive(int statValue, int baseValue)
+        {
+            return Raise(statValue, baseValue);
+        }
 
-        private static int Lower(int stat, int baseValue) => Raise(-stat, baseValue);
-        public int TransformPositive(int statValue, int baseValue) => Raise(statValue, baseValue);
+        public int TransformNegative(int statValue, int baseValue)
+        {
+            return Lower(statValue, baseValue);
+        }
 
-        public int TransformNegative(int statValue, int baseValue) => Lower(statValue, baseValue);
+        private static int Raise(int stat, int baseValue)
+        {
+            return baseValue + stat;
+        }
+
+        private static int Lower(int stat, int baseValue)
+        {
+            return Raise(-stat, baseValue);
+        }
     }
 }

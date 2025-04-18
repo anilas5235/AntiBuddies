@@ -1,6 +1,5 @@
 using System;
 using Project.Scripts.EffectSystem.Effects;
-using Project.Scripts.EffectSystem.Effects.Status;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
@@ -10,18 +9,16 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private AlieGroup alieGroup;
         [SerializeField] private HealthComponent healthComponent;
         [SerializeField] private StatusComponent statusComponent;
-        [SerializeField] private HealingStats healingStats;
         [SerializeField] private ResistanceComponent resistanceComponent;
-        
+        [SerializeField] private AmplificationComponent amplificationComponent;
+
         public HealthComponent HealthComponent => healthComponent;
         public AlieGroup AlieGroup => alieGroup;
+
         public bool Apply(EffectPackage applyable)
         {
-            if (applyable.AlieGroup == alieGroup)
-            {
-                return false;
-            }
-            
+            if (applyable.AlieGroup == alieGroup) return false;
+
             switch (applyable.EffectType.EffectCategory)
             {
                 case EffectCategory.Attack:
@@ -29,12 +26,15 @@ namespace Project.Scripts.EffectSystem.Components
                     healthComponent.ApplyAttack(damage, applyable.EffectType);
                     break;
                 case EffectCategory.Heal:
+                    int heal = amplificationComponent.AmplifyEffect(applyable);
+                    healthComponent.ApplyHeal(heal, applyable.EffectType);
                     break;
                 case EffectCategory.Status:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             return true;
         }
     }

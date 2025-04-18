@@ -6,7 +6,7 @@ namespace Project.Scripts.EffectSystem.Components
     public abstract class EffectSource : MonoBehaviour
     {
         [SerializeField] private EffectData effectData;
-        [SerializeField] private AlieGroup alieGroup;
+        [SerializeField] protected AlieGroup alieGroup;
 
         protected void ApplyEffect(ITarget<EffectPackage> target)
         {

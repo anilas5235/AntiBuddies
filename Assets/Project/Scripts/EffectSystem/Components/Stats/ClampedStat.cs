@@ -11,6 +11,22 @@ namespace Project.Scripts.EffectSystem.Components.Stats
         [SerializeField] private int maxValue;
         [SerializeField] private int minValue;
 
+        internal ClampedStat(IStatBehaviour statBehaviour, int value, int max, int min) : base(statBehaviour, value)
+        {
+            clampedValue = value;
+            maxValue = max;
+            minValue = min;
+            UpdateClampedValue();
+        }
+
+        public ClampedStat() : this(0, 100, 0)
+        {
+        }
+
+        public ClampedStat(int value, int max, int min) : this(new FlatStatBehaviour(), value, max, min)
+        {
+        }
+
         protected int ClampedValue => clampedValue;
 
         public int MaxValue
@@ -35,22 +51,6 @@ namespace Project.Scripts.EffectSystem.Components.Stats
             }
         }
 
-        internal ClampedStat(IStatBehaviour statBehaviour, int value, int max, int min) : base(statBehaviour, value)
-        {
-            clampedValue = value;
-            maxValue = max;
-            minValue = min;
-            UpdateClampedValue();
-        }
-
-        public ClampedStat() : this(0, 100, 0)
-        {
-        }
-
-        public ClampedStat(int value, int max, int min) : this(new FlatStatBehaviour(), value, max, min)
-        {
-        }
-
         protected override void OnStatValueChanged()
         {
             UpdateClampedValue();
@@ -61,6 +61,9 @@ namespace Project.Scripts.EffectSystem.Components.Stats
             clampedValue = Mathf.Clamp(StatValue, MinValue, MaxValue);
         }
 
-        public void MaximizeValue() => StatValue = MaxValue;
+        public void MaximizeValue()
+        {
+            StatValue = MaxValue;
+        }
     }
 }

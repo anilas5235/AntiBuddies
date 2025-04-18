@@ -1,12 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Project.Scripts.EffectSystem.Components.Stats;
-using Project.Scripts.EffectSystem.Effects.Status;
+using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
     public class AmplificationComponent : MonoBehaviour
     {
-        [SerializeField] private Dictionary<EffectType,PercentStat> amPercentStats = new();
+        [SerializeField] private List<SimpleKeyValuePair<EffectType, PercentStat>> amplifications = new();
+
+        public int AmplifyEffect(EffectPackage effectPackage)
+        {
+            int result = effectPackage.Amount;
+            if (TryGetAmplification(effectPackage.EffectType, out IStat amplification))
+                result = amplification.TransformPositive(result);
+
+            return result;
+        }
+
+        private bool TryGetAmplification(EffectType type, out IStat amplification)
+        {
+            amplification = amplifications.FirstOrDefault(res => res.Key == type).Value;
+            return amplification != null;
+        }
     }
 }

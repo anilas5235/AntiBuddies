@@ -1,5 +1,4 @@
 ﻿using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects.Status;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects
@@ -9,7 +8,10 @@ namespace Project.Scripts.EffectSystem.Effects
     {
         [SerializeField] protected int amount;
         [SerializeField] protected EffectType effectType;
-        
-        public EffectPackage GetPackage(GameObject source, AlieGroup alieGroup) => new(alieGroup,amount, effectType, source);
+
+        public EffectPackage GetPackage(GameObject source, AlieGroup alieGroup)
+        {
+            return new EffectPackage(alieGroup, amount, effectType, source);
+        }
     }
 }

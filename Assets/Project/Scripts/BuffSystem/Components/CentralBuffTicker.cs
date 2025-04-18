@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Project.Scripts.BuffSystem.Buffs;
-using Project.Scripts.EffectSystem.Effects.Attacks;
-using Project.Scripts.EffectSystem.Effects.Heal;
-using Project.Scripts.EffectSystem.Effects.Status;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Components
