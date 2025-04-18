@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Project.Scripts.EffectSystem.Components.Stats;
+using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {

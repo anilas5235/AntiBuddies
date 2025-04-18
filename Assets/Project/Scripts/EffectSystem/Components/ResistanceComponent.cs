@@ -1,18 +1,19 @@
-﻿using UnityEngine;
+﻿using Project.Scripts.EffectSystem.Components.Stats;
+using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
     public class ResistanceComponent : MonoBehaviour
     {
         [Header("Damage Resistance")]
-        public Stat flatDamageReduction;
-        public PercentStat physicalResistance;
-        public PercentStat piercingResistance;
+        public ClampedStat flatDamageReduction;
+        public ClampedPercentStat physicalResistance;
+        public ClampedPercentStat piercingResistance;
         
         [Header("Elemental Resistance")]
-        public PercentStat fireResistance;
-        public PercentStat iceResistance;
-        public PercentStat lightningResistance;
-        public PercentStat poisonResistance;
+        public ClampedPercentStat fireResistance;
+        public ClampedPercentStat iceResistance;
+        public ClampedPercentStat lightningResistance;
+        public ClampedPercentStat poisonResistance;
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using Project.Scripts.EffectSystem.Components;
+﻿using Project.Scripts.EffectSystem.Components;
+using Project.Scripts.EffectSystem.Components.Stats;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
@@ -8,14 +8,14 @@ namespace Project.Scripts.EffectSystem.Effects.Attacks
     {
         public int CalculateDamage(ResistanceComponent resistanceComponent);
         
-        public static int CalculateDamage(int damage,Stat flatDamageReduction, PercentStat resistance)
+        public static int CalculateDamage(int damage,IStat flatDamageReduction, IStat resistance)
         {
             // Apply flat damage reduction
             damage = flatDamageReduction.TransformNegative(damage);
             return damage <= 0 ? 0 : CalculateDamage(damage,resistance);
         }
         
-        public static int CalculateDamage(int damage,PercentStat resistance)
+        public static int CalculateDamage(int damage,IStat resistance)
         {
             // Apply resistance
             damage = resistance.TransformNegative(damage);

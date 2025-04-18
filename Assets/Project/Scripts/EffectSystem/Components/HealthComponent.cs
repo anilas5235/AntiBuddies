@@ -1,4 +1,5 @@
 using System;
+using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using Project.Scripts.EffectSystem.Effects.Heal;
@@ -9,7 +10,7 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private Stat health = new(0, 10,0);
+        [SerializeField] private ClampedStat health = new(0, 10,0);
 
         [SerializeField] private ResistanceComponent resistanceComponent;
         [SerializeField] private HealingStats healingStats;
