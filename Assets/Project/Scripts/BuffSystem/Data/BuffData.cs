@@ -1,5 +1,6 @@
 ﻿using System;
 using Project.Scripts.BuffSystem.Buffs;
+using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.EffectSystem.Components;
@@ -14,6 +15,7 @@ namespace Project.Scripts.BuffSystem.Data
         [SerializeField] private float duration;
         [SerializeField] private StackingBehavior stackBehavior;
         [SerializeField] private TickingBehavior tickBehavior;
+        [SerializeField] private ExitBehavior exitBehavior;
         [SerializeField] private int ticksPerSecond;
 
         [SerializeField] private EffectData effect;
@@ -22,14 +24,24 @@ namespace Project.Scripts.BuffSystem.Data
         public IBuff GetBuff(ITarget<EffectPackage> target, GameObject source, AlieGroup alieGroup)
         {
             EffectPackage e = effect.GetPackage(source, alieGroup);
-            return new Buff(e, duration,  GetStackBehavior(),  GetTickBehavior(), target);
+            return new Buff(e, duration,  target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior());
+        }
+
+        private IExitBehaviour GetExitBehavior()
+        {
+            return exitBehavior switch
+            {
+                ExitBehavior.None => null,
+                ExitBehavior.Inverse => new InverseEffectBehaviour(),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
         private ITickBehaviour GetTickBehavior()
         {
             return tickBehavior switch
             {
-                TickingBehavior.None => new NonTicking(),
+                TickingBehavior.None => null,
                 TickingBehavior.Ticking => new Ticking(TickInterval),
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -44,6 +56,12 @@ namespace Project.Scripts.BuffSystem.Data
                 StackingBehavior.Stacking => new Stacking(),
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
+        
+        private enum ExitBehavior : byte
+        {
+            None,
+            Inverse,
         }
 
         private enum TickingBehavior : byte
