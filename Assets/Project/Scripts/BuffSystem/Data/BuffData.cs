@@ -11,25 +11,23 @@ namespace Project.Scripts.BuffSystem.Data
     [CreateAssetMenu(fileName = "NewBuffData", menuName = "BuffSystem/BuffData")]
     public class BuffData : ScriptableObject
     {
-        public float Duration;
-        public StackingBehavior StackBehavior;
-        public TickingBehavior TickBehavior;
-        public int TicksPerSecond;
+        [SerializeField] private float duration;
+        [SerializeField] private StackingBehavior stackBehavior;
+        [SerializeField] private TickingBehavior tickBehavior;
+        [SerializeField] private int ticksPerSecond;
 
-        public EffectData Effect;
-        private float TickInterval => 1f / TicksPerSecond;
+        [SerializeField] private EffectData effect;
+        private float TickInterval => 1f / ticksPerSecond;
 
         public IBuff GetBuff(ITarget<EffectPackage> target, GameObject source, AlieGroup alieGroup)
         {
-            EffectPackage effect = Effect.GetPackage(source,alieGroup);
-            IStackBehaviour stackBehavior = GetStackBehavior();
-            ITickBehaviour tickBehavior = GetTickBehavior();
-            return new Buff(effect, Duration, stackBehavior, tickBehavior,target);
+            EffectPackage e = effect.GetPackage(source, alieGroup);
+            return new Buff(e, duration,  GetStackBehavior(),  GetTickBehavior(), target);
         }
 
         private ITickBehaviour GetTickBehavior()
         {
-            return TickBehavior switch
+            return tickBehavior switch
             {
                 TickingBehavior.None => new NonTicking(),
                 TickingBehavior.Ticking => new Ticking(TickInterval),
@@ -39,7 +37,7 @@ namespace Project.Scripts.BuffSystem.Data
 
         private IStackBehaviour GetStackBehavior()
         {
-            return StackBehavior switch
+            return stackBehavior switch
             {
                 StackingBehavior.None => new NotStacking(),
                 StackingBehavior.Refresh => new Refreshing(),
@@ -48,13 +46,13 @@ namespace Project.Scripts.BuffSystem.Data
             };
         }
 
-        public enum TickingBehavior : byte
+        private enum TickingBehavior : byte
         {
             None,
             Ticking,
         }
-        
-        public enum StackingBehavior : byte
+
+        private enum StackingBehavior : byte
         {
             None,
             Refresh,
