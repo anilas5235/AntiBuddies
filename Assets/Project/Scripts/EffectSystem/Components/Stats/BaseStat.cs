@@ -1,6 +1,7 @@
 ﻿using System;
 using Project.Scripts.EffectSystem.Components.Stats.StatBehaviour;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Project.Scripts.EffectSystem.Components.Stats
 {
@@ -11,6 +12,7 @@ namespace Project.Scripts.EffectSystem.Components.Stats
         private IStatBehaviour _statBehaviour;
 
         public event Action<int> OnChange;
+        public UnityEvent<int> OnChanged;
 
         protected int StatValue
         {
@@ -21,6 +23,7 @@ namespace Project.Scripts.EffectSystem.Components.Stats
                 statValue = value;
                 OnStatValueChanged();
                 OnChange?.Invoke(statValue);
+                OnChanged?.Invoke(statValue);
             }
         }
 

@@ -1,4 +1,7 @@
-﻿using Project.Scripts.EffectSystem.Components.Stats;
+﻿using System.Collections.Generic;
+using Project.Scripts.EffectSystem.Components.Stats;
+using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Status;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
@@ -7,13 +10,22 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [Header("Damage Resistance")]
         public ClampedStat flatDamageReduction;
-        public ClampedPercentStat physicalResistance;
-        public ClampedPercentStat piercingResistance;
-        
-        [Header("Elemental Resistance")]
-        public ClampedPercentStat fireResistance;
-        public ClampedPercentStat iceResistance;
-        public ClampedPercentStat lightningResistance;
-        public ClampedPercentStat poisonResistance;
+        public Dictionary<EffectType,ClampedStat> Resistances = new ();
+
+
+        public int ResistEffect(EffectPackage effectPackage)
+        {
+            int result = effectPackage.Amount;
+            if (effectPackage.EffectType.AffectedByFlatDamageReduction)
+            {
+                result = flatDamageReduction.TransformNegative(result);
+            }
+
+            if (Resistances.TryGetValue(effectPackage.EffectType, out ClampedStat resistance))
+            {
+                result = resistance.TransformNegative(result);
+            }
+            return result;
+        }
     }
 }

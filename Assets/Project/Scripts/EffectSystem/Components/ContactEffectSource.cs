@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class ContactDamageSource : DamageSource
+    public class ContactEffectSource : EffectSource
     {
         private const float CooldownTime = 0.5f;
             
@@ -19,10 +19,10 @@ namespace Project.Scripts.EffectSystem.Components
             }
         }
 
-        protected virtual void HandleContact(EffectRelay effectRelay)
+        private void HandleContact(EffectRelay effectRelay)
         {
             if(_cooldownCoroutine != null || effectRelay.AlieGroup == alieGroup) return;
-            ApplyDamage(effectRelay.HealthComponent);
+            ApplyEffect(effectRelay);
             _cooldownCoroutine = StartCoroutine(CoolDown());
         }
 

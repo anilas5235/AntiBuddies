@@ -1,5 +1,6 @@
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Attacks;
+using Project.Scripts.EffectSystem.Effects.Status;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Visuals
@@ -28,7 +29,7 @@ namespace Project.Scripts.EffectSystem.Visuals
             _healthComponent.OnDamageReceived -= HandleDamageReceived;
         }
 
-        private void HandleDamageReceived(IAttack attack, int damage)
+        private void HandleDamageReceived(EffectType effectType, int damage)
         {
             if (!damageNumberPrefab) return;
 
@@ -36,7 +37,7 @@ namespace Project.Scripts.EffectSystem.Visuals
                 Instantiate(damageNumberPrefab, transform.position + (Vector3)offset, Quaternion.identity)
                     .GetComponent<FloatingNumber>();
 
-            numberInstance.Setup(new FloatingNumberData(damage, attack.Color, displayDuration));
+            numberInstance.Setup(new FloatingNumberData(damage, effectType.Color, displayDuration));
         }
     }
 }

@@ -3,6 +3,7 @@ using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Attacks;
 using Project.Scripts.EffectSystem.Effects.Heal;
+using Project.Scripts.EffectSystem.Effects.Status;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,14 +11,11 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private ClampedStat health = new(0, 10,0);
+        [SerializeField] private ClampedStat health = new(0, 10, 0);
+        public event Action<EffectType, int> OnDamageReceived;
 
-        [SerializeField] private ResistanceComponent resistanceComponent;
-        [SerializeField] private HealingStats healingStats;
-
-        public event Action<IAttack,int> OnDamageReceived;
-
-        public UnityEvent onDamageReceived;
+        public UnityEvent<EffectType, int> onDamageReceived;
+        public event Action<EffectPackage> OnHealApplied;
         public event Action OnDeath;
 
         public UnityEvent onDeath;
@@ -26,10 +24,24 @@ namespace Project.Scripts.EffectSystem.Components
         {
             FullHeal();
         }
-        
-        public bool IsDead() => health.IsBelowOrZero();
 
+        public void ApplyAttack(int amount, EffectType type)
+        {
+            if (amount <= 0) return;
+            health.ReduceValue(amount);
+            OnDamageReceived?.Invoke(type, amount);
+            onDamageReceived?.Invoke(type, amount);
+            if (IsDead()) Die();
+        }
+
+        public bool IsDead() => health.IsBelowOrZero();
         public bool IsAlive() => !IsDead();
+
+        public void ApplyHeal(int amount, EffectType type)
+        {
+            if (amount <= 0) return;
+            health.IncreaseValue(amount);
+        }
 
         public void FullHeal() => health.MaximizeValue();
         public int MaxHealth => health.MaxValue;
@@ -39,22 +51,6 @@ namespace Project.Scripts.EffectSystem.Components
             Debug.Log($"<color=yellow>{gameObject.name} died </color>");
             OnDeath?.Invoke();
             onDeath?.Invoke();
-        }
-
-        public void Apply(IAttack attack)
-        {
-            int damage = attack.CalculateDamage(resistanceComponent);
-            health.ReduceValue(damage);
-            OnDamageReceived?.Invoke(attack,damage);
-            onDamageReceived?.Invoke();
-            if (IsDead()) Die();
-        }
-
-        public void Apply(IHeal heal)
-        {
-            int amount = heal.CalculateHealing(healingStats,this);
-            if (amount <= 0) return;
-            health.IncreaseValue(amount);
         }
     }
 }

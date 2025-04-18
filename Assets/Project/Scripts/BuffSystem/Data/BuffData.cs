@@ -2,27 +2,29 @@
 using Project.Scripts.BuffSystem.Buffs;
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
+using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data
 {
-    public abstract class BuffData<TTarget,TEffect> : ScriptableObject where TEffect : IEffect<TTarget>
+    [CreateAssetMenu(fileName = "NewBuffData", menuName = "BuffSystem/BuffData")]
+    public class BuffData : ScriptableObject
     {
         public float Duration;
         public StackingBehavior StackBehavior;
         public TickingBehavior TickBehavior;
         public int TicksPerSecond;
 
-        public IEffectData<TEffect> Effect;
+        public EffectData Effect;
         private float TickInterval => 1f / TicksPerSecond;
 
-        public IBuff GetBuff(TTarget target, GameObject source)
+        public IBuff GetBuff(ITarget<EffectPackage> target, GameObject source, AlieGroup alieGroup)
         {
-            IEffect<TTarget> effect = Effect.GetEffect(source);
+            EffectPackage effect = Effect.GetPackage(source,alieGroup);
             IStackBehaviour stackBehavior = GetStackBehavior();
             ITickBehaviour tickBehavior = GetTickBehavior();
-            return new Buff<TTarget>(effect, Duration, stackBehavior, tickBehavior,target);
+            return new Buff(effect, Duration, stackBehavior, tickBehavior,target);
         }
 
         private ITickBehaviour GetTickBehavior()

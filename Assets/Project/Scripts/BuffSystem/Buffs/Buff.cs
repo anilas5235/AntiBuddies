@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {
-    public class Buff<TTarget> : IBuff
+    public class Buff : IBuff
     {
         private readonly float _duration;
         private float _remainingDuration;
-        private readonly IEffect<TTarget> _effect;
+        private readonly EffectPackage _effect;
         private readonly ITickBehaviour _tickBehavior;
         private readonly IStackBehaviour _stackBehaviour;
-        public TTarget Target { get; }
+        public ITarget<EffectPackage> Target { get; }
         public GameObject Source=> _effect.Source;
         public BuffManager BuffManager { get; private set; }
         public BuffGroup BuffGroup { get; private set; }
@@ -22,14 +22,14 @@ namespace Project.Scripts.BuffSystem.Buffs
 
         public string Name { get; }
 
-        public Buff(IEffect<TTarget> effect, float duration, IStackBehaviour stackBehaviour, ITickBehaviour tickBehavior, TTarget target)
+        public Buff(EffectPackage effect, float duration, IStackBehaviour stackBehaviour, ITickBehaviour tickBehavior, ITarget<EffectPackage> target)
         {
             Target = target;
             _effect = effect;
             _duration = duration;
             _tickBehavior = tickBehavior;
             _stackBehaviour = stackBehaviour;
-            Name = $"{_effect.Name}_{_stackBehaviour.Name}_{_tickBehavior.Name}_Buff";
+            Name = $"{_effect.EffectType.Name}_{_stackBehaviour.Name}_{_tickBehavior.Name}_Buff";
             ResetDuration();
         }
      
@@ -43,7 +43,7 @@ namespace Project.Scripts.BuffSystem.Buffs
             RemoveBuff();
         }
 
-        public virtual void OnBuffApply() => _effect.Apply(Target);
+        public virtual void OnBuffApply() => Target.Apply(_effect);
 
         public virtual void OnBuffRemove() { }
 
