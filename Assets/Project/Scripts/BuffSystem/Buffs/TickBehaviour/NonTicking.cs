@@ -5,10 +5,19 @@
         private const string ConstName = "NonTicking";
 
         public string Name => ConstName;
+        public void OnBuffAdded(IBuff buff)
+        {
+            buff.OnBuffApply();
+        }
 
-        public void Tick(IBuff buff, float deltaTime)
+        public void OnBuffTick(IBuff buff, float deltaTime)
         {
             buff.ReduceDuration(deltaTime);
+        }
+
+        public void OnBuffRemove(IBuff buff)
+        {
+            buff.OnInverseBuffApply();
         }
     }
 }

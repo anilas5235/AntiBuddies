@@ -17,5 +17,10 @@ namespace Project.Scripts.EffectSystem.Effects
             EffectType = effectType;
             Source = source;
         }
+        
+        public readonly EffectPackage Invert()
+        {
+            return new EffectPackage(AlieGroup, -Amount, EffectType, Source);
+        }
     }
 }

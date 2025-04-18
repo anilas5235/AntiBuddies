@@ -32,20 +32,27 @@ namespace Project.Scripts.BuffSystem.Buffs
             Name = $"{_effect.EffectType.Name}_{_stackBehaviour.Name}_{_tickBehavior.Name}_Buff";
             ResetDuration();
         }
-     
-        public virtual void OnBuffAdded(){}
+
+        public virtual void OnBuffAdded()
+        {
+            _tickBehavior.OnBuffAdded(this);
+        }
 
         public void OnBuffTick(float deltaTime)
         {
-            _tickBehavior.Tick(this,deltaTime);
+            _tickBehavior.OnBuffTick(this,deltaTime);
             
             if (!IsBuffExpired()) return;
             RemoveBuff();
         }
 
         public virtual void OnBuffApply() => Target.Apply(_effect);
+        public void OnInverseBuffApply() => Target.Apply(_effect.Invert());
 
-        public virtual void OnBuffRemove() { }
+        public virtual void OnBuffRemove()
+        {
+            _tickBehavior.OnBuffRemove(this);
+        }
 
         public bool IsBuffExpired() => _remainingDuration <= 0;
 

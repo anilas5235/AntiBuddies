@@ -5,16 +5,21 @@
         private const string ConstName = "Ticking";
 
         private float _timeSinceLastTick;
-        private int _accumulatedTicks = 1;
+        private int _accumulatedTicks;
         private readonly float _tickInterval;
         public string Name => ConstName;
-
+        
         public Ticking(float tickInterval)
         {
             _tickInterval = tickInterval;
         }
-        
-        public void Tick(IBuff buff, float deltaTime)
+
+        public void OnBuffAdded(IBuff buff)
+        {
+            _accumulatedTicks++;
+        }
+
+        public void OnBuffTick(IBuff buff, float deltaTime)
         {
             buff.ReduceDuration(deltaTime);
             _timeSinceLastTick += deltaTime;
@@ -25,6 +30,10 @@
             {
                 buff.OnBuffApply();
             }
+        }
+
+        public void OnBuffRemove(IBuff buff)
+        {
         }
     }
 }
