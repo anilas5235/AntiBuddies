@@ -142,6 +142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alieGroup: 1
   healthComponent: {fileID: 4307234338099689046}
+  statusComponent: {fileID: 0}
+  resistanceComponent: {fileID: 3699389999355936274}
+  amplificationComponent: {fileID: 0}
 --- !u!114 &1304199053460124670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,10 +242,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    currValue: 0
+    statValue: 0
+    clampedValue: 0
     maxValue: 10
     minValue: 0
-  resistanceComponent: {fileID: 3699389999355936274}
   onDamageReceived:
     m_PersistentCalls:
       m_Calls:
@@ -347,21 +350,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flatDamageReduction:
-    currValue: 0
+    statValue: 0
+    clampedValue: 0
     maxValue: 100
     minValue: 0
-  physicalResistance:
-    currValue: 0
-    maxValue: 100
-    minValue: 0
-  piercingResistance:
-    currValue: 0
-    maxValue: 100
-    minValue: 0
-  fireResistance:
-    currValue: 0
-    maxValue: 100
-    minValue: 0
+  resistances: []
 --- !u!114 &6364770945690560736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,10 +368,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmplifier:
-    currValue: 0
-    maxValue: 100
-    minValue: 0
-  healingAmplifier:
-    currValue: 0
-    maxValue: 100
-    minValue: 0
+    statValue: 0

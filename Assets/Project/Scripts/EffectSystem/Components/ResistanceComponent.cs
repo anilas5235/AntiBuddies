@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
@@ -13,14 +14,18 @@ namespace Project.Scripts.EffectSystem.Components
 
         [SerializeField] private List<SimpleKeyValuePair<EffectType, ClampedPercentStat>> resistances = new();
 
-        public int ResistEffect(EffectPackage effectPackage)
+        public int ResistEffect(int value, EffectType effectType)
         {
-            int result = effectPackage.Amount;
-            if (effectPackage.EffectType.AffectedByFlatDamageReduction)
+            int result = value;
+            if (effectType.AffectedByFlatModifier)
+            {
                 result = flatDamageReduction.TransformNegative(result);
+            }
 
-            if (TryGetResistance(effectPackage.EffectType, out IStat resistance))
+            if (effectType.AffectedByPercentModifier && TryGetResistance(effectType, out IStat resistance))
+            {
                 result = resistance.TransformNegative(result);
+            }
 
             return result;
         }
@@ -29,6 +34,15 @@ namespace Project.Scripts.EffectSystem.Components
         {
             resistance = resistances.FirstOrDefault(res => res.Key == effectType).Value;
             return resistance != null;
+        }
+
+        private void OnValidate()
+        {
+            flatDamageReduction.UpdateClampedValue();
+            foreach (SimpleKeyValuePair<EffectType,ClampedPercentStat> pair in resistances)
+            {
+                pair.Value.UpdateClampedValue();
+            }
         }
     }
 }

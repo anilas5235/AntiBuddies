@@ -6,19 +6,16 @@ namespace Project.Scripts.EffectSystem.Effects
     public class EffectType : ScriptableObject
     {
         [SerializeField] private EffectCategory effectCategory;
-        [SerializeField] private string title;
-        [SerializeField] private string description;
-        [SerializeField] private Color color;
-        [SerializeField] private bool affectedByReduction;
-        [SerializeField] private bool affectedByPercentageReduction;
-        [SerializeField] private bool affectedByFlatDamageReduction;
+        [SerializeField] private string description = "no description jet";
+        [SerializeField] private Color color = Color.white;
+        [SerializeField] private bool affectedByPercentModifier;
+        [SerializeField] private bool affectedByFlatModifier;
 
         public EffectCategory EffectCategory => effectCategory;
-        public string Name => title;
+        public string Name => name;
         public string Description => description;
         public Color Color => color;
-        public bool AffectedByReduction => affectedByReduction;
-        public bool AffectedByPercentageReduction => affectedByPercentageReduction;
-        public bool AffectedByFlatDamageReduction => affectedByFlatDamageReduction;
+        public bool AffectedByPercentModifier => affectedByPercentModifier;
+        public bool AffectedByFlatModifier => affectedByFlatModifier;
     }
 }

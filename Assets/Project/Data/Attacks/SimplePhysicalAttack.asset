@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c50be960a78a43b4be4a43385c1033a0, type: 3}
-  m_Name: WeakPhysicalAttack
+  m_Script: {fileID: 11500000, guid: 3d581e4c74cf4fd09689b1c9c86b6e83, type: 3}
+  m_Name: SimplePhysicalAttack
   m_EditorClassIdentifier: 
   amount: 1
-  type: 0
+  effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}

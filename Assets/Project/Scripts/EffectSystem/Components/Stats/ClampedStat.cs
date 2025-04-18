@@ -56,7 +56,7 @@ namespace Project.Scripts.EffectSystem.Components.Stats
             UpdateClampedValue();
         }
 
-        private void UpdateClampedValue()
+        public void UpdateClampedValue()
         {
             clampedValue = Mathf.Clamp(StatValue, MinValue, MaxValue);
         }

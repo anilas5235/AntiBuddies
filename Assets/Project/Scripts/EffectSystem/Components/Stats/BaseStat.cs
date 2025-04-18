@@ -1,7 +1,6 @@
 ﻿using System;
 using Project.Scripts.EffectSystem.Components.Stats.StatBehaviour;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Project.Scripts.EffectSystem.Components.Stats
 {
@@ -9,8 +8,8 @@ namespace Project.Scripts.EffectSystem.Components.Stats
     public class BaseStat : IStat
     {
         [SerializeField] private int statValue;
-        public UnityEvent<int> OnChanged;
         private IStatBehaviour _statBehaviour;
+        public event Action<int> OnChange;
 
         internal BaseStat(IStatBehaviour statBehaviour, int statValue)
         {
@@ -34,7 +33,6 @@ namespace Project.Scripts.EffectSystem.Components.Stats
                 statValue = value;
                 OnStatValueChanged();
                 OnChange?.Invoke(statValue);
-                OnChanged?.Invoke(statValue);
             }
         }
 
@@ -62,9 +60,7 @@ namespace Project.Scripts.EffectSystem.Components.Stats
         {
             return _statBehaviour.TransformNegative(StatValue, baseValue);
         }
-
-        public event Action<int> OnChange;
-
+        
         protected virtual void OnStatValueChanged()
         {
         }

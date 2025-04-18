@@ -10,10 +10,10 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [SerializeField] private List<SimpleKeyValuePair<EffectType, PercentStat>> amplifications = new();
 
-        public int AmplifyEffect(EffectPackage effectPackage)
+        public int AmplifyEffect(int value, EffectType effectType)
         {
-            int result = effectPackage.Amount;
-            if (TryGetAmplification(effectPackage.EffectType, out IStat amplification))
+            int result = value;
+            if (TryGetAmplification(effectType, out IStat amplification))
                 result = amplification.TransformPositive(result);
 
             return result;

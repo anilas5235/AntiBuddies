@@ -22,20 +22,41 @@ namespace Project.Scripts.EffectSystem.Components
             switch (applyable.EffectType.EffectCategory)
             {
                 case EffectCategory.Attack:
-                    int damage = resistanceComponent.ResistEffect(applyable);
-                    healthComponent.ApplyAttack(damage, applyable.EffectType);
+                    Attack(applyable);
                     break;
                 case EffectCategory.Heal:
-                    int heal = amplificationComponent.AmplifyEffect(applyable);
-                    healthComponent.ApplyHeal(heal, applyable.EffectType);
+                    Heal(applyable);
                     break;
                 case EffectCategory.Status:
+                    Status(applyable);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
             return true;
+        }
+
+        private void Heal(EffectPackage healPackage)
+        {
+            int heal = healPackage.Amount;
+            if (amplificationComponent && healPackage.EffectType.AffectedByPercentModifier) amplificationComponent.AmplifyEffect(heal, healPackage.EffectType);
+            healthComponent.ApplyHeal(heal, healPackage.EffectType);
+        }
+
+        private void Attack(EffectPackage attackPackage)
+        {
+            int damage = attackPackage.Amount;
+            if (resistanceComponent)
+            {
+                damage = resistanceComponent.ResistEffect(damage, attackPackage.EffectType);
+            }
+            healthComponent.ApplyAttack(damage, attackPackage.EffectType);
+        }
+
+        private void Status(EffectPackage statusPackage)
+        {
+            
         }
     }
 }
