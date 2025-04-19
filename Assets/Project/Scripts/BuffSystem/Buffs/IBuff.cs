@@ -1,5 +1,4 @@
-﻿using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
-using Project.Scripts.BuffSystem.Components;
+﻿using Project.Scripts.BuffSystem.Components;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs
@@ -12,6 +11,7 @@ namespace Project.Scripts.BuffSystem.Buffs
         void OnBuffAdded();
         void OnBuffTick(float deltaTime);
         void OnBuffApply();
+        void OnInverseBuffApply();
         void OnBuffRemove();
         bool IsBuffExpired();
         void ReduceDuration(float amount);

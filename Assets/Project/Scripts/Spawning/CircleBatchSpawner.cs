@@ -1,59 +1,53 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project.Scripts.Spawning
 {
     public class CircleBatchSpawner : MonoBehaviour
     {
-        [Header("Batch Settings")]
-        [SerializeField] private GameObject prefabToSpawn;
-        [SerializeField, Range(1,100)] private int spawnPerBatch = 5;
-        [SerializeField, Range(.1f,20)] private float spawnDelay = 1f;
-        [SerializeField, Range(1,15)] private int numberOfBatches = 2;
-        [Header("Spawn Area")]
-        [SerializeField, Range(1, 15)] private float spawnRadius = 3;
-
-        private void Start()
-        {
-            StartCoroutine(SpawnBatches());
-        }
-        
+        [Header("Batch Settings")] [SerializeField]
+        public Batch batch;
         private IEnumerator SpawnBatches()
         {
-            for (int batch = 0; batch < numberOfBatches; batch++)
+            yield return new WaitForSeconds(batch.initialDelay);
+            WaitForSeconds waitDelay = new WaitForSeconds(batch.spawnDelay); // Cached WaitForSeconds
+            for (int i = 0; i < batch.numberOfBatches; i++)
             {
                 SpawnBatch();
-                
-                if (batch < numberOfBatches - 1)
+                if (i < batch.numberOfBatches - 1)
                 {
-                    yield return new WaitForSeconds(spawnDelay);
+                    yield return waitDelay;
                 }
             }
+            Destroy(gameObject);
         }
 
         private void SpawnBatch()
         {
-            if (!prefabToSpawn) throw new NullReferenceException("prefabToSpawn is null");
-            
-            for (int i = 0; i < spawnPerBatch; i++)
+            if (!batch.enemyPrefab) throw new NullReferenceException("prefabToSpawn is null");
+            Vector2 basePos = transform.position; // Cache position
+            for (int i = 0; i < batch.spawnPerBatch; i++)
             {
-                // Generate a random position within the circle collider
-                Vector2 randomPos = UnityEngine.Random.insideUnitCircle * spawnRadius;
-                Vector2 spawnPosition = (Vector2)transform.position + randomPos;
-
-                // Instantiate the prefab at the calculated position
-                Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+                Vector2 randomPos = Random.insideUnitCircle * batch.spawnRadius;
+                Vector2 spawnPosition = basePos + randomPos;
+                Instantiate(batch.enemyPrefab, spawnPosition, Quaternion.identity);
             }
+        }
+
+        public void StartSpawning()
+        {
+            StartCoroutine(SpawnBatches());
         }
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            // Draw the spawn area
             Gizmos.color = new Color(1, 0, 0, 1);
-            Gizmos.DrawWireSphere(transform.position, spawnRadius);
+            Gizmos.DrawWireSphere(transform.position, batch.spawnRadius);
         }
 #endif
     }
 }
+
