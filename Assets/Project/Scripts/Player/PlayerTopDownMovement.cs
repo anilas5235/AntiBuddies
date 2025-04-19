@@ -70,7 +70,8 @@ namespace Project.Scripts.Player
             Vector2 targetVelocity = _moveInput.normalized * speed;
 
             _rb2d.linearVelocity =
-                Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, Time.fixedDeltaTime * 10 * maxAcceleration);
+                Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, 
+                    Time.fixedDeltaTime * 10 * maxAcceleration);
         }
     }
 }

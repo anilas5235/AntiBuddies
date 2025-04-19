@@ -28,7 +28,7 @@ namespace Project.Scripts.EffectSystem.Visuals
             _healthComponent.OnDamageReceived -= HandleDamageReceived;
         }
 
-        private void HandleDamageReceived(AttackInfo attack)
+        private void HandleDamageReceived(IAttack attack, int damage)
         {
             if (!damageNumberPrefab) return;
 
@@ -36,7 +36,7 @@ namespace Project.Scripts.EffectSystem.Visuals
                 Instantiate(damageNumberPrefab, transform.position + (Vector3)offset, Quaternion.identity)
                     .GetComponent<FloatingNumber>();
 
-            numberInstance.Setup(new FloatingNumberData(attack.GetAmount(), attack.GetColor(), displayDuration));
+            numberInstance.Setup(new FloatingNumberData(damage, attack.Color, displayDuration));
         }
     }
 }

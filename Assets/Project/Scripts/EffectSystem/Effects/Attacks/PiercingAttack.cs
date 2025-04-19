@@ -3,16 +3,27 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Attacks
 {
-    public class PiercingAttack : Attack
+    public class PiercingAttack : IAttack
     {
-        public PiercingAttack(GameObject source, int amount)
-            : base(source, amount, AttackType.Piercing)
-        {
-        }
+        private static readonly EffectConstants Constants = new(
+            "Piercing",
+            "Damages the Target with a Piercing Type Damage"
+        );
 
-        public override int CalculateDamage(ResistanceComponent resData)
+        public EffectConstants EffectConstants => Constants;
+        public GameObject Source { get; }
+        public int Amount { get; }
+
+        public PiercingAttack(GameObject source, int amount)
         {
-            return CalculateDamage(resData.flatDamageReduction, resData.piercingResistance);
+            Source = source;
+            Amount = amount;
         }
+        
+        public void Apply(IDamageable applyTarget) => applyTarget.Apply(this);
+
+        public int CalculateDamage(ResistanceComponent resistanceComponent)
+            => IAttack.CalculateDamage(Amount, resistanceComponent.flatDamageReduction,
+                resistanceComponent.piercingResistance);
     }
 }
