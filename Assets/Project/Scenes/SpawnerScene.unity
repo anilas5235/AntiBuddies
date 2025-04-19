@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f447ae51420e4a4dbc9d8a9a0908c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveGroup: {fileID: 0}
+  waveGroup: {fileID: 11400000, guid: 6673d25719475f54786ca8192b984eae, type: 2}
   spawnerHandlerPrefab: {fileID: 2948315606604756506, guid: 61efa98c25ad98b468f232f1b7570c91, type: 3}
 --- !u!1 &519420028
 GameObject:
