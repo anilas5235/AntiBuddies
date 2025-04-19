@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b671d1cd9a4fe5440bc4bfb75ba1590a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 28bfa5c589de5314caf347da01a1e797, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -246,7 +246,6 @@ MonoBehaviour:
     clampedValue: 0
     maxValue: 10
     minValue: 0
-  healingStats: {fileID: 0}
   onDamageReceived:
     m_PersistentCalls:
       m_Calls:
@@ -340,18 +339,6 @@ MonoBehaviour:
     maxValue: 100
     minValue: 0
   resistances: []
-  iceResistance:
-    currValue: 0
-    maxValue: 100
-    minValue: 0
-  lightningResistance:
-    currValue: 0
-    maxValue: 100
-    minValue: 0
-  poisonResistance:
-    currValue: 0
-    maxValue: 100
-    minValue: 0
 --- !u!114 &6364770945690560736
 MonoBehaviour:
   m_ObjectHideFlags: 0

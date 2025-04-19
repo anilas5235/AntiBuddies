@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f25dd4b2d0e841f5b862653cc6a54c60, type: 3}
   m_Name: WaveGroup
-  m_EditorClassIdentifier: Assembly-CSharp:Project.Scripts.Spawning:WaveGroup
+  m_EditorClassIdentifier: 
   waves:
   - {fileID: 11400000, guid: 7db8aea97b5d27340aaab5697da7aff7, type: 2}
   - {fileID: 11400000, guid: a3c09c2b8c06d1047843d460f367fef1, type: 2}
