@@ -27,8 +27,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6726787141778080833}
   m_Father: {fileID: 2120859598919654430}
@@ -135,6 +135,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
   attackBehaviour: {fileID: 11400000, guid: 98facdf158d49e74c81a694f09b1ee9f, type: 2}
+  range: 1.5
+  attacksPerSecond: 1
+  weaponColliders:
+  - {fileID: 114367337451605291}
 --- !u!1 &7009135823704326037
 GameObject:
   m_ObjectHideFlags: 0

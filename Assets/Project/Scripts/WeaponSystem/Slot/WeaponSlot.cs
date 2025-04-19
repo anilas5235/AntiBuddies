@@ -7,7 +7,9 @@ namespace Project.Scripts.WeaponSystem.Slot
         [SerializeField] private WeaponData weaponData;
         
         private IWeapon _currentWeapon;
-        
+        private WeaponSlotManager _weaponSlotManager;
+        public void SetWeaponSlotManager(WeaponSlotManager weaponSlotManager) => _weaponSlotManager = weaponSlotManager;
+
         public bool HasWeapon => _currentWeapon != null;
         public bool IsEmpty => _currentWeapon == null;
         
@@ -17,10 +19,9 @@ namespace Project.Scripts.WeaponSystem.Slot
 
             weaponData = newWeaponData;
             GameObject newWeapon = Instantiate(weaponData.Prefab, transform);
-            newWeapon.transform.SetParent(transform);
             newWeapon.transform.localPosition = Vector3.zero;
-            newWeapon.transform.localRotation = Quaternion.identity;
             _currentWeapon = newWeapon.GetComponent<IWeapon>();
+            _currentWeapon.SetWeaponSlot(this);
         }
         
         public void ClearSlot()

@@ -32,8 +32,9 @@ namespace Project.Scripts.WeaponSystem.Slot
         {
             return _weaponSlots.FirstOrDefault(slot => slot.IsEmpty);
         }
-        
-        public WeaponSlot AddWeaponSlot(){
+
+        public WeaponSlot AddWeaponSlot()
+        {
             numberOfSlots++;
             BuildWeaponSlots();
             return _weaponSlots.Last();
@@ -46,27 +47,25 @@ namespace Project.Scripts.WeaponSystem.Slot
             {
                 Vector3 position = positions[i];
                 // Instantiate or reuse the weapon slot object
-                GameObject weaponSlotObject = i >= _weaponSlots.Count
-                    ? Instantiate(weaponSlotPrefab, transform)
-                    : _weaponSlots[i].gameObject;
+                WeaponSlot weaponSlot = i >= _weaponSlots.Count ? CreateWeaponSlot(position) : _weaponSlots[i];
 
-                weaponSlotObject.transform.localPosition = position;
-                weaponSlotObject.transform.localRotation = Quaternion.identity;
-
-                WeaponSlot weaponSlot = weaponSlotObject.GetComponent<WeaponSlot>();
-                if (!weaponSlot)
-                {
-                    throw new ArgumentException($"WeaponSlot component not found on {weaponSlotObject.name}");
-                }
                 _weaponSlots.Add(weaponSlot);
             }
-            
+
             // Remove any unused weapon slots
             for (int i = _weaponSlots.Count - 1; i >= numberOfSlots; i--)
             {
                 Destroy(_weaponSlots[i].gameObject);
                 _weaponSlots.RemoveAt(i);
             }
+        }
+
+        private WeaponSlot CreateWeaponSlot(Vector3 position)
+        {
+            GameObject weaponSlotObject = Instantiate(weaponSlotPrefab, position, Quaternion.identity, transform);
+            WeaponSlot weaponSlot = weaponSlotObject.GetComponent<WeaponSlot>();
+            weaponSlot.SetWeaponSlotManager(this);
+            return weaponSlot;
         }
 
         private List<Vector3> CalculateSlotPositions()

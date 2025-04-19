@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e5768d459645f9978d58f3a8fd8963, type: 3}
   m_Name: StabAttack
   m_EditorClassIdentifier: 
-  stabMagnitude: 1
-  stabDuration: 1
+  restPercent: 50
