@@ -1,7 +1,5 @@
 ﻿using System;
-using Project.Scripts.EffectSystem.Effects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.EffectSystem.Visuals
 {
@@ -19,8 +17,14 @@ namespace Project.Scripts.EffectSystem.Visuals
             this.lifeTime = lifeTime;
         }
 
-        public override string ToString() => amount.ToString();
+        public override string ToString()
+        {
+            return amount.ToString();
+        }
 
-        public Color GetColor() => color;
+        public Color GetColor()
+        {
+            return color;
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
+﻿using System.Linq;
+using System.Text;
+using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
+using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.BuffSystem.Components;
 using Project.Scripts.EffectSystem.Effects;
@@ -6,58 +9,67 @@ using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {
-    public class Buff<TTarget> : IBuff
+    public sealed class Buff : IBuff
     {
+        public string Name { get; }
+        public GameObject Source => _effect.Source;
+        public BuffManager BuffManager { get; private set; }
+        private IStackBehaviour StackBehaviour { get; }
+        private BuffGroup BuffGroup { get; set; }
+        private ITarget<EffectPackage> Target { get; }
         private readonly float _duration;
         private float _remainingDuration;
-        private readonly IEffect<TTarget> _effect;
+        private readonly EffectPackage _effect;
         private readonly ITickBehaviour _tickBehavior;
-        private readonly IStackBehaviour _stackBehaviour;
-        public TTarget Target { get; }
-        public GameObject Source=> _effect.Source;
-        public BuffManager BuffManager { get; private set; }
-        public BuffGroup BuffGroup { get; private set; }
-        
-        public IStackBehaviour StackBehaviour => _stackBehaviour;
+        private readonly IExitBehaviour _exitBehavior;
 
-        public string Name { get; }
-
-        public Buff(IEffect<TTarget> effect, float duration, IStackBehaviour stackBehaviour, ITickBehaviour tickBehavior, TTarget target)
+        public Buff(EffectPackage effect, float duration, ITarget<EffectPackage> target, IStackBehaviour stackBehaviour,
+            ITickBehaviour tickBehavior, IExitBehaviour exitBehavior)
         {
             Target = target;
+            _exitBehavior = exitBehavior;
             _effect = effect;
             _duration = duration;
             _tickBehavior = tickBehavior;
-            _stackBehaviour = stackBehaviour;
-            Name = $"{_effect.Name}_{_stackBehaviour.Name}_{_tickBehavior.Name}_Buff";
+            StackBehaviour = stackBehaviour;
+            Name = ConstructName(effect, stackBehaviour, tickBehavior);
             ResetDuration();
         }
-     
-        public virtual void OnBuffAdded(){}
+
+        private static string ConstructName(EffectPackage effect, IStackBehaviour stackBehaviour,
+            ITickBehaviour tickBehavior)
+        {
+            string name = $"{effect.EffectType.Name}_{stackBehaviour.Name}";
+            if (tickBehavior != null) name += $"_{tickBehavior.Name}";
+            return name;
+        }
+
+        public void OnBuffAdded()
+        {
+            OnBuffApply();
+        }
 
         public void OnBuffTick(float deltaTime)
         {
-            _tickBehavior.Tick(this,deltaTime);
-            
-            if (!IsBuffExpired()) return;
-            RemoveBuff();
+            ReduceDuration(deltaTime);
+            _tickBehavior?.OnBuffTick(this, deltaTime);
+
+            if (IsBuffExpired()) RemoveBuff();
         }
 
-        public virtual void OnBuffApply() => _effect.Apply(Target);
+        public void OnBuffApply() => Target.Apply(_effect);
+        public void OnInverseBuffApply() => Target.Apply(_effect.Invert());
 
-        public virtual void OnBuffRemove() { }
+        public void OnBuffRemove() => _exitBehavior?.OnExit(this);
 
         public bool IsBuffExpired() => _remainingDuration <= 0;
 
         private void ResetDuration() => _remainingDuration = _duration;
-        
+
         public void ReduceDuration(float amount)
         {
             _remainingDuration -= amount;
-            if (_remainingDuration < 0)
-            {
-                _remainingDuration = 0;
-            }
+            _remainingDuration = Mathf.Max(0, _remainingDuration);
         }
 
         public void RegisteredAtBuffManager(BuffManager buffManager)
@@ -66,21 +78,15 @@ namespace Project.Scripts.BuffSystem.Buffs
             StackBehaviour.AddingBuff(this, buffManager);
         }
 
-        public void RegisteredAtBuffGroup(BuffGroup buffGroup)
-        {
-            BuffGroup = buffGroup;
-        }
+        public void RegisteredAtBuffGroup(BuffGroup buffGroup) => BuffGroup = buffGroup;
 
-        public void Refresh()
-        {
-            ResetDuration();
-        }
+        public void Refresh() => ResetDuration();
 
         public void RemoveBuff()
         {
+            OnBuffRemove();
             BuffGroup.UnregisterBuff(this);
             BuffManager.RemoveBuffFromDictionary(this);
-            OnBuffRemove();
         }
     }
 }

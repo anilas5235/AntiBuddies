@@ -11,19 +11,20 @@ namespace Project.Scripts.EffectSystem.Visuals
         [SerializeField] private FloatingNumberData data;
         [SerializeField] private TextMesh textMesh;
 
-        public void Setup(FloatingNumberData floatingNumberData){
+        public void Setup(FloatingNumberData floatingNumberData)
+        {
             data = floatingNumberData;
-            
+
             Vector3 pos = transform.position;
             pos.z = -1;
             pos.x += Random.Range(-XOffsetRange, XOffsetRange);
             pos.y += YOffset;
             transform.position = pos;
-                
+
             UpdateText();
             StartCoroutine(LifeCycle());
         }
-     
+
 
         private void UpdateText()
         {

@@ -1,18 +1,48 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Project.Scripts.EffectSystem.Components.Stats;
+using Project.Scripts.EffectSystem.Effects;
+using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
     public class ResistanceComponent : MonoBehaviour
     {
-        [Header("Damage Resistance")]
-        public Stat flatDamageReduction;
-        public PercentStat physicalResistance;
-        public PercentStat piercingResistance;
-        
-        [Header("Elemental Resistance")]
-        public PercentStat fireResistance;
-        public PercentStat iceResistance;
-        public PercentStat lightningResistance;
-        public PercentStat poisonResistance;
+        [Header("Damage Resistance")] [SerializeField]
+        private ClampedStat flatDamageReduction;
+
+        [SerializeField] private List<SimpleKeyValuePair<EffectType, ClampedPercentStat>> resistances = new();
+
+        public int ResistEffect(int value, EffectType effectType)
+        {
+            int result = value;
+            if (effectType.AffectedByFlatModifier)
+            {
+                result = flatDamageReduction.TransformNegative(result);
+            }
+
+            if (effectType.AffectedByPercentModifier && TryGetResistance(effectType, out IStat resistance))
+            {
+                result = resistance.TransformNegative(result);
+            }
+
+            return result;
+        }
+
+        private bool TryGetResistance(EffectType effectType, out IStat resistance)
+        {
+            resistance = resistances.FirstOrDefault(res => res.Key == effectType).Value;
+            return resistance != null;
+        }
+
+        private void OnValidate()
+        {
+            flatDamageReduction.UpdateClampedValue();
+            foreach (SimpleKeyValuePair<EffectType,ClampedPercentStat> pair in resistances)
+            {
+                pair.Value.UpdateClampedValue();
+            }
+        }
     }
 }

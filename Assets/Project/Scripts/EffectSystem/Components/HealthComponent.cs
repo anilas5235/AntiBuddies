@@ -1,7 +1,7 @@
 using System;
+using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
-using Project.Scripts.EffectSystem.Effects.Attacks;
-using Project.Scripts.EffectSystem.Effects.Heal;
+using Project.Scripts.EffectSystem.Effects.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,15 +9,9 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private Stat health = new(0, 10,0);
+        [SerializeField] private ClampedStat health = new(0, 10, 0);
 
-        [SerializeField] private ResistanceComponent resistanceComponent;
-        [SerializeField] private HealingStats healingStats;
-
-        public event Action<IAttack,int> OnDamageReceived;
-
-        public UnityEvent onDamageReceived;
-        public event Action OnDeath;
+        public UnityEvent<EffectType, int> onDamageReceived;
 
         public UnityEvent onDeath;
 
@@ -25,13 +19,25 @@ namespace Project.Scripts.EffectSystem.Components
         {
             FullHeal();
         }
-        
-        public bool IsDead() => health.IsBelowOrZero();
 
-        public bool IsAlive() => !IsDead();
+        public void ApplyAttack(int amount, EffectType type)
+        {
+            if (amount <= 0) return;
+            health.ReduceValue(amount);
+            OnDamageReceived?.Invoke(type, amount);
+            onDamageReceived?.Invoke(type, amount);
+            if (IsDead()) Die();
+        }
 
-        public void FullHeal() => health.MaximizeValue();
-        public int MaxHealth => health.MaxValue;
+        public bool IsDead()
+        {
+            return health.IsBelowOrZero();
+        }
+
+        public bool IsAlive()
+        {
+            return !IsDead();
+        }
 
         public void Die()
         {
@@ -40,20 +46,21 @@ namespace Project.Scripts.EffectSystem.Components
             onDeath?.Invoke();
         }
 
-        public void Apply(IAttack attack)
-        {
-            int damage = attack.CalculateDamage(resistanceComponent);
-            health.ReduceValue(damage);
-            OnDamageReceived?.Invoke(attack,damage);
-            onDamageReceived?.Invoke();
-            if (IsDead()) Die();
-        }
+        public event Action<EffectPackage> OnHealApplied;
+        public event Action OnDeath;
 
-        public void Apply(IHeal heal)
+        public void ApplyHeal(int amount, EffectType type)
         {
-            int amount = heal.CalculateHealing(healingStats,this);
             if (amount <= 0) return;
             health.IncreaseValue(amount);
         }
+
+        public void FullHeal()
+        {
+            health.MaximizeValue();
+        }
+
+        public int MaxHealth => health.MaxValue;
+        public event Action<EffectType, int> OnDamageReceived;
     }
 }
