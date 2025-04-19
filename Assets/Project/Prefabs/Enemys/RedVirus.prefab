@@ -148,14 +148,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    currValue: 0
+    statValue: 0
+    clampedValue: 0
     maxValue: 10
     minValue: 0
-  resistanceComponent: {fileID: 0}
-  healingStats: {fileID: 0}
   onDamageReceived:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9118214270691948427}
+        m_TargetAssemblyTypeName: Project.Scripts.UtilComponents.FlashColor, Assembly-CSharp
+        m_MethodName: Flash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -172,6 +183,7 @@ GameObject:
   - component: {fileID: 1847879552277608203}
   - component: {fileID: 5458632804673224790}
   - component: {fileID: 5854833170621524535}
+  - component: {fileID: 9118214270691948427}
   m_Layer: 7
   m_Name: Body
   m_TagString: Enemy
@@ -313,3 +325,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alieGroup: 0
   healthComponent: {fileID: 821334034517289629}
+  resistance: {fileID: 0}
+  amplification: {fileID: 0}
+--- !u!114 &9118214270691948427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691238699623227762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7982cccbf9df8468fdfbe5e7950a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.2
+  spriteRenderer: {fileID: 5458632804673224790}

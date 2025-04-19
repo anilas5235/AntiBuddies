@@ -142,9 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alieGroup: 1
   healthComponent: {fileID: 4307234338099689046}
-  statusComponent: {fileID: 0}
-  resistanceComponent: {fileID: 3699389999355936274}
-  amplificationComponent: {fileID: 0}
+  resistance: {fileID: 3699389999355936274}
+  amplification: {fileID: 5745433279975557315}
 --- !u!114 &1304199053460124670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +189,7 @@ GameObject:
   - component: {fileID: 8293573683347230753}
   - component: {fileID: 3356991902276083124}
   - component: {fileID: 3699389999355936274}
-  - component: {fileID: 6364770945690560736}
+  - component: {fileID: 5745433279975557315}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -339,7 +338,7 @@ MonoBehaviour:
     maxValue: 100
     minValue: 0
   resistances: []
---- !u!114 &6364770945690560736
+--- !u!114 &5745433279975557315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,11 +347,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2029995827079385713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f75e3e8e4a242b584a87dd51d26554a, type: 3}
+  m_Script: {fileID: 11500000, guid: a8987f17ce15402da15b25db6596cfe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmplifier:
-    statValue: 0
+  amplifications: []
 --- !u!1 &7670451574764322797
 GameObject:
   m_ObjectHideFlags: 0

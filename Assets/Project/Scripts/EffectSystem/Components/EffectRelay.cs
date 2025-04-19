@@ -1,5 +1,6 @@
 using System;
 using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Interfaces;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
@@ -8,11 +9,8 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [SerializeField] private AlieGroup alieGroup;
         [SerializeField] private HealthComponent healthComponent;
-        [SerializeField] private StatusComponent statusComponent;
-        [SerializeField] private ResistanceComponent resistanceComponent;
-        [SerializeField] private AmplificationComponent amplificationComponent;
-
-        public HealthComponent HealthComponent => healthComponent;
+        [SerializeField] private ResistanceComponent resistance;
+        [SerializeField] private AmplificationComponent amplification;
         public AlieGroup AlieGroup => alieGroup;
 
         public bool Apply(EffectPackage applyable)
@@ -40,23 +38,24 @@ namespace Project.Scripts.EffectSystem.Components
         private void Heal(EffectPackage healPackage)
         {
             int heal = healPackage.Amount;
-            if (amplificationComponent && healPackage.EffectType.AffectedByPercentModifier) amplificationComponent.AmplifyEffect(heal, healPackage.EffectType);
+            if (amplification && healPackage.EffectType.AffectedByPercentModifier) amplification.AmplifyEffect(heal, healPackage.EffectType);
             healthComponent.ApplyHeal(heal, healPackage.EffectType);
         }
 
         private void Attack(EffectPackage attackPackage)
         {
             int damage = attackPackage.Amount;
-            if (resistanceComponent)
+            if (resistance)
             {
-                damage = resistanceComponent.ResistEffect(damage, attackPackage.EffectType);
+                damage = resistance.ResistEffect(damage, attackPackage.EffectType);
             }
             healthComponent.ApplyAttack(damage, attackPackage.EffectType);
         }
 
-        private void Status(EffectPackage statusPackage)
+        private void Status(EffectPackage statusP)
         {
-            
+            if (amplification && amplification.IncreaseAmplifier(statusP.Amount,statusP.EffectType)) return;
+            if (resistance) resistance.IncreaseResistance(statusP.Amount, statusP.EffectType);
         }
     }
 }

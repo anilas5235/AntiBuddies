@@ -1,4 +1,4 @@
-﻿namespace Project.Scripts.EffectSystem.Effects
+﻿namespace Project.Scripts.EffectSystem.Effects.Interfaces
 {
     public interface IApplyable<in TTarget>
     {

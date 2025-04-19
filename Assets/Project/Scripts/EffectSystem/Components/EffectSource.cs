@@ -1,4 +1,5 @@
 ﻿using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Interfaces;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
@@ -10,6 +11,10 @@ namespace Project.Scripts.EffectSystem.Components
 
         protected void ApplyEffect(ITarget<EffectPackage> target)
         {
+            if (!effectData){
+                Debug.LogError("EffectData is not assigned in " + gameObject.name);
+                return;
+            }
             target?.Apply(effectData.GetPackage(gameObject, alieGroup));
         }
     }
