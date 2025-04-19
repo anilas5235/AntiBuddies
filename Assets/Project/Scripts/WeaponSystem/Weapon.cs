@@ -9,28 +9,28 @@ namespace Project.Scripts.WeaponSystem
     {
         [SerializeField] private TargetingBehaviour targetingBehaviour;
         [SerializeField] private AttackBehaviour attackBehaviour;
-        private Transform target;
+        private Transform _target;
 
         public void Attack()
         {
-            if (target && !attackBehaviour.IsPerforming)
-            {
-                attackBehaviour.PerformAttack(this);
-            }
+            attackBehaviour.PerformAttack(this);
         }
 
         private void FixedUpdate()
         {
-            target ??= targetingBehaviour.FindTarget(transform, 10f);
-            if (target)
-            {
-                // Rotate the weapon to face the target in 2D space => only rotate Z axis
-                Vector3 direction = transform.InverseTransformPoint(target.position);
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                transform.Rotate(0,0, angle);
-                
-                Attack();
-            }
+            _target ??= targetingBehaviour.FindTarget(transform, 10f);
+            if (!_target) return;
+            if (attackBehaviour.IsPerforming) return;
+            UpdateRotation();
+            Attack();
+        }
+
+        private void UpdateRotation()
+        {
+            // Rotate the weapon to face the target in 2D space => only rotate Z axis
+            Vector3 direction = transform.InverseTransformPoint(_target.position);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.Rotate(0, 0, angle);
         }
 
         public void DestroyWeapon()

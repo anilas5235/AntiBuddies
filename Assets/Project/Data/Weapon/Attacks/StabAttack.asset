@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StabAttack
   m_EditorClassIdentifier: 
   stabMagnitude: 1
-  stabDuration: 0.5
+  stabDuration: 1

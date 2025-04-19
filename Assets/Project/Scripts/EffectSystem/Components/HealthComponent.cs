@@ -59,6 +59,7 @@ namespace Project.Scripts.EffectSystem.Components
         {
             if (amount <= 0) return;
             health.IncreaseValue(amount);
+            OnHealApplied?.Invoke(amount, type, gameObject);
         }
 
         public void FullHeal() => health.MaximizeValue();
