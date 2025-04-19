@@ -1,7 +1,7 @@
 using System;
+using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
-using Project.Scripts.EffectSystem.Effects.Attacks;
-using Project.Scripts.EffectSystem.Effects.Heal;
+using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Visuals;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,39 +10,40 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private Stat health = new(0, 10,0);
+        [SerializeField] private ClampedStat health = new(0, 10, 0);
 
-        [SerializeField] private ResistanceComponent resistanceComponent;
-        [SerializeField] private HealingStats healingStats;
-
-        public event Action<GameObject,IAttack,int> OnDamageReceived;
-
-        public UnityEvent onDamageReceived;
-        public event Action OnDeath;
+        public UnityEvent<EffectType, int> onDamageReceived;
 
         public UnityEvent onDeath;
+        public event Action<EffectPackage> OnHealApplied;
+        public event Action OnDeath;
+        public int MaxHealth => health.MaxValue;
+        public event Action<EffectType, int> OnDamageReceived;
 
         private void Awake()
         {
             FullHeal();
         }
 
-        private void OnEnable()
+        public void ApplyAttack(int amount, EffectType type)
         {
-            if (FloatingNumberSpawner.Instance) OnDamageReceived += FloatingNumberSpawner.Instance.SpawnDamageNumber;
+            if (amount <= 0) return;
+            health.ReduceValue(amount);
+            if (FloatingNumberSpawner.Instance) FloatingNumberSpawner.Instance.SpawnFloatingNumber(type, amount, transform.position);
+            OnDamageReceived?.Invoke(type, amount);
+            onDamageReceived?.Invoke(type, amount);
+            if (IsDead()) Die();
         }
-        
-        private void OnDisable()
+
+        public bool IsDead()
         {
-            if (FloatingNumberSpawner.Instance) OnDamageReceived -= FloatingNumberSpawner.Instance.SpawnDamageNumber;
+            return health.IsBelowOrZero();
         }
 
-        public bool IsDead() => health.IsBelowOrZero();
-
-        public bool IsAlive() => !IsDead();
-
-        public void FullHeal() => health.MaximizeValue();
-        public int MaxHealth => health.MaxValue;
+        public bool IsAlive()
+        {
+            return !IsDead();
+        }
 
         public void Die()
         {
@@ -51,20 +52,15 @@ namespace Project.Scripts.EffectSystem.Components
             onDeath?.Invoke();
         }
 
-        public void Apply(IAttack attack)
+        public void ApplyHeal(int amount, EffectType type)
         {
-            int damage = attack.CalculateDamage(resistanceComponent);
-            health.ReduceValue(damage);
-            OnDamageReceived?.Invoke(gameObject,attack,damage);
-            onDamageReceived?.Invoke();
-            if (IsDead()) Die();
-        }
-
-        public void Apply(IHeal heal)
-        {
-            int amount = heal.CalculateHealing(healingStats,this);
             if (amount <= 0) return;
             health.IncreaseValue(amount);
+        }
+
+        public void FullHeal()
+        {
+            health.MaximizeValue();
         }
     }
 }
