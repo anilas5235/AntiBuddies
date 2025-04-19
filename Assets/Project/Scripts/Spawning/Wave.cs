@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Project.Scripts.Spawning
 {
-    [Serializable]
-    public class Batch
+    [CreateAssetMenu(fileName = "Batch", menuName = "SpawnSystem/Batch")]
+    public class Batch : ScriptableObject
     {
         public GameObject enemyPrefab;
         public int spawnPerBatch;
@@ -15,8 +15,8 @@ namespace Project.Scripts.Spawning
         public float initialDelay;
     }
 
-    [Serializable]
-    public class Wave
+    [CreateAssetMenu(fileName = "Wave", menuName = "SpawnSystem/Wave")]
+    public class Wave : ScriptableObject
     {
         public List<Batch> batches = new();
         public float timeBetweenWaves;
