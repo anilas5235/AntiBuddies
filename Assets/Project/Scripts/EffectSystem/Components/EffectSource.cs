@@ -9,12 +9,14 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private EffectData effectData;
         [SerializeField] protected AlieGroup alieGroup;
 
+        private void Awake()
+        {
+            if (effectData) return;
+            Debug.LogError("EffectData is not assigned in " + gameObject.name);
+        }
+
         protected void ApplyEffect(ITarget<EffectPackage> target)
         {
-            if (!effectData){
-                Debug.LogError("EffectData is not assigned in " + gameObject.name);
-                return;
-            }
             target?.Apply(effectData.GetPackage(gameObject, alieGroup));
         }
     }

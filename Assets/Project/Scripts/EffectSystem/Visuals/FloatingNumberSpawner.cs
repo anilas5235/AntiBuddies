@@ -23,12 +23,12 @@ namespace Project.Scripts.EffectSystem.Visuals
             }
         }
 
-        public void SpawnFloatingNumber(EffectType effectType, int num, Vector3 position)
+        public void SpawnFloatingNumber(int num,EffectType effectType, GameObject source)
         {
             if (!damageNumberPrefab) return;
 
             FloatingNumber numberInstance =
-                Instantiate(damageNumberPrefab, position + (Vector3)offset, Quaternion.identity)
+                Instantiate(damageNumberPrefab, source.transform.position + (Vector3)offset, Quaternion.identity)
                     .GetComponent<FloatingNumber>();
 
             numberInstance.Setup(new FloatingNumberData(num, effectType.Color, displayDuration));
