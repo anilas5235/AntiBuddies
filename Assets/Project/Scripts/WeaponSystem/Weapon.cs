@@ -42,7 +42,8 @@ namespace Project.Scripts.WeaponSystem
         private void UpdateRotation()
         {
             // Rotate the weapon to face the target in 2D space => only rotate Z axis
-            transform.localRotation = Quaternion.Euler(0, 0, CalculateAngleToTarget());
+            float angle = CalculateAngleToTarget();
+            transform.localRotation = Quaternion.Euler(0, 0, angle);
         }
 
         protected virtual float CalculateAngleToTarget()

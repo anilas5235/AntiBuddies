@@ -10,7 +10,7 @@ namespace Project.Scripts.WeaponSystem.Slot
         [SerializeField, Range(0, 10)] private float slotCircleRadius = 1f;
         [SerializeField, Range(0, 20)] private int numberOfSlots = 6;
         [SerializeField] private GameObject weaponSlotPrefab;
-        [SerializeField] private WeaponData defaultWeaponData;
+        [SerializeField] private WeaponData[] defaultWeaponData;
         private readonly List<WeaponSlot> _weaponSlots = new();
 
         private const float ExtraBufferingPerSlot = 0.05f;
@@ -22,9 +22,9 @@ namespace Project.Scripts.WeaponSystem.Slot
 
         private void Start()
         {
-            if (defaultWeaponData)
+            foreach (WeaponData data in defaultWeaponData)
             {
-                GetEmptySlot()?.EquipWeapon(defaultWeaponData);
+                GetEmptySlot()?.EquipWeapon(data);
             }
         }
 

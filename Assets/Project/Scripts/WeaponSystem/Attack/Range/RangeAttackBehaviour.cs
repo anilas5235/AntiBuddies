@@ -4,6 +4,6 @@ namespace Project.Scripts.WeaponSystem.Attack.Range
 {
     public abstract class RangeAttackBehaviour : ScriptableObject
     {
-        public abstract void Shot();
+        public abstract Vector2 GetDirection(RangeWeapon weapon);
     }
 }
