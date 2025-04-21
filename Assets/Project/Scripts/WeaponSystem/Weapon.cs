@@ -1,50 +1,38 @@
 ﻿using System;
 using System.Collections;
-using Project.Scripts.WeaponSystem.Attack;
 using Project.Scripts.WeaponSystem.Slot;
 using Project.Scripts.WeaponSystem.Targeting;
 using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem
 {
-    public class Weapon : MonoBehaviour, IWeapon
+    public abstract class Weapon : MonoBehaviour, IWeapon
     {
-        [SerializeField] private TargetingBehaviour targetingBehaviour;
-        [SerializeField] private AttackBehaviour attackBehaviour;
         [SerializeField] private float range = 10f;
-        [SerializeField] private float attacksPerSecond = 3f;
-        [SerializeField] private Collider2D[] weaponColliders;
+        [SerializeField] private float attackInterval = 1f;
+        [SerializeField] private TargetingBehaviour targetingBehaviour;
+
         private Transform _target;
         private WeaponSlot _weaponSlot;
-        private float AttackInterval => 1f / attacksPerSecond;
-        public void SetWeaponSlot(WeaponSlot weaponSlot) => _weaponSlot = weaponSlot;
-        
-        private bool IsPerforming => !IsReady;
-        private bool IsReady => _coroutine == null;
-        private Coroutine _coroutine;
+        protected Coroutine _coroutine;
+        public float Range => range;
 
-        private void Awake()
+        protected virtual void OnEnable()
         {
-            SetColliderEnabled(false);
+            _weaponSlot = GetComponentInParent<WeaponSlot>();
         }
+
 
         public void Attack()
         {
-            if (IsReady) attackBehaviour.PerformAttack(this, range, AttackInterval);
+            if (_coroutine != null) return;
+            _coroutine = StartCoroutine(AttackRoutine(attackInterval));
         }
-        
-        internal void StartAttackCoroutine(IEnumerator routine) => _coroutine = StartCoroutine(routine);
-        internal void AttackCoroutineFinished() => _coroutine = null;
-        internal void SetColliderEnabled(bool b)
-        {
-            foreach (Collider2D col in weaponColliders)
-            {
-                col.enabled = b;
-            }
-        }
+
+
         private void FixedUpdate()
         {
-            if(_target && Vector3.Distance(transform.position, _target.position) > range) _target = null;
+            if (_target && Vector3.Distance(transform.position, _target.position) > range) _target = null;
             _target ??= targetingBehaviour.FindTarget(transform, range);
             if (!_target) return;
             UpdateRotation();
@@ -54,14 +42,20 @@ namespace Project.Scripts.WeaponSystem
         private void UpdateRotation()
         {
             // Rotate the weapon to face the target in 2D space => only rotate Z axis
+            transform.localRotation = Quaternion.Euler(0, 0, CalculateAngleToTarget());
+        }
+
+        protected virtual float CalculateAngleToTarget()
+        {
             Vector3 direction = _weaponSlot.transform.InverseTransformPoint(_target.position);
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.localRotation = Quaternion.Euler(0, 0, angle);
+            return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         }
 
         public void DestroyWeapon()
         {
             Destroy(gameObject);
         }
+
+        protected abstract IEnumerator AttackRoutine(float interval);
     }
 }

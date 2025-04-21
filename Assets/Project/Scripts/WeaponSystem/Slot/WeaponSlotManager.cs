@@ -64,7 +64,6 @@ namespace Project.Scripts.WeaponSystem.Slot
         {
             GameObject weaponSlotObject = Instantiate(weaponSlotPrefab, position, Quaternion.identity, transform);
             WeaponSlot weaponSlot = weaponSlotObject.GetComponent<WeaponSlot>();
-            weaponSlot.SetWeaponSlotManager(this);
             return weaponSlot;
         }
 
