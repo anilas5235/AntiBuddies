@@ -39,7 +39,7 @@ namespace Project.Scripts.WeaponSystem
             Attack();
         }
 
-        private void UpdateRotation()
+        protected virtual void UpdateRotation()
         {
             // Rotate the weapon to face the target in 2D space => only rotate Z axis
             float angle = CalculateAngleToTarget();
