@@ -9,6 +9,7 @@ namespace Project.Scripts.Spawning
         [SerializeField] private float size = 5f;
         [SerializeField] private int spawns = 10;
         [SerializeField] private GameObject prefabToSpawn;
+        [SerializeField] private bool parentSpawnedObjects;
 
         private void Awake()
         {
@@ -23,7 +24,11 @@ namespace Project.Scripts.Spawning
             {
                 Vector2 randomPos = new(Random.Range(-halfSize, halfSize), Random.Range(-halfSize, halfSize));
                 Vector2 spawnPosition = basePos + randomPos;
-                Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+                GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+                if (parentSpawnedObjects)
+                {
+                    spawnedObject.transform.SetParent(transform);
+                }
             }
         }
 #if UNITY_EDITOR
