@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using System.Text;
-using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
+﻿using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.BuffSystem.Components;
 using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Interfaces;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs

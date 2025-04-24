@@ -1,4 +1,6 @@
-﻿using Project.Scripts.EffectSystem.Effects;
+﻿using System;
+using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Interfaces;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
@@ -7,10 +9,22 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [SerializeField] private EffectData effectData;
         [SerializeField] protected AlieGroup alieGroup;
+        
+        public event Action OnEffectApplied; 
+
+        private void Awake()
+        {
+            if (effectData) return;
+            Debug.LogError("EffectData is not assigned in " + gameObject.name);
+        }
 
         protected void ApplyEffect(ITarget<EffectPackage> target)
         {
-            target?.Apply(effectData.GetPackage(gameObject, alieGroup));
+            if (target == null) return;
+            if(target.Apply(effectData.GetPackage(gameObject, alieGroup)))
+            {
+                OnEffectApplied?.Invoke();
+            }
         }
     }
 }

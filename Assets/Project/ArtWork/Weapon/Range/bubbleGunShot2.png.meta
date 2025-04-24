@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 602eb16605701b540ac868bf9b9fbd0d
+guid: 64df4086854822d429399f7ba51782ff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3800349844484620278
-    second: ExplosiveVirus_0
+      213: -5516642211710672112
+    second: bubbleGunShot2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 512
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ExplosiveVirus_0
+      name: bubbleGunShot2_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 38
-        width: 961
-        height: 958
+        x: 83
+        y: 85
+        width: 342
+        height: 342
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a00884993f1724bc0800000000000000
-      internalID: -3800349844484620278
+      spriteID: 0136f0a0323f073b0800000000000000
+      internalID: -5516642211710672112
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ExplosiveVirus_0: -3800349844484620278
+      bubbleGunShot2_0: -5516642211710672112
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

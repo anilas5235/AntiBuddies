@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
@@ -28,6 +27,16 @@ namespace Project.Scripts.EffectSystem.Components
             }
 
             return result;
+        }
+
+        public bool IncreaseResistance(int value, EffectType effectType)
+        {
+            if (TryGetResistance(effectType, out IStat resistance))
+            {
+                resistance.IncreaseValue(value);
+                return true;
+            }
+            return false;
         }
 
         private bool TryGetResistance(EffectType effectType, out IStat resistance)

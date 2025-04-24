@@ -24,5 +24,12 @@ namespace Project.Scripts.EffectSystem.Components
             amplification = amplifications.FirstOrDefault(res => res.Key == type).Value;
             return amplification != null;
         }
+
+        public bool IncreaseAmplifier(int value, EffectType effectType)
+        {
+            if (!TryGetAmplification(effectType, out IStat amplification)) return false;
+            amplification.IncreaseValue(value);
+            return true;
+        }
     }
 }

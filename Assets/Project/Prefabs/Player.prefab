@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5961228089469582901}
   - component: {fileID: 1304199053460124670}
   - component: {fileID: 4396818464361325487}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b671d1cd9a4fe5440bc4bfb75ba1590a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 28bfa5c589de5314caf347da01a1e797, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,9 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alieGroup: 1
   healthComponent: {fileID: 4307234338099689046}
-  statusComponent: {fileID: 0}
-  resistanceComponent: {fileID: 3699389999355936274}
-  amplificationComponent: {fileID: 0}
+  resistance: {fileID: 3699389999355936274}
+  amplification: {fileID: 5745433279975557315}
 --- !u!114 &1304199053460124670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,9 +188,8 @@ GameObject:
   - component: {fileID: 4307234338099689046}
   - component: {fileID: 8293573683347230753}
   - component: {fileID: 3356991902276083124}
-  - component: {fileID: 4458083661349159689}
   - component: {fileID: 3699389999355936274}
-  - component: {fileID: 6364770945690560736}
+  - component: {fileID: 5745433279975557315}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -213,6 +211,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4939956795979444460}
+  - {fileID: 950662932907279521}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2116360303484522427
@@ -321,22 +320,6 @@ MonoBehaviour:
   m_DefaultActionMap: Default
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4458083661349159689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029995827079385713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5334093c2b753d947a4cb17f73a729a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageNumberPrefab: {fileID: 5766984190451043708, guid: 2e4e39724878a0e46885f61a2bcd6184, type: 3}
-  displayDuration: 1
-  offset: {x: 0, y: 0.5}
-  floatSpeed: 1
 --- !u!114 &3699389999355936274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,7 +338,7 @@ MonoBehaviour:
     maxValue: 100
     minValue: 0
   resistances: []
---- !u!114 &6364770945690560736
+--- !u!114 &5745433279975557315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,8 +347,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 2029995827079385713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f75e3e8e4a242b584a87dd51d26554a, type: 3}
+  m_Script: {fileID: 11500000, guid: a8987f17ce15402da15b25db6596cfe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmplifier:
-    statValue: 0
+  amplifications: []
+--- !u!1 &7670451574764322797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 950662932907279521}
+  - component: {fileID: 7838128060625392467}
+  m_Layer: 0
+  m_Name: WeaponBelt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &950662932907279521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7670451574764322797}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8794693308980230054}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7838128060625392467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7670451574764322797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56007d5198b84e91aa73900aa7850ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotCircleRadius: 1
+  numberOfSlots: 6
+  weaponSlotPrefab: {fileID: 4847109733002469394, guid: 24ab6752f857f1144bf800314df430ba, type: 3}
+  defaultWeaponData: {fileID: 0}
