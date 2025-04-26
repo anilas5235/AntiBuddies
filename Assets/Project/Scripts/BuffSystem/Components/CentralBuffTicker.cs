@@ -13,10 +13,6 @@ namespace Project.Scripts.BuffSystem.Components
     /// </summary>
     public class CentralBuffTicker : Singleton<CentralBuffTicker>
     {
-        private const float TickInterval = 0.1f;
-        public BuffGroup DamageBuffGroup;
-        public BuffGroup HealBuffGroup;
-        public BuffGroup StatusBuffGroup;
         [SerializeField] private List<BuffGroup> buffGroups;
         [SerializeField] private int initialBuffGroups = 3;
         [SerializeField] private int maxBuffGroups = 30;
