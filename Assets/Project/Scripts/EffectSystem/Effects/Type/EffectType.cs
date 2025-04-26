@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Effects
+namespace Project.Scripts.EffectSystem.Effects.Type
 {
     public abstract class EffectType : ScriptableObject
     {

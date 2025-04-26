@@ -1,5 +1,6 @@
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
@@ -9,8 +10,7 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [SerializeField] private AlieGroup alieGroup;
         [SerializeField] private HealthComponent healthComponent;
-        [SerializeField] private ResistanceComponent resistance;
-        [SerializeField] private AmplificationComponent amplification;
+        [SerializeField] private StatComponent statComponent;
         public AlieGroup AlieGroup => alieGroup;
 
         public bool Apply(EffectPackage<AttackType> attackPackage)
@@ -43,9 +43,9 @@ namespace Project.Scripts.EffectSystem.Components
         private void Attack(EffectPackage<AttackType> attackPackage)
         {
             int damage = attackPackage.Amount;
-            if (resistance)
+            if (statComponent)
             {
-                damage = resistance.ResistEffect(damage, attackPackage.EffectType);
+                damage = statComponent.ResistAttack(damage, attackPackage.EffectType);
             }
 
             healthComponent.ApplyAttack(damage, attackPackage.EffectType);
@@ -53,8 +53,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         private void Status(EffectPackage<StatType> statusP)
         {
-            if (amplification && amplification.IncreaseAmplifier(statusP.Amount, statusP.EffectType)) return;
-            if (resistance) resistance.IncreaseResistance(statusP.Amount, statusP.EffectType);
+            statComponent.IncreaseStat(statusP.Amount, statusP.EffectType);
         }
     }
 }
