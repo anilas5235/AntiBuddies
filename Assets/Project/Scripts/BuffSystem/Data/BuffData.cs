@@ -10,8 +10,7 @@ using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data
 {
-    [CreateAssetMenu(fileName = "NewBuffData", menuName = "BuffSystem/BuffData")]
-    public class BuffData : ScriptableObject
+    public abstract class BuffData<T> : ScriptableObject where T : EffectType
     {
         [SerializeField] private float duration;
         [SerializeField] private StackingBehavior stackBehavior;
@@ -19,13 +18,13 @@ namespace Project.Scripts.BuffSystem.Data
         [SerializeField] private ExitBehavior exitBehavior;
         [SerializeField] private int ticksPerSecond;
 
-        [SerializeField] private EffectData effect;
+        [SerializeField] private EffectData<T> effect;
         private float TickInterval => 1f / ticksPerSecond;
 
-        public IBuff GetBuff(ITarget<EffectPackage> target, GameObject source, AlieGroup alieGroup)
+        public IBuff GetBuff(ITarget<EffectPackage<T>> target, GameObject source, AlieGroup alieGroup)
         {
-            EffectPackage e = effect.GetPackage(source, alieGroup);
-            return new Buff(e, duration,  target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior());
+            EffectPackage<T> e = effect.GetPackage(source, alieGroup);
+            return new Buff<T>(e, duration,  target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior());
         }
 
         private IExitBehaviour GetExitBehavior()

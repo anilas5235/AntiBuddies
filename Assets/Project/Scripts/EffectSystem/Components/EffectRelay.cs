@@ -1,11 +1,11 @@
-using System;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class EffectRelay : MonoBehaviour, ITarget<EffectPackage>
+    public class EffectRelay : MonoBehaviour, ITarget<EffectPackage<AttackType>>, ITarget<EffectPackage<HealType>>,
+        ITarget<EffectPackage<StatType>>
     {
         [SerializeField] private AlieGroup alieGroup;
         [SerializeField] private HealthComponent healthComponent;
@@ -13,48 +13,47 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private AmplificationComponent amplification;
         public AlieGroup AlieGroup => alieGroup;
 
-        public bool Apply(EffectPackage applyable)
+        public bool Apply(EffectPackage<AttackType> attackPackage)
         {
-            if (applyable.AlieGroup == alieGroup) return false;
-
-            switch (applyable.EffectType.EffectCategory)
-            {
-                case EffectCategory.Attack:
-                    Attack(applyable);
-                    break;
-                case EffectCategory.Heal:
-                    Heal(applyable);
-                    break;
-                case EffectCategory.Status:
-                    Status(applyable);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
+            if (attackPackage.AlieGroup == alieGroup) return false;
+            Attack(attackPackage);
             return true;
         }
 
-        private void Heal(EffectPackage healPackage)
+        public bool Apply(EffectPackage<HealType> healPackage)
+        {
+            if (healPackage.AlieGroup == alieGroup) return false;
+            Heal(healPackage);
+            return true;
+        }
+
+        public bool Apply(EffectPackage<StatType> statPackage)
+        {
+            if (statPackage.AlieGroup == alieGroup) return false;
+            Status(statPackage);
+            return true;
+        }
+
+        private void Heal(EffectPackage<HealType> healPackage)
         {
             int heal = healPackage.Amount;
-            if (amplification && healPackage.EffectType.AffectedByPercentModifier) amplification.AmplifyEffect(heal, healPackage.EffectType);
             healthComponent.ApplyHeal(heal, healPackage.EffectType);
         }
 
-        private void Attack(EffectPackage attackPackage)
+        private void Attack(EffectPackage<AttackType> attackPackage)
         {
             int damage = attackPackage.Amount;
             if (resistance)
             {
                 damage = resistance.ResistEffect(damage, attackPackage.EffectType);
             }
+
             healthComponent.ApplyAttack(damage, attackPackage.EffectType);
         }
 
-        private void Status(EffectPackage statusP)
+        private void Status(EffectPackage<StatType> statusP)
         {
-            if (amplification && amplification.IncreaseAmplifier(statusP.Amount,statusP.EffectType)) return;
+            if (amplification && amplification.IncreaseAmplifier(statusP.Amount, statusP.EffectType)) return;
             if (resistance) resistance.IncreaseResistance(statusP.Amount, statusP.EffectType);
         }
     }

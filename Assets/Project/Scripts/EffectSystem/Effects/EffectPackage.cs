@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects
 {
-    public struct EffectPackage
+    public struct EffectPackage<T> where T : EffectType
     {
         public AlieGroup AlieGroup;
         public int Amount;
-        public EffectType EffectType;
+        public T EffectType;
         public GameObject Source;
 
-        public EffectPackage(AlieGroup alieGroup, int amount, EffectType effectType, GameObject source)
+        public EffectPackage(AlieGroup alieGroup, int amount, T effectType, GameObject source)
         {
             AlieGroup = alieGroup;
             Amount = amount;
@@ -18,9 +18,9 @@ namespace Project.Scripts.EffectSystem.Effects
             Source = source;
         }
         
-        public readonly EffectPackage Invert()
+        public readonly EffectPackage<T> Invert()
         {
-            return new EffectPackage(AlieGroup, -Amount, EffectType, Source);
+            return new EffectPackage<T>(AlieGroup, -Amount, EffectType, Source);
         }
     }
 }
