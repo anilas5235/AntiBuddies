@@ -1,6 +1,8 @@
 ﻿using System;
 using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components

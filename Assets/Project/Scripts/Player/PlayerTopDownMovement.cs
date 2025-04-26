@@ -9,7 +9,6 @@ namespace Project.Scripts.Player
         [Range(0.1f, 60)] public float speed = 4f;
         [Range(0.0001f, 2)] public float maxAcceleration = 1;
 
-
         private Rigidbody2D _rb2d;
 
         // Input System Variables

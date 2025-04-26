@@ -1,4 +1,5 @@
 ﻿using System;
+using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Interfaces

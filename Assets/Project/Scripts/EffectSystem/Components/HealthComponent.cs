@@ -2,6 +2,7 @@ using System;
 using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.EffectSystem.Visuals;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,8 +11,7 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private ClampedStat health = new(0, 10, 0);
-        public int MaxHealth => health.MaxValue;
+        [SerializeField] private Stat health = new(0, 10, 0);
         public event Action<int, AttackType, GameObject> OnDamageReceived;
         public UnityEvent onDamageReceived;
         public event Action OnDeath;
@@ -60,6 +60,17 @@ namespace Project.Scripts.EffectSystem.Components
             if (amount <= 0) return;
             health.IncreaseValue(amount);
             OnHealApplied?.Invoke(amount, type, gameObject);
+        }
+        
+        public void ModifyHealth(int amount)
+        {
+            health.MaxValue += amount;
+            if (health.MaxValue < health.MinValue)
+            {
+                Die();
+                return;
+            }
+            if(amount > 0) health.IncreaseValue(amount);
         }
 
         public void FullHeal() => health.MaximizeValue();

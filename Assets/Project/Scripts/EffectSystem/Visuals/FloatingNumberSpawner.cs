@@ -1,4 +1,5 @@
 using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.Utils;
 using UnityEngine;
 

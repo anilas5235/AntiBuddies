@@ -5,7 +5,9 @@ using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data
