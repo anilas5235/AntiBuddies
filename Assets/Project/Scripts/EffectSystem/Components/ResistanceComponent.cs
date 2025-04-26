@@ -13,7 +13,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         [SerializeField] private List<SimpleKeyValuePair<EffectType, ClampedPercentStat>> resistances = new();
 
-        public int ResistEffect(int value, EffectType effectType)
+        public int ResistEffect(int value, AttackType effectType)
         {
             int result = value;
             if (effectType.AffectedByFlatModifier)

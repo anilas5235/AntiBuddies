@@ -8,21 +8,21 @@ using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {
-    public sealed class Buff : IBuff
+    public sealed class Buff<T> : IBuff where T : EffectType
     {
         public string Name { get; }
         public GameObject Source => _effect.Source;
         public BuffManager BuffManager { get; private set; }
         private IStackBehaviour StackBehaviour { get; }
         private BuffGroup BuffGroup { get; set; }
-        private ITarget<EffectPackage> Target { get; }
+        private ITarget<EffectPackage<T>> Target { get; }
         private readonly float _duration;
         private float _remainingDuration;
-        private readonly EffectPackage _effect;
+        private readonly EffectPackage<T> _effect;
         private readonly ITickBehaviour _tickBehavior;
         private readonly IExitBehaviour _exitBehavior;
 
-        public Buff(EffectPackage effect, float duration, ITarget<EffectPackage> target, IStackBehaviour stackBehaviour,
+        public Buff(EffectPackage<T> effect, float duration, ITarget<EffectPackage<T>> target, IStackBehaviour stackBehaviour,
             ITickBehaviour tickBehavior, IExitBehaviour exitBehavior)
         {
             Target = target;
@@ -35,7 +35,7 @@ namespace Project.Scripts.BuffSystem.Buffs
             ResetDuration();
         }
 
-        private static string ConstructName(EffectPackage effect, IStackBehaviour stackBehaviour,
+        private static string ConstructName(EffectPackage<T> effect, IStackBehaviour stackBehaviour,
             ITickBehaviour tickBehavior)
         {
             string name = $"{effect.EffectType.Name}_{stackBehaviour.Name}";

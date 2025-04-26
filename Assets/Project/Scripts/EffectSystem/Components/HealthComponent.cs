@@ -12,11 +12,11 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [SerializeField] private ClampedStat health = new(0, 10, 0);
         public int MaxHealth => health.MaxValue;
-        public event Action<int, EffectType, GameObject> OnDamageReceived;
+        public event Action<int, AttackType, GameObject> OnDamageReceived;
         public UnityEvent onDamageReceived;
         public event Action OnDeath;
         public UnityEvent onDeath;
-        public event Action<int, EffectType, GameObject> OnHealApplied;
+        public event Action<int, HealType, GameObject> OnHealApplied;
 
         private void Awake()
         {
@@ -35,7 +35,7 @@ namespace Project.Scripts.EffectSystem.Components
             OnHealApplied -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
         }
 
-        public void ApplyAttack(int amount, EffectType type)
+        public void ApplyAttack(int amount, AttackType type)
         {
             if (amount <= 0) return;
             health.ReduceValue(amount);
@@ -55,7 +55,7 @@ namespace Project.Scripts.EffectSystem.Components
             onDeath?.Invoke();
         }
 
-        public void ApplyHeal(int amount, EffectType type)
+        public void ApplyHeal(int amount, HealType type)
         {
             if (amount <= 0) return;
             health.IncreaseValue(amount);

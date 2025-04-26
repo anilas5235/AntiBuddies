@@ -214,5 +214,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectData: {fileID: 11400000, guid: 681dd5d6a1adffc4c8a2466cb2943037, type: 2}
+  attackData: {fileID: 11400000, guid: 468b932b8e3c7f54aa2207cdcf7c3d71, type: 2}
   alieGroup: 1

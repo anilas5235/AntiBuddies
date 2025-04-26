@@ -3,15 +3,14 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects
 {
-    [CreateAssetMenu(fileName = "NewEffect", menuName = "EffectsSys/Effect")]
-    public class EffectData : ScriptableObject
+    public abstract class EffectData<T> : ScriptableObject where T:EffectType
     {
-        [SerializeField] protected int amount;
-        [SerializeField] protected EffectType effectType;
+        [SerializeField] protected int Amount;
+        [SerializeField] protected T Type;
 
-        public EffectPackage GetPackage(GameObject source, AlieGroup alieGroup)
+        public EffectPackage<T> GetPackage(GameObject source, AlieGroup alieGroup)
         {
-            return new EffectPackage(alieGroup, amount, effectType, source);
+            return new EffectPackage<T>(alieGroup, Amount, Type, source);
         }
     }
 }

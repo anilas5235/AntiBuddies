@@ -2,7 +2,7 @@
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class ContactEffectSource : EffectSource
+    public class ContactEffectSource : AttackSource
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -12,7 +12,7 @@ namespace Project.Scripts.EffectSystem.Components
         private void HandleContact(EffectRelay effectRelay)
         {
             if (effectRelay.AlieGroup == alieGroup) return;
-            ApplyEffect(effectRelay);
+            Attack(effectRelay);
         }
     }
 }

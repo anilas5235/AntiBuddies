@@ -5,23 +5,23 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public abstract class EffectSource : MonoBehaviour
+    public abstract class AttackSource : MonoBehaviour
     {
-        [SerializeField] private EffectData effectData;
+        [SerializeField] private AttackData attackData;
         [SerializeField] protected AlieGroup alieGroup;
         
         public event Action OnEffectApplied; 
 
         private void Awake()
         {
-            if (effectData) return;
+            if (attackData) return;
             Debug.LogError("EffectData is not assigned in " + gameObject.name);
         }
 
-        protected void ApplyEffect(ITarget<EffectPackage> target)
+        protected void Attack(ITarget<EffectPackage<AttackType>> target)
         {
             if (target == null) return;
-            if(target.Apply(effectData.GetPackage(gameObject, alieGroup)))
+            if(target.Apply(attackData.GetPackage(gameObject, alieGroup)))
             {
                 OnEffectApplied?.Invoke();
             }
