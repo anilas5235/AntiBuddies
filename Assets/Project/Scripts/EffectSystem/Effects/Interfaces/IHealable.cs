@@ -8,7 +8,7 @@ namespace Project.Scripts.EffectSystem.Effects.Interfaces
     {
         event Action<int,HealType,GameObject> OnHealApplied;
         event Action OnDeath;
-        void ApplyHeal(int amount, HealType type);
+        void ApplyHeal(EffectPackage<HealType> package);
         void FullHeal();
     }
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2fbc860bd414212a0a15670f47465a6, type: 3}
-  m_Name: Health
+  m_Name: Range
   m_EditorClassIdentifier: 
-  typeName: Health
-  description: your Hitpoints
+  typeName: Armor
+  description: 

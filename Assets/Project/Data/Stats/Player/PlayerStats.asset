@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a78f8473b614508b0f76ce2d75ddc1a, type: 3}
+  m_Name: PlayerStats
+  m_EditorClassIdentifier: 
+  MaxHealth:
+    statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  HealthRegeneration:
+    statType: {fileID: 11400000, guid: 1e3b73a2a12e3ef4ab712e845e56d54b, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  LifeSteal:
+    statType: {fileID: 11400000, guid: dfe087d8d19350f47befefa18d5553d0, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  Damage:
+    statType: {fileID: 11400000, guid: 9ae9e11c7a800ac449417d2e24f309da, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  MeleeDamage:
+    statType: {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  RangedDamage:
+    statType: {fileID: 11400000, guid: 276d7306589f62f40804b680e8208e63, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  AttackSpeed:
+    statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  Range:
+    statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  Armor:
+    statType: {fileID: 11400000, guid: 7fac75f7b0c7e9f49b1f04e927d25dfc, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  Shield:
+    statType: {fileID: 11400000, guid: c8b4ff22af6cbf1449dcb06a9bda38b9, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  Dodage:
+    statType: {fileID: 11400000, guid: 0d17735fd947eec44a9cfc0e84046141, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  MoveSpeed:
+    statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  Luck:
+    statType: {fileID: 11400000, guid: 5df89aa858657d349841d99de210f860, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+  Harvesting:
+    statType: {fileID: 11400000, guid: 07a950e63d9c7a2459a3d656d563b65f, type: 2}
+    statValue: 0
+    clampedValue: 0
+    maxValue: 2147483647
+    minValue: -2147483648

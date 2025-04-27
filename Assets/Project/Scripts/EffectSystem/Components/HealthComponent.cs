@@ -1,9 +1,10 @@
 using System;
-using Project.Scripts.EffectSystem.Components.Stats;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.EffectSystem.Visuals;
+using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,12 +12,29 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private Stat health = new(0, 10, 0);
+        [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private int currentHealth = 10;
+
+
+        private int MaxHealth => playerStats.MaxHealth.Value;
+
+        private int CurrentHealth
+        {
+            get => currentHealth;
+            set
+            {
+                if (currentHealth == value) return;
+                currentHealth = Math.Clamp(value, 0, MaxHealth);
+                if (IsDead()) Die();
+            }
+        }
+
         public event Action<int, AttackType, GameObject> OnDamageReceived;
         public UnityEvent onDamageReceived;
         public event Action OnDeath;
         public UnityEvent onDeath;
         public event Action<int, HealType, GameObject> OnHealApplied;
+
 
         private void Awake()
         {
@@ -35,17 +53,33 @@ namespace Project.Scripts.EffectSystem.Components
             OnHealApplied -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
         }
 
-        public void ApplyAttack(int amount, AttackType type)
+        public void ApplyAttack(EffectPackage<AttackType> package)
         {
-            if (amount <= 0) return;
-            health.ReduceValue(amount);
-            OnDamageReceived?.Invoke(amount, type, gameObject);
+            int damage = package.Amount;
+            AttackType attackType = package.EffectType;
+            if (playerStats)
+            {
+                if (playerStats.Dodage.RollChance()) return;
+                if (attackType.AffectedByFlatModifier)
+                {
+                    Stat flatModifier = playerStats.GetStat(attackType.FlatModifier);
+                    if (flatModifier != null) damage = flatModifier.TransformNegative(damage);
+                }
+
+                if (attackType.AffectedByPercentModifier)
+                {
+                    Stat percentageModifier = playerStats.GetStat(attackType.PercentModifier);
+                    if (percentageModifier != null) damage = percentageModifier.TransformNegative(damage);
+                }
+            }
+
+            if (damage <= 0) return;
+            CurrentHealth -= damage;
+            OnDamageReceived?.Invoke(damage, attackType, gameObject);
             onDamageReceived?.Invoke();
-            if (IsDead()) Die();
         }
 
-        public bool IsDead() => health.IsBelowOrZero();
-
+        public bool IsDead() => CurrentHealth <= 0;
         public bool IsAlive() => !IsDead();
 
         public void Die()
@@ -55,24 +89,15 @@ namespace Project.Scripts.EffectSystem.Components
             onDeath?.Invoke();
         }
 
-        public void ApplyHeal(int amount, HealType type)
+        public void ApplyHeal(EffectPackage<HealType> package)
         {
-            if (amount <= 0) return;
-            health.IncreaseValue(amount);
-            OnHealApplied?.Invoke(amount, type, gameObject);
-        }
-        
-        public void ModifyHealth(int amount)
-        {
-            health.MaxValue += amount;
-            if (health.MaxValue < health.MinValue)
-            {
-                Die();
-                return;
-            }
-            if(amount > 0) health.IncreaseValue(amount);
+            int amount = package.Amount;
+            if (amount <= 0 || CurrentHealth >= MaxHealth) return;
+            int diff = MaxHealth - CurrentHealth;
+            CurrentHealth += amount;
+            OnHealApplied?.Invoke(diff < amount ? diff : amount, package.EffectType, gameObject);
         }
 
-        public void FullHeal() => health.MaximizeValue();
+        public void FullHeal() => CurrentHealth = MaxHealth;
     }
 }
