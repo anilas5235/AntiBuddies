@@ -16,21 +16,33 @@ namespace Project.Scripts.StatSystem.Editor
             SerializedProperty clampedValue = property.FindPropertyRelative("clampedValue");
             SerializedProperty maxValue = property.FindPropertyRelative("maxValue");
             SerializedProperty minValue = property.FindPropertyRelative("minValue");
+            SerializedProperty baseStatValue = property.FindPropertyRelative("baseStatValue");
+            SerializedProperty tempStatBonus = property.FindPropertyRelative("tempStatBonus");
 
-            EditorGUILayout.LabelField(new GUIContent(statType.name, "Stat Type"), EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical("box");
-            EditorGUILayout.PropertyField(clampedValue);
-
-            foldout = EditorGUILayout.Foldout(foldout, "Stat Properties");
-            if (foldout)
             {
-                EditorGUILayout.BeginVertical("box");
-                EditorGUILayout.PropertyField(statValue);
-                EditorGUILayout.PropertyField(maxValue);
-                EditorGUILayout.PropertyField(minValue);
-                EditorGUILayout.EndVertical();
-            }
+                EditorGUILayout.BeginHorizontal();
+                {
+                    EditorGUILayout.LabelField(new GUIContent(statType.objectReferenceValue.name, "Stat Type"),
+                        EditorStyles.boldLabel);
+                    EditorGUILayout.PropertyField(clampedValue, GUIContent.none);
+                }
+                EditorGUILayout.EndHorizontal();
 
+                foldout = EditorGUILayout.Foldout(foldout, "Details");
+                if (foldout)
+                {
+                    EditorGUILayout.BeginVertical("box");
+                    {
+                        EditorGUILayout.PropertyField(statValue);
+                        EditorGUILayout.PropertyField(maxValue);
+                        EditorGUILayout.PropertyField(minValue);
+                        EditorGUILayout.PropertyField(baseStatValue);
+                        EditorGUILayout.PropertyField(tempStatBonus);
+                    }
+                    EditorGUILayout.EndVertical();
+                }
+            }
             EditorGUILayout.EndVertical();
         }
     }

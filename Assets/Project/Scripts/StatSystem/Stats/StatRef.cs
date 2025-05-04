@@ -16,6 +16,10 @@ namespace Project.Scripts.StatSystem.Stats
         {
             if (!statComponent) return;
             _stat = statComponent.GetStat(statType);
+            if (_stat == null)
+            {
+                Debug.LogWarning($"Stat {statType} not found in StatComponent.");
+            }
         }
     }
 }

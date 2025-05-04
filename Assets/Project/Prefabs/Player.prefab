@@ -225,6 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   maxAcceleration: 1
+  moveSpeed:
+    statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
 --- !u!114 &4307234338099689046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,8 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e9c2d10c80b5044a4beea02aa69801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statComponent: {fileID: 4282238287893853404}
-  currentHealth: 10
+  currentHealth: 0
   maxHpStat:
     statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
   onDamageReceived:
@@ -393,4 +394,5 @@ MonoBehaviour:
   numberOfSlots: 6
   weaponSlotPrefab: {fileID: 4847109733002469394, guid: 24ab6752f857f1144bf800314df430ba, type: 3}
   defaultWeaponData:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 70f6dd9407021584d856891c43768010, type: 2}
+  - {fileID: 11400000, guid: e02202dd553a52d499c7ceb5bdcb2a66, type: 2}

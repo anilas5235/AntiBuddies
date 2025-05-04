@@ -10,12 +10,12 @@ using UnityEngine.Events;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class HealthComponent : MonoBehaviour, IDamageable, IHealable
+    public class HealthComponent : MonoBehaviour, IDamageable, IHealable, INeedStatComponent
     {
-        [SerializeField] private StatComponent statComponent;
         [SerializeField] private int currentHealth = 10;
         [SerializeField] private StatRef maxHpStat;
 
+        private StatComponent _statComponent;
         private int MaxHealth => maxHpStat.Stat.Value;
 
         private int CurrentHealth
@@ -37,7 +37,6 @@ namespace Project.Scripts.EffectSystem.Components
 
         private void OnEnable()
         {
-            maxHpStat.GetStat(statComponent);
             FullHeal();
             OnDamageReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
             OnHealApplied += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
@@ -53,19 +52,17 @@ namespace Project.Scripts.EffectSystem.Components
         {
             int damage = package.Amount;
             AttackType attackType = package.EffectType;
-            if (statComponent)
-            {
-                if (attackType.AffectedByFlatModifier)
-                {
-                    Stat flatModifier = statComponent.GetStat(attackType.FlatModifier);
-                    if (flatModifier != null) damage = flatModifier.TransformNegative(damage);
-                }
 
-                if (attackType.AffectedByPercentModifier)
-                {
-                    Stat percentageModifier = statComponent.GetStat(attackType.PercentModifier);
-                    if (percentageModifier != null) damage = percentageModifier.TransformNegative(damage);
-                }
+            if (attackType.AffectedByFlatModifier)
+            {
+                Stat flatModifier = _statComponent.GetStat(attackType.FlatModifier);
+                if (flatModifier != null) damage = flatModifier.TransformNegative(damage);
+            }
+
+            if (attackType.AffectedByPercentModifier)
+            {
+                Stat percentageModifier = _statComponent.GetStat(attackType.PercentModifier);
+                if (percentageModifier != null) damage = percentageModifier.TransformNegative(damage);
             }
 
             if (damage <= 0) return;
@@ -94,5 +91,11 @@ namespace Project.Scripts.EffectSystem.Components
         }
 
         public void FullHeal() => CurrentHealth = MaxHealth;
+
+        public void OnStatInit(StatComponent statComponent)
+        {
+            _statComponent = statComponent;
+            maxHpStat.GetStat(statComponent);
+        }
     }
 }

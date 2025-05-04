@@ -17,6 +17,7 @@ namespace Project.Scripts.StatSystem
         private void Awake()
         {
             InitStats();
+            CallOnInitStats();
         }
 
         private void InitStats()
@@ -40,6 +41,15 @@ namespace Project.Scripts.StatSystem
                 Stat stat = new(statType, defaultStats.GetDefault(statType));
                 liveStats.Add(stat);
                 _statDict.Add(statType, stat);
+            }
+        }
+        
+        private void CallOnInitStats()
+        {
+            INeedStatComponent[] comps = GetComponentsInChildren<INeedStatComponent>();
+            foreach (INeedStatComponent component in comps)
+            {
+                component.OnStatInit(this);
             }
         }
 

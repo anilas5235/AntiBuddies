@@ -2,7 +2,7 @@
 {
     public interface IStat
     {
-        public int Value { get; set; }
+        public int Value { get;}
         int TransformPositive(int baseValue);
         int TransformNegative(int baseValue);
     }
