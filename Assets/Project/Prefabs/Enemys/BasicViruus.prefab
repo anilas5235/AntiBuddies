@@ -150,7 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statComponent: {fileID: 7052312215536277138}
   currentHealth: 10
-  maxHpStat: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+  maxHpStat:
+    statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
   onDamageReceived:
     m_PersistentCalls:
       m_Calls:
@@ -181,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cb9a2a934a469ab6787ddfc6735ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultStats: {fileID: 11400000, guid: 826c52194d1b19f478785b6aa61f2a07, type: 2}
   stats:
   - {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
   liveStats: []

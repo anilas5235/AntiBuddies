@@ -14,11 +14,13 @@ namespace Project.Scripts.StatSystem.Stats
         [SerializeField] private int maxValue;
         [SerializeField] private int minValue;
 
-        public Stat(StatType statType)
+        public Stat(StatType statType, int statValue = 0)
         {
             this.statType = statType;
+            this.statValue = statValue;
             maxValue = statType.MaxValue;
             minValue = statType.MinValue;
+            UpdateClampedValue();
         }
 
         public int Value

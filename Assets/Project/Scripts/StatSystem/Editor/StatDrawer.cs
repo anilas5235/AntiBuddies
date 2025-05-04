@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.Scripts.StatSystem.Editor
 {
     [CustomPropertyDrawer(typeof(Stat))]
-    public class StatCustomEditor : PropertyDrawer
+    public class StatDrawer : PropertyDrawer
     {
         private bool foldout;
 

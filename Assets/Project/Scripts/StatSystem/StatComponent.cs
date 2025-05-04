@@ -5,16 +5,22 @@ using UnityEngine;
 
 namespace Project.Scripts.StatSystem
 {
-    public class StatComponent : MonoBehaviour
+    [DefaultExecutionOrder(-50)]
+    public class StatComponent : MonoBehaviour, IStatGroup
     {
+        [SerializeField] private StatDefaultData defaultStats;
         [SerializeField] private List<StatType> stats;
         [SerializeField] private List<Stat> liveStats;
 
-        private Dictionary<StatType, Stat> _statDict;
+        private readonly Dictionary<StatType, Stat> _statDict = new();
 
         private void Awake()
         {
-            _statDict = new Dictionary<StatType, Stat>();
+            InitStats();
+        }
+
+        private void InitStats()
+        {
             foreach (StatType statType in stats)
             {
                 // Check if the statType is null
@@ -31,7 +37,7 @@ namespace Project.Scripts.StatSystem
                     continue;
                 }
 
-                Stat stat = new(statType);
+                Stat stat = new(statType, defaultStats.GetDefault(statType));
                 liveStats.Add(stat);
                 _statDict.Add(statType, stat);
             }
@@ -39,6 +45,11 @@ namespace Project.Scripts.StatSystem
 
         public Stat GetStat(StatType statType)
         {
+            if(!statType)
+            {
+                Debug.LogWarning("StatType is null, returning null.");
+                return null;
+            }
             return _statDict.GetValueOrDefault(statType);
         }
     }

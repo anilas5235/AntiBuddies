@@ -7,7 +7,6 @@ using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.EffectSystem.Components
 {
@@ -15,10 +14,9 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [SerializeField] private StatComponent statComponent;
         [SerializeField] private int currentHealth = 10;
-        [SerializeField] private StatType maxHpStat;
-        private Stat _healthStat;
+        [SerializeField] private StatRef maxHpStat;
 
-        private int MaxHealth => _healthStat.Value;
+        private int MaxHealth => maxHpStat.Stat.Value;
 
         private int CurrentHealth
         {
@@ -37,15 +35,10 @@ namespace Project.Scripts.EffectSystem.Components
         public UnityEvent onDeath;
         public event Action<int, HealType, GameObject> OnHealApplied;
 
-
-        private void Start()
-        {
-            _healthStat = statComponent.GetStat(maxHpStat);
-            FullHeal();
-        }
-
         private void OnEnable()
         {
+            maxHpStat.GetStat(statComponent);
+            FullHeal();
             OnDamageReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
             OnHealApplied += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
         }

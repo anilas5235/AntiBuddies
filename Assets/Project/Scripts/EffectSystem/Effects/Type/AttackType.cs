@@ -10,8 +10,8 @@ namespace Project.Scripts.EffectSystem.Effects.Type
         [SerializeField] private StatType percentModifier;
 
         public Color Color => color;
-        public bool AffectedByPercentModifier => flatModifier;
-        public bool AffectedByFlatModifier => percentModifier;
+        public bool AffectedByPercentModifier => percentModifier;
+        public bool AffectedByFlatModifier => flatModifier;
         public StatType FlatModifier => flatModifier;
         public StatType PercentModifier => percentModifier;
     }
