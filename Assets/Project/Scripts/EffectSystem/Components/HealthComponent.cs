@@ -7,16 +7,18 @@ using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.EffectSystem.Components
 {
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable
     {
-        [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private StatComponent statComponent;
         [SerializeField] private int currentHealth = 10;
+        [SerializeField] private StatType maxHpStat;
+        private Stat _healthStat;
 
-
-        private int MaxHealth => playerStats.MaxHealth.Value;
+        private int MaxHealth => _healthStat.Value;
 
         private int CurrentHealth
         {
@@ -36,8 +38,9 @@ namespace Project.Scripts.EffectSystem.Components
         public event Action<int, HealType, GameObject> OnHealApplied;
 
 
-        private void Awake()
+        private void Start()
         {
+            _healthStat = statComponent.GetStat(maxHpStat);
             FullHeal();
         }
 
@@ -57,18 +60,17 @@ namespace Project.Scripts.EffectSystem.Components
         {
             int damage = package.Amount;
             AttackType attackType = package.EffectType;
-            if (playerStats)
+            if (statComponent)
             {
-                if (playerStats.Dodage.RollChance()) return;
                 if (attackType.AffectedByFlatModifier)
                 {
-                    Stat flatModifier = playerStats.GetStat(attackType.FlatModifier);
+                    Stat flatModifier = statComponent.GetStat(attackType.FlatModifier);
                     if (flatModifier != null) damage = flatModifier.TransformNegative(damage);
                 }
 
                 if (attackType.AffectedByPercentModifier)
                 {
-                    Stat percentageModifier = playerStats.GetStat(attackType.PercentModifier);
+                    Stat percentageModifier = statComponent.GetStat(attackType.PercentModifier);
                     if (percentageModifier != null) damage = percentageModifier.TransformNegative(damage);
                 }
             }

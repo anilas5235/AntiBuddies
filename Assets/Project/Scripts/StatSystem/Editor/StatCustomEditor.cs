@@ -17,16 +17,15 @@ namespace Project.Scripts.StatSystem.Editor
             SerializedProperty maxValue = property.FindPropertyRelative("maxValue");
             SerializedProperty minValue = property.FindPropertyRelative("minValue");
 
-            EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(new GUIContent(statType.name, "Stat Type"), EditorStyles.boldLabel);
             EditorGUILayout.BeginVertical("box");
-            EditorGUILayout.PropertyField(statType);
-            EditorGUILayout.PropertyField(statValue);
             EditorGUILayout.PropertyField(clampedValue);
 
             foldout = EditorGUILayout.Foldout(foldout, "Stat Properties");
             if (foldout)
             {
                 EditorGUILayout.BeginVertical("box");
+                EditorGUILayout.PropertyField(statValue);
                 EditorGUILayout.PropertyField(maxValue);
                 EditorGUILayout.PropertyField(minValue);
                 EditorGUILayout.EndVertical();

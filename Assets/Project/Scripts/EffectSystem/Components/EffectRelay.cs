@@ -10,7 +10,6 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [SerializeField] private AlieGroup alieGroup;
         [SerializeField] private HealthComponent healthComponent;
-        [SerializeField] private PlayerStats playerStats;
         public AlieGroup AlieGroup => alieGroup;
 
         public bool Apply(EffectPackage<AttackType> attackPackage)

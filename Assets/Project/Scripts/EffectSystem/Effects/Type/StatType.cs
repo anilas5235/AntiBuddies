@@ -7,5 +7,10 @@ namespace Project.Scripts.EffectSystem.Effects.Type
     {
         [SerializeField] private bool isPercentage;
         public bool IsPercentage => isPercentage;
+        
+        [SerializeField] private int maxValue = int.MaxValue;
+        [SerializeField] private int minValue = int.MinValue;
+        public int MaxValue => maxValue;
+        public int MinValue => minValue;
     }
 }
