@@ -2,6 +2,7 @@
 using Project.Scripts.StatSystem.Stats;
 using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Project.Scripts.Enemy
 {
@@ -11,6 +12,7 @@ namespace Project.Scripts.Enemy
         [SerializeField] private StatRef speedStat;
 
         [SerializeField] private BehaviorGraphAgent behaviorGraphAgent;
+        [SerializeField] private NavMeshAgent navMeshAgent;
 
         public void OnStatInit(StatComponent statComponent)
         {
@@ -20,11 +22,14 @@ namespace Project.Scripts.Enemy
         private void OnEnable()
         {
             speedStat.Stat.OnStatChange += OnSpeedStatChange;
+            OnSpeedStatChange();
         }
 
         private void OnSpeedStatChange()
         {
-            behaviorGraphAgent.SetVariableValue("Speed", speedStat.Stat.AsFloatPercentage * baseSpeed);
+            float speed = speedStat.Stat.AsFloatPercentage * baseSpeed;
+            behaviorGraphAgent.SetVariableValue("Speed",speed);
+            navMeshAgent.speed = speed;
         }
     }
 }

@@ -203,6 +203,7 @@ MonoBehaviour:
   speedStat:
     statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
   behaviorGraphAgent: {fileID: 7679437470409611216}
+  navMeshAgent: {fileID: 2740992555734098473}
 --- !u!1 &7691238699623227762
 GameObject:
   m_ObjectHideFlags: 0
