@@ -43,7 +43,7 @@ namespace Project.Scripts.StatSystem
                 _statDict.Add(statType, stat);
             }
         }
-        
+
         private void CallOnInitStats()
         {
             INeedStatComponent[] comps = GetComponentsInChildren<INeedStatComponent>();
@@ -55,12 +55,22 @@ namespace Project.Scripts.StatSystem
 
         public Stat GetStat(StatType statType)
         {
-            if(!statType)
+            if (!statType)
             {
                 Debug.LogWarning("StatType is null, returning null.");
                 return null;
             }
+
             return _statDict.GetValueOrDefault(statType);
         }
+
+        public void ModifyStat(StatModification statModification)
+        {
+            Stat stat = GetStat(statModification.StatType);
+            stat?.ModifyStat(statModification);
+        }
+
+
+        
     }
 }

@@ -10,7 +10,7 @@ namespace Project.Scripts.StatSystem.Stats
     public class Stat : IStat
     {
         [SerializeField] private StatType statType;
-        
+
         [SerializeField] private int statValue;
         [SerializeField] private int clampedValue;
 
@@ -31,32 +31,11 @@ namespace Project.Scripts.StatSystem.Stats
 
         public float AsFloatPercentage => 1 + Value / 100f;
         public int Value => clampedValue;
-
         public int FreeValue => statValue;
+        public int MaxValue => maxValue;
+        public int MinValue => minValue;
 
-        public int MaxValue
-        {
-            get => maxValue;
-            set
-            {
-                if (maxValue == value) return;
-                maxValue = value;
-                UpdateValues();
-            }
-        }
-
-        public int MinValue
-        {
-            get => minValue;
-            set
-            {
-                if (minValue == value) return;
-                minValue = value;
-                UpdateValues();
-            }
-        }
-
-        public void UpdateValues()
+        private void UpdateValues()
         {
             statValue = baseStatValue + tempStatBonus;
             clampedValue = Mathf.Clamp(statValue, MinValue, MaxValue);
@@ -67,14 +46,27 @@ namespace Project.Scripts.StatSystem.Stats
 
         private int Transform(int statVal, int baseValue) =>
             statType.IsPercentage ? Mathf.RoundToInt((1 + statVal / 100f) * baseValue) : baseValue + statVal;
-        
-        public void AddTempStatBonus(int value){
-            tempStatBonus += value;
-            UpdateValues();
-        }
-        
-        public void AddPermanentStatBonus(int value){
-            baseStatValue += value;
+
+        public void ModifyStat(StatModification statModification)
+        {
+            if (statModification.StatType != statType) return;
+
+            switch (statModification.ModType)
+            {
+                case StatModification.Type.BaseValue:
+                    baseStatValue += statModification.Value;
+                    break;
+                case StatModification.Type.TempValue:
+                    tempStatBonus += statModification.Value;
+                    break;
+                case StatModification.Type.MaxValue:
+                    maxValue = statModification.Value;
+                    break;
+                case StatModification.Type.MinValue:
+                    minValue = statModification.Value;
+                    break;
+            }
+
             UpdateValues();
         }
     }
