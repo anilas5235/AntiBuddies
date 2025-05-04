@@ -34,11 +34,13 @@ namespace Project.Scripts.StatSystem.Stats
         public int FreeValue => statValue;
         public int MaxValue => maxValue;
         public int MinValue => minValue;
+        public event Action OnStatChange;
 
         private void UpdateValues()
         {
             statValue = baseStatValue + tempStatBonus;
             clampedValue = Mathf.Clamp(statValue, MinValue, MaxValue);
+            OnStatChange?.Invoke();
         }
 
         public int TransformPositive(int baseValue) => Transform(Value, baseValue);

@@ -1,18 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class ContactEffectSource : AttackSource
+    public abstract class ContactEffectSource : MonoBehaviour
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out EffectRelay effectRelay)) HandleContact(effectRelay);
+            HandleContact(other.gameObject);
         }
 
-        private void HandleContact(EffectRelay effectRelay)
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            if (effectRelay.AlieGroup == alieGroup) return;
-            Attack(effectRelay);
+            HandleContact(other.gameObject);
         }
+
+        protected abstract void HandleContact(GameObject other);
     }
 }

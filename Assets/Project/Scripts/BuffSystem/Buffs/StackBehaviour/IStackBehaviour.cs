@@ -5,6 +5,6 @@ namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
     public interface IStackBehaviour
     {
         string Name { get; }
-        void AddingBuff(IBuff buff,BuffManager buffManager);
+        bool ShouldBuffBeAdded(IBuff buff,BuffManager buffManager);
     }
 }

@@ -6,11 +6,9 @@ namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
     {
         private const string ConstName = "NotStacking";
         public string Name => ConstName;
-
-        public void AddingBuff(IBuff buff, BuffManager buffManager)
+        public bool ShouldBuffBeAdded(IBuff buff, BuffManager buffManager)
         {
-            if (buffManager.HasBuff(buff.Name)) return;
-            buffManager.AddBuffToDictionary(buff);
+            return !buffManager.HasBuff(buff.Name);
         }
     }
 }

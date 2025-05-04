@@ -6,10 +6,11 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class EffectRelay : MonoBehaviour, ITarget<EffectPackage<AttackType>>, ITarget<EffectPackage<HealType>>
+    public class EffectRelay : MonoBehaviour, ITarget<EffectPackage<AttackType>>, ITarget<EffectPackage<HealType>>, ITarget<EffectPackage<StatType>>, INeedStatComponent
     {
         [SerializeField] private AlieGroup alieGroup;
         [SerializeField] private HealthComponent healthComponent;
+        private StatComponent _statComponent;
         public AlieGroup AlieGroup => alieGroup;
 
         public bool Apply(EffectPackage<AttackType> attackPackage)
@@ -24,6 +25,18 @@ namespace Project.Scripts.EffectSystem.Components
             if (healPackage.AlieGroup == alieGroup) return false;
             healthComponent.ApplyHeal(healPackage);
             return true;
+        }
+
+        public bool Apply(EffectPackage<StatType> statPackage)
+        {
+            if (statPackage.AlieGroup == alieGroup) return false;
+            _statComponent.ModifyStat(statPackage);
+            return true;
+        }
+
+        public void OnStatInit(StatComponent statComponent)
+        {
+            _statComponent = statComponent;
         }
     }
 }

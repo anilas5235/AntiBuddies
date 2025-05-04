@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public abstract class AttackSource : MonoBehaviour
+    public class ContactAttack : ContactEffectSource
     {
         [SerializeField] private AttackData attackData;
         [SerializeField] protected AlieGroup alieGroup;
@@ -20,13 +20,19 @@ namespace Project.Scripts.EffectSystem.Components
             Debug.LogError("EffectData is not assigned in " + gameObject.name);
         }
 
-        protected void Attack(ITarget<EffectPackage<AttackType>> target)
+        private void Attack(ITarget<EffectPackage<AttackType>> target)
         {
             if (target == null) return;
             if(target.Apply(attackData.GetPackage(gameObject, alieGroup)))
             {
                 OnEffectApplied?.Invoke();
             }
+        }
+
+        protected override void HandleContact(GameObject other)
+        {
+            ITarget<EffectPackage<AttackType>> target = other.GetComponent<ITarget<EffectPackage<AttackType>>>();
+            Attack(target);
         }
     }
 }

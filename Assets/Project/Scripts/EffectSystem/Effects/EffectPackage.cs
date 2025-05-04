@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects
 {
-    public struct EffectPackage<T> where T : EffectType
+    public record EffectPackage<T> where T : EffectType
     {
         public AlieGroup AlieGroup;
         public int Amount;
@@ -19,7 +19,7 @@ namespace Project.Scripts.EffectSystem.Effects
             Source = source;
         }
         
-        public readonly EffectPackage<T> Invert()
+        public EffectPackage<T> Invert()
         {
             return new EffectPackage<T>(AlieGroup, -Amount, EffectType, Source);
         }

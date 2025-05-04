@@ -1,5 +1,4 @@
-﻿using System;
-using Project.Scripts.EffectSystem.Components;
+﻿using Project.Scripts.EffectSystem.Components;
 using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem.Projectile
@@ -10,16 +9,16 @@ namespace Project.Scripts.WeaponSystem.Projectile
         [SerializeField] private float speed = 10f;
         [SerializeField] private int allowedContacts = 1;
         [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private ContactEffectSource contactEffectSource;
+        [SerializeField] private ContactAttack contactEffect;
 
         private void OnEnable()
         {
-            contactEffectSource.OnEffectApplied += HandleContact;
+            contactEffect.OnEffectApplied += HandleContact;
         }
 
         private void OnDisable()
         {
-            contactEffectSource.OnEffectApplied -= HandleContact;
+            contactEffect.OnEffectApplied -= HandleContact;
         }
 
         private void HandleContact()

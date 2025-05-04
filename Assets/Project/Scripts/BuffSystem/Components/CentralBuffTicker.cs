@@ -44,28 +44,27 @@ namespace Project.Scripts.BuffSystem.Components
             }
         }
 
-        public BuffGroup RegisterBuff(IBuff buff)
+        public void RegisterBuff(IBuff buff)
         {
             if (buff == null)
             {
                 Debug.LogError("Buff is null");
-                return null;
+                return;
             }
 
             if (_currBuffGroup.RegisterBuff(buff))
             {
-                return _currBuffGroup;
+                return;
             }
 
             UpdateCurrentBuffGroup();
 
             if (_currBuffGroup.RegisterBuff(buff))
             {
-                return _currBuffGroup;
+                return;
             }
 
             Debug.LogError("No available buff groups");
-            return null;
         }
 
         private BuffGroup GetGroupForNextBuffs()

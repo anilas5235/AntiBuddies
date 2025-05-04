@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
@@ -55,12 +56,6 @@ namespace Project.Scripts.StatSystem
 
         public Stat GetStat(StatType statType)
         {
-            if (!statType)
-            {
-                Debug.LogWarning("StatType is null, returning null.");
-                return null;
-            }
-
             return _statDict.GetValueOrDefault(statType);
         }
 
@@ -70,7 +65,10 @@ namespace Project.Scripts.StatSystem
             stat?.ModifyStat(statModification);
         }
 
-
-        
+        public void ModifyStat(EffectPackage<StatType> statPackage)
+        {
+            StatModification mod = new(statPackage.EffectType, statPackage.Amount, StatModification.Type.TempValue);
+            ModifyStat(mod);
+        }
     }
 }
