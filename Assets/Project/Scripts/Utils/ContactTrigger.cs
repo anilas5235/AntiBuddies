@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Components
+namespace Project.Scripts.Utils
 {
-    public abstract class ContactEffectSource : MonoBehaviour
+    public abstract class ContactTrigger : MonoBehaviour
     {
         private void OnTriggerEnter2D(Collider2D other)
         {

@@ -53,15 +53,15 @@ namespace Project.Scripts.EffectSystem.Components
             int damage = package.Amount;
             AttackType attackType = package.EffectType;
 
-            if (attackType.AffectedByFlatModifier)
+            if (attackType.AffectedByFlatResistanceStat)
             {
-                Stat flatModifier = _statComponent.GetStat(attackType.FlatModifier);
+                Stat flatModifier = _statComponent.GetStat(attackType.FlatResistanceStat);
                 if (flatModifier != null) damage = flatModifier.TransformNegative(damage);
             }
 
-            if (attackType.AffectedByPercentModifier)
+            if (attackType.AffectedByPercentResistance)
             {
-                Stat percentageModifier = _statComponent.GetStat(attackType.PercentModifier);
+                Stat percentageModifier = _statComponent.GetStat(attackType.PercentResistanceStat);
                 if (percentageModifier != null) damage = percentageModifier.TransformNegative(damage);
             }
 

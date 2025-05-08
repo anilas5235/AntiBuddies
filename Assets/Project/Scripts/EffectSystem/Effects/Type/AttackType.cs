@@ -6,13 +6,13 @@ namespace Project.Scripts.EffectSystem.Effects.Type
     public class AttackType : EffectType
     {
         [SerializeField] private Color color = Color.white;
-        [SerializeField] private StatType flatModifier;
-        [SerializeField] private StatType percentModifier;
+        [SerializeField] private StatType flatResistanceStat;
+        [SerializeField] private StatType percentResistanceStat;
 
         public Color Color => color;
-        public bool AffectedByPercentModifier => percentModifier;
-        public bool AffectedByFlatModifier => flatModifier;
-        public StatType FlatModifier => flatModifier;
-        public StatType PercentModifier => percentModifier;
+        public bool AffectedByPercentResistance => percentResistanceStat;
+        public bool AffectedByFlatResistanceStat => flatResistanceStat;
+        public StatType FlatResistanceStat => flatResistanceStat;
+        public StatType PercentResistanceStat => percentResistanceStat;
     }
 }

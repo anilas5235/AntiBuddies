@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using Project.Scripts.Spawning.Pooling;
+using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem.Projectile
 {
-    public interface IProjectile
+    public interface IProjectile : IPoolable<ProjectileData>
     {
-        public void Setup(int contacts, float projectileSpeed, Vector2 direction);
-        public void DestroyProjectile();
+        public void SetDirection(Vector2 direction);
     }
 }

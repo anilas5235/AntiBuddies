@@ -1,10 +1,12 @@
 ﻿using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Type;
+using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects
 {
-    public record EffectPackage<T> where T : EffectType
+    public struct EffectPackage<T> where T : EffectType
     {
         public AlieGroup AlieGroup;
         public int Amount;
@@ -18,8 +20,8 @@ namespace Project.Scripts.EffectSystem.Effects
             EffectType = effectType;
             Source = source;
         }
-        
-        public EffectPackage<T> Invert()
+
+        public readonly EffectPackage<T> Invert()
         {
             return new EffectPackage<T>(AlieGroup, -Amount, EffectType, Source);
         }

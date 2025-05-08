@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Project.Scripts.Spawning.Pooling;
 using Project.Scripts.WeaponSystem.Attack.Range;
 using Project.Scripts.WeaponSystem.Projectile;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Project.Scripts.WeaponSystem
     public class RangeWeapon : Weapon
     {
         [SerializeField] private RangeAttackBehaviour attackBehaviour;
-        [SerializeField] private GameObject projectilePrefab;
+        [SerializeField] private ProjectileData projectileData;
         [SerializeField] private int projectileCount = 1;
         [SerializeField] private Transform projectileSpawnPoint;
         [SerializeField] private bool isFlip;
@@ -28,10 +29,10 @@ namespace Project.Scripts.WeaponSystem
         {
             for (int i = 0; i < projectileCount; i++)
             {
-                GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position,
-                    transform.rotation);
-                IProjectile projectileComp = projectile.GetComponent<IProjectile>();
-                projectileComp.Setup(1, 10f, attackBehaviour.GetDirection(this) * FlipMultiplier);
+                IProjectile projectile = (IProjectile) GlobalPools.Instance.ProjectilePool.GetObject();
+                projectile.Activate(projectileData);
+                projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
+                projectile.SetDirection(attackBehaviour.GetDirection(this) * FlipMultiplier);
             }
 
             yield return new WaitForSeconds(interval);

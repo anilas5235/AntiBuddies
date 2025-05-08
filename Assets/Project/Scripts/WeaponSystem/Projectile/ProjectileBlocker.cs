@@ -7,7 +7,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
         private void OnTriggerEnter(Collider other)
         {
             IProjectile projectile = other.GetComponentInParent<IProjectile>();
-            projectile?.DestroyProjectile();
+            projectile?.Deactivate();
         }
     }
 }
