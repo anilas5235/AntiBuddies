@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  maxAcceleration: 1
+  maxAcceleration: 2
   moveSpeed:
     statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
 --- !u!114 &4307234338099689046
