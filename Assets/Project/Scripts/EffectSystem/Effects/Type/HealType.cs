@@ -6,7 +6,7 @@ namespace Project.Scripts.EffectSystem.Effects.Type
     public class HealType : EffectType
     {
         [SerializeField] private Color color = Color.green;
-        
+
         public Color Color => color;
     }
 }

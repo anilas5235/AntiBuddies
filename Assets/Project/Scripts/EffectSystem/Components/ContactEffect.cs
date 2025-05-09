@@ -1,39 +1,50 @@
-﻿using System.Collections.Generic;
-using Project.Scripts.EffectSystem.Effects;
+﻿using System;
+using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Effects.Data;
-using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
+using Project.Scripts.StatSystem;
 using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class ContactEffect<T> : ContactTrigger where T : EffectType
+    public class ContactEffect : ContactTrigger
     {
-        [SerializeField] private List<EffectData<T>> effectData;
-        [SerializeField] protected AlieGroup alieGroup;
+        [Header("Effects")] public EffectCollection<DamageType> damageEffects = new();
+        public EffectCollection<HealType> healEffects = new();
+        public EffectCollection<StatType> statEffects = new();
+
+        [Header("Buffs")] public BuffCollection<DamageType> damagingBuffs = new();
+        public BuffCollection<HealType> healingBuffs = new();
+        public BuffCollection<StatType> statBuffs = new();
+
+        [Header("Settings")] [SerializeField] protected AlieGroup alieGroup;
+        [SerializeField] private StatComponent statComponent;
+        public event Action OnEffectApplied;
 
         protected override void HandleContact(GameObject other)
         {
-            if (effectData.Count < 1) return;
+            if (!other || other == gameObject) return;
 
-            ITarget<EffectPackage<T>> target = other.GetComponent<ITarget<EffectPackage<T>>>();
-            foreach (EffectData<T> effect in effectData)
-            {
-                if (!effect) continue;
-                target.Apply(effect.GetPackage(gameObject, alieGroup));
-            }
+            int applies = 0;
+            if (damageEffects.ApplyEffects(other, alieGroup, statComponent, gameObject)) applies++;
+            if (healEffects.ApplyEffects(other, alieGroup, statComponent, gameObject)) applies++;
+            if (statEffects.ApplyEffects(other, alieGroup, statComponent, gameObject)) applies++;
+            if (damagingBuffs.ApplyBuffs(other, statComponent, gameObject)) applies++;
+            if (healingBuffs.ApplyBuffs(other, statComponent, gameObject)) applies++;
+            if (statBuffs.ApplyBuffs(other, statComponent, gameObject)) applies++;
+
+            if (applies > 0) OnEffectApplied?.Invoke();
         }
 
-        public void Add(EffectData<T> data)
+        public void ClearAll()
         {
-            if (!data) return;
-            effectData.Add(data);
-        }
-
-        public void Clear()
-        {
-            effectData.Clear();
+            damageEffects.Clear();
+            healEffects.Clear();
+            statEffects.Clear();
+            damagingBuffs.Clear();
+            healingBuffs.Clear();
+            statBuffs.Clear();
         }
     }
 }

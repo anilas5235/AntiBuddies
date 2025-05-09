@@ -826,8 +826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6c89679150a48c383f7706086a75c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statBuffData: {fileID: 11400000, guid: 2b1b060c30fa4064bb8254e94cc5cdf0, type: 2}
-  alieGroup: 2
 --- !u!60 &729443564
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1620,6 +1618,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4e16524cf1453abcea2a3395a0dbe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1684471479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1684471481}
+  - component: {fileID: 1684471480}
+  m_Layer: 0
+  m_Name: Pools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1684471480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684471479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9488f294c3459e8627a3e58f7244f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePool:
+    prefab: {fileID: 5625872554786471411, guid: b4550fe16fe5318459c654792c9ed459, type: 3}
+    initialObjCount: 10
+    objCount: 0
+--- !u!4 &1684471481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684471479}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1921992120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,6 +1886,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: defaultWeaponData.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: 'defaultWeaponData.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e02202dd553a52d499c7ceb5bdcb2a66, type: 2}
+    - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: 'defaultWeaponData.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 70f6dd9407021584d856891c43768010, type: 2}
     - target: {fileID: 8794693308980230054, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1898,3 +1956,4 @@ SceneRoots:
   - {fileID: 1202702149}
   - {fileID: 729443567}
   - {fileID: 376863656}
+  - {fileID: 1684471481}

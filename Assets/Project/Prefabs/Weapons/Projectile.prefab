@@ -73,10 +73,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2d35119fb048579f154b40fb0da760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
   speed: 10
   allowedContacts: 1
   rb: {fileID: 5197039053017321834}
-  contactEffect: {fileID: 8416121651978986974}
+  effectComponent: {fileID: 395669318181505856}
 --- !u!1 &8610606476552106314
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +89,7 @@ GameObject:
   - component: {fileID: 3949919441299309228}
   - component: {fileID: 1044720617701492151}
   - component: {fileID: 5503898783667051400}
-  - component: {fileID: 8416121651978986974}
+  - component: {fileID: 395669318181505856}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -202,7 +203,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.35
---- !u!114 &8416121651978986974
+--- !u!114 &395669318181505856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,8 +212,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8610606476552106314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613dea0ef8cb49b0bb0ee18937e844e8, type: 3}
+  m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackData: {fileID: 11400000, guid: 468b932b8e3c7f54aa2207cdcf7c3d71, type: 2}
-  alieGroup: 1
+  damageEffects:
+    data: []
+  healEffects:
+    data: []
+  statEffects:
+    data: []
+  damagingBuffs:
+    data: []
+  healingBuffs:
+    data: []
+  statBuffs:
+    data: []
+  alieGroup: 0
+  statComponent: {fileID: 0}

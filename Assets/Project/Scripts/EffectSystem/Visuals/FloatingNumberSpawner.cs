@@ -23,9 +23,9 @@ namespace Project.Scripts.EffectSystem.Visuals
             numberInstance.Setup(new FloatingNumberData(num, color, displayDuration));
         }
 
-        public void SpawnFloatingNumber(int num,AttackType attackType, GameObject source)
+        public void SpawnFloatingNumber(int num,DamageType damageType, GameObject source)
         {
-            SpawnFloatingNumber(num, attackType.Color, source);
+            SpawnFloatingNumber(num, damageType.Color, source);
         }
         
         public void SpawnFloatingNumber(int num,HealType healType ,GameObject source)

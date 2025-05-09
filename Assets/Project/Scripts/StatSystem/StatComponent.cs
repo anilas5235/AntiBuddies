@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
@@ -19,6 +21,11 @@ namespace Project.Scripts.StatSystem
         {
             InitStats();
             CallOnInitStats();
+        }
+
+        private void OnValidate()
+        {
+            InitStats();
         }
 
         private void InitStats()
@@ -67,7 +74,7 @@ namespace Project.Scripts.StatSystem
 
         public void ModifyStat(EffectPackage<StatType> statPackage)
         {
-            StatModification mod = new(statPackage.EffectType, statPackage.Amount, StatModification.Type.TempValue);
+            StatModification mod = new(statPackage.effectDef.EffectType, statPackage.effectDef.Amount, StatModification.Type.TempValue);
             ModifyStat(mod);
         }
     }

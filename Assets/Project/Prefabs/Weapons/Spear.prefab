@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6726787141778080833}
   - component: {fileID: 114367337451605291}
-  - component: {fileID: 7325067759018335804}
+  - component: {fileID: 7808569503964837938}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -219,7 +219,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &7325067759018335804
+--- !u!114 &7808569503964837938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,8 +228,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 7009135823704326037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613dea0ef8cb49b0bb0ee18937e844e8, type: 3}
+  m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackData: {fileID: 11400000, guid: 468b932b8e3c7f54aa2207cdcf7c3d71, type: 2}
-  alieGroup: 1
+  damageEffects:
+    data:
+    - amount: 5
+      effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
+  healEffects:
+    data: []
+  statEffects:
+    data: []
+  damagingBuffs:
+    data: []
+  healingBuffs:
+    data: []
+  statBuffs:
+    data: []
+  alieGroup: 0
+  statComponent: {fileID: 0}

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.StatSystem.Stats
 {
@@ -13,6 +11,8 @@ namespace Project.Scripts.StatSystem.Stats
 
         [SerializeField] private int statValue;
         [SerializeField] private int clampedValue;
+        
+        [SerializeField] private int percentMultiplier;
 
         [SerializeField] private int maxValue;
         [SerializeField] private int minValue;
@@ -38,7 +38,7 @@ namespace Project.Scripts.StatSystem.Stats
 
         private void UpdateValues()
         {
-            statValue = baseStatValue + tempStatBonus;
+            statValue = (baseStatValue + tempStatBonus) * percentMultiplier;
             clampedValue = Mathf.Clamp(statValue, MinValue, MaxValue);
             OnStatChange?.Invoke();
         }
@@ -46,8 +46,11 @@ namespace Project.Scripts.StatSystem.Stats
         public int TransformPositive(int baseValue) => Transform(Value, baseValue);
         public int TransformNegative(int baseValue) => Transform(-Value, baseValue);
 
-        private int Transform(int statVal, int baseValue) =>
-            statType.IsPercentage ? Mathf.RoundToInt((1 + statVal / 100f) * baseValue) : baseValue + statVal;
+        private int Transform(int statVal, int baseValue)
+        {
+            if (statVal == 0) return baseValue;
+            return statType.IsPercentage ? Mathf.RoundToInt((1 + statVal / 100f) * baseValue) : baseValue + statVal;
+        }
 
         public void ModifyStat(StatModification statModification)
         {

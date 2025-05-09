@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ec73bbb15d40daba6fc54be632b4ea, type: 3}
-  m_Name: SimplePysical
+  m_Script: {fileID: 11500000, guid: b574b39dae8348c4aa99d60a6ac5f19e, type: 3}
+  m_Name: ProjectileData
   m_EditorClassIdentifier: 
-  Amount: 1
-  Type: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
+  damageEffects:
+  - amount: 1
+    effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
+  speed: 10

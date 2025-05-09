@@ -2,7 +2,7 @@
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.BuffSystem.Components;
-using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
@@ -16,14 +16,14 @@ namespace Project.Scripts.BuffSystem.Buffs
         public BuffManager BuffManager { get; private set; }
         private IStackBehaviour StackBehaviour { get; }
         public BuffGroup BuffGroup { get; set; }
-        private ITarget<EffectPackage<T>> Target { get; }
+        private IPackageTarget<T> Target { get; }
         private readonly float _duration;
         private float _remainingDuration;
         private readonly EffectPackage<T> _effect;
         private readonly ITickBehaviour _tickBehavior;
         private readonly IExitBehaviour _exitBehavior;
 
-        public Buff(EffectPackage<T> effect, float duration, ITarget<EffectPackage<T>> target,
+        public Buff(EffectPackage<T> effect, float duration, IPackageTarget<T> target,
             IStackBehaviour stackBehaviour,
             ITickBehaviour tickBehavior, IExitBehaviour exitBehavior)
         {

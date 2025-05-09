@@ -186,7 +186,39 @@ MonoBehaviour:
   stats:
   - {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
   - {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
-  liveStats: []
+  liveStats:
+  - statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 10
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 10
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
 --- !u!114 &3032735940818429893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,11 +402,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 7691238699623227762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613dea0ef8cb49b0bb0ee18937e844e8, type: 3}
+  m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackData: {fileID: 11400000, guid: 468b932b8e3c7f54aa2207cdcf7c3d71, type: 2}
+  damageEffects:
+    data:
+    - amount: 1
+      effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
+  healEffects:
+    data: []
+  statEffects:
+    data: []
+  damagingBuffs:
+    data: []
+  healingBuffs:
+    data: []
+  statBuffs:
+    data: []
   alieGroup: 0
+  statComponent: {fileID: 7052312215536277138}
 --- !u!114 &5022748536055724361
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,23 +1,27 @@
-﻿using System;
-using Project.Scripts.BuffSystem.Components;
-using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects.Type;
+﻿using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.Spawning.Pooling;
-using Project.Scripts.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.WeaponSystem.Projectile
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Projectile : ContactTrigger, IProjectile
+    public class Projectile : MonoBehaviour, IProjectile
     {
         [SerializeField] private ProjectileData data;
         [SerializeField] private float speed = 10f;
         [SerializeField] private int allowedContacts = 1;
         [SerializeField] private Rigidbody2D rb;
-        
-        private Vector2 _direction;
+        [SerializeField] private ContactEffect effectComponent;
+
+        private void OnEnable()
+        {
+            effectComponent.OnEffectApplied += HandleContact;
+        }
+
+        private void OnDisable()
+        {
+            effectComponent.OnEffectApplied -= HandleContact;
+        }
 
         private void HandleContact()
         {
@@ -28,18 +32,6 @@ namespace Project.Scripts.WeaponSystem.Projectile
             }
         }
 
-        private void FixedUpdate()
-        {
-            rb.linearVelocity = _direction * speed;
-        }
-
-        public void Setup(int contacts, float projectileSpeed, Vector2 direction)
-        {
-            allowedContacts = contacts;
-            speed = projectileSpeed;
-            transform.right = direction;
-        }
-
         public GameObjectPool<ProjectileData> Pool { get; set; }
 
         public void SetTransform(Vector3 position, Quaternion rotation)
@@ -48,9 +40,14 @@ namespace Project.Scripts.WeaponSystem.Projectile
             transform.rotation = rotation;
         }
 
-        public void Activate(ProjectileData data)
+        public void Activate(ProjectileData projectileData)
         {
-            throw new System.NotImplementedException();
+            data = projectileData;
+            gameObject.SetActive(true);
+            speed = data.speed;
+            allowedContacts = 1;
+            effectComponent.ClearAll();
+            effectComponent.damageEffects.Add(projectileData.damageEffects);
         }
 
         public void Deactivate()
@@ -63,26 +60,19 @@ namespace Project.Scripts.WeaponSystem.Projectile
             rb.linearVelocity = Vector2.zero;
             allowedContacts = 1;
             speed = 0;
-            _direction = Vector2.zero;
         }
 
         public void ReturnToPool()
-        { 
+        {
             Pool.AddToPool(this);
         }
 
         public void SetDirection(Vector2 direction)
         {
-            _direction = direction.normalized;
-            if (direction != Vector2.zero)
-            {
-                transform.right = direction;
-            }
-        }
-
-        protected override void HandleContact(GameObject other)
-        {
-            throw new NotImplementedException();
+            if (direction == Vector2.zero) return;
+            direction = direction.normalized;
+            transform.right = direction;
+            rb.linearVelocity = direction * speed;
         }
     }
 }

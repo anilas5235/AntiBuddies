@@ -1,5 +1,5 @@
 using System;
-using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.EffectSystem.Visuals;
@@ -29,7 +29,7 @@ namespace Project.Scripts.EffectSystem.Components
             }
         }
 
-        public event Action<int, AttackType, GameObject> OnDamageReceived;
+        public event Action<int, DamageType, GameObject> OnDamageReceived;
         public UnityEvent onDamageReceived;
         public event Action OnDeath;
         public UnityEvent onDeath;
@@ -48,26 +48,13 @@ namespace Project.Scripts.EffectSystem.Components
             OnHealApplied -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
         }
 
-        public void ApplyAttack(EffectPackage<AttackType> package)
+        public void ApplyAttack(EffectPackage<DamageType> package)
         {
             int damage = package.Amount;
-            AttackType attackType = package.EffectType;
-
-            if (attackType.AffectedByFlatResistanceStat)
-            {
-                Stat flatModifier = _statComponent.GetStat(attackType.FlatResistanceStat);
-                if (flatModifier != null) damage = flatModifier.TransformNegative(damage);
-            }
-
-            if (attackType.AffectedByPercentResistance)
-            {
-                Stat percentageModifier = _statComponent.GetStat(attackType.PercentResistanceStat);
-                if (percentageModifier != null) damage = percentageModifier.TransformNegative(damage);
-            }
-
+            if (_statComponent) damage = package.EffectType.ResistanceDamage(damage, _statComponent);
             if (damage <= 0) return;
             CurrentHealth -= damage;
-            OnDamageReceived?.Invoke(damage, attackType, gameObject);
+            OnDamageReceived?.Invoke(damage, package.EffectType, gameObject);
             onDamageReceived?.Invoke();
         }
 
