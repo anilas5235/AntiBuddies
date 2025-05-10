@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b574b39dae8348c4aa99d60a6ac5f19e, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 64df4086854822d429399f7ba51782ff, type: 3}
+  scale: {x: 0.3, y: 0.3, z: 1}
   damageEffects:
   - amount: 1
     effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}

@@ -5,12 +5,10 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Interfaces
 {
-    public interface IDamageable
+    public interface IDamageable : ITarget<EffectPackage<DamageType>>
     {
         event Action<int,DamageType,GameObject> OnDamageReceived;
-        void ApplyAttack(EffectPackage<DamageType> package);
         bool IsDead();
-
         bool IsAlive();
 
         void Die();

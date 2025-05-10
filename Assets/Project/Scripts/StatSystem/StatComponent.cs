@@ -32,17 +32,8 @@ namespace Project.Scripts.StatSystem
         {
             foreach (StatType statType in stats)
             {
-                // Check if the statType is null
-                if (!statType)
+                if (!statType || _statDict.ContainsKey(statType))
                 {
-                    Debug.LogWarning("StatType is null, skipping.");
-                    continue;
-                }
-
-                // Check if the statType is already in the dictionary
-                if (_statDict.ContainsKey(statType))
-                {
-                    Debug.LogWarning($"Stat {statType} already exists in the dictionary.");
                     continue;
                 }
 

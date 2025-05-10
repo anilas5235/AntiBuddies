@@ -5,11 +5,10 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Interfaces
 {
-    public interface IHealable
+    public interface IHealable : ITarget<EffectPackage<HealType>>
     {
         event Action<int,HealType,GameObject> OnHealApplied;
         event Action OnDeath;
-        void ApplyHeal(EffectPackage<HealType> package);
         void FullHeal();
     }
 }

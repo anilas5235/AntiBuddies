@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using Project.Scripts.EffectSystem.Components;
+using Project.Scripts.StatSystem;
 using Project.Scripts.WeaponSystem.Slot;
 using Project.Scripts.WeaponSystem.Targeting;
 using UnityEngine;
@@ -11,22 +12,25 @@ namespace Project.Scripts.WeaponSystem
         [SerializeField] private float range = 10f;
         [SerializeField] private float attackInterval = 1f;
         [SerializeField] private TargetingBehaviour targetingBehaviour;
+        [SerializeField] protected AlieGroup alieGroup;
 
         private Transform _target;
         private WeaponSlot _weaponSlot;
-        protected Coroutine _coroutine;
+        protected Coroutine Coroutine;
+        protected StatComponent StatComponent;
         public float Range => range;
 
         protected virtual void OnEnable()
         {
             _weaponSlot = GetComponentInParent<WeaponSlot>();
+            StatComponent = GetComponentInParent<StatComponent>();
         }
 
 
         public void Attack()
         {
-            if (_coroutine != null) return;
-            _coroutine = StartCoroutine(AttackRoutine(attackInterval));
+            if (Coroutine != null) return;
+            Coroutine = StartCoroutine(AttackRoutine(attackInterval));
         }
 
 

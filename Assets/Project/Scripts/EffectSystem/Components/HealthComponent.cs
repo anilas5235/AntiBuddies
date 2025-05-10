@@ -48,16 +48,6 @@ namespace Project.Scripts.EffectSystem.Components
             OnHealApplied -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
         }
 
-        public void ApplyAttack(EffectPackage<DamageType> package)
-        {
-            int damage = package.Amount;
-            if (_statComponent) damage = package.EffectType.ReceptionScale(damage, _statComponent);
-            if (damage <= 0) return;
-            CurrentHealth -= damage;
-            OnDamageReceived?.Invoke(damage, package.EffectType, gameObject);
-            onDamageReceived?.Invoke();
-        }
-
         public bool IsDead() => CurrentHealth <= 0;
         public bool IsAlive() => !IsDead();
 
@@ -68,7 +58,25 @@ namespace Project.Scripts.EffectSystem.Components
             onDeath?.Invoke();
         }
 
-        public void ApplyHeal(EffectPackage<HealType> package)
+        public void FullHeal() => CurrentHealth = MaxHealth;
+
+        public void OnStatInit(StatComponent statComponent)
+        {
+            _statComponent = statComponent;
+            maxHpStat.GetStat(statComponent);
+        }
+
+        public void Apply(EffectPackage<DamageType> package)
+        {
+            int damage = package.Amount;
+            if (_statComponent) damage = package.EffectType.ReceptionScale(damage, _statComponent);
+            if (damage <= 0) return;
+            CurrentHealth -= damage;
+            OnDamageReceived?.Invoke(damage, package.EffectType, gameObject);
+            onDamageReceived?.Invoke();
+        }
+
+        public void Apply(EffectPackage<HealType> package)
         {
             int amount = package.Amount;
             if (_statComponent) amount = package.EffectType.ReceptionScale(amount, _statComponent);
@@ -76,14 +84,6 @@ namespace Project.Scripts.EffectSystem.Components
             int diff = MaxHealth - CurrentHealth;
             CurrentHealth += amount;
             OnHealApplied?.Invoke(diff < amount ? diff : amount, package.EffectType, gameObject);
-        }
-
-        public void FullHeal() => CurrentHealth = MaxHealth;
-
-        public void OnStatInit(StatComponent statComponent)
-        {
-            _statComponent = statComponent;
-            maxHpStat.GetStat(statComponent);
         }
     }
 }

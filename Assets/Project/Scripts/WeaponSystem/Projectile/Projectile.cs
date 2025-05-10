@@ -10,6 +10,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
         [SerializeField] private ProjectileData data;
         [SerializeField] private float speed = 10f;
         [SerializeField] private int allowedContacts = 1;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private ContactEffect effectComponent;
 
@@ -28,7 +29,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
             allowedContacts--;
             if (allowedContacts <= 0)
             {
-                Deactivate();
+                ReturnToPool();
             }
         }
 
@@ -46,6 +47,8 @@ namespace Project.Scripts.WeaponSystem.Projectile
             gameObject.SetActive(true);
             speed = data.speed;
             allowedContacts = 1;
+            spriteRenderer.sprite = data.sprite;
+            transform.localScale = data.scale;
             effectComponent.ClearAll();
             effectComponent.damageEffects.Add(projectileData.damageEffects);
         }
@@ -73,6 +76,11 @@ namespace Project.Scripts.WeaponSystem.Projectile
             direction = direction.normalized;
             transform.right = direction;
             rb.linearVelocity = direction * speed;
+        }
+
+        public void SetAlieGroup(AlieGroup alieGroup)
+        {
+            effectComponent.alieGroup = alieGroup;
         }
     }
 }

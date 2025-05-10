@@ -48,6 +48,7 @@ MonoBehaviour:
   range: 10
   attackInterval: 0.5
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
+  alieGroup: 1
   attackBehaviour: {fileID: 11400000, guid: 17c118038b4068049a754033d6e0ade4, type: 2}
   projectileData: {fileID: 11400000, guid: 14a307630c66be44ba1c30e7975bf775, type: 2}
   projectileCount: 1

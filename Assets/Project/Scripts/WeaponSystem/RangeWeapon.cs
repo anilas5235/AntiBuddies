@@ -33,10 +33,11 @@ namespace Project.Scripts.WeaponSystem
                 projectile.Activate(projectileData);
                 projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
                 projectile.SetDirection(attackBehaviour.GetDirection(this) * FlipMultiplier);
+                projectile.SetAlieGroup(alieGroup);
             }
 
             yield return new WaitForSeconds(interval);
-            _coroutine = null;
+            Coroutine = null;
         }
     }
 }

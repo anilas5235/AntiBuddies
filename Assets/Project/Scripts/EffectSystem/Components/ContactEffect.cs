@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Type;
@@ -18,13 +19,17 @@ namespace Project.Scripts.EffectSystem.Components
         public BuffCollection<HealType> healingBuffs = new();
         public BuffCollection<StatType> statBuffs = new();
 
-        [Header("Settings")] [SerializeField] protected AlieGroup alieGroup;
-        [SerializeField] private StatComponent statComponent;
+        [Header("Settings")] public AlieGroup alieGroup;
+        public StatComponent statComponent;
         public event Action OnEffectApplied;
+        
+        private readonly List<GameObject> _contacts = new();
 
         protected override void HandleContact(GameObject other)
         {
             if (!other || other == gameObject) return;
+            if (_contacts.Contains(other)) return;
+            _contacts.Add(other);
 
             int applies = 0;
             if (damageEffects.ApplyEffects(other, alieGroup, statComponent, gameObject)) applies++;
@@ -45,6 +50,9 @@ namespace Project.Scripts.EffectSystem.Components
             damagingBuffs.Clear();
             healingBuffs.Clear();
             statBuffs.Clear();
+            ClearContacts();
         }
+        
+        public void ClearContacts() => _contacts.Clear();
     }
 }
