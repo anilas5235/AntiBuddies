@@ -21,15 +21,19 @@ namespace Project.Scripts.EffectSystem.Components
 
         [Header("Settings")] public AlieGroup alieGroup;
         public StatComponent statComponent;
+        [SerializeField] private bool applyOnlyOncePerObject = true;
         public event Action OnEffectApplied;
-        
+
         private readonly List<GameObject> _contacts = new();
 
         protected override void HandleContact(GameObject other)
         {
             if (!other || other == gameObject) return;
-            if (_contacts.Contains(other)) return;
-            _contacts.Add(other);
+            if (applyOnlyOncePerObject)
+            {
+                if (_contacts.Contains(other)) return;
+                _contacts.Add(other);
+            }
 
             int applies = 0;
             if (damageEffects.ApplyEffects(other, alieGroup, statComponent, gameObject)) applies++;
@@ -52,7 +56,7 @@ namespace Project.Scripts.EffectSystem.Components
             statBuffs.Clear();
             ClearContacts();
         }
-        
+
         public void ClearContacts() => _contacts.Clear();
     }
 }

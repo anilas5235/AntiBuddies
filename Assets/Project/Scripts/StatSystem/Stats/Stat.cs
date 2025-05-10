@@ -19,6 +19,8 @@ namespace Project.Scripts.StatSystem.Stats
 
         [SerializeField] private int baseStatValue;
         [SerializeField] private int tempStatBonus;
+        
+        public StatType StatType => statType;
 
         public Stat(StatType statType, int statValue = 0)
         {
@@ -29,16 +31,22 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValues();
         }
 
-        public float AsFloatPercentage => 1 + Value / 100f;
+        public float AsFloatPercentage => MakeBonusMultiplier(Value);
         public int Value => clampedValue;
         public int FreeValue => statValue;
         public int MaxValue => maxValue;
         public int MinValue => minValue;
         public event Action OnStatChange;
+        
+        private float MakeBonusMultiplier(int multiplier)
+        {
+            if (multiplier == 0) return 1;
+            return 1 + multiplier / 100f;
+        }
 
         private void UpdateValues()
         {
-            statValue = (baseStatValue + tempStatBonus) * percentMultiplier;
+            statValue = Mathf.RoundToInt((baseStatValue + tempStatBonus) * MakeBonusMultiplier(percentMultiplier));
             clampedValue = Mathf.Clamp(statValue, MinValue, MaxValue);
             OnStatChange?.Invoke();
         }

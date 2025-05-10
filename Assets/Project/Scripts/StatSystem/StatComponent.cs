@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Type;
@@ -19,32 +20,43 @@ namespace Project.Scripts.StatSystem
 
         private void Awake()
         {
-            InitStats();
             CallOnInitStats();
         }
 
         private void OnValidate()
         {
-            InitStats();
+            CheckLiveStats();
+        }
+        
+        private void CheckLiveStats()
+        {
+            foreach (StatType statType in stats)
+            {
+                if (liveStats.FirstOrDefault(s => s.StatType == statType) != null) continue;
+                
+                Stat stat = new(statType, defaultStats.GetDefault(statType));
+                liveStats.Add(stat);
+            }
+
+            while (liveStats.Count > stats.Count)
+            {
+                liveStats.RemoveAt(liveStats.Count - 1);
+            }
         }
 
         private void InitStats()
         {
-            foreach (StatType statType in stats)
-            {
-                if (!statType || _statDict.ContainsKey(statType))
-                {
-                    continue;
-                }
+            CheckLiveStats();
 
-                Stat stat = new(statType, defaultStats.GetDefault(statType));
-                liveStats.Add(stat);
-                _statDict.Add(statType, stat);
+            foreach (Stat stat in liveStats)
+            {
+                _statDict.TryAdd(stat.StatType, stat);
             }
         }
 
         private void CallOnInitStats()
         {
+            InitStats();
             INeedStatComponent[] comps = GetComponentsInChildren<INeedStatComponent>();
             foreach (INeedStatComponent component in comps)
             {

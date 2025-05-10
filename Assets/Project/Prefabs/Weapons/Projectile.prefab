@@ -61,7 +61,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &3148985571149448578
 MonoBehaviour:
@@ -107,6 +107,7 @@ MonoBehaviour:
     data: []
   alieGroup: 0
   statComponent: {fileID: 0}
+  applyOnlyOncePerObject: 1
 --- !u!212 &7101522813916109232
 SpriteRenderer:
   m_ObjectHideFlags: 0

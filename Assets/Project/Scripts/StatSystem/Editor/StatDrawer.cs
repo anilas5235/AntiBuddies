@@ -14,6 +14,7 @@ namespace Project.Scripts.StatSystem.Editor
             SerializedProperty statType = property.FindPropertyRelative("statType");
             SerializedProperty statValue = property.FindPropertyRelative("statValue");
             SerializedProperty clampedValue = property.FindPropertyRelative("clampedValue");
+            SerializedProperty percentMultiplier = property.FindPropertyRelative("percentMultiplier");
             SerializedProperty maxValue = property.FindPropertyRelative("maxValue");
             SerializedProperty minValue = property.FindPropertyRelative("minValue");
             SerializedProperty baseStatValue = property.FindPropertyRelative("baseStatValue");
@@ -34,6 +35,9 @@ namespace Project.Scripts.StatSystem.Editor
                 {
                     EditorGUILayout.BeginVertical("box");
                     {
+                        EditorGUILayout.PropertyField(percentMultiplier, new GUIContent("%Multiplier",
+                            "multiplier for the baseStat value to calculate the stat value"));
+
                         EditorGUILayout.PropertyField(statValue);
                         EditorGUILayout.PropertyField(maxValue);
                         EditorGUILayout.PropertyField(minValue);
