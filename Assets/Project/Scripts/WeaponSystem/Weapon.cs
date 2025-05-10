@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.WeaponSystem.Slot;
 using Project.Scripts.WeaponSystem.Targeting;
 using UnityEngine;
@@ -9,35 +10,43 @@ namespace Project.Scripts.WeaponSystem
 {
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
-        [SerializeField] private float range = 10f;
-        [SerializeField] private float attackInterval = 1f;
         [SerializeField] private TargetingBehaviour targetingBehaviour;
         [SerializeField] protected AlieGroup alieGroup;
+
+        [SerializeField] private ValueStatRef attackSpeedStat;
+        [SerializeField] private ValueStatRef rangeStat;
 
         private Transform _target;
         private WeaponSlot _weaponSlot;
         protected Coroutine Coroutine;
         protected StatComponent StatComponent;
-        public float Range => range;
+        public float Range => rangeStat.CurrValue;
+        public float AttackSpeed => attackSpeedStat.CurrValue;
 
         protected virtual void OnEnable()
         {
             _weaponSlot = GetComponentInParent<WeaponSlot>();
             StatComponent = GetComponentInParent<StatComponent>();
+            
+            attackSpeedStat.Init(StatComponent);
+            rangeStat.Init(StatComponent);
         }
-
 
         public void Attack()
         {
             if (Coroutine != null) return;
-            Coroutine = StartCoroutine(AttackRoutine(attackInterval));
+            Coroutine = StartCoroutine(AttackRoutine(CalcAttackInterval()));
         }
-
+        
+        protected virtual float CalcAttackInterval()
+        {
+            return attackSpeedStat.CurrValue;
+        }
 
         private void FixedUpdate()
         {
-            if (_target && Vector3.Distance(transform.position, _target.position) > range) _target = null;
-            _target ??= targetingBehaviour.FindTarget(transform, range);
+            if (_target && Vector3.Distance(transform.position, _target.position) > Range) _target = null;
+            _target ??= targetingBehaviour.FindTarget(transform, Range);
             if (!_target) return;
             UpdateRotation();
             Attack();

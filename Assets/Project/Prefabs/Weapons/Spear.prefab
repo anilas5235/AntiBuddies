@@ -133,10 +133,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77bfdd0688de4aa2baa0caac4e263ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 1.5
-  attackInterval: 1
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
   alieGroup: 1
+  attackSpeedStat:
+    statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    baseValue: 1
+    currValue: 0
+    positiveTransform: 0
+  rangeStat:
+    statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
+    baseValue: 1.5
+    currValue: 0
+    positiveTransform: 1
   meleeAttackBehaviour: {fileID: 11400000, guid: 98facdf158d49e74c81a694f09b1ee9f, type: 2}
   weaponColliders:
   - {fileID: 114367337451605291}
@@ -249,3 +257,4 @@ MonoBehaviour:
     data: []
   alieGroup: 1
   statComponent: {fileID: 0}
+  applyOnlyOncePerObject: 1

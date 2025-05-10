@@ -3,7 +3,9 @@
     public interface IStat
     {
         public int Value { get;}
-        int TransformPositive(int baseValue);
-        int TransformNegative(int baseValue);
+        public int TransformPositive(int baseValue);
+        public int TransformNegative(int baseValue);
+        public float TransformPositive(float baseValue);
+        public float TransformNegative(float baseValue);
     }
 }

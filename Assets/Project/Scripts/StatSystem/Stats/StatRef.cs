@@ -8,15 +8,15 @@ namespace Project.Scripts.StatSystem.Stats
     public class StatRef
     {
         [SerializeField] private StatType statType;
-        private Stat _stat;
         public StatType StatType => statType;
-        public Stat Stat => _stat;
-        
-        public void GetStat(StatComponent statComponent)
+        public Stat Stat { get; private set; }
+
+        public virtual void Init(StatComponent statComponent)
         {
             if (!statComponent) return;
-            _stat = statComponent.GetStat(statType);
-            if (_stat == null)
+            if(!statType) throw new ArgumentNullException(nameof(statType), "cannot be null.");
+            Stat = statComponent.GetStat(statType);
+            if (Stat == null)
             {
                 Debug.LogWarning($"Stat {statType} not found in StatComponent.");
             }

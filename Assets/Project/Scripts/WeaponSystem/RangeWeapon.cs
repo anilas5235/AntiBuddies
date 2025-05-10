@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Project.Scripts.Spawning.Pooling;
+using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.WeaponSystem.Attack.Range;
 using Project.Scripts.WeaponSystem.Projectile;
 using UnityEngine;
@@ -32,8 +33,8 @@ namespace Project.Scripts.WeaponSystem
                 IProjectile projectile = (IProjectile) GlobalPools.Instance.ProjectilePool.GetObject();
                 projectile.Activate(projectileData);
                 projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
-                projectile.SetDirection(attackBehaviour.GetDirection(this) * FlipMultiplier);
-                projectile.SetAlieGroup(alieGroup);
+                projectile.ProjectileSetUp(attackBehaviour.GetDirection(this) * FlipMultiplier,
+                    alieGroup, StatComponent, projectileData.contacts);
             }
 
             yield return new WaitForSeconds(interval);

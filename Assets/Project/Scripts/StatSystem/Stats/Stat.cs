@@ -11,7 +11,7 @@ namespace Project.Scripts.StatSystem.Stats
 
         [SerializeField] private int statValue;
         [SerializeField] private int clampedValue;
-        
+
         [SerializeField] private int percentMultiplier;
 
         [SerializeField] private int maxValue;
@@ -19,7 +19,7 @@ namespace Project.Scripts.StatSystem.Stats
 
         [SerializeField] private int baseStatValue;
         [SerializeField] private int tempStatBonus;
-        
+
         public StatType StatType => statType;
 
         public Stat(StatType statType, int statValue = 0)
@@ -31,33 +31,34 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValues();
         }
 
-        public float AsFloatPercentage => MakeBonusMultiplier(Value);
         public int Value => clampedValue;
         public int FreeValue => statValue;
         public int MaxValue => maxValue;
         public int MinValue => minValue;
         public event Action OnStatChange;
-        
+
         private float MakeBonusMultiplier(int multiplier)
         {
-            if (multiplier == 0) return 1;
-            return 1 + multiplier / 100f;
+            if (multiplier < 0) return 1f / MakeBonusMultiplier(Mathf.Abs(multiplier));
+            return 1f + (multiplier / 100f);
         }
 
-        private void UpdateValues()
+        public void UpdateValues()
         {
             statValue = Mathf.RoundToInt((baseStatValue + tempStatBonus) * MakeBonusMultiplier(percentMultiplier));
             clampedValue = Mathf.Clamp(statValue, MinValue, MaxValue);
             OnStatChange?.Invoke();
         }
 
-        public int TransformPositive(int baseValue) => Transform(Value, baseValue);
-        public int TransformNegative(int baseValue) => Transform(-Value, baseValue);
+        public int TransformPositive(int baseValue) => Mathf.RoundToInt(TransformPositive((float)baseValue));
+        public int TransformNegative(int baseValue) => Mathf.RoundToInt(TransformNegative((float)baseValue));
+        public float TransformPositive(float baseValue) => Transform(Value, baseValue);
+        public float TransformNegative(float baseValue) => Transform(-Value, baseValue);
 
-        private int Transform(int statVal, int baseValue)
+        private float Transform(int statVal, float baseValue)
         {
             if (statVal == 0) return baseValue;
-            return statType.IsPercentage ? Mathf.RoundToInt((1 + statVal / 100f) * baseValue) : baseValue + statVal;
+            return statType.IsPercentage ? baseValue * MakeBonusMultiplier(statVal) : baseValue + statVal;
         }
 
         public void ModifyStat(StatModification statModification)
@@ -80,6 +81,16 @@ namespace Project.Scripts.StatSystem.Stats
                     break;
             }
 
+            UpdateValues();
+        }
+
+        public void Reset()
+        {
+            baseStatValue = 0;
+            tempStatBonus = 0;
+            percentMultiplier = 0;
+            maxValue = statType.MaxValue;
+            minValue = statType.MinValue;
             UpdateValues();
         }
     }

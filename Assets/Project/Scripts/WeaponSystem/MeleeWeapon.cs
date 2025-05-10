@@ -39,6 +39,11 @@ namespace Project.Scripts.WeaponSystem
             return base.CalculateAngleToTarget() + AngleOffset;
         }
 
+        protected override float CalcAttackInterval()
+        {
+            return AttackSpeed + Range/10f;
+        }
+
         protected override IEnumerator AttackRoutine(float interval)
         {
             float elapsedTime = 0f;

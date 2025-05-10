@@ -1,4 +1,5 @@
-﻿using Project.Scripts.StatSystem.Stats;
+﻿using System.Collections.Generic;
+using Project.Scripts.StatSystem.Stats;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +8,12 @@ namespace Project.Scripts.StatSystem.Editor
     [CustomPropertyDrawer(typeof(Stat))]
     public class StatDrawer : PropertyDrawer
     {
-        private bool foldout;
+        private static readonly Dictionary<string, bool> FoldoutStates = new();
+
+        private const int Padding = 2;
+
+        private static readonly float Spacing =
+            EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -20,34 +26,71 @@ namespace Project.Scripts.StatSystem.Editor
             SerializedProperty baseStatValue = property.FindPropertyRelative("baseStatValue");
             SerializedProperty tempStatBonus = property.FindPropertyRelative("tempStatBonus");
 
-            EditorGUILayout.BeginVertical("box");
+            string propertyPath = property.propertyPath; // Unique identifier for the property
+            FoldoutStates.TryAdd(propertyPath, false);
+
+            // Calculate the total height of the property
+            float totalHeight = GetPropertyHeight(property, label);
+            GUI.Box(new Rect(position.x, position.y, position.width, totalHeight), GUIContent.none); // Draw the box
+
+            position.y += Padding;
+            position.x += Padding; // Add padding
+            position.width -= Padding * 2; // Adjust width for padding
+            position.height = EditorGUIUtility.singleLineHeight;
+
+            // Draw foldout and clampedValue on the same line
+            Rect foldoutRect = new(position.x, position.y, position.width * 0.7f, position.height);
+            Rect clampedValueRect = new(position.x + position.width * 0.72f, position.y, position.width * 0.28f,
+                position.height);
+
+            FoldoutStates[propertyPath] = EditorGUI.Foldout(foldoutRect, FoldoutStates[propertyPath],
+                statType.objectReferenceValue ? statType.objectReferenceValue.name : "Stat", true);
+
+            GUI.enabled = false; // Disable editing for clampedValue
+            EditorGUI.PropertyField(clampedValueRect, clampedValue, GUIContent.none);
+            GUI.enabled = true; // Re-enable editing for other fields
+
+            if (FoldoutStates[propertyPath])
             {
-                EditorGUILayout.BeginHorizontal();
-                {
-                    EditorGUILayout.LabelField(new GUIContent(statType.objectReferenceValue.name, "Stat Type"),
-                        EditorStyles.boldLabel);
-                    EditorGUILayout.PropertyField(clampedValue, GUIContent.none);
-                }
-                EditorGUILayout.EndHorizontal();
+                EditorGUI.indentLevel++;
+                position.y += Spacing;
 
-                foldout = EditorGUILayout.Foldout(foldout, "Details");
-                if (foldout)
-                {
-                    EditorGUILayout.BeginVertical("box");
-                    {
-                        EditorGUILayout.PropertyField(percentMultiplier, new GUIContent("%Multiplier",
-                            "multiplier for the baseStat value to calculate the stat value"));
+                GUI.enabled = false;
+                EditorGUI.PropertyField(position, statValue);
+                GUI.enabled = true;
 
-                        EditorGUILayout.PropertyField(statValue);
-                        EditorGUILayout.PropertyField(maxValue);
-                        EditorGUILayout.PropertyField(minValue);
-                        EditorGUILayout.PropertyField(baseStatValue);
-                        EditorGUILayout.PropertyField(tempStatBonus);
-                    }
-                    EditorGUILayout.EndVertical();
-                }
+                position.y += Spacing;
+
+                EditorGUI.PropertyField(position, percentMultiplier, new GUIContent("% Multiplier"));
+                position.y += Spacing;
+
+                EditorGUI.PropertyField(position, maxValue);
+                position.y += Spacing;
+
+                EditorGUI.PropertyField(position, minValue);
+                position.y += Spacing;
+
+                EditorGUI.PropertyField(position, baseStatValue);
+                position.y += Spacing;
+
+                EditorGUI.PropertyField(position, tempStatBonus);
+                position.y += Spacing;
+
+                EditorGUI.indentLevel--;
             }
-            EditorGUILayout.EndVertical();
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            string propertyPath = property.propertyPath;
+            bool isFoldout = FoldoutStates.ContainsKey(propertyPath) && FoldoutStates[propertyPath];
+            float height = EditorGUIUtility.singleLineHeight; // For the foldout and clampedValue
+            if (isFoldout)
+            {
+                height += Spacing * 6; // For the remaining fields
+            }
+
+            return height + Padding * 2;
         }
     }
 }

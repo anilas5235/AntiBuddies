@@ -1,5 +1,6 @@
 ﻿using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.Spawning.Pooling;
+using Project.Scripts.StatSystem;
 using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem.Projectile
@@ -61,8 +62,9 @@ namespace Project.Scripts.WeaponSystem.Projectile
         public void Reset()
         {
             rb.linearVelocity = Vector2.zero;
-            allowedContacts = 1;
             speed = 0;
+            effectComponent.ClearAll();
+            effectComponent.statComponent = null;
         }
 
         public void ReturnToPool()
@@ -70,17 +72,15 @@ namespace Project.Scripts.WeaponSystem.Projectile
             Pool.AddToPool(this);
         }
 
-        public void SetDirection(Vector2 direction)
+        public void ProjectileSetUp(Vector2 direction, AlieGroup alieGroup, StatComponent statComponent, int contacts)
         {
             if (direction == Vector2.zero) return;
             direction = direction.normalized;
             transform.right = direction;
             rb.linearVelocity = direction * speed;
-        }
-
-        public void SetAlieGroup(AlieGroup alieGroup)
-        {
             effectComponent.alieGroup = alieGroup;
+            effectComponent.statComponent = statComponent;
+            allowedContacts = contacts;
         }
     }
 }

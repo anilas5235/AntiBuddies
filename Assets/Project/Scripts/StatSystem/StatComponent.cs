@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem.Stats;
@@ -23,17 +21,12 @@ namespace Project.Scripts.StatSystem
             CallOnInitStats();
         }
 
-        private void OnValidate()
-        {
-            CheckLiveStats();
-        }
-        
-        private void CheckLiveStats()
+        public void CheckLiveStats()
         {
             foreach (StatType statType in stats)
             {
                 if (liveStats.FirstOrDefault(s => s.StatType == statType) != null) continue;
-                
+
                 Stat stat = new(statType, defaultStats.GetDefault(statType));
                 liveStats.Add(stat);
             }
@@ -77,8 +70,25 @@ namespace Project.Scripts.StatSystem
 
         public void ModifyStat(EffectPackage<StatType> statPackage)
         {
-            StatModification mod = new(statPackage.effectDef.EffectType, statPackage.effectDef.Amount, StatModification.Type.TempValue);
+            StatModification mod = new(statPackage.effectDef.EffectType, statPackage.effectDef.Amount,
+                StatModification.Type.TempValue);
             ModifyStat(mod);
+        }
+
+        public void ResetLiveStats()
+        {
+            foreach (Stat liveStat in liveStats)
+            {
+                liveStat.Reset();
+            }
+        }
+
+        public void ForceStatsToUpdate()
+        {
+            foreach (Stat liveStat in liveStats)
+            {
+                liveStat.UpdateValues();
+            }
         }
     }
 }

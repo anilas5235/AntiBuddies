@@ -63,7 +63,7 @@ namespace Project.Scripts.EffectSystem.Components
         public void OnStatInit(StatComponent statComponent)
         {
             _statComponent = statComponent;
-            maxHpStat.GetStat(statComponent);
+            maxHpStat.Init(statComponent);
         }
 
         public void Apply(EffectPackage<DamageType> package)

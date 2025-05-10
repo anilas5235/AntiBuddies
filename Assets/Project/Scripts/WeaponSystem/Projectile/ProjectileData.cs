@@ -12,5 +12,6 @@ namespace Project.Scripts.WeaponSystem.Projectile
         public Vector3 scale = Vector3.one;
         public List<EffectDef<DamageType>> damageEffects;
         public float speed;
+        public int contacts = 1;
     }
 }

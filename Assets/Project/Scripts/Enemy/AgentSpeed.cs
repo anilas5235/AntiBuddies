@@ -8,15 +8,14 @@ namespace Project.Scripts.Enemy
 {
     public class AgentSpeed : MonoBehaviour, INeedStatComponent
     {
-        [SerializeField] private float baseSpeed = 2f;
-        [SerializeField] private StatRef speedStat;
+        [SerializeField] private ValueStatRef speedStat;
 
         [SerializeField] private BehaviorGraphAgent behaviorGraphAgent;
         [SerializeField] private NavMeshAgent navMeshAgent;
 
         public void OnStatInit(StatComponent statComponent)
         {
-            speedStat.GetStat(statComponent);
+            speedStat.Init(statComponent);
         }
 
         private void OnEnable()
@@ -27,9 +26,8 @@ namespace Project.Scripts.Enemy
 
         private void OnSpeedStatChange()
         {
-            float speed = speedStat.Stat.AsFloatPercentage * baseSpeed;
-            behaviorGraphAgent.SetVariableValue("Speed",speed);
-            navMeshAgent.speed = speed;
+            behaviorGraphAgent.SetVariableValue("Speed",speedStat.CurrValue);
+            navMeshAgent.speed = speedStat.CurrValue;
         }
     }
 }

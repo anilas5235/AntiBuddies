@@ -1899,9 +1899,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2116360303484522427, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: maxAcceleration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: liveStats.Array.size
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: liveStats.Array.data[8].statValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: liveStats.Array.data[1].clampedValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: liveStats.Array.data[8].clampedValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: liveStats.Array.data[11].clampedValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: liveStats.Array.data[8].baseStatValue
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: defaultWeaponData.Array.size
