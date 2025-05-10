@@ -8,11 +8,14 @@ namespace Project.Scripts.EffectSystem.Effects.Type
         [SerializeField] private string description = "no description jet";
         public string Name => name;
         public string Description => description;
-        
-        [SerializeField] private StatType scaleStat;
-        public int Scale(int amount, StatComponent statComponent)
+
+        public virtual int CreationScale(int amount, StatComponent statComponent)
         {
-            if (scaleStat) amount = statComponent.GetStat(scaleStat).TransformPositive(amount);
+            return amount;
+        }
+        
+        public virtual int ReceptionScale(int amount, StatComponent statComponent)
+        {
             return amount;
         }
     }

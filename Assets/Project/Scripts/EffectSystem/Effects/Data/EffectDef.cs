@@ -25,7 +25,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data
             int finalAmount = amount;
             if (statComponent)
             {
-                finalAmount = effectType.Scale(amount, statComponent);
+                finalAmount = effectType.CreationScale(amount, statComponent);
             }
             return new EffectPackage<T>(finalAmount, effectType, source);
         }
