@@ -17,4 +17,6 @@ MonoBehaviour:
   tickBehavior: 0
   exitBehavior: 1
   ticksPerSecond: 0
-  effect: {fileID: 11400000, guid: c790a40a9dd0b2c429636cba47aaf398, type: 2}
+  effect:
+    amount: -30
+    effectType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
