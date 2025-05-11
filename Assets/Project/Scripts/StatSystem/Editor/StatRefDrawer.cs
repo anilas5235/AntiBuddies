@@ -16,10 +16,21 @@ namespace Project.Scripts.StatSystem.Editor
         {
             SerializedProperty statType = property.FindPropertyRelative("statType");
             
-            EditorGUILayout.BeginHorizontal("box");
+            EditorGUILayout.BeginVertical("box");
+            EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(label);
             EditorGUILayout.PropertyField(statType, GUIContent.none);
             EditorGUILayout.EndHorizontal();
+            if (!statType.objectReferenceValue)
+            {
+                EditorGUILayout.HelpBox("StatType cannot be null.", MessageType.Error);
+            }
+            ChildContent(position, property);
+            EditorGUILayout.EndVertical();
+        }
+
+        protected virtual void ChildContent(Rect position, SerializedProperty property)
+        {
         }
     }
 }

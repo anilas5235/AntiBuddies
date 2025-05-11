@@ -14,7 +14,7 @@ namespace Project.Scripts.StatSystem
         [SerializeField] private List<StatType> stats;
         [SerializeField] private List<Stat> liveStats;
 
-        private readonly Dictionary<StatType, Stat> _statDict = new();
+        private readonly Dictionary<StatType, IStat> _statDict = new();
 
         private void Awake()
         {
@@ -57,22 +57,15 @@ namespace Project.Scripts.StatSystem
             }
         }
 
-        public Stat GetStat(StatType statType)
+        public IStat GetStat(StatType statType)
         {
             return _statDict.GetValueOrDefault(statType);
         }
 
-        public void ModifyStat(StatModification statModification)
-        {
-            Stat stat = GetStat(statModification.StatType);
-            stat?.ModifyStat(statModification);
-        }
-
         public void ModifyStat(EffectPackage<StatType> statPackage)
         {
-            StatModification mod = new(statPackage.effectDef.EffectType, statPackage.effectDef.Amount,
-                StatModification.Type.TempValue);
-            ModifyStat(mod);
+            IStat stat = GetStat(statPackage.EffectType);
+            stat?.ModifyStat(statPackage);
         }
 
         public void ResetLiveStats()
@@ -83,12 +76,18 @@ namespace Project.Scripts.StatSystem
             }
         }
 
-        public void ForceStatsToUpdate()
+        private void ForceStatsToUpdate()
         {
             foreach (Stat liveStat in liveStats)
             {
                 liveStat.UpdateValues();
             }
+        }
+
+
+        private void OnValidate()
+        {
+            ForceStatsToUpdate();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Project.Scripts.StatSystem.Stats
     {
         [SerializeField] private StatType statType;
         public StatType StatType => statType;
-        public Stat Stat { get; private set; }
+        public IStat Stat { get; private set; }
 
         public virtual void Init(StatComponent statComponent)
         {
@@ -21,5 +21,7 @@ namespace Project.Scripts.StatSystem.Stats
                 Debug.LogWarning($"Stat {statType} not found in StatComponent.");
             }
         }
+        
+        
     }
 }

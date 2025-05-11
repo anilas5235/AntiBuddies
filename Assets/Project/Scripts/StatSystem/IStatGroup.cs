@@ -5,6 +5,6 @@ namespace Project.Scripts.StatSystem
 {
     public interface IStatGroup
     {
-        Stat GetStat(StatType statType);
+        IStat GetStat(StatType statType);
     }
 }

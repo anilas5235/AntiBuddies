@@ -31,34 +31,38 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValues();
         }
 
+        public event Action OnStatChange;
         public int Value => clampedValue;
         public int FreeValue => statValue;
         public int MaxValue => maxValue;
         public int MinValue => minValue;
-        public event Action OnStatChange;
-
-        private float MakeBonusMultiplier(int multiplier)
-        {
-            if (multiplier < 0) return 1f / MakeBonusMultiplier(Mathf.Abs(multiplier));
-            return 1f + (multiplier / 100f);
-        }
 
         public void UpdateValues()
         {
-            statValue = Mathf.RoundToInt((baseStatValue + tempStatBonus) * MakeBonusMultiplier(percentMultiplier));
+            statValue = Mathf.RoundToInt((baseStatValue + tempStatBonus) * MakePositiveMultiplier(percentMultiplier));
             clampedValue = Mathf.Clamp(statValue, MinValue, MaxValue);
             OnStatChange?.Invoke();
         }
 
-        public int TransformPositive(int baseValue) => Mathf.RoundToInt(TransformPositive((float)baseValue));
-        public int TransformNegative(int baseValue) => Mathf.RoundToInt(TransformNegative((float)baseValue));
-        public float TransformPositive(float baseValue) => Transform(Value, baseValue);
-        public float TransformNegative(float baseValue) => Transform(-Value, baseValue);
-
-        private float Transform(int statVal, float baseValue)
+        public float TransformPositive(float baseValue)
         {
-            if (statVal == 0) return baseValue;
-            return statType.IsPercentage ? baseValue * MakeBonusMultiplier(statVal) : baseValue + statVal;
+            if (Value == 0) return baseValue;
+            if (!statType.IsPercentage) return baseValue + Value;
+            return baseValue * MakePositiveMultiplier(Value);
+        }
+
+        public float TransformNegative(float baseValue)
+        {
+            if (Value == 0) return baseValue;
+            if (!statType.IsPercentage) return baseValue - Value;
+            if(Value < -99) return 0;
+            return baseValue / MakePositiveMultiplier(Value);
+        }
+
+        private float MakePositiveMultiplier(float multiplier)
+        {
+            if (multiplier == 0) return 1f;
+            return 1f + multiplier / 100f;
         }
 
         public void ModifyStat(StatModification statModification)

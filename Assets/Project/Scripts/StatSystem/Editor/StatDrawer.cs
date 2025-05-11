@@ -61,6 +61,7 @@ namespace Project.Scripts.StatSystem.Editor
 
                 position.y += Spacing;
 
+                EditorGUI.BeginChangeCheck(); // Start tracking changes
                 EditorGUI.PropertyField(position, percentMultiplier, new GUIContent("% Multiplier"));
                 position.y += Spacing;
 
@@ -74,12 +75,16 @@ namespace Project.Scripts.StatSystem.Editor
                 position.y += Spacing;
 
                 EditorGUI.PropertyField(position, tempStatBonus);
-                position.y += Spacing;
 
+                position.y += Spacing;
                 EditorGUI.indentLevel--;
             }
-        }
 
+            if (EditorGUI.EndChangeCheck())
+            {
+                property.serializedObject.ApplyModifiedProperties();
+            }
+        }
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             string propertyPath = property.propertyPath;

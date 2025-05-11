@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcd3fb852ecf944c91ef9c0845fd4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 2
+  maxAcceleration: 5
   moveSpeed:
     statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
     baseValue: 6
@@ -366,7 +366,7 @@ MonoBehaviour:
     clampedValue: 0
     percentMultiplier: 0
     maxValue: 100
-    minValue: -2147483648
+    minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
@@ -374,7 +374,7 @@ MonoBehaviour:
     clampedValue: 0
     percentMultiplier: 0
     maxValue: 2147483647
-    minValue: -2147483648
+    minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: 9ae9e11c7a800ac449417d2e24f309da, type: 2}
@@ -382,7 +382,7 @@ MonoBehaviour:
     clampedValue: 0
     percentMultiplier: 0
     maxValue: 2147483647
-    minValue: -2147483648
+    minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: 0d17735fd947eec44a9cfc0e84046141, type: 2}
@@ -390,7 +390,7 @@ MonoBehaviour:
     clampedValue: 0
     percentMultiplier: 0
     maxValue: 60
-    minValue: -2147483648
+    minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: 07a950e63d9c7a2459a3d656d563b65f, type: 2}
@@ -414,7 +414,7 @@ MonoBehaviour:
     clampedValue: 0
     percentMultiplier: 0
     maxValue: 2147483647
-    minValue: -2147483648
+    minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: 5df89aa858657d349841d99de210f860, type: 2}
@@ -426,8 +426,8 @@ MonoBehaviour:
     baseStatValue: 0
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
-    statValue: 0
-    clampedValue: 0
+    statValue: 10
+    clampedValue: 10
     percentMultiplier: 0
     maxValue: 2147483647
     minValue: -2147483648
@@ -446,7 +446,7 @@ MonoBehaviour:
     clampedValue: 0
     percentMultiplier: 0
     maxValue: 2147483647
-    minValue: -2147483648
+    minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
@@ -454,7 +454,7 @@ MonoBehaviour:
     clampedValue: 0
     percentMultiplier: 0
     maxValue: 2147483647
-    minValue: -2147483648
+    minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: 276d7306589f62f40804b680e8208e63, type: 2}

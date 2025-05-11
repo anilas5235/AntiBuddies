@@ -24,13 +24,6 @@ namespace Project.Scripts.StatSystem.Editor
                 {
                     statComponent.ResetLiveStats();
                 }
-
-                GUILayout.Space(10);
-
-                if (GUILayout.Button("Force Stats to Update"))
-                {
-                    statComponent.ForceStatsToUpdate();
-                }
             }
             GUILayout.EndHorizontal();
             base.OnInspectorGUI();

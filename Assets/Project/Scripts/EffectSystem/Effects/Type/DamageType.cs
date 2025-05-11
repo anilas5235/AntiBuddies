@@ -13,7 +13,6 @@ namespace Project.Scripts.EffectSystem.Effects.Type
         [SerializeField] private List<StatType> percentResistanceStat;
         [SerializeField] private List<StatType> flatScaleStat;
         [SerializeField] private List<StatType> percentScaleStat;
-
         public Color Color => color;
         public override int CreationScale(int amount, StatComponent statComponent)
         {

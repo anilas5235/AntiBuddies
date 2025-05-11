@@ -12,5 +12,18 @@ namespace Project.Scripts.EffectSystem.Effects.Type
         [SerializeField] private int minValue = int.MinValue;
         public int MaxValue => maxValue;
         public int MinValue => minValue;
+
+        private void OnValidate()
+        {
+            if(isPercentage) 
+            {
+                minValue = -100;
+            }
+            else
+            {
+                minValue = int.MinValue;
+                maxValue = int.MaxValue;
+            }
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValue();
         }
 
+        ~ValueStatRef()
+        {
+            Stat.OnStatChange -= UpdateValue;
+        }
+
         private void UpdateValue()
         {
             currValue = positiveTransform ? Stat.TransformPositive(baseValue) : Stat.TransformNegative(baseValue);
