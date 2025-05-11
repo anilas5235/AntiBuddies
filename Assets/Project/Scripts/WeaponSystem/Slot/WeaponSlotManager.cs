@@ -9,16 +9,12 @@ namespace Project.Scripts.WeaponSystem.Slot
     {
         [SerializeField, Range(0, 10)] private float slotCircleRadius = 1f;
         [SerializeField, Range(0, 20)] private int numberOfSlots = 6;
+        [SerializeField] private int currentNumberOfSlots;
         [SerializeField] private GameObject weaponSlotPrefab;
         [SerializeField] private WeaponData[] defaultWeaponData;
         private readonly List<WeaponSlot> _weaponSlots = new();
 
         private const float ExtraBufferingPerSlot = 0.05f;
-
-        private void Awake()
-        {
-            BuildWeaponSlots();
-        }
 
         private void Start()
         {
@@ -28,28 +24,30 @@ namespace Project.Scripts.WeaponSystem.Slot
             }
         }
 
-        public WeaponSlot GetEmptySlot()
+        private WeaponSlot GetEmptySlot()
         {
-            return _weaponSlots.FirstOrDefault(slot => slot.IsEmpty);
+            WeaponSlot slot = _weaponSlots.FirstOrDefault(slot => slot.IsEmpty);
+            slot ??= AddWeaponSlot();
+            return slot;
         }
 
-        public WeaponSlot AddWeaponSlot()
+        private WeaponSlot AddWeaponSlot()
         {
-            numberOfSlots++;
+            if (currentNumberOfSlots >= numberOfSlots) return null;
+            currentNumberOfSlots++;
             BuildWeaponSlots();
             return _weaponSlots.Last();
         }
 
         private void BuildWeaponSlots()
         {
-            List<Vector3> positions = CalculateSlotPositions();
+            List<Vector3> positions = CalculateSlotPositions(currentNumberOfSlots);
             for (int i = 0; i < positions.Count; i++)
             {
                 Vector3 position = positions[i];
                 // Instantiate or reuse the weapon slot object
                 WeaponSlot weaponSlot = i >= _weaponSlots.Count ? CreateWeaponSlot(position) : _weaponSlots[i];
-
-                _weaponSlots.Add(weaponSlot);
+                weaponSlot.transform.localPosition = position;
             }
 
             // Remove any unused weapon slots
@@ -64,18 +62,19 @@ namespace Project.Scripts.WeaponSystem.Slot
         {
             GameObject weaponSlotObject = Instantiate(weaponSlotPrefab, position, Quaternion.identity, transform);
             WeaponSlot weaponSlot = weaponSlotObject.GetComponent<WeaponSlot>();
+            _weaponSlots.Add(weaponSlot);
             return weaponSlot;
         }
 
-        private List<Vector3> CalculateSlotPositions()
+        private List<Vector3> CalculateSlotPositions(int numOfSlots)
         {
             List<Vector3> positions = new();
-            float deltaAngle = 2 * Mathf.PI / numberOfSlots;
-            for (int i = 0; i < numberOfSlots; i++)
+            float deltaAngle = 2 * Mathf.PI / numOfSlots;
+            for (int i = 0; i < numOfSlots; i++)
             {
                 float angle = i * deltaAngle;
                 // Adjust radius based on the number of slots
-                float radius = slotCircleRadius + numberOfSlots * ExtraBufferingPerSlot;
+                float radius = slotCircleRadius + numOfSlots * ExtraBufferingPerSlot;
                 // Calculate the position of the weapon slot in a circular pattern
                 Vector3 position = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
                 positions.Add(position);
@@ -91,7 +90,7 @@ namespace Project.Scripts.WeaponSystem.Slot
             Vector3 scaledUp = transform.up * radius;
             Vector3 scaledRight = transform.right * radius;
             Gizmos.color = Color.yellow;
-            foreach (Vector3 position in CalculateSlotPositions())
+            foreach (Vector3 position in CalculateSlotPositions(numberOfSlots))
             {
                 Gizmos.DrawWireSphere(position, radius);
                 Gizmos.DrawLine(position - scaledUp, position + scaledUp);

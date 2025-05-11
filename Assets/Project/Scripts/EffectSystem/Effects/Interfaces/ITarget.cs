@@ -2,6 +2,6 @@
 {
     public interface ITarget<in TFor>
     {
-        bool Apply(TFor applyable);
+        void Apply(TFor applyable);
     }
 }

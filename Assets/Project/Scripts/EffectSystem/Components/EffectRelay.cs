@@ -1,59 +1,38 @@
-using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
+using Project.Scripts.StatSystem;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class EffectRelay : MonoBehaviour, ITarget<EffectPackage<AttackType>>, ITarget<EffectPackage<HealType>>,
-        ITarget<EffectPackage<StatType>>
+    public class EffectRelay : MonoBehaviour, IPackageTarget<DamageType>, IPackageTarget<HealType>,
+        IPackageTarget<StatType>, INeedStatComponent
     {
         [SerializeField] private AlieGroup alieGroup;
         [SerializeField] private HealthComponent healthComponent;
-        [SerializeField] private StatComponent statComponent;
-        public AlieGroup AlieGroup => alieGroup;
-
-        public bool Apply(EffectPackage<AttackType> attackPackage)
+        private StatComponent _statComponent;
+        
+        public void Apply(EffectPackage<DamageType> attackPackage)
         {
-            if (attackPackage.AlieGroup == alieGroup) return false;
-            Attack(attackPackage);
-            return true;
+            healthComponent.Apply(attackPackage);
         }
 
-        public bool Apply(EffectPackage<HealType> healPackage)
+        public void Apply(EffectPackage<HealType> healPackage)
         {
-            if (healPackage.AlieGroup == alieGroup) return false;
-            Heal(healPackage);
-            return true;
+            healthComponent.Apply(healPackage);
         }
 
-        public bool Apply(EffectPackage<StatType> statPackage)
+        public void Apply(EffectPackage<StatType> statPackage)
         {
-            if (statPackage.AlieGroup == alieGroup) return false;
-            Status(statPackage);
-            return true;
+            _statComponent.ModifyStat(statPackage);
         }
 
-        private void Heal(EffectPackage<HealType> healPackage)
+        public void OnStatInit(StatComponent statComponent)
         {
-            int heal = healPackage.Amount;
-            healthComponent.ApplyHeal(heal, healPackage.EffectType);
+            _statComponent = statComponent;
         }
 
-        private void Attack(EffectPackage<AttackType> attackPackage)
-        {
-            int damage = attackPackage.Amount;
-            if (statComponent)
-            {
-                damage = statComponent.ResistAttack(damage, attackPackage.EffectType);
-            }
-
-            healthComponent.ApplyAttack(damage, attackPackage.EffectType);
-        }
-
-        private void Status(EffectPackage<StatType> statusP)
-        {
-            statComponent.IncreaseStat(statusP.Amount, statusP.EffectType);
-        }
+        public bool IsAlie(AlieGroup group) => group == alieGroup;
     }
 }

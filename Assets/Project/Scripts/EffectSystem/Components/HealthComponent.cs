@@ -1,30 +1,43 @@
 using System;
-using Project.Scripts.EffectSystem.Components.Stats;
-using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.EffectSystem.Visuals;
+using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class HealthComponent : MonoBehaviour, IDamageable, IHealable
+    public class HealthComponent : MonoBehaviour, IDamageable, IHealable, INeedStatComponent
     {
-        [SerializeField] private Stat health = new(0, 10, 0);
-        public event Action<int, AttackType, GameObject> OnDamageReceived;
+        [SerializeField] private int currentHealth = 10;
+        [SerializeField] private StatRef maxHpStat;
+
+        private StatComponent _statComponent;
+        private int MaxHealth => maxHpStat.Stat.Value;
+
+        private int CurrentHealth
+        {
+            get => currentHealth;
+            set
+            {
+                if (currentHealth == value) return;
+                currentHealth = Math.Clamp(value, 0, MaxHealth);
+                if (IsDead()) Die();
+            }
+        }
+
+        public event Action<int, DamageType, GameObject> OnDamageReceived;
         public UnityEvent onDamageReceived;
         public event Action OnDeath;
         public UnityEvent onDeath;
         public event Action<int, HealType, GameObject> OnHealApplied;
 
-        private void Awake()
-        {
-            FullHeal();
-        }
-
         private void OnEnable()
         {
+            FullHeal();
             OnDamageReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
             OnHealApplied += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
         }
@@ -35,17 +48,7 @@ namespace Project.Scripts.EffectSystem.Components
             OnHealApplied -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
         }
 
-        public void ApplyAttack(int amount, AttackType type)
-        {
-            if (amount <= 0) return;
-            health.ReduceValue(amount);
-            OnDamageReceived?.Invoke(amount, type, gameObject);
-            onDamageReceived?.Invoke();
-            if (IsDead()) Die();
-        }
-
-        public bool IsDead() => health.IsBelowOrZero();
-
+        public bool IsDead() => CurrentHealth <= 0;
         public bool IsAlive() => !IsDead();
 
         public void Die()
@@ -55,24 +58,32 @@ namespace Project.Scripts.EffectSystem.Components
             onDeath?.Invoke();
         }
 
-        public void ApplyHeal(int amount, HealType type)
+        public void FullHeal() => CurrentHealth = MaxHealth;
+
+        public void OnStatInit(StatComponent statComponent)
         {
-            if (amount <= 0) return;
-            health.IncreaseValue(amount);
-            OnHealApplied?.Invoke(amount, type, gameObject);
-        }
-        
-        public void ModifyHealth(int amount)
-        {
-            health.MaxValue += amount;
-            if (health.MaxValue < health.MinValue)
-            {
-                Die();
-                return;
-            }
-            if(amount > 0) health.IncreaseValue(amount);
+            _statComponent = statComponent;
+            maxHpStat.Init(statComponent);
         }
 
-        public void FullHeal() => health.MaximizeValue();
+        public void Apply(EffectPackage<DamageType> package)
+        {
+            int damage = package.Amount;
+            if (_statComponent) damage = package.EffectType.ReceptionScale(damage, _statComponent);
+            if (damage <= 0) return;
+            CurrentHealth -= damage;
+            OnDamageReceived?.Invoke(damage, package.EffectType, gameObject);
+            onDamageReceived?.Invoke();
+        }
+
+        public void Apply(EffectPackage<HealType> package)
+        {
+            int amount = package.Amount;
+            if (_statComponent) amount = package.EffectType.ReceptionScale(amount, _statComponent);
+            if (amount <= 0 || CurrentHealth >= MaxHealth) return;
+            int diff = MaxHealth - CurrentHealth;
+            CurrentHealth += amount;
+            OnHealApplied?.Invoke(diff < amount ? diff : amount, package.EffectType, gameObject);
+        }
     }
 }

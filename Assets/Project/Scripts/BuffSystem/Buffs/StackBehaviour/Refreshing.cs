@@ -7,17 +7,14 @@ namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
         private const string ConstName = "Refreshing";
 
         public string Name => ConstName;
-
-        public void AddingBuff(IBuff buff, BuffManager buffManager)
+        public bool ShouldBuffBeAdded(IBuff buff, BuffManager buffManager)
         {
             if (buffManager.TryGetFirstBuff(buff.Name, out IBuff presentBuff))
             {
                 presentBuff.Refresh();
+                return false;
             }
-            else
-            {
-                buffManager.AddBuffToDictionary(buff);
-            }
+            return true;
         }
     }
 }

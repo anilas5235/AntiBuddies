@@ -3,11 +3,10 @@ using Project.Scripts.BuffSystem.Buffs;
 using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
-using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects;
 using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
+using Project.Scripts.StatSystem;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data
@@ -20,14 +19,17 @@ namespace Project.Scripts.BuffSystem.Data
         [SerializeField] private ExitBehavior exitBehavior;
         [SerializeField] private int ticksPerSecond;
 
-        [SerializeField] private EffectData<T> effect;
+        [SerializeField] private EffectDef<T> effect;
         private float TickInterval => 1f / ticksPerSecond;
 
-        public IBuff GetBuff(ITarget<EffectPackage<T>> target, GameObject source, AlieGroup alieGroup)
+        public IBuff GetBuff(IPackageTarget<T> target, GameObject source, StatComponent statComponent)
         {
-            EffectPackage<T> e = effect.GetPackage(source, alieGroup);
-            return new Buff<T>(e, duration,  target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior());
+            if (target == null) return null;
+            EffectPackage<T> e = effect.CreatePackage(source, statComponent);
+            return new Buff<T>(e, duration, target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior());
         }
+
+        #region Behaviours
 
         private IExitBehaviour GetExitBehavior()
         {
@@ -59,7 +61,7 @@ namespace Project.Scripts.BuffSystem.Data
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-        
+
         private enum ExitBehavior : byte
         {
             None,
@@ -78,5 +80,7 @@ namespace Project.Scripts.BuffSystem.Data
             Refresh,
             Stacking,
         }
+
+        #endregion
     }
 }

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2fbc860bd414212a0a15670f47465a6, type: 3}
   m_Name: Armor
   m_EditorClassIdentifier: 
-  typeName: Armor
   description: 
+  isPercentage: 1
+  maxValue: 100
+  minValue: -2147483648

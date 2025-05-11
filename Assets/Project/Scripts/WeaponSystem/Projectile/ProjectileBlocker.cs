@@ -4,10 +4,11 @@ namespace Project.Scripts.WeaponSystem.Projectile
 {
     public class ProjectileBlocker : MonoBehaviour
     {
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            IProjectile projectile = other.GetComponentInParent<IProjectile>();
-            projectile?.DestroyProjectile();
+            if(!other.isTrigger) return;
+            IProjectile projectile = other.GetComponent<IProjectile>();
+            projectile?.ReturnToPool();
         }
     }
 }

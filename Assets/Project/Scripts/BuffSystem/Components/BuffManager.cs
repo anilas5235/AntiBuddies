@@ -18,10 +18,12 @@ namespace Project.Scripts.BuffSystem.Components
                 return;
             }
 
-            buff.RegisteredAtBuffManager(this);
+            if(!buff.ShouldBuffBeAdded(this)) return;
+            CentralBuffTicker.Instance.RegisterBuff(buff);
+            AddBuffToDictionary(buff);
         }
 
-        internal void AddBuffToDictionary([NotNull] IBuff buff)
+        private void AddBuffToDictionary([NotNull] IBuff buff)
         {
             string key = buff.Name;
             if (_buffs.TryGetValue(key, out List<IBuff> buffList))
@@ -49,9 +51,7 @@ namespace Project.Scripts.BuffSystem.Components
         
         internal void RemoveBuffFromDictionary(IBuff buff)
         {
-            buff.OnBuffRemove();
-            string key = buff.Name;
-            if (!_buffs.TryGetValue(key, out List<IBuff> buffList)) return;
+            if (!_buffs.TryGetValue(buff.Name, out List<IBuff> buffList)) return;
             buffList.Remove(buff);
         }
        
@@ -64,11 +64,11 @@ namespace Project.Scripts.BuffSystem.Components
             return true;
         }
 
-        internal int GetBuffCount(string typeName)
+        public int GetBuffCount(string typeName)
         {
             return _buffs.TryGetValue(typeName, out List<IBuff> buffList) ? buffList.Count : 0;
         }
 
-        internal bool HasBuff(string typeName) => GetBuffCount(typeName) > 0;
+        public bool HasBuff(string typeName) => GetBuffCount(typeName) > 0;
     }
 }

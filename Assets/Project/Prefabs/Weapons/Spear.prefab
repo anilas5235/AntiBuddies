@@ -133,13 +133,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77bfdd0688de4aa2baa0caac4e263ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 1.5
-  attackInterval: 1
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
+  alieGroup: 1
+  attackSpeedStat:
+    statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    baseValue: 1
+    currValue: 0
+    positiveTransform: 0
+  rangeStat:
+    statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
+    baseValue: 1.5
+    currValue: 0
+    positiveTransform: 1
   meleeAttackBehaviour: {fileID: 11400000, guid: 98facdf158d49e74c81a694f09b1ee9f, type: 2}
   weaponColliders:
   - {fileID: 114367337451605291}
   restPercent: 30
+  contactEffect: {fileID: 7808569503964837938}
 --- !u!1 &7009135823704326037
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,8 +160,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6726787141778080833}
   - component: {fileID: 114367337451605291}
-  - component: {fileID: 2265182203880910523}
-  m_Layer: 0
+  - component: {fileID: 7808569503964837938}
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +229,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &2265182203880910523
+--- !u!114 &7808569503964837938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,8 +238,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7009135823704326037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
+  m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackData: {fileID: 11400000, guid: 468b932b8e3c7f54aa2207cdcf7c3d71, type: 2}
+  damageEffects:
+    data:
+    - amount: 5
+      effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
+  healEffects:
+    data: []
+  statEffects:
+    data: []
+  damagingBuffs:
+    data: []
+  healingBuffs:
+    data: []
+  statBuffs:
+    data: []
   alieGroup: 1
+  statComponent: {fileID: 0}
+  applyOnlyOncePerObject: 1

@@ -1,13 +1,16 @@
+using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Project.Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerTopDownMovement : MonoBehaviour
+    public class PlayerTopDownMovement : MonoBehaviour, INeedStatComponent
     {
-        [Range(0.1f, 60)] public float speed = 4f;
-        [Range(0.0001f, 2)] public float maxAcceleration = 1;
+        [Range(0.0001f, 50f)] public float maxAcceleration = 2f;
+
+        [SerializeField] private ValueStatRef moveSpeed;
 
         private Rigidbody2D _rb2d;
 
@@ -66,11 +69,15 @@ namespace Project.Scripts.Player
 
         private void HandleMovement()
         {
-            Vector2 targetVelocity = _moveInput.normalized * speed;
-
+            Vector2 targetVelocity = _moveInput.normalized * moveSpeed.CurrValue;
             _rb2d.linearVelocity =
                 Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, 
-                    Time.fixedDeltaTime * 10 * maxAcceleration);
+                    Time.fixedDeltaTime * maxAcceleration * moveSpeed.CurrValue);
+        }
+
+        public void OnStatInit(StatComponent statComponent)
+        {
+            moveSpeed.Init(statComponent);
         }
     }
 }

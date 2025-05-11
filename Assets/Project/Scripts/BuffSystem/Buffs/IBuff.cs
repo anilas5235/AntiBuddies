@@ -7,6 +7,7 @@ namespace Project.Scripts.BuffSystem.Buffs
     {
         GameObject Source { get; }
         BuffManager BuffManager { get; }      
+        BuffGroup BuffGroup { get; set; }
         string Name { get; }
         void OnBuffAdded();
         void OnBuffTick(float deltaTime);
@@ -15,8 +16,7 @@ namespace Project.Scripts.BuffSystem.Buffs
         void OnBuffRemove();
         bool IsBuffExpired();
         void ReduceDuration(float amount);
-        void RegisteredAtBuffManager(BuffManager buffManager);
-        void RegisteredAtBuffGroup(BuffGroup buffGroup);
+        bool ShouldBuffBeAdded(BuffManager buffManager);
         void Refresh();
         void RemoveBuff();
     }

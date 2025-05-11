@@ -2,7 +2,7 @@
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.BuffSystem.Components;
-using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
@@ -15,15 +15,16 @@ namespace Project.Scripts.BuffSystem.Buffs
         public GameObject Source => _effect.Source;
         public BuffManager BuffManager { get; private set; }
         private IStackBehaviour StackBehaviour { get; }
-        private BuffGroup BuffGroup { get; set; }
-        private ITarget<EffectPackage<T>> Target { get; }
+        public BuffGroup BuffGroup { get; set; }
+        private IPackageTarget<T> Target { get; }
         private readonly float _duration;
         private float _remainingDuration;
         private readonly EffectPackage<T> _effect;
         private readonly ITickBehaviour _tickBehavior;
         private readonly IExitBehaviour _exitBehavior;
 
-        public Buff(EffectPackage<T> effect, float duration, ITarget<EffectPackage<T>> target, IStackBehaviour stackBehaviour,
+        public Buff(EffectPackage<T> effect, float duration, IPackageTarget<T> target,
+            IStackBehaviour stackBehaviour,
             ITickBehaviour tickBehavior, IExitBehaviour exitBehavior)
         {
             Target = target;
@@ -69,16 +70,13 @@ namespace Project.Scripts.BuffSystem.Buffs
         public void ReduceDuration(float amount)
         {
             _remainingDuration -= amount;
-            _remainingDuration = Mathf.Max(0, _remainingDuration);
         }
 
-        public void RegisteredAtBuffManager(BuffManager buffManager)
+        public bool ShouldBuffBeAdded(BuffManager buffManager)
         {
             BuffManager = buffManager;
-            StackBehaviour.AddingBuff(this, buffManager);
+            return StackBehaviour.ShouldBuffBeAdded(this, buffManager);
         }
-
-        public void RegisteredAtBuffGroup(BuffGroup buffGroup) => BuffGroup = buffGroup;
 
         public void Refresh() => ResetDuration();
 
