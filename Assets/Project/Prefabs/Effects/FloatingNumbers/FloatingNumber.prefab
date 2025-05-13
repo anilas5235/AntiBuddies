@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3487260599637648475}
   - component: {fileID: 5718301372832122031}
   m_Layer: 0
-  m_Name: DamgeNumber
+  m_Name: FloatingNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
