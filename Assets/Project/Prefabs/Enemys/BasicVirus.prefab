@@ -9,9 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8009642216940962535}
-  - component: {fileID: 2740992555734098473}
   - component: {fileID: 7679437470409611216}
-  - component: {fileID: 6211520244055357206}
   - component: {fileID: 30313915423617477}
   - component: {fileID: 821334034517289629}
   - component: {fileID: 7052312215536277138}
@@ -39,28 +37,6 @@ Transform:
   - {fileID: 7895299373064707608}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!195 &2740992555734098473
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919007744789787044}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.2
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 0
-  m_StoppingDistance: 0.5
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 0.2
-  m_BaseOffset: 0
-  m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 2
 --- !u!114 &7679437470409611216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,18 +74,6 @@ MonoBehaviour:
           m_Value1: 12403424371290604585
         Name: Speed
         m_Value: 2
---- !u!114 &6211520244055357206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919007744789787044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b9ce43646e9de74b8ca098706701cb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &30313915423617477
 Rigidbody2D:
   serializedVersion: 5
@@ -118,7 +82,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4919007744789787044}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -136,7 +100,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &821334034517289629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,8 +152,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
   liveStats:
   - statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
-    statValue: 0
-    clampedValue: 0
+    statValue: 10
+    clampedValue: 10
     percentMultiplier: 0
     maxValue: 2147483647
     minValue: -2147483648
@@ -221,7 +185,6 @@ MonoBehaviour:
     currValue: 0
     positiveTransform: 1
   behaviorGraphAgent: {fileID: 7679437470409611216}
-  navMeshAgent: {fileID: 2740992555734098473}
 --- !u!1 &7691238699623227762
 GameObject:
   m_ObjectHideFlags: 0
