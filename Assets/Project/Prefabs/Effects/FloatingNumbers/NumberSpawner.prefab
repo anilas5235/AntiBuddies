@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8485446900987075236}
   - component: {fileID: 4722243978489353542}
+  - component: {fileID: 39785366156688324}
   m_Layer: 0
   m_Name: NumberSpawner
   m_TagString: Untagged
@@ -44,7 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5334093c2b753d947a4cb17f73a729a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageNumberPrefab: {fileID: 5766984190451043708, guid: 2e4e39724878a0e46885f61a2bcd6184, type: 3}
+  floatingNumberPool: {fileID: 39785366156688324}
   displayDuration: 1
   offset: {x: 0, y: 0.5}
   stopSpawn: 0
+--- !u!114 &39785366156688324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5779969478983599824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801ca702600281443b662377bc314c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5766984190451043708, guid: 2e4e39724878a0e46885f61a2bcd6184, type: 3}
+  initialObjCount: 10
+  currentTotal: 0
+  currentInPool: 0

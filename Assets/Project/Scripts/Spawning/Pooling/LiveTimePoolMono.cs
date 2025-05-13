@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.Spawning.Pooling
 {
     public class LiveTimePoolableMono : PoolableMono
     {
-        [SerializeField] protected float liveTime = 5f;
+        [FormerlySerializedAs("liveTime")] [SerializeField] protected float lifeTime = 5f;
         [SerializeField] protected float timeToLive;
 
         private void FixedUpdate()
@@ -24,7 +25,7 @@ namespace Project.Scripts.Spawning.Pooling
 
         public override void Reset()
         {
-            timeToLive = liveTime;
+            timeToLive = lifeTime;
         }
     }
 }
