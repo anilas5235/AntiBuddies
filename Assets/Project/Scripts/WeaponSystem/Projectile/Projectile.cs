@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Project.Scripts.WeaponSystem.Projectile
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Projectile : MonoBehaviour, IProjectile
+    public class Projectile : PoolableMono, IProjectile
     {
         [SerializeField] private ProjectileData data;
         [SerializeField] private float speed = 10f;
@@ -34,42 +34,24 @@ namespace Project.Scripts.WeaponSystem.Projectile
             }
         }
 
-        public GameObjectPool<ProjectileData> Pool { get; set; }
-
-        public void SetTransform(Vector3 position, Quaternion rotation)
-        {
-            transform.position = position;
-            transform.rotation = rotation;
-        }
-
-        public void Activate(ProjectileData projectileData)
-        {
-            data = projectileData;
-            gameObject.SetActive(true);
-            speed = data.speed;
-            allowedContacts = 1;
-            spriteRenderer.sprite = data.sprite;
-            transform.localScale = data.scale;
-            effectComponent.ClearAll();
-            effectComponent.damageEffects.Add(projectileData.damageEffects);
-        }
-
-        public void Deactivate()
-        {
-            gameObject.SetActive(false);
-        }
-
-        public void Reset()
+        public override void Reset()
         {
             rb.linearVelocity = Vector2.zero;
             speed = 0;
             effectComponent.ClearAll();
             effectComponent.statComponent = null;
         }
+       
 
-        public void ReturnToPool()
+        public void SetData(ProjectileData projectileData)
         {
-            Pool.AddToPool(this);
+            data = projectileData;
+            speed = data.speed;
+            allowedContacts = 1;
+            spriteRenderer.sprite = data.sprite;
+            transform.localScale = data.scale;
+            effectComponent.ClearAll();
+            effectComponent.damageEffects.Add(projectileData.damageEffects);
         }
 
         public void ProjectileSetUp(Vector2 direction, AlieGroup alieGroup, StatComponent statComponent, int contacts)
