@@ -1,4 +1,6 @@
-﻿using Project.Scripts.StatSystem;
+﻿using System.Collections.Generic;
+using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Type
@@ -9,12 +11,12 @@ namespace Project.Scripts.EffectSystem.Effects.Type
         public string Name => name;
         public string Description => description;
 
-        public virtual int CreationScale(int amount, StatComponent statComponent)
+        public virtual int CreationScale(int amount, StatComponent statComponent, List<IStat> extraStats = null)
         {
             return amount;
         }
         
-        public virtual int ReceptionScale(int amount, StatComponent statComponent)
+        public virtual int ReceptionScale(int amount, StatComponent statComponent, List<IStat> extraStats = null)
         {
             return amount;
         }

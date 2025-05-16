@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Type
@@ -9,33 +10,38 @@ namespace Project.Scripts.EffectSystem.Effects.Type
     public class DamageType : EffectType
     {
         [SerializeField] private Color color = Color.white;
-        [SerializeField] private List<StatType> flatResistanceStat;
-        [SerializeField] private List<StatType> percentResistanceStat;
-        [SerializeField] private List<StatType> flatScaleStat;
-        [SerializeField] private List<StatType> percentScaleStat;
+        [SerializeField] private List<StatType> ResistanceStats;
+        [SerializeField] private List<StatType> ScaleStats;
         public Color Color => color;
-        public override int CreationScale(int amount, StatComponent statComponent)
+
+        public override int CreationScale(int amount, StatComponent statComponent, List<IStat> extraStats = null)
         {
-            amount = AggregateStats(amount, statComponent, percentScaleStat, true);
-            amount = AggregateStats(amount, statComponent, flatScaleStat, true);
-            return amount;
+            return CalculateScaledAmount(amount, statComponent, ScaleStats, extraStats, true);
         }
 
-        public override int ReceptionScale(int amount, StatComponent statComponent)
+        public override int ReceptionScale(int amount, StatComponent statComponent, List<IStat> extraStats = null)
         {
-            amount = AggregateStats(amount, statComponent, flatResistanceStat, false);
-            amount = AggregateStats(amount, statComponent, percentResistanceStat, false);
-            return amount;
+            return CalculateScaledAmount(amount, statComponent, ResistanceStats, extraStats, false);
         }
 
-        private static int AggregateStats(int value, StatComponent statComponent, List<StatType> stats, bool isPositive)
+        private static int CalculateScaledAmount(int amount, StatComponent statComponent, List<StatType> statTypes, List<IStat> extraStats, bool isPositive)
         {
-            if (stats == null || !statComponent) return value;
+            List<IStat> stats = statTypes.Select(statComponent.GetStat).Where(statValue => statValue != null).ToList();
 
-            return stats.Aggregate(value, (current, stat) =>
-                isPositive
-                    ? statComponent.GetStat(stat)?.TransformPositive(current) ?? current
-                    : statComponent.GetStat(stat)?.TransformNegative(current) ?? current);
+            if (extraStats != null) stats.AddRange(extraStats);
+            int currAmount = amount;
+            int flatAmount = 0;
+
+            foreach (IStat stat in stats.Where(stat => stat != null))
+            {
+                if (stat.IsPercentage)
+                    currAmount = isPositive ? stat.TransformPositive(currAmount) : stat.TransformNegative(currAmount);
+                else
+                    flatAmount += isPositive ? stat.TransformPositive(currAmount) : stat.TransformNegative(currAmount);
+            }
+
+            int finalAmount = currAmount + flatAmount;
+            return finalAmount < 1 ? 0 : finalAmount;
         }
     }
 }

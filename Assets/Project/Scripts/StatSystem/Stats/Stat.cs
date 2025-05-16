@@ -35,6 +35,7 @@ namespace Project.Scripts.StatSystem.Stats
 
         public event Action OnStatChange;
         public int Value => clampedValue;
+        public bool IsPercentage => statType.IsPercentage;
         public int FreeValue => statValue;
         public int MaxValue => maxValue;
         public int MinValue => minValue;

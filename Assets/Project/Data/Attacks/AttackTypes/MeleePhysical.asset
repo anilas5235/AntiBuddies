@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Physical Damage
   color: {r: 1, g: 1, b: 1, a: 1}
-  flatResistanceStat:
-  - {fileID: 11400000, guid: c8b4ff22af6cbf1449dcb06a9bda38b9, type: 2}
-  percentResistanceStat:
+  ResistanceStats:
   - {fileID: 11400000, guid: 7fac75f7b0c7e9f49b1f04e927d25dfc, type: 2}
-  flatScaleStat:
-  - {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
-  percentScaleStat:
+  - {fileID: 11400000, guid: c8b4ff22af6cbf1449dcb06a9bda38b9, type: 2}
+  ScaleStats:
   - {fileID: 11400000, guid: 9ae9e11c7a800ac449417d2e24f309da, type: 2}
+  - {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
