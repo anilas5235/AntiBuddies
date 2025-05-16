@@ -14,12 +14,12 @@ namespace Project.Scripts.EffectSystem.Effects.Type
         [SerializeField] private List<StatType> ScaleStats;
         public Color Color => color;
 
-        public override int CreationScale(int amount, StatComponent statComponent, List<IStat> extraStats = null)
+        public override int CreationScale(int amount, StatComponent statComponent, List<IStat> extraStats)
         {
             return CalculateScaledAmount(amount, statComponent, ScaleStats, extraStats, true);
         }
 
-        public override int ReceptionScale(int amount, StatComponent statComponent, List<IStat> extraStats = null)
+        public override int ReceptionScale(int amount, StatComponent statComponent, List<IStat> extraStats)
         {
             return CalculateScaledAmount(amount, statComponent, ResistanceStats, extraStats, false);
         }
@@ -37,7 +37,7 @@ namespace Project.Scripts.EffectSystem.Effects.Type
                 if (stat.IsPercentage)
                     currAmount = isPositive ? stat.TransformPositive(currAmount) : stat.TransformNegative(currAmount);
                 else
-                    flatAmount += isPositive ? stat.TransformPositive(currAmount) : stat.TransformNegative(currAmount);
+                    flatAmount = isPositive ? stat.TransformPositive(flatAmount) : stat.TransformNegative(flatAmount);
             }
 
             int finalAmount = currAmount + flatAmount;

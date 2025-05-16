@@ -21,7 +21,5 @@ namespace Project.Scripts.StatSystem.Stats
                 Debug.LogWarning($"Stat {statType} not found in StatComponent.");
             }
         }
-        
-        
     }
 }

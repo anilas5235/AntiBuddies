@@ -11,12 +11,12 @@ namespace Project.Scripts.EffectSystem.Effects.Type
         public string Name => name;
         public string Description => description;
 
-        public virtual int CreationScale(int amount, StatComponent statComponent, List<IStat> extraStats = null)
+        public virtual int CreationScale(int amount, StatComponent statComponent, List<IStat> extraStats)
         {
             return amount;
         }
         
-        public virtual int ReceptionScale(int amount, StatComponent statComponent, List<IStat> extraStats = null)
+        public virtual int ReceptionScale(int amount, StatComponent statComponent, List<IStat> extraStats)
         {
             return amount;
         }

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Data
@@ -20,12 +23,17 @@ namespace Project.Scripts.EffectSystem.Effects.Data
             this.effectType = effectType;
         }
 
-        public EffectPackage<T> CreatePackage(GameObject source, StatComponent statComponent)
+        public EffectPackage<T> CreatePackage(GameObject source, StatComponent statComponent, List<StatType> extraStats =null)
         {
             int finalAmount = amount;
             if (statComponent)
             {
-                finalAmount = effectType.CreationScale(amount, statComponent);
+                List<IStat> extraStatList = new();
+                if (extraStats != null)
+                {
+                    extraStatList.AddRange(extraStats.Select(statComponent.GetStat).Where(stat => stat != null));
+                }
+                finalAmount = effectType.CreationScale(amount, statComponent, extraStatList);
             }
             return new EffectPackage<T>(finalAmount, effectType, source);
         }
