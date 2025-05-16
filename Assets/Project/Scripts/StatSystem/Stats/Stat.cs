@@ -9,6 +9,8 @@ namespace Project.Scripts.StatSystem.Stats
     {
         [SerializeField] private StatType statType;
 
+        private StatType previousStatType; // Track the previous value of statType
+
         [SerializeField] private int statValue;
         [SerializeField] private int clampedValue;
 
@@ -55,7 +57,7 @@ namespace Project.Scripts.StatSystem.Stats
         {
             if (Value == 0) return baseValue;
             if (!statType.IsPercentage) return baseValue - Value;
-            if(Value < -99) return 0;
+            if (Value < -99) return 0;
             return baseValue / MakePositiveMultiplier(Value);
         }
 
@@ -83,6 +85,8 @@ namespace Project.Scripts.StatSystem.Stats
                 case StatModification.Type.MinValue:
                     minValue = statModification.Value;
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             UpdateValues();
@@ -90,11 +94,18 @@ namespace Project.Scripts.StatSystem.Stats
 
         public void Reset()
         {
+            Debug.Log("Resetting stat: " + statType);
             baseStatValue = 0;
             tempStatBonus = 0;
             percentMultiplier = 0;
-            maxValue = statType.MaxValue;
-            minValue = statType.MinValue;
+            maxValue = statType ? statType.MaxValue : 0;
+            minValue = statType ? statType.MinValue : 0;
+            UpdateValues();
+        }
+
+        public void ResetTempStat()
+        {
+            tempStatBonus = 0;
             UpdateValues();
         }
     }

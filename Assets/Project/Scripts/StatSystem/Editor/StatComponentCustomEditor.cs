@@ -9,23 +9,18 @@ namespace Project.Scripts.StatSystem.Editor
         public override void OnInspectorGUI()
         {
             StatComponent statComponent = (StatComponent)target;
-            GUILayout.BeginHorizontal();
+
+            EditorGUILayout.BeginVertical(); // Begin vertical layout for stability
+            GUILayout.Space(5); // Add spacing to avoid jittering
+
+            if (GUILayout.Button("Reset Stats", GUILayout.Height(25))) // Set a fixed height for the button
             {
-                if (GUILayout.Button("Live Stats"))
-                {
-                    statComponent.CheckLiveStats();
-                    EditorUtility.SetDirty(statComponent);
-                    Repaint();
-                }
-
-                GUILayout.Space(10);
-
-                if (GUILayout.Button("Reset Stats"))
-                {
-                    statComponent.ResetLiveStats();
-                }
+                statComponent.ResetStats();
             }
-            GUILayout.EndHorizontal();
+
+            GUILayout.Space(5); // Add spacing to separate the button from other elements
+            EditorGUILayout.EndVertical(); // End vertical layout
+
             base.OnInspectorGUI();
         }
     }

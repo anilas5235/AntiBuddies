@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem.Stats;
 using UnityEditor;
 using UnityEngine;
+// Required for SerializedProperty utilities
 
 namespace Project.Scripts.StatSystem.Editor
 {
@@ -38,13 +40,17 @@ namespace Project.Scripts.StatSystem.Editor
             position.width -= Padding * 2; // Adjust width for padding
             position.height = EditorGUIUtility.singleLineHeight;
 
-            // Draw foldout and clampedValue on the same line
-            Rect foldoutRect = new(position.x, position.y, position.width * 0.7f, position.height);
-            Rect clampedValueRect = new(position.x + position.width * 0.72f, position.y, position.width * 0.28f,
+            // Draw foldout, statType, and clampedValue on the same line
+            Rect foldoutRect = new(position.x, position.y, position.width * 0.5f, position.height);
+            Rect statTypeRect = new(position.x + position.width * 0.52f, position.y, position.width * 0.23f,
+                position.height);
+            Rect clampedValueRect = new(position.x + position.width * 0.76f, position.y, position.width * 0.22f,
                 position.height);
 
             FoldoutStates[propertyPath] = EditorGUI.Foldout(foldoutRect, FoldoutStates[propertyPath],
-                statType.objectReferenceValue ? statType.objectReferenceValue.name : "Stat", true);
+                statType.objectReferenceValue ? statType.objectReferenceValue.name : "Unknown", true);
+
+            EditorGUI.PropertyField(statTypeRect, statType, GUIContent.none);
 
             GUI.enabled = false; // Disable editing for clampedValue
             EditorGUI.PropertyField(clampedValueRect, clampedValue, GUIContent.none);
@@ -77,6 +83,23 @@ namespace Project.Scripts.StatSystem.Editor
                 EditorGUI.PropertyField(position, tempStatBonus);
 
                 position.y += Spacing;
+
+                // Add a button to reset the stat
+                if (GUI.Button(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight),
+                        "Reset Stat"))
+                {
+                    if (statType.objectReferenceValue)
+                    {
+                        // Call the Reset method on the Stat object
+                        StatComponent target = property.serializedObject.targetObject as StatComponent;
+                        if (target)
+                        {
+                            target.ResetStatOfType(statType.objectReferenceValue as StatType);
+                        }
+                    }
+                }
+
+                position.y += Spacing;
                 EditorGUI.indentLevel--;
             }
 
@@ -85,6 +108,7 @@ namespace Project.Scripts.StatSystem.Editor
                 property.serializedObject.ApplyModifiedProperties();
             }
         }
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             string propertyPath = property.propertyPath;
@@ -92,7 +116,7 @@ namespace Project.Scripts.StatSystem.Editor
             float height = EditorGUIUtility.singleLineHeight; // For the foldout and clampedValue
             if (isFoldout)
             {
-                height += Spacing * 6; // For the remaining fields
+                height += Spacing * 7; // For the remaining fields
             }
 
             return height + Padding * 2;
