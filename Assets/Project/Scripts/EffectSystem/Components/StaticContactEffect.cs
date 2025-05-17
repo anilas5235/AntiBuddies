@@ -48,6 +48,11 @@ namespace Project.Scripts.EffectSystem.Components
             };
         }
 
+        private void OnDisable()
+        {
+            ClearContacts();
+        }
+
         protected override void HandleContact(GameObject other)
         {
             if (!other || other == gameObject) return;

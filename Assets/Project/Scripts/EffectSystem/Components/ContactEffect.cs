@@ -41,6 +41,11 @@ namespace Project.Scripts.EffectSystem.Components
                 statBuffs
             };
         }
+        
+        private void OnDisable()
+        {
+            ClearContacts();
+        }
 
         protected override void HandleContact(GameObject other)
         {
