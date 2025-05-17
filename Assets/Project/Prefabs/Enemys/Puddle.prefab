@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7938149670653833923}
   - component: {fileID: 4899480555218850068}
-  - component: {fileID: 6361551416678177104}
   - component: {fileID: 1253394331397966347}
   - component: {fileID: -1871986820936156073}
+  - component: {fileID: 5532534441183630602}
   m_Layer: 0
   m_Name: Puddle
   m_TagString: Untagged
@@ -90,34 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6361551416678177104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2467287288266850996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageEffects:
-    data: []
-  healEffects:
-    data: []
-  statEffects:
-    data: []
-  damagingBuffs:
-    data: []
-  healingBuffs:
-    data: []
-  statBuffs:
-    data:
-    - {fileID: 11400000, guid: 2b1b060c30fa4064bb8254e94cc5cdf0, type: 2}
-  alieGroup: 0
-  statComponent: {fileID: 0}
-  applyOnlyOncePerObject: 1
 --- !u!70 &1253394331397966347
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -167,6 +139,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa000549cb94460b3dae725d11b26ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveTime: 5
+  lifeTime: 5
   timeToLive: 5
   spriteRenderer: {fileID: 4899480555218850068}
+--- !u!114 &5532534441183630602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2467287288266850996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db232dd538c44ac088a0883766ccdf2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageEffects:
+    data: []
+  healEffects:
+    data: []
+  statEffects:
+    data: []
+  damagingBuffs:
+    data: []
+  healingBuffs:
+    data: []
+  statBuffs:
+    data:
+    - {fileID: 11400000, guid: 2b1b060c30fa4064bb8254e94cc5cdf0, type: 2}
+  alieGroup: 2
+  applyOnlyOncePerObject: 1
+  applyToSource: 0

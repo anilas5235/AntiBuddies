@@ -18,8 +18,13 @@ namespace Project.Scripts.Enemy
 
         private void OnEnable()
         {
-            speedStat.Stat.OnStatChange += OnSpeedStatChange;
+            speedStat.OnValueChange += OnSpeedStatChange;
             OnSpeedStatChange();
+        }
+        
+        private void OnDisable()
+        {
+            speedStat.OnValueChange -= OnSpeedStatChange;
         }
 
         private void OnSpeedStatChange()

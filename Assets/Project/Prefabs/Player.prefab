@@ -238,7 +238,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAcceleration: 5
   moveSpeed:
-    statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    statRefs:
+    - statDependency:
+        useEfficiency: 100
+        statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
     baseValue: 6
     currValue: 0
     positiveTransform: 1
@@ -256,7 +259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHpStat:
-    statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statDependency:
+      useEfficiency: 100
+      statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
   onDamageReceived:
     m_PersistentCalls:
       m_Calls:

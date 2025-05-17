@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using Project.Scripts.StatSystem;
-using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Type
@@ -10,38 +9,34 @@ namespace Project.Scripts.EffectSystem.Effects.Type
     public class DamageType : EffectType
     {
         [SerializeField] private Color color = Color.white;
-        [SerializeField] private List<StatType> ResistanceStats;
-        [SerializeField] private List<StatType> ScaleStats;
+
+        [SerializeField] private List<StatDependency> resistanceStats;
+
+        [SerializeField] private List<StatDependency> scaleStats;
+
         public Color Color => color;
 
-        public override int CreationScale(int amount, StatComponent statComponent, List<IStat> extraStats)
+        private static int ScaleAmount(int amount, IStatGroup statGroup, List<StatDependency> baseStats,
+            List<StatDependency> extraStats, bool isPositive)
         {
-            return CalculateScaledAmount(amount, statComponent, ScaleStats, extraStats, true);
-        }
-
-        public override int ReceptionScale(int amount, StatComponent statComponent, List<IStat> extraStats)
-        {
-            return CalculateScaledAmount(amount, statComponent, ResistanceStats, extraStats, false);
-        }
-
-        private static int CalculateScaledAmount(int amount, StatComponent statComponent, List<StatType> statTypes, List<IStat> extraStats, bool isPositive)
-        {
-            List<IStat> stats = statTypes.Select(statComponent.GetStat).Where(statValue => statValue != null).ToList();
-
-            if (extraStats != null) stats.AddRange(extraStats);
-            int currAmount = amount;
-            int flatAmount = 0;
-
-            foreach (IStat stat in stats.Where(stat => stat != null))
+            List<StatDependency> totalDeps = new(baseStats);
+            if (extraStats is { Count: > 0 })
             {
-                if (stat.IsPercentage)
-                    currAmount = isPositive ? stat.TransformPositive(currAmount) : stat.TransformNegative(currAmount);
-                else
-                    flatAmount = isPositive ? stat.TransformPositive(flatAmount) : stat.TransformNegative(flatAmount);
+                totalDeps.AddRange(extraStats);
             }
 
-            int finalAmount = currAmount + flatAmount;
-            return finalAmount < 1 ? 0 : finalAmount;
+            int result = StatUtils.AggregateStatDeps(amount, totalDeps, statGroup, isPositive);
+            return Math.Max(result, 0);
+        }
+
+        public override int CreationScale(int amount, IStatGroup statGroup, List<StatDependency> extraStats)
+        {
+            return ScaleAmount(amount, statGroup, scaleStats, extraStats, true);
+        }
+
+        public override int ReceptionScale(int amount, IStatGroup statGroup, List<StatDependency> extraStats)
+        {
+            return ScaleAmount(amount, statGroup, resistanceStats, extraStats, false);
         }
     }
 }

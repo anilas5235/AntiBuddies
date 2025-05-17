@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project.Scripts.StatSystem.Editor
 {
-    [CustomPropertyDrawer(typeof(ValueStatRef))]
+    //[CustomPropertyDrawer(typeof(ValueStatRef))]
     public class ValueStatRefDrawer : StatRefDrawer
     {
         protected override void ChildContent(Rect position, SerializedProperty property)

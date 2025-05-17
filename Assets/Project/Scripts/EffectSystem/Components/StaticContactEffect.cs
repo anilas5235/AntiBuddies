@@ -3,39 +3,45 @@ using System.Collections.Generic;
 using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Type;
-using Project.Scripts.StatSystem;
 using Project.Scripts.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class ContactEffect : ContactTrigger
+    public class StaticContactEffect : ContactTrigger
     {
-        [FormerlySerializedAs("damageEffects")] [Header("Effects")] public DynamicEffectCollection<DamageType> damageDynamicEffects = new();
-        [FormerlySerializedAs("healEffects")] public DynamicEffectCollection<HealType> healDynamicEffects = new();
-        [FormerlySerializedAs("statEffects")] public DynamicEffectCollection<StatType> statDynamicEffects = new();
+        [Header("Effects")] public EffectPackageCollection<DamageType> damageEffects = new();
+        public EffectPackageCollection<HealType> healEffects = new();
+        public EffectPackageCollection<StatType> statEffects = new();
 
         [Header("Buffs")] public BuffDataCollection<DamageType> damagingBuffs = new();
         public BuffDataCollection<HealType> healingBuffs = new();
         public BuffDataCollection<StatType> statBuffs = new();
 
         [Header("Settings")] public AlieGroup alieGroup;
-        public StatComponent statComponent;
         [SerializeField] private bool applyOnlyOncePerObject = true;
+        [SerializeField] private bool applyToSource;
+
+        private GameObject _source;
         public event Action OnEffectApplied;
 
         private readonly List<GameObject> _contacts = new();
-        
-        private List<IApplyDynamicEffect> _applyEffects = new();
+
+        public void SetSource(GameObject source) => _source = source;
+
+        private List<IApplyEffect> _applyEffects = new();
+        private List<IApplyDynamicEffect> _dynamicEffects = new();
 
         private void Awake()
         {
-            _applyEffects = new List<IApplyDynamicEffect>()
+            _applyEffects = new List<IApplyEffect>()
             {
-                damageDynamicEffects,
-                healDynamicEffects,
-                statDynamicEffects,
+                damageEffects,
+                healEffects,
+                statEffects,
+            };
+            _dynamicEffects = new List<IApplyDynamicEffect>()
+            {
                 damagingBuffs,
                 healingBuffs,
                 statBuffs
@@ -45,6 +51,7 @@ namespace Project.Scripts.EffectSystem.Components
         protected override void HandleContact(GameObject other)
         {
             if (!other || other == gameObject) return;
+            if (!applyToSource && other == _source) return;
             if (applyOnlyOncePerObject)
             {
                 if (_contacts.Contains(other)) return;
@@ -52,9 +59,13 @@ namespace Project.Scripts.EffectSystem.Components
             }
 
             int applies = 0;
-            foreach (IApplyDynamicEffect effect in _applyEffects)
+            foreach (IApplyEffect effect in _applyEffects)
             {
-                applies += effect.Apply(other, alieGroup, statComponent, gameObject);
+                applies += effect.Apply(other, alieGroup);
+            }
+            foreach (IApplyDynamicEffect effect in _dynamicEffects)
+            {
+                applies += effect.Apply(other, alieGroup, null, _source);
             }
 
             if (applies > 0) OnEffectApplied?.Invoke();
@@ -62,9 +73,9 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void ClearAll()
         {
-            damageDynamicEffects.Clear();
-            healDynamicEffects.Clear();
-            statDynamicEffects.Clear();
+            damageEffects.Clear();
+            healEffects.Clear();
+            statEffects.Clear();
             damagingBuffs.Clear();
             healingBuffs.Clear();
             statBuffs.Clear();

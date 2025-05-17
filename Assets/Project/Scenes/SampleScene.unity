@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenVirus
       objectReference: {fileID: 0}
+    - target: {fileID: 1711102263862150332, guid: 169a02d1fb54a724ebfbadbdf0a73ab2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4385144991567378431, guid: 169a02d1fb54a724ebfbadbdf0a73ab2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.9025295
@@ -528,6 +532,10 @@ PrefabInstance:
     - target: {fileID: 8993275561615036061, guid: 42574e0640e87d946874b3359352ca2e, type: 3}
       propertyPath: m_Name
       value: SlimyBacteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993275561615036061, guid: 42574e0640e87d946874b3359352ca2e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1567,6 +1575,10 @@ PrefabInstance:
     - target: {fileID: 2029995827079385713, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: defaultWeaponData.Array.size

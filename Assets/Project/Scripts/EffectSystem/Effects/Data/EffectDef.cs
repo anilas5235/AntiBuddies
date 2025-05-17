@@ -14,6 +14,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data
     {
         [SerializeField] private int amount;
         [SerializeField] private T effectType;
+        [SerializeField] private List<StatDependency> extraStatDeps;
         public int Amount => amount;
         public T EffectType => effectType;
 
@@ -21,19 +22,15 @@ namespace Project.Scripts.EffectSystem.Effects.Data
         {
             this.amount = amount;
             this.effectType = effectType;
+            extraStatDeps = new List<StatDependency>();
         }
 
-        public EffectPackage<T> CreatePackage(GameObject source, StatComponent statComponent, List<StatType> extraStats =null)
+        public EffectPackage<T> CreatePackage(GameObject source, IStatGroup statComponent)
         {
             int finalAmount = amount;
-            if (statComponent)
+            if (statComponent != null)
             {
-                List<IStat> extraStatList = new();
-                if (extraStats != null)
-                {
-                    extraStatList.AddRange(extraStats.Select(statComponent.GetStat).Where(stat => stat != null));
-                }
-                finalAmount = effectType.CreationScale(amount, statComponent, extraStatList);
+                finalAmount = effectType.CreationScale(amount, statComponent, extraStatDeps);
             }
             return new EffectPackage<T>(finalAmount, effectType, source);
         }

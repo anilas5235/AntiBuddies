@@ -14,9 +14,15 @@ namespace Project.Scripts.EffectSystem.Effects.Data
         public int Count => data.Count;
         public bool IsEmpty => data.Count == 0;
 
-        public virtual void Add(T t)
+        public void Add(T t)
         {
+            if (t == null) return;
             data.Add(t);
+        }
+        
+        public void Add(List<T> list)
+        {
+            data.AddRange(list);
         }
 
         public void Clear()
