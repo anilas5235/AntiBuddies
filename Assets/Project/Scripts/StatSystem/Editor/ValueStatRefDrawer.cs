@@ -4,20 +4,30 @@ using UnityEngine;
 
 namespace Project.Scripts.StatSystem.Editor
 {
-    //[CustomPropertyDrawer(typeof(ValueStatRef))]
-    public class ValueStatRefDrawer : StatRefDrawer
+    [CustomPropertyDrawer(typeof(ValueStatRef))]
+    public class ValueStatRefDrawer: PropertyDrawer
     {
-        protected override void ChildContent(Rect position, SerializedProperty property)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             SerializedProperty baseValue = property.FindPropertyRelative("baseValue");
             SerializedProperty currValue = property.FindPropertyRelative("currValue");
             SerializedProperty positiveTransform = property.FindPropertyRelative("positiveTransform");
+            SerializedProperty statRefs = property.FindPropertyRelative("statRefs");
+
+            EditorGUILayout.BeginVertical("box");
+            EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
 
             GUI.enabled = false;
-            EditorGUILayout.PropertyField(currValue);
+            EditorGUILayout.PropertyField(currValue, new GUIContent("Current Value"));
             GUI.enabled = true;
-            EditorGUILayout.PropertyField(baseValue);
-            EditorGUILayout.PropertyField(positiveTransform);
+
+            EditorGUILayout.PropertyField(baseValue, new GUIContent("Base Value"));
+            EditorGUILayout.PropertyField(positiveTransform, new GUIContent("Positive Transform"));
+
+            // Ensure the StatRef list is drawn correctly
+            EditorGUILayout.PropertyField(statRefs, new GUIContent("Stat References"), true);
+
+            EditorGUILayout.EndVertical();
         }
     }
 }

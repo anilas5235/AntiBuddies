@@ -7,7 +7,7 @@ namespace Project.Scripts.StatSystem.Stats
     [Serializable]
     public class StatRef
     {
-        [SerializeField] private StatDependency statDependency;
+        [SerializeField] private StatDependency statDependency = new();
         public IStat Stat { get; private set; }
 
         public void Init(IStatGroup statComponent)
