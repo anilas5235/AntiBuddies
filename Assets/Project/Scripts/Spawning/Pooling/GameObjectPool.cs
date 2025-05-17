@@ -6,37 +6,37 @@ using Object = UnityEngine.Object;
 
 namespace Project.Scripts.Spawning.Pooling
 {
-    [Serializable]
-    public class GameObjectPool<TData>
+    public class GameObjectPool : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private int initialObjCount = 10;
         [SerializeField] private int currentTotal;
         [SerializeField] private int currentInPool;
-        private readonly Stack<IPoolable<TData>> _pool = new();
+        private readonly Stack<IPoolable> _pool = new();
         
         public void Init()
         {
             FillPoolTo(initialObjCount);
         }
 
-        public IPoolable<TData> GetObject()
+        public IPoolable GetObject()
         {
-            IPoolable<TData> obj = IsEmpty ? CreateNewInstance() : _pool.Pop();
+            IPoolable obj = IsEmpty ? CreateNewInstance() : _pool.Pop();
             currentInPool = _pool.Count;
+            obj.Activate();
             return obj;
         }
 
-        private IPoolable<TData> CreateNewInstance()
+        private IPoolable CreateNewInstance()
         {
             GameObject obj = Object.Instantiate(prefab);
             currentTotal++;
-            IPoolable<TData> poolable = obj.GetComponent<IPoolable<TData>>();
+            IPoolable poolable = obj.GetComponent<IPoolable>();
             poolable.Init(this);
             return poolable;
         }
         
-        public void AddToPool(IPoolable<TData> obj){
+        public void AddToPool(IPoolable obj){
             obj.Reset();
             obj.Deactivate();
             _pool.Push(obj);

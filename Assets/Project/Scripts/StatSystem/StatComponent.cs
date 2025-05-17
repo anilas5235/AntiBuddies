@@ -10,38 +10,19 @@ namespace Project.Scripts.StatSystem
     [DefaultExecutionOrder(-50)]
     public class StatComponent : MonoBehaviour, IStatGroup
     {
-        [SerializeField] private StatDefaultData defaultStats;
-        [SerializeField] private List<StatType> stats;
-        [SerializeField] private List<Stat> liveStats;
+        [SerializeField] private List<Stat> stats;
 
         private readonly Dictionary<StatType, IStat> _statDict = new();
 
         private void Awake()
         {
+            InitStats();
             CallOnInitStats();
-        }
-
-        public void CheckLiveStats()
-        {
-            foreach (StatType statType in stats)
-            {
-                if (liveStats.FirstOrDefault(s => s.StatType == statType) != null) continue;
-
-                Stat stat = new(statType, defaultStats.GetDefault(statType));
-                liveStats.Add(stat);
-            }
-
-            while (liveStats.Count > stats.Count)
-            {
-                liveStats.RemoveAt(liveStats.Count - 1);
-            }
         }
 
         private void InitStats()
         {
-            CheckLiveStats();
-
-            foreach (Stat stat in liveStats)
+            foreach (Stat stat in stats)
             {
                 _statDict.TryAdd(stat.StatType, stat);
             }
@@ -49,7 +30,6 @@ namespace Project.Scripts.StatSystem
 
         private void CallOnInitStats()
         {
-            InitStats();
             INeedStatComponent[] comps = GetComponentsInChildren<INeedStatComponent>();
             foreach (INeedStatComponent component in comps)
             {
@@ -68,26 +48,45 @@ namespace Project.Scripts.StatSystem
             stat?.ModifyStat(statPackage);
         }
 
-        public void ResetLiveStats()
+        public void ResetStats()
         {
-            foreach (Stat liveStat in liveStats)
+            foreach (Stat liveStat in stats)
             {
                 liveStat.Reset();
             }
         }
 
-        private void ForceStatsToUpdate()
+        private void OnValidate()
         {
-            foreach (Stat liveStat in liveStats)
+            List<StatType> statTypes = new();
+            foreach (Stat stat in stats)
             {
-                liveStat.UpdateValues();
+                if (!stat.StatType)
+                {
+                    Debug.LogWarning($"Stat {stat} has no StatType assigned. Please assign a valid StatType.");
+                    continue;
+                }
+
+                if (statTypes.Contains(stat.StatType))
+                {
+                    Debug.LogWarning(
+                        $"Duplicate StatType {stat.StatType} found in {name}. Please ensure each StatType is unique.");
+                    continue;
+                }
+
+                statTypes.Add(stat.StatType);
+
+                stat.UpdateValues();
             }
         }
 
-
-        private void OnValidate()
+        public void ResetStatOfType(StatType statType)
         {
-            ForceStatsToUpdate();
+            IEnumerable<Stat> s = stats.Where(x => x.StatType == statType);
+            foreach (Stat stat in s)
+            {
+                stat.Reset();
+            }
         }
     }
 }

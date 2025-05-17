@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using Project.Scripts.Spawning.Pooling;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Visuals
 {
-    public class FloatingNumber : MonoBehaviour
+    public class FloatingNumber : LiveTimePoolableMono
     {
         private const float XOffsetRange = .7f;
         private const float YOffset = .5f;
@@ -20,11 +21,10 @@ namespace Project.Scripts.EffectSystem.Visuals
             pos.x += Random.Range(-XOffsetRange, XOffsetRange);
             pos.y += YOffset;
             transform.position = pos;
-
+            lifeTime = floatingNumberData.lifeTime;
+            
             UpdateText();
-            StartCoroutine(LifeCycle());
         }
-
 
         private void UpdateText()
         {
@@ -32,10 +32,10 @@ namespace Project.Scripts.EffectSystem.Visuals
             textMesh.color = data.GetColor();
         }
 
-        private IEnumerator LifeCycle()
+        public override void Reset()
         {
-            yield return new WaitForSeconds(data.lifeTime);
-            Destroy(gameObject);
+            base.Reset();
+            textMesh.color = Color.white;
         }
     }
 }

@@ -136,12 +136,18 @@ MonoBehaviour:
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
   alieGroup: 1
   attackSpeedStat:
-    statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    statRefs:
+    - statDependency:
+        useEfficiency: 100
+        statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
     baseValue: 1
     currValue: 0
     positiveTransform: 0
   rangeStat:
-    statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
+    statRefs:
+    - statDependency:
+        useEfficiency: 100
+        statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
     baseValue: 1.5
     currValue: 0
     positiveTransform: 1
@@ -245,6 +251,7 @@ MonoBehaviour:
     data:
     - amount: 5
       effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
+      extraStatDeps: []
   healEffects:
     data: []
   statEffects:

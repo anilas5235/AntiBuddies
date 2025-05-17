@@ -69,7 +69,7 @@ namespace Project.Scripts.EffectSystem.Components
         public void Apply(EffectPackage<DamageType> package)
         {
             int damage = package.Amount;
-            if (_statComponent) damage = package.EffectType.ReceptionScale(damage, _statComponent);
+            if (_statComponent) damage = package.EffectType.ReceptionScale(damage, _statComponent, null);
             if (damage <= 0) return;
             CurrentHealth -= damage;
             OnDamageReceived?.Invoke(damage, package.EffectType, gameObject);
@@ -79,7 +79,7 @@ namespace Project.Scripts.EffectSystem.Components
         public void Apply(EffectPackage<HealType> package)
         {
             int amount = package.Amount;
-            if (_statComponent) amount = package.EffectType.ReceptionScale(amount, _statComponent);
+            if (_statComponent) amount = package.EffectType.ReceptionScale(amount, _statComponent, null);
             if (amount <= 0 || CurrentHealth >= MaxHealth) return;
             int diff = MaxHealth - CurrentHealth;
             CurrentHealth += amount;

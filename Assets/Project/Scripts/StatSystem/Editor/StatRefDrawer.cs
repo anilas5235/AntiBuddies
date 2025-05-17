@@ -7,30 +7,36 @@ namespace Project.Scripts.StatSystem.Editor
     [CustomPropertyDrawer(typeof(StatRef))]
     public class StatRefDrawer : PropertyDrawer
     {
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUIUtility.singleLineHeight;
-        }
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            SerializedProperty statType = property.FindPropertyRelative("statType");
+            SerializedProperty statType = property.FindPropertyRelative("statDependency.statType");
+            SerializedProperty useEfficiency = property.FindPropertyRelative("statDependency.useEfficiency");
+
+            float lineHeight = EditorGUIUtility.singleLineHeight;
+            float spacing = EditorGUIUtility.standardVerticalSpacing;
             
-            EditorGUILayout.BeginVertical("box");
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(label);
-            EditorGUILayout.PropertyField(statType, GUIContent.none);
-            EditorGUILayout.EndHorizontal();
-            if (!statType.objectReferenceValue)
-            {
-                EditorGUILayout.HelpBox("StatType cannot be null.", MessageType.Error);
-            }
-            ChildContent(position, property);
-            EditorGUILayout.EndVertical();
+            position.x -= 10; // Add padding
+            position.width -= 10;
+
+            // Draw label
+            Rect currentRect = new(position.x, position.y, position.width, lineHeight);
+            EditorGUI.LabelField(currentRect,
+                label.text + "(" + (statType.objectReferenceValue ? statType.objectReferenceValue.name : "Unknown") +
+                ")", EditorStyles.boldLabel);
+
+            // Draw statType field
+            currentRect.y += lineHeight + spacing;
+            EditorGUI.PropertyField(currentRect, statType, new GUIContent("Stat Type"));
+
+            // Draw useEfficiency field
+            currentRect.y += lineHeight + spacing;
+            EditorGUI.PropertyField(currentRect, useEfficiency, new GUIContent("Use Efficiency"));
         }
 
-        protected virtual void ChildContent(Rect position, SerializedProperty property)
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
+            // Calculate height for two fields and spacing
+            return (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing) * 3;
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Project.Scripts.EffectSystem.Components;
+using Project.Scripts.EffectSystem.Effects.Data;
+using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.Spawning.Pooling;
 using Project.Scripts.StatSystem;
 using UnityEngine;
@@ -6,14 +8,14 @@ using UnityEngine;
 namespace Project.Scripts.WeaponSystem.Projectile
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Projectile : MonoBehaviour, IProjectile
+    public class Projectile : PoolableMono, IProjectile
     {
         [SerializeField] private ProjectileData data;
         [SerializeField] private float speed = 10f;
         [SerializeField] private int allowedContacts = 1;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private ContactEffect effectComponent;
+        [SerializeField] private StaticContactEffect effectComponent;
 
         private void OnEnable()
         {
@@ -34,52 +36,35 @@ namespace Project.Scripts.WeaponSystem.Projectile
             }
         }
 
-        public GameObjectPool<ProjectileData> Pool { get; set; }
-
-        public void SetTransform(Vector3 position, Quaternion rotation)
+        public override void Reset()
         {
-            transform.position = position;
-            transform.rotation = rotation;
+            rb.linearVelocity = Vector2.zero;
+            speed = 0;
+            effectComponent.ClearAll();
         }
+       
 
-        public void Activate(ProjectileData projectileData)
+        public void SetData(ProjectileData projectileData, IStatGroup statGroup, GameObject source)
         {
             data = projectileData;
-            gameObject.SetActive(true);
             speed = data.speed;
             allowedContacts = 1;
             spriteRenderer.sprite = data.sprite;
             transform.localScale = data.scale;
             effectComponent.ClearAll();
-            effectComponent.damageEffects.Add(projectileData.damageEffects);
+            foreach (EffectDef<DamageType> effect in projectileData.damageEffects)
+            {
+                effectComponent.damageEffects.Add(effect.CreatePackage(source, statGroup));
+            }
         }
 
-        public void Deactivate()
-        {
-            gameObject.SetActive(false);
-        }
-
-        public void Reset()
-        {
-            rb.linearVelocity = Vector2.zero;
-            speed = 0;
-            effectComponent.ClearAll();
-            effectComponent.statComponent = null;
-        }
-
-        public void ReturnToPool()
-        {
-            Pool.AddToPool(this);
-        }
-
-        public void ProjectileSetUp(Vector2 direction, AlieGroup alieGroup, StatComponent statComponent, int contacts)
+        public void ProjectileSetUp(Vector2 direction, AlieGroup alieGroup, int contacts)
         {
             if (direction == Vector2.zero) return;
             direction = direction.normalized;
             transform.right = direction;
             rb.linearVelocity = direction * speed;
             effectComponent.alieGroup = alieGroup;
-            effectComponent.statComponent = statComponent;
             allowedContacts = contacts;
         }
     }

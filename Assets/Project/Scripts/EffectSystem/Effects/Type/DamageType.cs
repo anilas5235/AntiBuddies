@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using Project.Scripts.StatSystem;
 using UnityEngine;
 
@@ -9,33 +9,34 @@ namespace Project.Scripts.EffectSystem.Effects.Type
     public class DamageType : EffectType
     {
         [SerializeField] private Color color = Color.white;
-        [SerializeField] private List<StatType> flatResistanceStat;
-        [SerializeField] private List<StatType> percentResistanceStat;
-        [SerializeField] private List<StatType> flatScaleStat;
-        [SerializeField] private List<StatType> percentScaleStat;
+
+        [SerializeField] private List<StatDependency> resistanceStats;
+
+        [SerializeField] private List<StatDependency> scaleStats;
+
         public Color Color => color;
-        public override int CreationScale(int amount, StatComponent statComponent)
+
+        private static int ScaleAmount(int amount, IStatGroup statGroup, List<StatDependency> baseStats,
+            List<StatDependency> extraStats, bool isPositive)
         {
-            amount = AggregateStats(amount, statComponent, percentScaleStat, true);
-            amount = AggregateStats(amount, statComponent, flatScaleStat, true);
-            return amount;
+            List<StatDependency> totalDeps = new(baseStats);
+            if (extraStats is { Count: > 0 })
+            {
+                totalDeps.AddRange(extraStats);
+            }
+
+            int result = StatUtils.AggregateStatDeps(amount, totalDeps, statGroup, isPositive);
+            return Math.Max(result, 0);
         }
 
-        public override int ReceptionScale(int amount, StatComponent statComponent)
+        public override int CreationScale(int amount, IStatGroup statGroup, List<StatDependency> extraStats)
         {
-            amount = AggregateStats(amount, statComponent, flatResistanceStat, false);
-            amount = AggregateStats(amount, statComponent, percentResistanceStat, false);
-            return amount;
+            return ScaleAmount(amount, statGroup, scaleStats, extraStats, true);
         }
 
-        private static int AggregateStats(int value, StatComponent statComponent, List<StatType> stats, bool isPositive)
+        public override int ReceptionScale(int amount, IStatGroup statGroup, List<StatDependency> extraStats)
         {
-            if (stats == null || !statComponent) return value;
-
-            return stats.Aggregate(value, (current, stat) =>
-                isPositive
-                    ? statComponent.GetStat(stat)?.TransformPositive(current) ?? current
-                    : statComponent.GetStat(stat)?.TransformNegative(current) ?? current);
+            return ScaleAmount(amount, statGroup, resistanceStats, extraStats, false);
         }
     }
 }

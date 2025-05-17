@@ -5,8 +5,9 @@ using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem.Projectile
 {
-    public interface IProjectile : IPoolable<ProjectileData>
+    public interface IProjectile : IPoolable
     {
-        public void ProjectileSetUp(Vector2 direction, AlieGroup alieGroup, StatComponent statComponent, int contacts);
+        public void SetData(ProjectileData projectileData, IStatGroup statGroup, GameObject source);
+        public void ProjectileSetUp(Vector2 direction, AlieGroup alieGroup, int contacts);
     }
 }

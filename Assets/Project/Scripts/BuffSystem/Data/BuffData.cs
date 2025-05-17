@@ -20,13 +20,16 @@ namespace Project.Scripts.BuffSystem.Data
         [SerializeField] private int ticksPerSecond;
 
         [SerializeField] private EffectDef<T> effect;
+        [SerializeField] private bool canBeAppliedToAlly = true;
         private float TickInterval => 1f / ticksPerSecond;
+        
+        public bool CanBeAppliedToAlly => canBeAppliedToAlly;
 
-        public IBuff GetBuff(IPackageTarget<T> target, GameObject source, StatComponent statComponent)
+        public IBuff GetBuff(IPackageTarget<T> target, GameObject source, IStatGroup statComponent)
         {
             if (target == null) return null;
             EffectPackage<T> e = effect.CreatePackage(source, statComponent);
-            return new Buff<T>(e, duration, target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior());
+            return new Buff<T>(e, duration, target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior(),this);
         }
 
         #region Behaviours

@@ -2,23 +2,25 @@
 
 namespace Project.Scripts.Spawning.Pooling
 {
-    public interface IPoolable<T>
+    public interface IPoolable
     {
-        public GameObjectPool<T> Pool { get; set; }
+        public GameObjectPool Pool { get; set; }
 
-        internal void Init(GameObjectPool<T> pool)
+        public GameObject GetGameObject();
+
+        internal void Init(GameObjectPool pool)
         {
             Pool = pool;
         }
 
-        public void SetTransform(Vector3 position, Quaternion rotation);
-
-        public void Activate(T data);
+        public void Activate();
 
         public void Deactivate();
 
         public void Reset();
 
         public void ReturnToPool();
+        
+        public void SetTransform(Vector3 position, Quaternion rotation);
     }
 }

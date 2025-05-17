@@ -1,7 +1,9 @@
-﻿using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
+﻿using System;
+using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.BuffSystem.Components;
+using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
@@ -9,11 +11,13 @@ using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {
+    [Serializable]
     public sealed class Buff<T> : IBuff where T : EffectType
     {
         public string Name { get; }
         public GameObject Source => _effect.Source;
         public BuffManager BuffManager { get; private set; }
+        public BuffData<T> Data { get; }
         private IStackBehaviour StackBehaviour { get; }
         public BuffGroup BuffGroup { get; set; }
         private IPackageTarget<T> Target { get; }
@@ -24,11 +28,11 @@ namespace Project.Scripts.BuffSystem.Buffs
         private readonly IExitBehaviour _exitBehavior;
 
         public Buff(EffectPackage<T> effect, float duration, IPackageTarget<T> target,
-            IStackBehaviour stackBehaviour,
-            ITickBehaviour tickBehavior, IExitBehaviour exitBehavior)
+            IStackBehaviour stackBehaviour, ITickBehaviour tickBehavior, IExitBehaviour exitBehavior, BuffData<T> data)
         {
             Target = target;
             _exitBehavior = exitBehavior;
+            Data = data;
             _effect = effect;
             _duration = duration;
             _tickBehavior = tickBehavior;

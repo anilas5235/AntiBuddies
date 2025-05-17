@@ -9,10 +9,9 @@ namespace Project.Scripts.StatSystem.Stats
     {
         public event Action OnStatChange;
         public int Value { get; }
-        public int TransformPositive(int baseValue) => Mathf.RoundToInt(TransformPositive((float)baseValue));
-        public int TransformNegative(int baseValue) => Mathf.RoundToInt(TransformNegative((float)baseValue));
-        public float TransformPositive(float baseValue);
-        public float TransformNegative(float baseValue);
+        public bool IsPercentage { get; }
+        public StatType StatType { get; }
+       
         public void ModifyStat(StatModification statModification);
 
         public void ModifyStat(EffectPackage<StatType> statPackage)
