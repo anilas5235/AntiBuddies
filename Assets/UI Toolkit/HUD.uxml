@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/HUDStyle.uss?fileID=7433441132597879392&amp;guid=65879c3243c75f1428348cceb8f5a268&amp;type=3#HUDStyle" />
+    <engine:VisualElement style="flex-grow: 1;">
+        <engine:VisualElement name="StatBars" style="flex-grow: 1; width: 20%;">
+            <engine:ProgressBar value="22" title="5/15" name="Health" class="statBar healthBar" style="-unity-text-align: upper-left; width: auto; align-self: stretch; flex-grow: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;" />
+            <engine:ProgressBar value="22" title="Lvl.0" name="Exp" class="statBar healthBar expBar" style="-unity-text-align: upper-left; width: auto; align-self: stretch; flex-grow: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

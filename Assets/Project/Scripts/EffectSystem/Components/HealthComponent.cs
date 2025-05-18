@@ -16,18 +16,20 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private StatRef maxHpStat;
 
         private StatComponent _statComponent;
-        private int MaxHealth => maxHpStat.Stat.Value;
+        public int MaxHealth => maxHpStat.Stat.Value;
 
-        private int CurrentHealth
+        public int CurrentHealth
         {
             get => currentHealth;
-            set
+            private set
             {
                 if (currentHealth == value) return;
                 currentHealth = Math.Clamp(value, 0, MaxHealth);
                 if (IsDead()) Die();
             }
         }
+
+        public float HealthPercentage => (float)CurrentHealth / MaxHealth;
 
         public event Action<int, DamageType, GameObject> OnDamageReceived;
         public UnityEvent onDamageReceived;
