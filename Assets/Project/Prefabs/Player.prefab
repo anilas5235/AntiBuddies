@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5961228089469582901}
   - component: {fileID: 1304199053460124670}
   - component: {fileID: 4396818464361325487}
+  - component: {fileID: 1508122211642880128}
   m_Layer: 3
   m_Name: body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +128,7 @@ CapsuleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 0.6}
-  m_Direction: 1
+  m_Direction: 0
 --- !u!114 &5961228089469582901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,8 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alieGroup: 1
   healthComponent: {fileID: 4307234338099689046}
-  resistance: {fileID: 3699389999355936274}
-  amplification: {fileID: 5745433279975557315}
 --- !u!114 &1304199053460124670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +174,18 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0, a: 1}
   duration: 0.2
   spriteRenderer: {fileID: 4412279362573788579}
+--- !u!114 &1508122211642880128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293653513685770464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58521b59edf4e0abdc4b245dc9f2e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2029995827079385713
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,8 +199,7 @@ GameObject:
   - component: {fileID: 4307234338099689046}
   - component: {fileID: 8293573683347230753}
   - component: {fileID: 3356991902276083124}
-  - component: {fileID: 3699389999355936274}
-  - component: {fileID: 5745433279975557315}
+  - component: {fileID: 4282238287893853404}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -226,8 +236,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcd3fb852ecf944c91ef9c0845fd4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  maxAcceleration: 1
+  maxAcceleration: 5
+  moveSpeed:
+    statRefs:
+    - statDependency:
+        useEfficiency: 100
+        statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    baseValue: 6
+    currValue: 0
+    positiveTransform: 1
 --- !u!114 &4307234338099689046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,11 +257,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e9c2d10c80b5044a4beea02aa69801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health:
-    statValue: 0
-    clampedValue: 0
-    maxValue: 10
-    minValue: 0
+  currentHealth: 0
+  maxHpStat:
+    statDependency:
+      useEfficiency: 100
+      statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
   onDamageReceived:
     m_PersistentCalls:
       m_Calls:
@@ -271,14 +288,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029995827079385713}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_AngularDamping: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -320,7 +337,7 @@ MonoBehaviour:
   m_DefaultActionMap: Default
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3699389999355936274
+--- !u!114 &4282238287893853404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,28 +346,122 @@ MonoBehaviour:
   m_GameObject: {fileID: 2029995827079385713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d253c15e88ba433eb133b4b2de8796c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 35cb9a2a934a469ab6787ddfc6735ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flatDamageReduction:
+  stats:
+  - statType: {fileID: 11400000, guid: 7fac75f7b0c7e9f49b1f04e927d25dfc, type: 2}
     statValue: 0
     clampedValue: 0
+    percentMultiplier: 0
     maxValue: 100
-    minValue: 0
-  resistances: []
---- !u!114 &5745433279975557315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029995827079385713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8987f17ce15402da15b25db6596cfe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplifications: []
+    minValue: -100
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -100
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 9ae9e11c7a800ac449417d2e24f309da, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -100
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 0d17735fd947eec44a9cfc0e84046141, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 60
+    minValue: -100
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 07a950e63d9c7a2459a3d656d563b65f, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 1e3b73a2a12e3ef4ab712e845e56d54b, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: dfe087d8d19350f47befefa18d5553d0, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -100
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 5df89aa858657d349841d99de210f860, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statValue: 10
+    clampedValue: 10
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 10
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -100
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -100
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: 276d7306589f62f40804b680e8208e63, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: c8b4ff22af6cbf1449dcb06a9bda38b9, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
 --- !u!1 &7670451574764322797
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,5 +508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotCircleRadius: 1
   numberOfSlots: 6
+  currentNumberOfSlots: 0
   weaponSlotPrefab: {fileID: 4847109733002469394, guid: 24ab6752f857f1144bf800314df430ba, type: 3}
-  defaultWeaponData: {fileID: 0}
+  defaultWeaponData: []

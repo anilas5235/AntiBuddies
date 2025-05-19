@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using Project.Scripts.BuffSystem.Buffs;
-using Project.Scripts.BuffSystem.Data;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.BuffSystem.Components
 {
@@ -12,8 +9,9 @@ namespace Project.Scripts.BuffSystem.Components
     public class BuffGroup
     {
         private const int MaxBuffCount = 1000;
-        [SerializeField] private float lastTickTime;
+        [SerializeField] private float tickDelta;
         [SerializeField] private int buffCount;
+        [SerializeField] private float lastTickTime;
         private event Action<float> OnBuffTick;
         public int BuffCount => buffCount;
 
@@ -24,7 +22,7 @@ namespace Project.Scripts.BuffSystem.Components
         {
             if(IsFull) return false;
             OnBuffTick += buff.OnBuffTick;
-            buff.RegisteredAtBuffGroup(this);
+            buff.BuffGroup = this;
             buffCount++;
             return true;
         }
@@ -38,9 +36,9 @@ namespace Project.Scripts.BuffSystem.Components
         internal void Tick()
         {
             float now = Time.time;
-            float deltaTime = now - lastTickTime;
+            tickDelta = now - lastTickTime;
             lastTickTime = now;
-            OnBuffTick?.Invoke(deltaTime);
+            OnBuffTick?.Invoke(tickDelta);
         }
     }
 }

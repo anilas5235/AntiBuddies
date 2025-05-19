@@ -45,13 +45,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b98f9776a234a13b1ca728d1006ad23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
-  attackInterval: 0.5
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
+  alieGroup: 1
+  attackSpeedStat:
+    statRefs:
+    - statDependency:
+        useEfficiency: 100
+        statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    baseValue: 0.4
+    currValue: 0
+    positiveTransform: 0
+  rangeStat:
+    statRefs:
+    - statDependency:
+        useEfficiency: 100
+        statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
+    baseValue: 10
+    currValue: 0
+    positiveTransform: 1
   attackBehaviour: {fileID: 11400000, guid: 17c118038b4068049a754033d6e0ade4, type: 2}
-  projectilePrefab: {fileID: 5625872554786471411, guid: b4550fe16fe5318459c654792c9ed459, type: 3}
+  projectileData: {fileID: 11400000, guid: 14a307630c66be44ba1c30e7975bf775, type: 2}
   projectileCount: 1
   projectileSpawnPoint: {fileID: 6213526889500920904}
+  isFlip: 0
 --- !u!1 &4668028058438883482
 GameObject:
   m_ObjectHideFlags: 0

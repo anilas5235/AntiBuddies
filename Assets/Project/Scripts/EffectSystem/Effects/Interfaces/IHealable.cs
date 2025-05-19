@@ -1,14 +1,14 @@
 ﻿using System;
+using Project.Scripts.EffectSystem.Effects.Data;
+using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Interfaces
 {
-    public interface IHealable
+    public interface IHealable : ITarget<EffectPackage<HealType>>
     {
-        int MaxHealth { get; }
-        event Action<int,EffectType,GameObject> OnHealApplied;
+        event Action<int,HealType,GameObject> OnHealApplied;
         event Action OnDeath;
-        void ApplyHeal(int amount, EffectType type);
         void FullHeal();
     }
 }

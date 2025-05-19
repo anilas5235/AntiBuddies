@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3032735940818429893, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: speedStat.baseValue
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4919007744789787044, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
       propertyPath: m_Name
       value: SlimyBacteria
@@ -16,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8702bf2d235eb09468885a98d72a52f1, type: 3}
+    - target: {fileID: 5458632804673224790, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 39910e5d53319ee41af2d2a041353e0c, type: 2}
     - target: {fileID: 5669197356759340266, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -30,6 +38,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5669197356759340266, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679437470409611216, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: m_Graph
+      value: 
+      objectReference: {fileID: -4578831319606847986, guid: b6342ce00c3679e479eea25dd0650646, type: 2}
+    - target: {fileID: 7679437470409611216, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7895299373064707608, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}

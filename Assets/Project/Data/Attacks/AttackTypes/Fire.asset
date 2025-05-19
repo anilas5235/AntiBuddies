@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fa45537bff445c6a481217f275d8905, type: 3}
+  m_Script: {fileID: 11500000, guid: e3285dfd78ea4a98b01162c82f27e098, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  effectCategory: 0
-  description: no description jet
-  color: {r: 1, g: 0.54861224, b: 0.23113209, a: 1}
-  affectedByPercentModifier: 1
-  affectedByFlatModifier: 0
+  description: Buring Damage
+  color: {r: 1, g: 0.4704976, b: 0, a: 1}
+  ResistanceStats: []
+  ScaleStats: []

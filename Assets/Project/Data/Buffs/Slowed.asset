@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e7c6cefb1c14d2eb4a1c0eeeea99076, type: 3}
+  m_Name: Slowed
+  m_EditorClassIdentifier: 
+  duration: 2
+  stackBehavior: 1
+  tickBehavior: 0
+  exitBehavior: 1
+  ticksPerSecond: 0
+  effect:
+    amount: -30
+    effectType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}

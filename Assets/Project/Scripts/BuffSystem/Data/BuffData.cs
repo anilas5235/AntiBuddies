@@ -3,15 +3,15 @@ using Project.Scripts.BuffSystem.Buffs;
 using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
-using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.Effects.Type;
+using Project.Scripts.StatSystem;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data
 {
-    [CreateAssetMenu(fileName = "NewBuffData", menuName = "BuffSystem/BuffData")]
-    public class BuffData : ScriptableObject
+    public abstract class BuffData<T> : ScriptableObject where T : EffectType
     {
         [SerializeField] private float duration;
         [SerializeField] private StackingBehavior stackBehavior;
@@ -19,14 +19,20 @@ namespace Project.Scripts.BuffSystem.Data
         [SerializeField] private ExitBehavior exitBehavior;
         [SerializeField] private int ticksPerSecond;
 
-        [SerializeField] private EffectData effect;
+        [SerializeField] private EffectDef<T> effect;
+        [SerializeField] private bool canBeAppliedToAlly = true;
         private float TickInterval => 1f / ticksPerSecond;
+        
+        public bool CanBeAppliedToAlly => canBeAppliedToAlly;
 
-        public IBuff GetBuff(ITarget<EffectPackage> target, GameObject source, AlieGroup alieGroup)
+        public IBuff GetBuff(IPackageTarget<T> target, GameObject source, IStatGroup statComponent)
         {
-            EffectPackage e = effect.GetPackage(source, alieGroup);
-            return new Buff(e, duration,  target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior());
+            if (target == null) return null;
+            EffectPackage<T> e = effect.CreatePackage(source, statComponent);
+            return new Buff<T>(e, duration, target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior(),this);
         }
+
+        #region Behaviours
 
         private IExitBehaviour GetExitBehavior()
         {
@@ -58,7 +64,7 @@ namespace Project.Scripts.BuffSystem.Data
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-        
+
         private enum ExitBehavior : byte
         {
             None,
@@ -77,5 +83,7 @@ namespace Project.Scripts.BuffSystem.Data
             Refresh,
             Stacking,
         }
+
+        #endregion
     }
 }

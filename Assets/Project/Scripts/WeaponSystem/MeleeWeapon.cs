@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.WeaponSystem.Attack.Melee;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace Project.Scripts.WeaponSystem
         [SerializeField] private MeleeAttackBehaviour meleeAttackBehaviour;
         [SerializeField] private Collider2D[] weaponColliders;
         [SerializeField] private int restPercent = 30;
+        [SerializeField] private ContactEffect contactEffect;
         internal float AngleOffset { get; set; }
         private float RestPercentage => restPercent / 100f;
 
@@ -17,8 +19,15 @@ namespace Project.Scripts.WeaponSystem
             SetColliderEnabled(false);
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            contactEffect.statComponent = StatComponent;
+        }
+
         private void SetColliderEnabled(bool b)
         {
+            if(b) contactEffect.ClearContacts();
             foreach (Collider2D col in weaponColliders)
             {
                 col.enabled = b;
@@ -28,6 +37,11 @@ namespace Project.Scripts.WeaponSystem
         protected override float CalculateAngleToTarget()
         {
             return base.CalculateAngleToTarget() + AngleOffset;
+        }
+
+        protected override float CalcAttackInterval()
+        {
+            return AttackSpeed + Range/10f;
         }
 
         protected override IEnumerator AttackRoutine(float interval)
@@ -53,7 +67,7 @@ namespace Project.Scripts.WeaponSystem
             SetColliderEnabled(false);
             // Wait for the rest of the attack interval
             yield return new WaitForSeconds(restTime);
-            _coroutine = null;
+            Coroutine = null;
         }
     }
 }

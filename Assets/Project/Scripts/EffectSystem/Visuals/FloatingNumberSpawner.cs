@@ -1,37 +1,45 @@
-using Project.Scripts.EffectSystem.Effects;
+using Project.Scripts.EffectSystem.Effects.Type;
+using Project.Scripts.Spawning.Pooling;
+using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Visuals
 {
-    public class FloatingNumberSpawner : MonoBehaviour
+    public class FloatingNumberSpawner : Singleton<FloatingNumberSpawner>
     {
-        public static FloatingNumberSpawner Instance;
-        [SerializeField] private GameObject damageNumberPrefab;
+        [SerializeField] private GameObjectPool floatingNumberPool;
         [SerializeField] private float displayDuration = 1.0f;
         [SerializeField] private Vector2 offset = new(0, 0.5f);
         [SerializeField] private bool stopSpawn;
 
-        private void Awake()
+        public void SpawnFloatingNumber(int num, Color color, GameObject source)
         {
-            if (!Instance)
+            if (stopSpawn) return;
+            if (!floatingNumberPool)
             {
-                Instance = this;
+                Debug.LogWarning("FloatingNumberPool is null");
+                return;
             }
-            else
+
+            FloatingNumber numberInstance = (FloatingNumber)floatingNumberPool.GetObject();
+            if (!numberInstance)
             {
-                Destroy(gameObject);
+                Debug.LogWarning("FloatingNumberPool returned null");
+                return;
             }
+
+            numberInstance.SetTransform(source.transform.position + (Vector3)offset, Quaternion.identity);
+            numberInstance.Setup(new FloatingNumberData(num, color, displayDuration));
         }
 
-        public void SpawnFloatingNumber(int num,EffectType effectType, GameObject source)
+        public void SpawnFloatingNumber(int num, DamageType damageType, GameObject source)
         {
-            if (!damageNumberPrefab) return;
+            SpawnFloatingNumber(num, damageType.Color, source);
+        }
 
-            FloatingNumber numberInstance =
-                Instantiate(damageNumberPrefab, source.transform.position + (Vector3)offset, Quaternion.identity)
-                    .GetComponent<FloatingNumber>();
-
-            numberInstance.Setup(new FloatingNumberData(num, effectType.Color, displayDuration));
+        public void SpawnFloatingNumber(int num, HealType healType, GameObject source)
+        {
+            SpawnFloatingNumber(num, healType.Color, source);
         }
     }
 }

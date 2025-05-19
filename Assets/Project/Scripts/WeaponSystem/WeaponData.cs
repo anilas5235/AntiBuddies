@@ -11,7 +11,6 @@ namespace Project.Scripts.WeaponSystem
         [SerializeField] private WeaponType weaponType;
         [SerializeField] private List<WeaponTag> weaponTag;
         [SerializeField] private GameObject prefab;
-        
         public GameObject Prefab => prefab;
         public string WeaponName => weaponName;
 
