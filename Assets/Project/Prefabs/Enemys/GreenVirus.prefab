@@ -16,6 +16,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 16e234de589911d4993e932b5d53fc37, type: 3}
+    - target: {fileID: 7052312215536277138, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: stats.Array.data[0].statValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052312215536277138, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: stats.Array.data[0].clampedValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052312215536277138, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: stats.Array.data[0].baseStatValue
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8009642216940962535, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

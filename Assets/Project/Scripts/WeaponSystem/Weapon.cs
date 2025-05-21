@@ -18,6 +18,7 @@ namespace Project.Scripts.WeaponSystem
 
         private Transform _target;
         private WeaponSlot _weaponSlot;
+        protected bool _searchingForTarget = true;
         protected Coroutine Coroutine;
         protected StatComponent StatComponent;
         public float Range => rangeStat.CurrValue;
@@ -46,7 +47,7 @@ namespace Project.Scripts.WeaponSystem
         private void FixedUpdate()
         {
             if (_target && Vector3.Distance(transform.position, _target.position) > Range) _target = null;
-            _target ??= targetingBehaviour.FindTarget(transform, Range);
+            if(!_target && _searchingForTarget) _target = targetingBehaviour.FindTarget(transform, Range);
             if (!_target) return;
             UpdateRotation();
             Attack();

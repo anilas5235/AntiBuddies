@@ -40,6 +40,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7052312215536277138, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: stats.Array.data[0].statValue
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052312215536277138, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: stats.Array.data[0].clampedValue
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052312215536277138, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
+      propertyPath: stats.Array.data[0].baseStatValue
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7679437470409611216, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
       propertyPath: m_Graph
       value: 
