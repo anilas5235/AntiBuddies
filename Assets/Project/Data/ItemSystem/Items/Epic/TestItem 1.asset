@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36a8d847f2541d39827aea2c6b85250, type: 3}
-  m_Name: TestStatBehaviour
+  m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
+  m_Name: TestItem 1
   m_EditorClassIdentifier: 
-  statData: {fileID: 11400000, guid: 4325c03f9ffcc304cb33865df332d0fa, type: 2}
+  cost: 0
+  description: TestItem
+  behaviours:
+  - {fileID: 11400000, guid: 3a0f02d3edb4fd94b9cb164df95900bb, type: 2}
