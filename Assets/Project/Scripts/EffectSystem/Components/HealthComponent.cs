@@ -78,9 +78,9 @@ namespace Project.Scripts.EffectSystem.Components
             int damage = package.Amount;
             if (_statComponent) damage = package.EffectType.ReceptionScale(damage, _statComponent, null);
             if (damage <= 0) return;
-            CurrentHealth -= damage;
             OnDamageReceived?.Invoke(damage, package.EffectType, gameObject);
             onDamageReceived?.Invoke();
+            CurrentHealth -= damage;
         }
 
         public void Apply(EffectPackage<HealType> package)

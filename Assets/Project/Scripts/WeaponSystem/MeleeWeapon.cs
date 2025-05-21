@@ -50,6 +50,7 @@ namespace Project.Scripts.WeaponSystem
             float restTime = interval * RestPercentage;
             float attackTime = interval - restTime;
             SetColliderEnabled(true);
+            _searchingForTarget = false;
 
             // Move the weapon towards the target position
             while (elapsedTime < attackTime)
@@ -63,6 +64,7 @@ namespace Project.Scripts.WeaponSystem
             // Reset the weapon's transform
             transform.localPosition = Vector3.zero;
             AngleOffset = 0f;
+            _searchingForTarget = true;
             // deactivate the weapon collider
             SetColliderEnabled(false);
             // Wait for the rest of the attack interval

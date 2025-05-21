@@ -5,15 +5,17 @@ using UnityEngine;
 
 namespace Project.Scripts.Enemy
 {
-    public class AgentSpeed : MonoBehaviour, INeedStatComponent
+    public class Enemy : MonoBehaviour, INeedStatComponent
     {
         [SerializeField] private ValueStatRef speedStat;
 
         [SerializeField] private BehaviorGraphAgent behaviorGraphAgent;
+        private StatComponent _statComponent;
 
         public void OnStatInit(StatComponent statComponent)
         {
-            speedStat.Init(statComponent);
+            _statComponent = statComponent;
+            speedStat.Init(_statComponent);
         }
 
         private void OnEnable()
@@ -21,7 +23,7 @@ namespace Project.Scripts.Enemy
             speedStat.OnValueChange += OnSpeedStatChange;
             OnSpeedStatChange();
         }
-        
+
         private void OnDisable()
         {
             speedStat.OnValueChange -= OnSpeedStatChange;
@@ -29,7 +31,12 @@ namespace Project.Scripts.Enemy
 
         private void OnSpeedStatChange()
         {
-            behaviorGraphAgent.SetVariableValue("Speed",speedStat.CurrValue);
+            behaviorGraphAgent.SetVariableValue("Speed", speedStat.CurrValue);
+        }
+
+        public void Die()
+        {
+            Destroy(gameObject);
         }
     }
 }

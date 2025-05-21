@@ -136,7 +136,19 @@ MonoBehaviour:
         m_CallState: 2
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3032735940818429893}
+        m_TargetAssemblyTypeName: Project.Scripts.Enemy.Enemy, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7052312215536277138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,12 +163,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
   - statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
-    statValue: 0
-    clampedValue: 0
+    statValue: 5
+    clampedValue: 5
     percentMultiplier: 0
     maxValue: 2147483647
     minValue: -2147483648
-    baseStatValue: 0
+    baseStatValue: 5
     tempStatBonus: 0
   - statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
     statValue: 0
@@ -175,7 +187,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4919007744789787044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a723959da0dc40ab86dcbadd7aba3e04, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a6040a58b6d4d21981ed76c81de5f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speedStat:

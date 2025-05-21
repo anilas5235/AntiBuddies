@@ -148,13 +148,13 @@ MonoBehaviour:
     - statDependency:
         useEfficiency: 100
         statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
-    baseValue: 1.5
+    baseValue: 2
     currValue: 0
     positiveTransform: 1
   meleeAttackBehaviour: {fileID: 11400000, guid: 98facdf158d49e74c81a694f09b1ee9f, type: 2}
   weaponColliders:
   - {fileID: 114367337451605291}
-  restPercent: 30
+  restPercent: 50
   contactEffect: {fileID: 7808569503964837938}
 --- !u!1 &7009135823704326037
 GameObject:
@@ -247,14 +247,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffects:
+  damageDynamicEffects:
     data:
     - amount: 5
       effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
       extraStatDeps: []
-  healEffects:
+  healDynamicEffects:
     data: []
-  statEffects:
+  statDynamicEffects:
     data: []
   damagingBuffs:
     data: []
