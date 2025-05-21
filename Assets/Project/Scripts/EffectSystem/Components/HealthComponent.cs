@@ -23,13 +23,16 @@ namespace Project.Scripts.EffectSystem.Components
             get => currentHealth;
             private set
             {
+                value = Mathf.Clamp(value, 0, MaxHealth);
                 if (currentHealth == value) return;
-                currentHealth = Math.Clamp(value, 0, MaxHealth);
+                currentHealth = value;
+                OnHealthChange?.Invoke();
                 if (IsDead()) Die();
             }
         }
 
         public float HealthPercentage => (float)CurrentHealth / MaxHealth;
+        public event Action OnHealthChange;
 
         public event Action<int, DamageType, GameObject> OnDamageReceived;
         public UnityEvent onDamageReceived;
@@ -42,12 +45,14 @@ namespace Project.Scripts.EffectSystem.Components
             FullHeal();
             OnDamageReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
             OnHealApplied += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
+            maxHpStat.Stat.OnStatChange += HandleMaxHealthChange;
         }
-
+        
         private void OnDisable()
         {
             OnDamageReceived -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
             OnHealApplied -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
+            maxHpStat.Stat.OnStatChange -= HandleMaxHealthChange;
         }
 
         public bool IsDead() => CurrentHealth <= 0;
@@ -86,6 +91,11 @@ namespace Project.Scripts.EffectSystem.Components
             int diff = MaxHealth - CurrentHealth;
             CurrentHealth += amount;
             OnHealApplied?.Invoke(diff < amount ? diff : amount, package.EffectType, gameObject);
+        }
+        
+        private void HandleMaxHealthChange()
+        {
+            OnHealthChange?.Invoke();
         }
     }
 }

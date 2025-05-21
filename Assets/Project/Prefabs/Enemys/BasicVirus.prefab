@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 821334034517289629}
   - component: {fileID: 7052312215536277138}
   - component: {fileID: 3032735940818429893}
+  - component: {fileID: 7295848686759527547}
   m_Layer: 0
   m_Name: BasicVirus
   m_TagString: Enemy
@@ -82,7 +83,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4919007744789787044}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -186,6 +187,42 @@ MonoBehaviour:
     currValue: 0
     positiveTransform: 1
   behaviorGraphAgent: {fileID: 7679437470409611216}
+--- !u!58 &7295848686759527547
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919007744789787044}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.2
 --- !u!1 &7691238699623227762
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,14 +392,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffects:
+  damageDynamicEffects:
     data:
     - amount: 1
       effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
       extraStatDeps: []
-  healEffects:
+  healDynamicEffects:
     data: []
-  statEffects:
+  statDynamicEffects:
     data: []
   damagingBuffs:
     data: []
