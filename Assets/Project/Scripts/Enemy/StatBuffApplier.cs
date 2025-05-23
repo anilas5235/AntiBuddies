@@ -1,0 +1,20 @@
+﻿using Project.Scripts.BuffSystem.Data;
+using Project.Scripts.EffectSystem.Components;
+using Project.Scripts.Utils;
+using UnityEngine;
+
+namespace Project.Scripts.Enemy
+{
+    public class StatBuffApplier : MonoBehaviour, IHandleContact
+    {
+        [SerializeField] private StatBuffData statBuffData;
+        [SerializeField] private AlieGroup alieGroup = AlieGroup.Enemy;
+        
+        public void HandleContact(GameObject contact)
+        {
+            ContactToHubAdapter hubAdapter = new(contact, alieGroup);
+            if (!hubAdapter.IsValid) return;
+            hubAdapter.Apply(statBuffData?.GetBuff(null));
+        }
+    }
+}

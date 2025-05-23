@@ -29,14 +29,14 @@ namespace Project.Scripts.EffectSystem.Effects.Type
             return Math.Max(result, 0);
         }
 
-        public override int CreationScale(int amount, IStatGroup statGroup, List<StatDependency> extraStats)
+        public int CreationScale(int amount, IStatGroup statGroup, List<StatDependency> extraStats)
         {
             return ScaleAmount(amount, statGroup, scaleStats, extraStats, true);
         }
 
-        public override int ReceptionScale(int amount, IStatGroup statGroup, List<StatDependency> extraStats)
+        public int ReceptionScale(int amount, IStatGroup statGroup)
         {
-            return ScaleAmount(amount, statGroup, resistanceStats, extraStats, false);
+            return ScaleAmount(amount, statGroup, resistanceStats, null, false);
         }
     }
 }

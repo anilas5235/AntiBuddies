@@ -1,16 +1,10 @@
-﻿using System;
-using Project.Scripts.EffectSystem.Effects.Data;
-using Project.Scripts.EffectSystem.Effects.Type;
-using UnityEngine;
-
-namespace Project.Scripts.EffectSystem.Effects.Interfaces
+﻿namespace Project.Scripts.EffectSystem.Effects.Interfaces
 {
-    public interface IDamageable : ITarget<EffectPackage<DamageType>>
+    public interface IDamageable
     {
-        event Action<int,DamageType,GameObject> OnDamageReceived;
+        int TakeDamage(int amount);
         bool IsDead();
         bool IsAlive();
-
         void Die();
     }
 }

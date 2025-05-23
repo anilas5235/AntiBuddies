@@ -1,50 +1,25 @@
 ﻿using System;
 using Project.Scripts.BuffSystem.Buffs;
-using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
-using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
-using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data
 {
-    public abstract class BuffData<T> : ScriptableObject where T : EffectType
+    public abstract class BuffData : ScriptableObject
     {
-        [SerializeField] private float duration;
-        [SerializeField] private StackingBehavior stackBehavior;
-        [SerializeField] private TickingBehavior tickBehavior;
-        [SerializeField] private ExitBehavior exitBehavior;
+        [SerializeField] protected float duration;
+        [SerializeField] protected StackingBehavior stackBehavior;
+        [SerializeField] protected TickingBehavior tickBehavior;
         [SerializeField] private int ticksPerSecond;
 
-        [SerializeField] private EffectDef<T> effect;
-        [SerializeField] private bool canBeAppliedToAlly = true;
         private float TickInterval => 1f / ticksPerSecond;
-        
-        public bool CanBeAppliedToAlly => canBeAppliedToAlly;
-
-        public IBuff GetBuff(IPackageTarget<T> target, GameObject source, IStatGroup statComponent)
-        {
-            if (target == null) return null;
-            EffectPackage<T> e = effect.CreatePackage(source, statComponent);
-            return new Buff<T>(e, duration, target, GetStackBehavior(), GetTickBehavior(), GetExitBehavior(),this);
-        }
 
         #region Behaviours
 
-        private IExitBehaviour GetExitBehavior()
-        {
-            return exitBehavior switch
-            {
-                ExitBehavior.None => null,
-                ExitBehavior.Inverse => new InverseEffectBehaviour(),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        }
-
-        private ITickBehaviour GetTickBehavior()
+        protected ITickBehaviour GetTickBehavior()
         {
             return tickBehavior switch
             {
@@ -54,7 +29,7 @@ namespace Project.Scripts.BuffSystem.Data
             };
         }
 
-        private IStackBehaviour GetStackBehavior()
+        protected IStackBehaviour GetStackBehavior()
         {
             return stackBehavior switch
             {
@@ -65,19 +40,13 @@ namespace Project.Scripts.BuffSystem.Data
             };
         }
 
-        private enum ExitBehavior : byte
-        {
-            None,
-            Inverse,
-        }
-
-        private enum TickingBehavior : byte
+        protected enum TickingBehavior : byte
         {
             None,
             Ticking,
         }
 
-        private enum StackingBehavior : byte
+        protected enum StackingBehavior : byte
         {
             None,
             Refresh,

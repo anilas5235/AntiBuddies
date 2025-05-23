@@ -1463,7 +1463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: defaultWeaponData.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: 'defaultWeaponData.Array.data[0]'

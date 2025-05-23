@@ -1,4 +1,5 @@
-﻿using Project.Scripts.Utils;
+﻿using System;
+using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.Spawning.Pooling
@@ -7,6 +8,7 @@ namespace Project.Scripts.Spawning.Pooling
     {
         [SerializeField] private GameObjectPool projectilePool;
         [SerializeField] private GameObjectPool puddlePool;
+
 
         protected override void Awake()
         {
@@ -25,7 +27,7 @@ namespace Project.Scripts.Spawning.Pooling
             {
                 AvailablePool.Projectile => projectilePool,
                 AvailablePool.Puddle => puddlePool,
-                _ => throw new System.ArgumentOutOfRangeException(nameof(type), type, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
         }
     }

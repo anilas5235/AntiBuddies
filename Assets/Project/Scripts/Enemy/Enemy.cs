@@ -36,7 +36,7 @@ namespace Project.Scripts.Enemy
 
         public void Die()
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

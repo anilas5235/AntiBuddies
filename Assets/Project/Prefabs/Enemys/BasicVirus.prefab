@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7052312215536277138}
   - component: {fileID: 3032735940818429893}
   - component: {fileID: 7295848686759527547}
+  - component: {fileID: 6999244719332310704}
   m_Layer: 0
   m_Name: BasicVirus
   m_TagString: Enemy
@@ -119,21 +120,6 @@ MonoBehaviour:
     statDependency:
       useEfficiency: 100
       statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
-  onDamageReceived:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9118214270691948427}
-        m_TargetAssemblyTypeName: Project.Scripts.UtilComponents.FlashColor, Assembly-CSharp
-        m_MethodName: Flash
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -235,6 +221,24 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.2
+--- !u!114 &6999244719332310704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919007744789787044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6c391c2b8840d18017b5ebda2ff50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    amount: 1
+    damageType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
+    extraStatDeps: []
+  buffData: {fileID: 0}
+  alieGroup: 0
 --- !u!1 &7691238699623227762
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,8 +252,8 @@ GameObject:
   - component: {fileID: 5458632804673224790}
   - component: {fileID: 5854833170621524535}
   - component: {fileID: 9118214270691948427}
-  - component: {fileID: 6682953877771275521}
   - component: {fileID: 5022748536055724361}
+  - component: {fileID: 1582904719094375805}
   m_Layer: 7
   m_Name: Body
   m_TagString: Enemy
@@ -377,6 +381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alieGroup: 0
   healthComponent: {fileID: 821334034517289629}
+  buffManager: {fileID: 5022748536055724361}
 --- !u!114 &9118214270691948427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,36 +397,6 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0, a: 1}
   duration: 0.2
   spriteRenderer: {fileID: 5458632804673224790}
---- !u!114 &6682953877771275521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691238699623227762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageDynamicEffects:
-    data:
-    - amount: 1
-      effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
-      extraStatDeps: []
-  healDynamicEffects:
-    data: []
-  statDynamicEffects:
-    data: []
-  damagingBuffs:
-    data: []
-  healingBuffs:
-    data: []
-  statBuffs:
-    data: []
-  alieGroup: 0
-  statComponent: {fileID: 7052312215536277138}
-  applyOnlyOncePerObject: 0
 --- !u!114 &5022748536055724361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,3 +409,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58521b59edf4e0abdc4b245dc9f2e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1582904719094375805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691238699623227762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onlyOncePerObject: 1
+  onContactEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6999244719332310704}
+        m_TargetAssemblyTypeName: Project.Scripts.Enemy.BodyDamage, Assembly-CSharp
+        m_MethodName: HandleContact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -38,7 +38,8 @@ namespace Project.Scripts.WeaponSystem
             for (int i = 0; i < projectileCount; i++)
             {
                 IProjectile projectile = (IProjectile)_projectilePool.GetObject();
-                projectile.SetData(projectileData, StatComponent, gameObject);
+                projectile.SetData(projectileData, damage.CreatePackage(gameObject, StatComponent),
+                    buff?.GetBuff(null, gameObject, StatComponent));
                 projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
                 projectile.ProjectileSetUp(attackBehaviour.GetDirection(this) * FlipMultiplier,
                     alieGroup, projectileData.contacts);

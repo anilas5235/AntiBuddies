@@ -1,5 +1,6 @@
 using System;
 using Project.Scripts.EffectSystem.Effects.Data;
+using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.EffectSystem.Visuals;
@@ -14,8 +15,6 @@ namespace Project.Scripts.EffectSystem.Components
     {
         [SerializeField] private int currentHealth = 10;
         [SerializeField] private StatRef maxHpStat;
-
-        private StatComponent _statComponent;
         public int MaxHealth => maxHpStat.Stat.Value;
 
         public int CurrentHealth
@@ -33,26 +32,34 @@ namespace Project.Scripts.EffectSystem.Components
 
         public float HealthPercentage => (float)CurrentHealth / MaxHealth;
         public event Action OnHealthChange;
-
-        public event Action<int, DamageType, GameObject> OnDamageReceived;
-        public UnityEvent onDamageReceived;
         public event Action OnDeath;
         public UnityEvent onDeath;
-        public event Action<int, HealType, GameObject> OnHealApplied;
 
         private void OnEnable()
         {
             FullHeal();
-            OnDamageReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
-            OnHealApplied += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
             maxHpStat.Stat.OnStatChange += HandleMaxHealthChange;
         }
         
         private void OnDisable()
         {
-            OnDamageReceived -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
-            OnHealApplied -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
             maxHpStat.Stat.OnStatChange -= HandleMaxHealthChange;
+        }
+
+        public int TakeDamage(int amount)
+        {
+            if (amount <= 0) return 0;
+            CurrentHealth -= amount;
+            return amount;
+        }
+        
+        public int Heal(int amount)
+        {
+            if (amount <= 0 || CurrentHealth >= MaxHealth) return 0;
+            int diff = MaxHealth - CurrentHealth;
+            amount = diff < amount ? diff : amount;
+            CurrentHealth += amount;
+            return amount;
         }
 
         public bool IsDead() => CurrentHealth <= 0;
@@ -69,28 +76,7 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void OnStatInit(StatComponent statComponent)
         {
-            _statComponent = statComponent;
             maxHpStat.Init(statComponent);
-        }
-
-        public void Apply(EffectPackage<DamageType> package)
-        {
-            int damage = package.Amount;
-            if (_statComponent) damage = package.EffectType.ReceptionScale(damage, _statComponent, null);
-            if (damage <= 0) return;
-            OnDamageReceived?.Invoke(damage, package.EffectType, gameObject);
-            onDamageReceived?.Invoke();
-            CurrentHealth -= damage;
-        }
-
-        public void Apply(EffectPackage<HealType> package)
-        {
-            int amount = package.Amount;
-            if (_statComponent) amount = package.EffectType.ReceptionScale(amount, _statComponent, null);
-            if (amount <= 0 || CurrentHealth >= MaxHealth) return;
-            int diff = MaxHealth - CurrentHealth;
-            CurrentHealth += amount;
-            OnHealApplied?.Invoke(diff < amount ? diff : amount, package.EffectType, gameObject);
         }
         
         private void HandleMaxHealthChange()
