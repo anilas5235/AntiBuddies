@@ -11,15 +11,15 @@ namespace Project.Scripts.Enemy
     {
         [SerializeField] private DamageDefinition damage = new();
         [SerializeField] private DamageBuffData buffData;
-        [SerializeField] private AlieGroup alieGroup = AlieGroup.Enemy;
+        [SerializeField] private AllyGroup allyGroup = AllyGroup.Enemy;
         private StatComponent _statComponent;
-        
+
         public void HandleContact(GameObject contact)
         {
-            ContactToHubAdapter hubAdapter = new(contact, alieGroup);
+            ContactToHubAdapter hubAdapter = new(contact, allyGroup);
             if (!hubAdapter.IsValid) return;
             hubAdapter.Apply(damage.CreatePackage(gameObject, _statComponent));
-            hubAdapter.Apply(buffData?.GetBuff(null,gameObject, _statComponent));
+            hubAdapter.Apply(buffData?.GetBuff(null, gameObject, _statComponent));
         }
 
         public void OnStatInit(StatComponent statComponent)

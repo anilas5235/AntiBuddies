@@ -10,11 +10,13 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
     {
         [SerializeField] private DamageType damageType;
         [SerializeField] private GameObject source;
+        private bool _isCritical;
         public event Action<int> OnDamageApplied; 
 
-        public DamagePackage(int amount, GameObject source, DamageType damageType) : base(amount)
+        public DamagePackage(int amount, GameObject source, DamageType damageType, bool isCritical = false) : base(amount)
         {
             this.damageType = damageType;
+            _isCritical = isCritical;
             this.source = source;
         }
 

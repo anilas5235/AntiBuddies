@@ -12,8 +12,8 @@ namespace Project.Scripts.BuffSystem.Buffs
         private int _numberOfApplies;
 
         public StatBuff(StatPackage statPackage, float duration, IPackageHub hub, IStackBehaviour stack,
-            ITickBehaviour tick)
-            : base(ConstructName(statPackage.StatType, stack, tick), duration, hub, stack, tick, true)
+            ITickBehaviour tick, bool affectsAlly = false)
+            : base(ConstructName(statPackage.StatType, stack, tick), duration, hub, stack, tick, affectsAlly)
         {
             _statPackage = statPackage;
             _statPackageInverse = statPackage.Inverse();

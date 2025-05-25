@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Data.Definition;
-using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.WeaponSystem.Slot;
@@ -16,11 +13,12 @@ namespace Project.Scripts.WeaponSystem
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
         [SerializeField] private TargetingBehaviour targetingBehaviour;
-        [SerializeField] protected AlieGroup alieGroup = AlieGroup.Player;
-        
+        [SerializeField] protected AllyGroup allyGroup = AllyGroup.Player;
+        [SerializeField] protected EffectPipeline effectPipeline;
+
         [SerializeField] protected DamageDefinition damage = new();
         [SerializeField] protected DamageBuffData buff;
-        
+
         [SerializeField] private ValueStatRef attackSpeedStat;
         [SerializeField] private ValueStatRef rangeStat;
 
@@ -36,7 +34,7 @@ namespace Project.Scripts.WeaponSystem
         {
             _weaponSlot = GetComponentInParent<WeaponSlot>();
             StatComponent = GetComponentInParent<StatComponent>();
-            
+
             attackSpeedStat.Init(StatComponent);
             rangeStat.Init(StatComponent);
         }
@@ -60,7 +58,7 @@ namespace Project.Scripts.WeaponSystem
         private void FixedUpdate()
         {
             if (_target && Vector3.Distance(transform.position, _target.position) > Range) _target = null;
-            if(!_target && SearchingForTarget) _target = targetingBehaviour.FindTarget(transform, Range);
+            if (!_target && SearchingForTarget) _target = targetingBehaviour.FindTarget(transform, Range);
             if (!_target) return;
             UpdateRotation();
             Attack();
@@ -81,6 +79,7 @@ namespace Project.Scripts.WeaponSystem
 
         public void DestroyWeapon()
         {
+            StopCoroutine(Coroutine);
             Destroy(gameObject);
         }
 

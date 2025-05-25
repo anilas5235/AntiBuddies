@@ -14,6 +14,8 @@ namespace Project.Scripts.EffectSystem.Effects.Type
         public bool IsPercentage => statType.IsPercentage;
         public StatType StatType => statType;
         
+        public bool IsValid => statType;
+        
         public StatDependency()
         {
             useEfficiency = 100;

@@ -11,6 +11,6 @@ namespace Project.Scripts.WeaponSystem.Projectile
 
     {
         public void SetData(ProjectileData projectileData, DamagePackage damagePackage, DamageBuff damageBuff);
-        public void ProjectileSetUp(Vector2 direction, AlieGroup alieGroup, int contacts);
+        public void ProjectileSetUp(Vector2 direction, AllyGroup allyGroup, int contacts);
     }
 }

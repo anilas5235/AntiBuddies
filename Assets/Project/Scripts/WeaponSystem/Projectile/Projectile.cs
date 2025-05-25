@@ -18,7 +18,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
 
         private DamagePackage _damagePackage;
         private DamageBuff _damageBuff;
-        private AlieGroup _alieGroup;
+        private AllyGroup _allyGroup;
 
         public override void Reset()
         {
@@ -39,19 +39,19 @@ namespace Project.Scripts.WeaponSystem.Projectile
             _damageBuff = damageBuff;
         }
 
-        public void ProjectileSetUp(Vector2 direction, AlieGroup alieGroup, int contacts)
+        public void ProjectileSetUp(Vector2 direction, AllyGroup allyGroup, int contacts)
         {
             if (direction == Vector2.zero) return;
             direction = direction.normalized;
             transform.right = direction;
             rb.linearVelocity = direction * speed;
             allowedContacts = contacts;
-            _alieGroup = alieGroup;
+            _allyGroup = allyGroup;
         }
 
         public void HandleContact(GameObject contact)
         {
-            ContactToHubAdapter hubAdapter = new(contact, _alieGroup);
+            ContactToHubAdapter hubAdapter = new(contact, _allyGroup);
             if (!hubAdapter.IsValid || hubAdapter.Alie) return;
             hubAdapter.Apply(_damagePackage);
             hubAdapter.Apply(_damageBuff?.GetCopy());

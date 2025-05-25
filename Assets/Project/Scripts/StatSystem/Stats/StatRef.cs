@@ -9,6 +9,8 @@ namespace Project.Scripts.StatSystem.Stats
     {
         [SerializeField] private StatDependency statDependency = new();
         public IStat Stat { get; private set; }
+        
+        public bool IsValid => statDependency.IsValid || Stat != null;
 
         public void Init(IStatGroup statComponent)
         {

@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa000549cb94460b3dae725d11b26ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5
+  lifeTime: 15
   timeToLive: 5
   spriteRenderer: {fileID: 4899480555218850068}
 --- !u!114 &5622249107833275324
@@ -184,4 +184,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statBuffData: {fileID: 11400000, guid: 2b1b060c30fa4064bb8254e94cc5cdf0, type: 2}
-  alieGroup: 0
+  allyGroup: 0

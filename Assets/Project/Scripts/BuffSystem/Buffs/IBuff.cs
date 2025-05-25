@@ -8,7 +8,7 @@ namespace Project.Scripts.BuffSystem.Buffs
         BuffManager BuffManager { get; }
         BuffGroup BuffGroup { get; set; }
         public IPackageHub Hub { get; set; }
-        bool CanBeAppliedToAlly { get; }
+        bool AffectsAllies { get; }
         string Name { get; }
         void OnBuffAdded();
         void OnBuffTick(float deltaTime);

@@ -42,7 +42,7 @@ namespace Project.Scripts.WeaponSystem
                     buff?.GetBuff(null, gameObject, StatComponent));
                 projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
                 projectile.ProjectileSetUp(attackBehaviour.GetDirection(this) * FlipMultiplier,
-                    alieGroup, projectileData.contacts);
+                    allyGroup, projectileData.contacts);
             }
 
             yield return new WaitForSeconds(interval);

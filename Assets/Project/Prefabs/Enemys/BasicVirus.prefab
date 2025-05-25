@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 821334034517289629}
   - component: {fileID: 7052312215536277138}
   - component: {fileID: 3032735940818429893}
-  - component: {fileID: 7295848686759527547}
   - component: {fileID: 6999244719332310704}
   m_Layer: 0
   m_Name: BasicVirus
@@ -181,46 +180,10 @@ MonoBehaviour:
     - statDependency:
         useEfficiency: 100
         statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
-    baseValue: 2
+    baseValue: 2.8
     currValue: 0
     positiveTransform: 1
   behaviorGraphAgent: {fileID: 7679437470409611216}
---- !u!58 &7295848686759527547
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919007744789787044}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.2
 --- !u!114 &6999244719332310704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +201,7 @@ MonoBehaviour:
     damageType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
     extraStatDeps: []
   buffData: {fileID: 0}
-  alieGroup: 0
+  allyGroup: 0
 --- !u!1 &7691238699623227762
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +217,7 @@ GameObject:
   - component: {fileID: 9118214270691948427}
   - component: {fileID: 5022748536055724361}
   - component: {fileID: 1582904719094375805}
+  - component: {fileID: 7650959568606850438}
   m_Layer: 7
   m_Name: Body
   m_TagString: Enemy
@@ -379,9 +343,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b03a9a91ea0baa4a9cc71e92677617b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alieGroup: 0
+  allyGroup: 0
   healthComponent: {fileID: 821334034517289629}
   buffManager: {fileID: 5022748536055724361}
+  effectPipeline: {fileID: 0}
+  dodgeStat:
+    statDependency:
+      useEfficiency: 100
+      statType: {fileID: 11400000, guid: 0d17735fd947eec44a9cfc0e84046141, type: 2}
+  onDamageReceived:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9118214270691948427}
+        m_TargetAssemblyTypeName: Project.Scripts.UtilComponents.FlashColor, Assembly-CSharp
+        m_MethodName: Flash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9118214270691948427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,3 +421,39 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!58 &7650959568606850438
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691238699623227762}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.2

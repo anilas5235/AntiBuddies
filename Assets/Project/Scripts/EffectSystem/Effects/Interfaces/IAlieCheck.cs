@@ -4,6 +4,6 @@ namespace Project.Scripts.EffectSystem.Effects.Interfaces
 {
     public interface IAlieCheck
     {
-        public bool IsAlie(AlieGroup group);
+        public bool IsAlie(AllyGroup group);
     }
 }

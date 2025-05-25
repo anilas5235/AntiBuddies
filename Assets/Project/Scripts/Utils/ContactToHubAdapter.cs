@@ -9,13 +9,15 @@ namespace Project.Scripts.Utils
     public class ContactToHubAdapter : IPackageHub
     {
         private GameObject ContactObject { get; }
+        private EffectPipeline EffectPipeline { get; }
         private IPackageHub Hub { get; }
         public bool Alie { get; }
 
         public bool IsValid { get; } = true;
 
-        public ContactToHubAdapter(GameObject contactObject, AlieGroup alieGroup)
+        public ContactToHubAdapter(GameObject contactObject, AllyGroup allyGroup, EffectPipeline effectPipeline = null)
         {
+            EffectPipeline = effectPipeline;
             ContactObject = contactObject;
             if (!ContactObject)
             {
@@ -30,28 +32,31 @@ namespace Project.Scripts.Utils
                 return;
             }
 
-            Alie = Hub.IsAlie(alieGroup);
+            Alie = Hub.IsAlie(allyGroup);
         }
 
         public void Apply(DamagePackage package)
         {
             if (!IsValid || package == null || Alie) return;
             Hub.Apply(package);
+            EffectPipeline?.Execute(Hub, EffectPipelineMode.Damage);
         }
 
         public void Apply(HealPackage package)
         {
             if (!IsValid || package == null || !Alie) return;
             Hub.Apply(package);
+            EffectPipeline?.Execute(Hub, EffectPipelineMode.Heal);
         }
 
         public void Apply(StatPackage package)
         {
             if (!IsValid|| package == null) return;
             Hub.Apply(package);
+            EffectPipeline?.Execute(Hub, EffectPipelineMode.Stat);
         }
 
-        public bool IsAlie(AlieGroup group)
+        public bool IsAlie(AllyGroup group)
         {
             if (!IsValid) return false;
             return Hub.IsAlie(group);
@@ -60,7 +65,7 @@ namespace Project.Scripts.Utils
         public void Apply(IBuff buff)
         {
             if (!IsValid|| buff == null) return;
-            if (!buff.CanBeAppliedToAlly && Alie) return;
+            if (!buff.AffectsAllies && Alie) return;
             buff.Hub = Hub;
             Hub.Apply(buff);
         }

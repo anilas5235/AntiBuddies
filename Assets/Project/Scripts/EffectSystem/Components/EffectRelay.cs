@@ -1,32 +1,39 @@
 using System;
 using Project.Scripts.BuffSystem.Buffs;
 using Project.Scripts.BuffSystem.Components;
-using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.EffectSystem.Visuals;
 using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Project.Scripts.EffectSystem.Components
 {
     public class EffectRelay : MonoBehaviour, IPackageHub, INeedStatComponent
     {
-        [SerializeField] private AlieGroup alieGroup;
+        [SerializeField] private AllyGroup allyGroup;
+
         [SerializeField] private HealthComponent healthComponent;
         [SerializeField] private BuffManager buffManager;
+        [SerializeField] private EffectPipeline effectPipeline;
+        [SerializeField] private StatRef dodgeStat;
         private StatComponent _statComponent;
-        
+
         public event Action<int, DamageType, GameObject> OnDamageReceived;
         public event Action<int, HealType, GameObject> OnHealReceived;
+        
+        public UnityEvent onDamageReceived;
 
         private void OnEnable()
         {
             OnDamageReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
             OnHealReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
         }
-        
+
         private void OnDisable()
         {
             OnDamageReceived -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
@@ -35,10 +42,26 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void Apply(DamagePackage package)
         {
+            if (dodgeStat.IsValid && dodgeStat.GetValue() >= Random.Range(1, 100))
+            {
+                if (effectPipeline)
+                {
+                    effectPipeline.Execute(this, EffectPipelineMode.SelfDodge);
+                    IPackageHub other = package.Source.GetComponent<IPackageHub>();
+                    if (other != null)
+                    {
+                        effectPipeline.Execute(other, EffectPipelineMode.OtherDodge);
+                    }
+                }
+
+                return;
+            }
+
             int damage = package.Amount;
             if (_statComponent) damage = package.ReceptionScale(damage, _statComponent);
             damage = healthComponent.TakeDamage(damage);
             OnDamageReceived?.Invoke(damage, package.DamageType, gameObject);
+            onDamageReceived?.Invoke();
         }
 
         public void Apply(HealPackage package)
@@ -56,9 +79,11 @@ namespace Project.Scripts.EffectSystem.Components
         public void OnStatInit(StatComponent statComponent)
         {
             _statComponent = statComponent;
+            dodgeStat.Init(statComponent);
         }
 
-        public bool IsAlie(AlieGroup group) => group == alieGroup;
+        public bool IsAlie(AllyGroup group) => group == allyGroup;
+
         public void Apply(IBuff package)
         {
             buffManager?.AddBuff(package);

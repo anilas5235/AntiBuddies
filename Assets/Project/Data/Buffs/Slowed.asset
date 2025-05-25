@@ -16,7 +16,5 @@ MonoBehaviour:
   stackBehavior: 1
   tickBehavior: 0
   ticksPerSecond: 0
-  statDef:
-    amount: -30
-    statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
-    statMod: 1
+  amount: -30
+  statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}

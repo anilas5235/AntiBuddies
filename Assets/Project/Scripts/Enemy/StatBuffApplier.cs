@@ -8,11 +8,11 @@ namespace Project.Scripts.Enemy
     public class StatBuffApplier : MonoBehaviour, IHandleContact
     {
         [SerializeField] private StatBuffData statBuffData;
-        [SerializeField] private AlieGroup alieGroup = AlieGroup.Enemy;
-        
+        [SerializeField] private AllyGroup allyGroup = AllyGroup.Enemy;
+
         public void HandleContact(GameObject contact)
         {
-            ContactToHubAdapter hubAdapter = new(contact, alieGroup);
+            ContactToHubAdapter hubAdapter = new(contact, allyGroup);
             if (!hubAdapter.IsValid) return;
             hubAdapter.Apply(statBuffData?.GetBuff(null));
         }

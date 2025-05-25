@@ -18,7 +18,7 @@ namespace Project.Scripts.BuffSystem.Buffs
             return $"{effectType.Name}_{stackBehaviourName}_{tickBehaviourName}";
         }
 
-        public bool CanBeAppliedToAlly { get; }
+        public bool AffectsAllies { get; }
         public string Name { get; }
         public BuffManager BuffManager { get; private set; }
         protected IStackBehaviour StackBehaviour { get; }
@@ -29,12 +29,12 @@ namespace Project.Scripts.BuffSystem.Buffs
         protected ITickBehaviour TickBehavior  { get; }
 
         protected Buff(string buffName, float duration, IPackageHub hub, IStackBehaviour stack,
-            ITickBehaviour tick, bool canBeAppliedToAlly)
+            ITickBehaviour tick, bool affectsAllies)
         {
             Hub = hub;
             Duration = duration;
             TickBehavior = tick;
-            CanBeAppliedToAlly = canBeAppliedToAlly;
+            AffectsAllies = affectsAllies;
             StackBehaviour = stack;
             Name = buffName;
             ResetDuration();
