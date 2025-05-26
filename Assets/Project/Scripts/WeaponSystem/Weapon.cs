@@ -84,5 +84,11 @@ namespace Project.Scripts.WeaponSystem
         }
 
         protected abstract IEnumerator AttackRoutine(float interval);
+        
+        private void OnValidate()
+        {
+            attackSpeedStat.UpdateValue();
+            rangeStat.UpdateValue();
+        }
     }
 }

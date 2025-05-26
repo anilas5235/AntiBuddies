@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2077882152002529951}
   - component: {fileID: 7679126386687290998}
   - component: {fileID: 3793206719390716455}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gold
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.4
+  m_Radius: 0.1
 --- !u!1 &5314469558726381565
 GameObject:
   m_ObjectHideFlags: 0

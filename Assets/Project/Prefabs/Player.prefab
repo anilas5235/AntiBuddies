@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4396818464361325487}
   - component: {fileID: 1508122211642880128}
   - component: {fileID: 74603538948247301}
-  - component: {fileID: 8229965182615824673}
   - component: {fileID: 460446360464912619}
   m_Layer: 3
   m_Name: body
@@ -209,18 +208,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8229965182615824673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293653513685770464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0916c6f23b2641df98791325e94c27ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &460446360464912619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +224,7 @@ MonoBehaviour:
   onContactEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8229965182615824673}
+      - m_Target: {fileID: 564561616764115069}
         m_TargetAssemblyTypeName: Project.ResourceSystem.ResourcePickUp, Assembly-CSharp
         m_MethodName: HandleContact
         m_Mode: 0
@@ -266,6 +253,7 @@ GameObject:
   - component: {fileID: 5331183102116683151}
   - component: {fileID: 1453159354197933115}
   - component: {fileID: 6393263254011947306}
+  - component: {fileID: 564561616764115069}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -309,7 +297,7 @@ MonoBehaviour:
         useEfficiency: 100
         statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
     baseValue: 5
-    currValue: 0
+    currValue: 5
     positiveTransform: 1
 --- !u!114 &4307234338099689046
 MonoBehaviour:
@@ -571,6 +559,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e2dcb4ff5d4954a092cf511e26e7c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &564561616764115069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029995827079385713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0916c6f23b2641df98791325e94c27ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attractRange:
+    statRefs:
+    - statDependency:
+        useEfficiency: 100
+        statType: {fileID: 11400000, guid: e5b244f5799def84db3e00f5b60c75c1, type: 2}
+    baseValue: 1.3
+    currValue: 1.3
+    positiveTransform: 1
 --- !u!1 &7670451574764322797
 GameObject:
   m_ObjectHideFlags: 0

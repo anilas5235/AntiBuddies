@@ -37,5 +37,10 @@ namespace Project.Scripts.Enemy
         {
             //Destroy(gameObject);
         }
+
+        private void OnValidate()
+        {
+            speedStat.UpdateValue();
+        }
     }
 }
