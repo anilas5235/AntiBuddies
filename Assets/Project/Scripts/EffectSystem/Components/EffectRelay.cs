@@ -15,7 +15,7 @@ namespace Project.Scripts.EffectSystem.Components
 {
     public class EffectRelay : MonoBehaviour, IPackageHub, INeedStatComponent
     {
-        [SerializeField] private AllyGroup allyGroup;
+        [SerializeField] protected AllyGroup allyGroup;
 
         [SerializeField] private HealthComponent healthComponent;
         [SerializeField] private BuffManager buffManager;
@@ -23,24 +23,12 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private StatRef dodgeStat;
         private StatComponent _statComponent;
 
-        public event Action<int, DamageType, GameObject> OnDamageReceived;
-        public event Action<int, HealType, GameObject> OnHealReceived;
-        
+        public event Action<int, DamageType> OnDamageReceived;
+        public event Action<int, HealType> OnHealReceived;
+
         public UnityEvent onDamageReceived;
 
-        private void OnEnable()
-        {
-            OnDamageReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
-            OnHealReceived += FloatingNumberSpawner.Instance.SpawnFloatingNumber;
-        }
-
-        private void OnDisable()
-        {
-            OnDamageReceived -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
-            OnHealReceived -= FloatingNumberSpawner.Instance.SpawnFloatingNumber;
-        }
-
-        public void Apply(DamagePackage package)
+        public virtual void Apply(DamagePackage package)
         {
             if (dodgeStat.IsValid && dodgeStat.GetValue() >= Random.Range(1, 100))
             {
@@ -60,15 +48,21 @@ namespace Project.Scripts.EffectSystem.Components
             int damage = package.Amount;
             if (_statComponent) damage = package.ReceptionScale(damage, _statComponent);
             damage = healthComponent.TakeDamage(damage);
-            OnDamageReceived?.Invoke(damage, package.DamageType, gameObject);
+            OnDamageReceived?.Invoke(damage, package.DamageType);
             onDamageReceived?.Invoke();
+            FloatingNumberSpawner.Instance.SpawnFloatingNumber(damage, GetDamageColor(package.DamageType), gameObject);
+        }
+        
+        protected virtual Color GetDamageColor(DamageType damageType)
+        {
+            return damageType.Color;
         }
 
         public void Apply(HealPackage package)
         {
             int amount = package.Amount;
             amount = healthComponent.Heal(amount);
-            OnHealReceived?.Invoke(amount, package.HealType, gameObject);
+            OnHealReceived?.Invoke(amount, package.HealType);
         }
 
         public void Apply(StatPackage package)

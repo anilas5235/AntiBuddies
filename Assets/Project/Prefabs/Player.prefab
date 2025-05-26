@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4939956795979444460}
   - component: {fileID: 4412279362573788579}
   - component: {fileID: 855197769961472900}
-  - component: {fileID: 5961228089469582901}
   - component: {fileID: 1304199053460124670}
   - component: {fileID: 4396818464361325487}
   - component: {fileID: 1508122211642880128}
+  - component: {fileID: 74603538948247301}
   m_Layer: 3
   m_Name: body
   m_TagString: Untagged
@@ -129,41 +129,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 0.6}
   m_Direction: 0
---- !u!114 &5961228089469582901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293653513685770464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b03a9a91ea0baa4a9cc71e92677617b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allyGroup: 1
-  healthComponent: {fileID: 4307234338099689046}
-  buffManager: {fileID: 1508122211642880128}
-  effectPipeline: {fileID: 6393263254011947306}
-  dodgeStat:
-    statDependency:
-      useEfficiency: 100
-      statType: {fileID: 11400000, guid: 0d17735fd947eec44a9cfc0e84046141, type: 2}
-  onDamageReceived:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4396818464361325487}
-        m_TargetAssemblyTypeName: Project.Scripts.UtilComponents.FlashColor, Assembly-CSharp
-        m_MethodName: Flash
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1304199053460124670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7982cccbf9df8468fdfbe5e7950a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 1, g: 0.5, b: 0.5, a: 0.9019608}
   duration: 0.2
   spriteRenderer: {fileID: 4412279362573788579}
 --- !u!114 &1508122211642880128
@@ -207,6 +172,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58521b59edf4e0abdc4b245dc9f2e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &74603538948247301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293653513685770464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d45194f74049fe9cb74286650cbb1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allyGroup: 1
+  healthComponent: {fileID: 4307234338099689046}
+  buffManager: {fileID: 1508122211642880128}
+  effectPipeline: {fileID: 6393263254011947306}
+  dodgeStat:
+    statDependency:
+      useEfficiency: 100
+      statType: {fileID: 11400000, guid: 0d17735fd947eec44a9cfc0e84046141, type: 2}
+  onDamageReceived:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4396818464361325487}
+        m_TargetAssemblyTypeName: Project.Scripts.UtilComponents.FlashColor, Assembly-CSharp
+        m_MethodName: Flash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2029995827079385713
 GameObject:
   m_ObjectHideFlags: 0
