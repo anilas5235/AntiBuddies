@@ -2,7 +2,7 @@
 using Project.Scripts.Utils;
 using UnityEngine;
 
-namespace Project.Scripts.Player
+namespace Project.ResourceSystem
 {
     public class ExpManager :Singleton<ExpManager>
     {

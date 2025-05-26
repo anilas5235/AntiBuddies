@@ -8,7 +8,6 @@ namespace Project.Scripts.Enemy
     public class Enemy : MonoBehaviour, INeedStatComponent
     {
         [SerializeField] private ValueStatRef speedStat;
-
         [SerializeField] private BehaviorGraphAgent behaviorGraphAgent;
         private StatComponent _statComponent;
 

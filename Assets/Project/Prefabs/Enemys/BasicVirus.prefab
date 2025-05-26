@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7052312215536277138}
   - component: {fileID: 3032735940818429893}
   - component: {fileID: 6999244719332310704}
+  - component: {fileID: 5298582220894262415}
   m_Layer: 0
   m_Name: BasicVirus
   m_TagString: Enemy
@@ -134,6 +135,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5298582220894262415}
+        m_TargetAssemblyTypeName: Project.ResourceSystem.GoldDropper, Assembly-CSharp
+        m_MethodName: Drop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7052312215536277138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +215,19 @@ MonoBehaviour:
     extraStatDeps: []
   buffData: {fileID: 0}
   allyGroup: 0
+--- !u!114 &5298582220894262415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919007744789787044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab831a38f714abc9edfedbdb61d299a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldAmount: 3
 --- !u!1 &7691238699623227762
 GameObject:
   m_ObjectHideFlags: 0
