@@ -27,12 +27,14 @@ namespace Project.Scripts.WeaponSystem
         protected bool SearchingForTarget = true;
         protected Coroutine Coroutine;
         protected StatComponent StatComponent;
+        private float _defaultAngle;
         public float Range => rangeStat.CurrValue;
         protected float AttackSpeed => attackSpeedStat.CurrValue;
 
         protected virtual void OnEnable()
         {
             _weaponSlot = GetComponentInParent<WeaponSlot>();
+            _defaultAngle = _weaponSlot.GetDefaultWeaponAngle();
             StatComponent = GetComponentInParent<StatComponent>();
 
             attackSpeedStat.Init(StatComponent);
@@ -41,7 +43,7 @@ namespace Project.Scripts.WeaponSystem
 
         public void Attack()
         {
-            if (Coroutine != null) return;
+            if (Coroutine != null || !_target) return;
             Coroutine = StartCoroutine(AttackRoutine(CalcAttackInterval()));
         }
 
@@ -67,7 +69,6 @@ namespace Project.Scripts.WeaponSystem
                 SearchForTarget();
             }
 
-            if (!_target) return;
             UpdateRotation();
             Attack();
         }
@@ -87,6 +88,7 @@ namespace Project.Scripts.WeaponSystem
 
         protected virtual float CalculateAngleToTarget()
         {
+            if (!_target) return _defaultAngle;
             Vector3 direction = _weaponSlot.transform.InverseTransformPoint(_target.position);
             return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         }

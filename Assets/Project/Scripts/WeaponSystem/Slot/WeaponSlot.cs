@@ -26,5 +26,10 @@ namespace Project.Scripts.WeaponSystem.Slot
             _currentWeapon = null;
             weaponData = null;
         }
+
+        public float GetDefaultWeaponAngle()
+        {
+            return transform.localPosition.x > 0 ? 0f : 180f;
+        }
     }
 }
