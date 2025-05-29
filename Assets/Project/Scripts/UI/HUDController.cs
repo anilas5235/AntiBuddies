@@ -1,6 +1,4 @@
 ﻿using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects.Type;
-using Project.Scripts.Player;
 using Project.Scripts.ResourceSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,8 +12,11 @@ namespace Project.Scripts.UI
         private GameObject _player;
         private ProgressBar _healthBar;
         private ProgressBar _expBar;
+        private Label _goldDisplay;
+        
         private HealthComponent _healthComponent;
         private ExpManager _expManager;
+        private ResourceManager _resourceManager;
 
         private void OnEnable()
         {
@@ -36,6 +37,12 @@ namespace Project.Scripts.UI
                 _expManager.OnLevelUp += UpdateExpBar;
                 UpdateExpBar();
             }
+            
+            if (_resourceManager)
+            {
+                _resourceManager.OnGoldChange += UpdateGoldDisplay;
+                UpdateGoldDisplay();
+            }
         }
 
         private void OnDisable()
@@ -50,11 +57,18 @@ namespace Project.Scripts.UI
                 _expManager.OnExpGain -= UpdateExpBar;
                 _expManager.OnLevelUp -= UpdateExpBar;
             }
+
+            if (_resourceManager)
+            {
+                _resourceManager.OnGoldChange -= UpdateGoldDisplay;
+            }
         }
+
 
         private void InitFields()
         {
             _expManager = ExpManager.Instance;
+            _resourceManager = ResourceManager.Instance;
 
             _player = GameObject.FindGameObjectWithTag("Player");
             if (!_player)
@@ -68,7 +82,8 @@ namespace Project.Scripts.UI
 
             _healthBar = _uiDocument.rootVisualElement.Q<ProgressBar>("Health");
             _expBar = _uiDocument.rootVisualElement.Q<ProgressBar>("Exp");
-            
+            _goldDisplay = _uiDocument.rootVisualElement.Q<Label>("GoldText");
+
             if (_healthBar == null || _expBar == null)
             {
                 Debug.LogError("Progress bars not found in the UI document.");
@@ -85,6 +100,10 @@ namespace Project.Scripts.UI
         {
             _expBar.value = _expManager.ExpProgress * 100f;
             _expBar.title = $"Lvl.{_expManager.Level}";
+        }
+        private void UpdateGoldDisplay()
+        {
+            _goldDisplay.text = _resourceManager.Gold.ToString();
         }
     }
 }

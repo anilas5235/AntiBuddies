@@ -1,4 +1,5 @@
-﻿using Project.Scripts.Utils;
+﻿using System;
+using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.ResourceSystem
@@ -10,6 +11,7 @@ namespace Project.Scripts.ResourceSystem
         public int Gold => gold;
         
         public bool HasEnoughGold(int amount) => gold >= amount;
+        public event Action OnGoldChange;
         
         public void AddGold(int amount)
         {
@@ -19,6 +21,7 @@ namespace Project.Scripts.ResourceSystem
                 return;
             }
             gold += amount;
+            OnGoldChange?.Invoke();
         }
         
         public void RemoveGold(int amount)
@@ -34,6 +37,8 @@ namespace Project.Scripts.ResourceSystem
                 amount = gold;
             }
             gold -= amount;
+            OnGoldChange?.Invoke();
         }
+
     }
 }

@@ -50,7 +50,7 @@ namespace Project.Behaviors.Actions
 
         protected override void OnEnd()
         {
-            SetVelocity(Vector2.zero);
+            if (_rigidbody2D) SetVelocity(Vector2.zero);
         }
 
         private Vector2 GetMovementVector()
