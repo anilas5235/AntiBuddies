@@ -25,18 +25,23 @@ namespace Project.Scripts.ResourceSystem
 
         private void FixedUpdate()
         {
+            Attract();
+        }
+
+        private void Attract()
+        {
             Collider2D[] result = Physics2D.OverlapCircleAll(transform.position, attractRange.CurrValue, _pickUpLayer);
             foreach (Collider2D obj in result)
             {
                 if (!obj || !obj.gameObject.activeInHierarchy) continue;
 
-                if (obj.CompareTag("PickUp") && obj.TryGetComponent(out IPickUpable pickUpable))
+                if (obj.CompareTag("PickUp") && obj.TryGetComponent(out IAttractable attractable))
                 {
-                    pickUpable.AttractTo(gameObject);
+                    attractable.AttractTo(gameObject);
                 }
             }
         }
-        
+
         private void OnValidate()
         {
             attractRange.UpdateValue();

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.Scripts.ResourceSystem
 {
-    public class Gold : PoolableMono, IPickUpable
+    public class Gold : PoolableMono, IPickUpable, IAttractable
     {
         [SerializeField] private int amount = 1;
         private Transform _destTransform;
