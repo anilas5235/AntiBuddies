@@ -67,7 +67,6 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void Die()
         {
-            Debug.Log($"{gameObject.name} died");
             OnDeath?.Invoke();
             onDeath?.Invoke();
         }
