@@ -1,14 +1,14 @@
-﻿using Project.Scripts.StatSystem;
+﻿using Project.Scripts.Spawning.Pooling;
+using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using Unity.Behavior;
 using UnityEngine;
 
 namespace Project.Scripts.Enemy
 {
-    public class Enemy : MonoBehaviour, INeedStatComponent
+    public class Enemy : PoolableMono, INeedStatComponent
     {
         [SerializeField] private ValueStatRef speedStat;
-
         [SerializeField] private BehaviorGraphAgent behaviorGraphAgent;
         private StatComponent _statComponent;
 
@@ -22,6 +22,7 @@ namespace Project.Scripts.Enemy
         {
             speedStat.OnValueChange += OnSpeedStatChange;
             OnSpeedStatChange();
+            behaviorGraphAgent.Restart();
         }
 
         private void OnDisable()
@@ -36,7 +37,16 @@ namespace Project.Scripts.Enemy
 
         public void Die()
         {
-            //Destroy(gameObject);
+            ReturnToPool();
+        }
+
+        private void OnValidate()
+        {
+            speedStat.UpdateValue();
+        }
+
+        public override void Reset()
+        {
         }
     }
 }

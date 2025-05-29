@@ -1,7 +1,8 @@
-﻿using Project.Scripts.Utils;
+﻿using System;
+using Project.Scripts.Utils;
 using UnityEngine;
 
-namespace Project.Scripts.Player
+namespace Project.Scripts.ResourceSystem
 {
     public class ResourceManager : Singleton<ResourceManager>
     {
@@ -10,6 +11,7 @@ namespace Project.Scripts.Player
         public int Gold => gold;
         
         public bool HasEnoughGold(int amount) => gold >= amount;
+        public event Action OnGoldChange;
         
         public void AddGold(int amount)
         {
@@ -19,6 +21,7 @@ namespace Project.Scripts.Player
                 return;
             }
             gold += amount;
+            OnGoldChange?.Invoke();
         }
         
         public void RemoveGold(int amount)
@@ -34,6 +37,8 @@ namespace Project.Scripts.Player
                 amount = gold;
             }
             gold -= amount;
+            OnGoldChange?.Invoke();
         }
+
     }
 }

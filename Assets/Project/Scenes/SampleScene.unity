@@ -1110,10 +1110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26647ebfc243b8b17ec21aeb2f7311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 38
-  spawns: 500
   prefabToSpawn: {fileID: 1414540883596351562, guid: 3d3fdcd82fb4c754baaf5c62eef528c9, type: 3}
+  spawns: 500
+  initDelay: 0
+  spawnDelay: 0
   parentSpawnedObjects: 1
+  spawnOnEnable: 1
+  DestroyOnFinish: 0
+  poolingEnabled: 0
+  size: 38
 --- !u!1 &1202702148
 GameObject:
   m_ObjectHideFlags: 0

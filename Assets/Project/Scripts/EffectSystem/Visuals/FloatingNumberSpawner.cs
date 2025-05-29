@@ -7,21 +7,27 @@ namespace Project.Scripts.EffectSystem.Visuals
 {
     public class FloatingNumberSpawner : Singleton<FloatingNumberSpawner>
     {
-        [SerializeField] private GameObjectPool floatingNumberPool;
+        [SerializeField] private GameObject floatingNumberPrefab;
         [SerializeField] private float displayDuration = 1.0f;
         [SerializeField] private Vector2 offset = new(0, 0.5f);
         [SerializeField] private bool stopSpawn;
+        private GameObjectPool _floatingNumberPool;
+
+        private void OnEnable()
+        {
+            _floatingNumberPool = GlobalPools.Instance.GetPoolFor(floatingNumberPrefab);
+        }
 
         public void SpawnFloatingNumber(int num, Color color, GameObject source)
         {
             if (stopSpawn) return;
-            if (!floatingNumberPool)
+            if (!_floatingNumberPool)
             {
                 Debug.LogWarning("FloatingNumberPool is null");
                 return;
             }
 
-            FloatingNumber numberInstance = (FloatingNumber)floatingNumberPool.GetObject();
+            FloatingNumber numberInstance = (FloatingNumber)_floatingNumberPool.GetObject();
             if (!numberInstance)
             {
                 Debug.LogWarning("FloatingNumberPool returned null");

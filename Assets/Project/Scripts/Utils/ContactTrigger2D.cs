@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 namespace Project.Scripts.Utils
 {
+    [RequireComponent(typeof(Collider2D)), DisallowMultipleComponent]
     public class ContactTrigger2D : MonoBehaviour
     {
         [SerializeField] private bool onlyOncePerObject = true;

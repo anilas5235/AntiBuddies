@@ -27,12 +27,17 @@ namespace Project.Scripts.WeaponSystem
         protected bool SearchingForTarget = true;
         protected Coroutine Coroutine;
         protected StatComponent StatComponent;
+        private float _defaultAngle;
+        private bool _isFlip;
+        
+        protected internal float FlipMultiplier => _isFlip ? -1 : 1;
         public float Range => rangeStat.CurrValue;
         protected float AttackSpeed => attackSpeedStat.CurrValue;
 
         protected virtual void OnEnable()
         {
             _weaponSlot = GetComponentInParent<WeaponSlot>();
+            _defaultAngle = _weaponSlot.GetDefaultWeaponAngle();
             StatComponent = GetComponentInParent<StatComponent>();
 
             attackSpeedStat.Init(StatComponent);
@@ -41,7 +46,7 @@ namespace Project.Scripts.WeaponSystem
 
         public void Attack()
         {
-            if (Coroutine != null) return;
+            if (Coroutine != null || !_target) return;
             Coroutine = StartCoroutine(AttackRoutine(CalcAttackInterval()));
         }
 
@@ -57,22 +62,39 @@ namespace Project.Scripts.WeaponSystem
 
         private void FixedUpdate()
         {
-            if (_target && Vector3.Distance(transform.position, _target.position) > Range) _target = null;
-            if (!_target && SearchingForTarget) _target = targetingBehaviour.FindTarget(transform, Range);
-            if (!_target) return;
+            if (_target)
+            {
+                if (Vector3.Distance(transform.position, _target.position) > Range ||
+                    !_target.gameObject.activeInHierarchy) SearchForTarget();
+            }
+            else
+            {
+                SearchForTarget();
+            }
+
             UpdateRotation();
             Attack();
         }
 
-        protected virtual void UpdateRotation()
+        private void SearchForTarget()
+        {
+            if (!SearchingForTarget) return;
+            _target = targetingBehaviour.FindTarget(transform, Range);
+        }
+
+        private void UpdateRotation()
         {
             // Rotate the weapon to face the target in 2D space => only rotate Z axis
             float angle = CalculateAngleToTarget();
+            _isFlip = Mathf.Abs(angle) > 90;
+            if (_isFlip) angle -= 180;
             transform.localRotation = Quaternion.Euler(0, 0, angle);
+            transform.localScale = new Vector3(FlipMultiplier, 1, 1);
         }
 
         protected virtual float CalculateAngleToTarget()
         {
+            if (!_target) return _defaultAngle;
             Vector3 direction = _weaponSlot.transform.InverseTransformPoint(_target.position);
             return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         }
@@ -84,5 +106,11 @@ namespace Project.Scripts.WeaponSystem
         }
 
         protected abstract IEnumerator AttackRoutine(float interval);
+
+        private void OnValidate()
+        {
+            attackSpeedStat.UpdateValue();
+            rangeStat.UpdateValue();
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,4 +10,3 @@ namespace Project.Scripts.Spawning
         public float timeBetweenWaves;
     }
 }
-
