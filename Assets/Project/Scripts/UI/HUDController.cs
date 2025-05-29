@@ -1,7 +1,7 @@
-﻿using Project.ResourceSystem;
-using Project.Scripts.EffectSystem.Components;
+﻿using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.Player;
+using Project.Scripts.ResourceSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 

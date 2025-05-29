@@ -1,7 +1,7 @@
 ﻿using Project.Scripts.Utils;
 using UnityEngine;
 
-namespace Project.ResourceSystem
+namespace Project.Scripts.ResourceSystem
 {
     public class ResourceManager : Singleton<ResourceManager>
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.ResourceSystem
+namespace Project.Scripts.ResourceSystem
 {
     public class GoldDropper : MonoBehaviour
     {

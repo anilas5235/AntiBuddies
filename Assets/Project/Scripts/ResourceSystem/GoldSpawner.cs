@@ -2,7 +2,7 @@ using Project.Scripts.Spawning.Pooling;
 using Project.Scripts.Utils;
 using UnityEngine;
 
-namespace Project.ResourceSystem
+namespace Project.Scripts.ResourceSystem
 {
     public class GoldSpawner : Singleton<GoldSpawner>
     {

@@ -1,7 +1,7 @@
 using Project.Scripts.Spawning.Pooling;
 using UnityEngine;
 
-namespace Project.ResourceSystem
+namespace Project.Scripts.ResourceSystem
 {
     public class Gold : PoolableMono, IPickUpable
     {
