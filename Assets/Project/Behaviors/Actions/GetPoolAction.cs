@@ -8,11 +8,12 @@ using Action = Unity.Behavior.Action;
 namespace Project.Behaviors.Actions
 {
     [Serializable, GeneratePropertyBag]
-    [NodeDescription(name: "GetPool", story: "Get [Pool] of Type", category: "Action", id: "3c7db8e83071e52b4278284ca7bd948e")]
+    [NodeDescription(name: "GetPool", story: "Get [Pool] for [PoolObject]", category: "Action",
+        id: "3c7db8e83071e52b4278284ca7bd948e")]
     public partial class GetPoolAction : Action
     {
         [SerializeReference] public BlackboardVariable<GameObjectPool> Pool;
-        [SerializeReference] public BlackboardVariable<AvailablePool> Type;
+        [SerializeReference] public BlackboardVariable<GameObject> PoolObject;
 
         protected override Status OnStart()
         {
@@ -21,7 +22,7 @@ namespace Project.Behaviors.Actions
 
         protected override Status OnUpdate()
         {
-            Pool.Value ??= GlobalPools.Instance.GetPoolFor(Type.Value);
+            Pool.Value ??= GlobalPools.Instance.GetPoolFor(PoolObject.Value);
             return Status.Success;
         }
 
@@ -30,4 +31,3 @@ namespace Project.Behaviors.Actions
         }
     }
 }
-

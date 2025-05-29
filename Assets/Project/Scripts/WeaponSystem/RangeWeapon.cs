@@ -21,7 +21,7 @@ namespace Project.Scripts.WeaponSystem
         protected override void OnEnable()
         {
             base.OnEnable();
-            _projectilePool ??= GlobalPools.Instance.GetPoolFor(AvailablePool.Projectile);
+            _projectilePool ??= GlobalPools.Instance.GetPoolFor(projectileData.prefab);
         }
 
         protected override void UpdateRotation()

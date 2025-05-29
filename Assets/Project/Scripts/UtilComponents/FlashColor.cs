@@ -16,14 +16,26 @@ namespace Project.Scripts.UtilComponents
         {
             _originalColor = spriteRenderer.color;
         }
+        
+        private void OnDisable()
+        {
+            Stop();
+        }
 
         public void Flash()
+        {
+            Stop();
+            if(!gameObject.activeInHierarchy) return;
+            _coroutine = StartCoroutine(FlashCoroutine(duration));
+        }
+
+        private void Stop()
         {
             if (_coroutine != null)
             {
                 StopCoroutine(_coroutine);
-            }
-            _coroutine = StartCoroutine(FlashCoroutine(duration));
+                spriteRenderer.color = _originalColor;
+            } 
         }
 
         private IEnumerator FlashCoroutine(float flashDuration)

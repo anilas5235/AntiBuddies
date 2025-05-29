@@ -57,11 +57,25 @@ namespace Project.Scripts.WeaponSystem
 
         private void FixedUpdate()
         {
-            if (_target && Vector3.Distance(transform.position, _target.position) > Range) _target = null;
-            if (!_target && SearchingForTarget) _target = targetingBehaviour.FindTarget(transform, Range);
+            if (_target)
+            {
+                if (Vector3.Distance(transform.position, _target.position) > Range ||
+                    !_target.gameObject.activeInHierarchy) SearchForTarget();
+            }
+            else
+            {
+                SearchForTarget();
+            }
+
             if (!_target) return;
             UpdateRotation();
             Attack();
+        }
+
+        private void SearchForTarget()
+        {
+            if (!SearchingForTarget) return;
+            _target = targetingBehaviour.FindTarget(transform, Range);
         }
 
         protected virtual void UpdateRotation()
@@ -84,7 +98,7 @@ namespace Project.Scripts.WeaponSystem
         }
 
         protected abstract IEnumerator AttackRoutine(float interval);
-        
+
         private void OnValidate()
         {
             attackSpeedStat.UpdateValue();

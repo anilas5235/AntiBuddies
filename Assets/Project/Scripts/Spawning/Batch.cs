@@ -8,7 +8,6 @@ namespace Project.Scripts.Spawning
         public GameObject enemyPrefab;
         public int spawnPerBatch;
         public float spawnDelay;
-        public int numberOfBatches;
         public float spawnRadius;
         public float initialDelay;
     }

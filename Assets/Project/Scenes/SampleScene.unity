@@ -1110,10 +1110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26647ebfc243b8b17ec21aeb2f7311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 38
-  spawns: 500
   prefabToSpawn: {fileID: 1414540883596351562, guid: 3d3fdcd82fb4c754baaf5c62eef528c9, type: 3}
+  spawns: 500
+  initDelay: 0
+  spawnDelay: 0
   parentSpawnedObjects: 1
+  spawnOnEnable: 1
+  DestroyOnFinish: 0
+  poolingEnabled: 0
+  size: 38
 --- !u!1 &1202702148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,11 +1571,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1869624591522617220, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
+      propertyPath: goldPrefab
+      value: 
+      objectReference: {fileID: 3038155393275574951, guid: 0b2d78aafacfc194a9d91fb40c1ebce0, type: 3}
+    - target: {fileID: 5611558929212603208, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
+      propertyPath: floatingNumberPool
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5611558929212603208, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
+      propertyPath: floatingNumberPrefab
+      value: 
+      objectReference: {fileID: 5766984190451043708, guid: 2e4e39724878a0e46885f61a2bcd6184, type: 3}
     - target: {fileID: 8035423948169962729, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
       propertyPath: m_Name
       value: GameBackend
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2297418378814208058, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
+    - {fileID: 6322018048281503693, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
+    - {fileID: 8731770629282077718, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
+    - {fileID: 9194749559815557570, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
