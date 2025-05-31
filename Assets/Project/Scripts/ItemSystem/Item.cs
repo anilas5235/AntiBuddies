@@ -12,6 +12,7 @@ namespace Project.Scripts.ItemSystem
 
 
         public int Cost => cost;
+        public string Name => name;
         public string Description => description;
         public Sprite Icon => icon;
         public Color Color => Color.gray; // TODO: Implement color logic

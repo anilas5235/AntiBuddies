@@ -10,6 +10,7 @@ namespace Project.Scripts.ItemSystem
     {
         public Visibility visible;
         public int cost;
+        public string name;
         public string description;
         public Sprite icon;
         public Color color;
@@ -26,6 +27,7 @@ namespace Project.Scripts.ItemSystem
             visible = Visibility.Visible;
             _buyable = element;
             cost = element.Cost;
+            name = element.Name;
             description = element.Description;
             icon = element.Icon;
             color = element.Color;

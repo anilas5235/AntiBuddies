@@ -1511,9 +1511,65 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_MoveAction
+      value: 
+      objectReference: {fileID: -2985171247103694829, guid: a03df7e9bf216b84b819ae79516eb98d, type: 3}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_PointAction
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_ActionsAsset
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: a03df7e9bf216b84b819ae79516eb98d, type: 3}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_CancelAction
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_SubmitAction
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_LeftClickAction
+      value: 
+      objectReference: {fileID: 2393949074480048457, guid: a03df7e9bf216b84b819ae79516eb98d, type: 3}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_RightClickAction
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_MiddleClickAction
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_ScrollWheelAction
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_TrackedDevicePositionAction
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1453159354197933115, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_TrackedDeviceOrientationAction
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2029995827079385713, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356991902276083124, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - target: {fileID: 3356991902276083124, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356991902276083124, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard&Mouse
       objectReference: {fileID: 0}
     - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: m_Enabled
