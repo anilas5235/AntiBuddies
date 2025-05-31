@@ -27,6 +27,7 @@ namespace Project.Scripts.ResourceSystem
             }
 
             ResourceManager.Instance.AddGold(amount);
+            ExpManager.Instance.AddExp(amount);
             ReturnToPool();
         }
 

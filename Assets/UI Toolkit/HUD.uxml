@@ -1,12 +1,26 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Styles/HUDStyle.uss?fileID=7433441132597879392&amp;guid=65879c3243c75f1428348cceb8f5a268&amp;type=3#HUDStyle" />
-    <engine:VisualElement style="flex-grow: 1;">
+    <engine:VisualElement data-source="project://database/Assets/Project/Data/UI/HUDVars.asset?fileID=11400000&amp;guid=4d488c76ebabd2b47a8d41c12b28cccf&amp;type=2#HUDVars" style="flex-grow: 1;">
         <engine:VisualElement name="StatBars" style="flex-grow: 1; width: 20%; align-self: flex-start;">
-            <engine:ProgressBar value="22" title="5/15" name="Health" class="statBar healthBar" style="-unity-text-align: upper-left; width: auto; align-self: stretch; flex-grow: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;" />
-            <engine:ProgressBar value="22" title="Lvl.0" name="Exp" class="statBar healthBar expBar" style="-unity-text-align: upper-left; width: auto; align-self: stretch; flex-grow: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;" />
+            <engine:ProgressBar value="22" title="5/15" name="Health" class="statBar healthBar" style="-unity-text-align: upper-left; width: auto; align-self: stretch; flex-grow: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+                <Bindings>
+                    <engine:DataBinding property="value" data-source-path="healthBar" binding-mode="ToTarget" />
+                    <engine:DataBinding property="title" data-source-path="healthText" binding-mode="ToTarget" />
+                </Bindings>
+            </engine:ProgressBar>
+            <engine:ProgressBar value="22" title="Lvl.0" name="Exp" class="statBar healthBar expBar" style="-unity-text-align: upper-left; width: auto; align-self: stretch; flex-grow: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+                <Bindings>
+                    <engine:DataBinding property="value" data-source-path="levelBar" binding-mode="ToTarget" />
+                    <engine:DataBinding property="title" data-source-path="levelText" binding-mode="ToTarget" />
+                </Bindings>
+            </engine:ProgressBar>
             <engine:VisualElement style="flex-grow: 0; flex-direction: row; align-items: center; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; align-self: auto; align-content: auto; height: 60px;">
                 <engine:VisualElement name="GoldIcon" style="flex-grow: 0; align-self: auto; background-image: url(&quot;project://database/Assets/Project/ArtWork/Resource/small-gold-nugget.png?fileID=21300000&amp;guid=3386f8e2413cf2b47b1afbc75cd3b0b0&amp;type=3#small-gold-nugget&quot;); align-content: auto; width: 50px; height: 50px; align-items: auto;" />
-                <engine:Label text="Label" name="GoldText" style="flex-grow: 2; justify-content: flex-start; align-items: auto; align-self: auto; font-size: 30px; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 4px; -unity-text-outline-color: rgb(0, 0, 0); -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Examples%20&amp;%20Extras/Fonts/Anton.ttf?fileID=12800000&amp;guid=997a43b767814dd0a7642ec9b78cba41&amp;type=3#Anton&quot;);" />
+                <engine:Label text="Label" name="GoldText" style="flex-grow: 2; justify-content: flex-start; align-items: auto; align-self: auto; font-size: 30px; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-width: 4px; -unity-text-outline-color: rgb(0, 0, 0); -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Examples%20&amp;%20Extras/Fonts/Anton.ttf?fileID=12800000&amp;guid=997a43b767814dd0a7642ec9b78cba41&amp;type=3#Anton&quot;);">
+                    <Bindings>
+                        <engine:DataBinding property="text" data-source-path="gold" binding-mode="ToTarget" />
+                    </Bindings>
+                </engine:Label>
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>

@@ -4,15 +4,16 @@ using UnityEngine;
 
 namespace Project.Scripts.ResourceSystem
 {
-    public class ExpManager :Singleton<ExpManager>
+    public class ExpManager : Singleton<ExpManager>
     {
         private const int BaseExpPerLevel = 25;
         [SerializeField] private int exp;
         [SerializeField] private int level;
-        [SerializeField] private int expToLevelUp =1;
-        [SerializeField] private int expLevelUpStepPercentage = 30;
-        
+        [SerializeField] private int expToLevelUp = 1;
+        [SerializeField] private int expLevelUpStepPercentage = 50;
+
         public float ExpProgress => (float)exp / expToLevelUp;
+
         public int Level
         {
             get => level;
@@ -23,11 +24,12 @@ namespace Project.Scripts.ResourceSystem
                     Debug.LogWarning("Level cannot be negative. Setting to 0.");
                     value = 0;
                 }
+
                 level = value;
                 OnLevelUp?.Invoke();
             }
         }
-        
+
         public int Exp
         {
             get => exp;
@@ -38,6 +40,7 @@ namespace Project.Scripts.ResourceSystem
                     Debug.LogWarning("Experience cannot be negative. Setting to 0.");
                     value = 0;
                 }
+
                 exp = value;
                 OnExpGain?.Invoke();
             }
@@ -51,7 +54,7 @@ namespace Project.Scripts.ResourceSystem
             base.Awake();
             Reset();
         }
-        
+
         public void AddExp(int amount)
         {
             Exp += amount;
@@ -71,7 +74,9 @@ namespace Project.Scripts.ResourceSystem
 
         private void SetExpToLevelUp(int lvl)
         {
-            expToLevelUp = Mathf.RoundToInt(BaseExpPerLevel * (1+(expLevelUpStepPercentage * lvl) / 100f));
+            expToLevelUp = lvl < 1
+                ? BaseExpPerLevel
+                : Mathf.RoundToInt(expToLevelUp * (1f + expLevelUpStepPercentage / 100f * lvl));
         }
 
         private void Reset()

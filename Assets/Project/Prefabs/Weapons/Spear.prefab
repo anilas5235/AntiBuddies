@@ -134,9 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
-  alieGroup: 1
+  allyGroup: 1
+  effectPipeline: {fileID: 0}
   damage:
-    amount: 5
+    amount: 8
     damageType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
     extraStatDeps:
     - useEfficiency: 100
@@ -147,8 +148,8 @@ MonoBehaviour:
     - statDependency:
         useEfficiency: 100
         statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
-    baseValue: 1
-    currValue: 0
+    baseValue: 0.8
+    currValue: 0.8
     positiveTransform: 0
   rangeStat:
     statRefs:
@@ -156,7 +157,7 @@ MonoBehaviour:
         useEfficiency: 100
         statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
     baseValue: 2
-    currValue: 0
+    currValue: 2
     positiveTransform: 1
   meleeAttackBehaviour: {fileID: 11400000, guid: 98facdf158d49e74c81a694f09b1ee9f, type: 2}
   weaponColliders:
@@ -190,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 7009135823704326037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0.646, y: 0.628, z: 0}
+  m_LocalPosition: {x: 1.172, y: 1.154, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4231385}
   - component: {fileID: 4231384}
-  - component: {fileID: 4231386}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -171,18 +170,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4231386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4231383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a54b813bb4f449129004b8edafd0f2c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &118506038
 GameObject:
   m_ObjectHideFlags: 0
