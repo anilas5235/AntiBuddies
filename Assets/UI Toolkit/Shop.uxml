@@ -1,12 +1,12 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <engine:Template name="ShopElement" src="project://database/Assets/UI%20Toolkit/ShopElement.uxml?fileID=9197481963319205126&amp;guid=93657f3ad6cdf1c49a9517f2ee3a53d9&amp;type=3#ShopElement" />
     <Style src="project://database/Assets/UI%20Toolkit/Styles/ShopStyle.uss?fileID=7433441132597879392&amp;guid=2a5959c1331f25b479fd120c61d894df&amp;type=3#ShopStyle" />
-    <engine:VisualElement enabled="true" style="flex-grow: 1;">
+    <engine:VisualElement enabled="true" style="flex-grow: 1; background-color: rgb(64, 64, 64);">
         <engine:VisualElement name="BuyView" data-source="project://database/Assets/Project/Data/UI/ShopData.asset?fileID=11400000&amp;guid=57f6b43fcb4f9ba44b302961055bf409&amp;type=2#ShopData" class="frame" style="flex-grow: 0; height: 575px; width: 1461px; align-items: auto; justify-content: flex-start; align-self: flex-start; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-direction: row;">
-            <engine:Instance template="ShopElement" name="TemplateContainer" enabled="true" focusable="false" data-source-path="ShopElement0" style="flex-grow: 1; align-self: stretch;" />
-            <engine:Instance template="ShopElement" name="TemplateContainer" focusable="false" data-source-path="ShopElement1" style="flex-grow: 1; align-self: stretch;" />
-            <engine:Instance template="ShopElement" name="TemplateContainer" data-source-path="ShopElement2" style="flex-grow: 1; align-self: stretch;" />
-            <engine:Instance template="ShopElement" name="TemplateContainer" data-source-path="ShopElement3" style="flex-grow: 1; align-self: stretch;" />
+            <engine:Instance template="ShopElement" name="TemplateContainer" enabled="true" focusable="false" data-source-path="ShopElement0" style="flex-grow: 1; align-self: stretch; width: 25%;" />
+            <engine:Instance template="ShopElement" name="TemplateContainer" focusable="false" data-source-path="ShopElement1" style="flex-grow: 1; align-self: stretch; flex-shrink: 1; width: 25%;" />
+            <engine:Instance template="ShopElement" name="TemplateContainer" data-source-path="ShopElement2" style="flex-grow: 1; align-self: stretch; flex-shrink: 1; width: 25%;" />
+            <engine:Instance template="ShopElement" name="TemplateContainer" data-source-path="ShopElement3" style="flex-grow: 1; align-self: stretch; flex-shrink: 1; width: 25%;" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

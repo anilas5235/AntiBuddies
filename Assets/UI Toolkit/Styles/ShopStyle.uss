@@ -21,6 +21,10 @@
     width: 90%;
 }
 
+.costButton:hover {
+    scale: 1.05 1.05;
+}
+
 .costButton .unity-button__image {
     width: 30px;
     height: 30px;

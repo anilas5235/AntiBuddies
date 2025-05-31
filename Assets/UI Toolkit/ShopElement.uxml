@@ -1,32 +1,35 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Styles/ShopStyle.uss?fileID=7433441132597879392&amp;guid=2a5959c1331f25b479fd120c61d894df&amp;type=3#ShopStyle" />
-    <engine:VisualElement name="Frame" data-source-type="Project.Scripts.ItemSystem.ShopElement, Assembly-CSharp" class="frame" style="flex-grow: 1; margin-top: 5px; margin-bottom: 5px; margin-right: 5px; margin-left: 5px; visibility: visible;">
-        <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-            <engine:VisualElement name="Icon" style="flex-grow: 0; flex-shrink: 0; height: 100px; width: 100px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-self: flex-start; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;">
-                <Bindings>
-                    <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
-                </Bindings>
+    <engine:VisualElement style="flex-grow: 1; visibility: visible; align-self: stretch; align-content: flex-start;">
+        <engine:VisualElement name="Frame" data-source-type="Project.Scripts.ItemSystem.ShopElement, Assembly-CSharp" class="frame" style="flex-grow: 1; margin-top: 5px; margin-bottom: 5px; margin-right: 5px; margin-left: 5px;">
+            <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
+                <engine:VisualElement name="Icon" style="flex-grow: 0; flex-shrink: 0; height: 100px; width: 100px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-self: flex-start; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;">
+                    <Bindings>
+                        <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                    </Bindings>
+                </engine:VisualElement>
+                <engine:Label text="Label" name="Name" class="description" style="align-items: flex-start; align-self: flex-start; flex-grow: 1;">
+                    <Bindings>
+                        <engine:DataBinding property="text" data-source-path="name" binding-mode="ToTarget" />
+                    </Bindings>
+                </engine:Label>
             </engine:VisualElement>
-            <engine:Label text="Label" name="Name" class="description" style="align-items: flex-start; align-self: flex-start; flex-grow: 1;">
+            <engine:Label text="Label" name="Description" class="description" style="flex-grow: 1; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;">
                 <Bindings>
-                    <engine:DataBinding property="text" data-source-path="name" binding-mode="ToTarget" />
+                    <engine:DataBinding property="text" data-source-path="description" binding-mode="ToTarget" />
                 </Bindings>
             </engine:Label>
+            <engine:Button text="Button" name="Buy" icon-image="project://database/Assets/Project/ArtWork/Resource/small-gold-nugget.png?fileID=21300000&amp;guid=3386f8e2413cf2b47b1afbc75cd3b0b0&amp;type=3#small-gold-nugget" class="costButton" style="flex-direction: row-reverse; align-content: auto; align-self: center; justify-content: center; align-items: center;">
+                <Bindings>
+                    <engine:DataBinding property="text" data-source-path="cost" binding-mode="ToTarget" />
+                </Bindings>
+            </engine:Button>
+            <Bindings>
+                <engine:DataBinding property="style.backgroundColor" data-source-path="color" binding-mode="ToTarget" />
+            </Bindings>
         </engine:VisualElement>
-        <engine:Label text="Label" name="Description" class="description" style="flex-grow: 1; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;">
-            <Bindings>
-                <engine:DataBinding property="text" data-source-path="description" binding-mode="ToTarget" />
-            </Bindings>
-        </engine:Label>
-        <engine:Button text="Button" name="Buy" icon-image="project://database/Assets/Project/ArtWork/Resource/small-gold-nugget.png?fileID=21300000&amp;guid=3386f8e2413cf2b47b1afbc75cd3b0b0&amp;type=3#small-gold-nugget" class="costButton" style="flex-direction: row-reverse; align-content: auto; align-self: center; justify-content: center; align-items: center;">
-            <Bindings>
-                <engine:DataBinding property="text" data-source-path="cost" binding-mode="ToTarget" />
-            </Bindings>
-        </engine:Button>
         <Bindings>
-            <engine:DataBinding property="enabledSelf" data-source-path="isVisible" binding-mode="ToTarget" />
-            <engine:DataBinding property="style.visibility" data-source-path="visible" binding-mode="ToTarget" />
-            <engine:DataBinding property="style.backgroundColor" data-source-path="color" binding-mode="ToTarget" />
+            <engine:DataBinding property="style.visibility" data-source-path="visible" data-source-type="Project.Scripts.ItemSystem.ShopElement, Assembly-CSharp" binding-mode="ToTarget" />
         </Bindings>
     </engine:VisualElement>
 </engine:UXML>

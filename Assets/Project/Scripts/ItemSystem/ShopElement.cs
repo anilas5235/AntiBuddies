@@ -15,6 +15,8 @@ namespace Project.Scripts.ItemSystem
         public Sprite icon;
         public Color color;
         
+        public bool IsValid => _buyable != null;
+        
         private IBuyable _buyable;
         
         public ShopElement(IBuyable element)

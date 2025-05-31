@@ -18,7 +18,7 @@ namespace Project.Scripts.ItemSystem
         public Color Color => Color.gray; // TODO: Implement color logic
         public void Buy()
         {
-            throw new System.NotImplementedException();
+            //TODO: Implement the logic for buying the item
         }
     }
 }
