@@ -15,7 +15,6 @@ namespace Project.Scripts.UI
 
         public int Level
         {
-            get => _level;
             set
             {
                 _level = value;
@@ -28,7 +27,6 @@ namespace Project.Scripts.UI
 
         public int Health
         {
-            get => _health;
             set
             {
                 _health = value;
@@ -38,7 +36,6 @@ namespace Project.Scripts.UI
 
         public int HealthMax
         {
-            get => _healthMax;
             set
             {
                 _healthMax = value;
@@ -48,7 +45,7 @@ namespace Project.Scripts.UI
 
         private void UpdateHealth()
         {
-            healthBar = ((float)_health / _healthMax)*100f;
+            healthBar = (float)_health / _healthMax*100f;
             healthText = $"{_health}/{_healthMax}";
         }
     }
