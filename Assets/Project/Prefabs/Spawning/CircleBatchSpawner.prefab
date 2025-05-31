@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 0}
-  spawnPerBatch: 5
+  spawns: 10
+  initDelay: 0
   spawnDelay: 1
-  numberOfBatches: 2
-  initialDelay: 0
-  spawnRadius: 3
+  parentSpawnedObjects: 0
+  spawnOnEnable: 0
+  poolingEnabled: 1
+  radius: 5

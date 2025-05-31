@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using Project.Scripts.EffectSystem.Components;
+using Project.Scripts.Utils;
 using Project.Scripts.WeaponSystem.Attack.Melee;
 using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem
 {
-    public class MeleeWeapon : Weapon
+    public class MeleeWeapon : Weapon, IHandleContact
     {
         [SerializeField] private MeleeAttackBehaviour meleeAttackBehaviour;
         [SerializeField] private Collider2D[] weaponColliders;
         [SerializeField] private int restPercent = 30;
-        [SerializeField] private ContactEffect contactEffect;
+        [SerializeField] private ContactTrigger2D ContactTrigger2D;
         internal float AngleOffset { get; set; }
         private float RestPercentage => restPercent / 100f;
 
@@ -18,20 +19,21 @@ namespace Project.Scripts.WeaponSystem
         {
             SetColliderEnabled(false);
         }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            contactEffect.statComponent = StatComponent;
-        }
-
+        
         private void SetColliderEnabled(bool b)
         {
-            if(b) contactEffect.ClearContacts();
+            ContactTrigger2D.enabled = b;
             foreach (Collider2D col in weaponColliders)
             {
                 col.enabled = b;
             }
+        }
+        
+        public void HandleContact(GameObject contact)
+        {
+            ContactToHubAdapter hubAdapter = new(contact, allyGroup);
+            if (!hubAdapter.IsValid) return;
+            hubAdapter.Apply(damage.CreatePackage(gameObject,StatComponent));
         }
 
         protected override float CalculateAngleToTarget()
@@ -41,7 +43,7 @@ namespace Project.Scripts.WeaponSystem
 
         protected override float CalcAttackInterval()
         {
-            return AttackSpeed + Range/10f;
+            return AttackSpeed + Range / 10f;
         }
 
         protected override IEnumerator AttackRoutine(float interval)
@@ -50,6 +52,7 @@ namespace Project.Scripts.WeaponSystem
             float restTime = interval * RestPercentage;
             float attackTime = interval - restTime;
             SetColliderEnabled(true);
+            SearchingForTarget = false;
 
             // Move the weapon towards the target position
             while (elapsedTime < attackTime)
@@ -63,6 +66,7 @@ namespace Project.Scripts.WeaponSystem
             // Reset the weapon's transform
             transform.localPosition = Vector3.zero;
             AngleOffset = 0f;
+            SearchingForTarget = true;
             // deactivate the weapon collider
             SetColliderEnabled(false);
             // Wait for the rest of the attack interval

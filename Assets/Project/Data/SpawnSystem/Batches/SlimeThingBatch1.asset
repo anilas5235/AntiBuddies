@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SlimeThingBatch1
   m_EditorClassIdentifier: Assembly-CSharp:Project.Scripts.Spawning:Batch
   enemyPrefab: {fileID: 8993275561615036061, guid: 42574e0640e87d946874b3359352ca2e, type: 3}
-  spawnPerBatch: 1
+  spawnPerBatch: 3
   spawnDelay: 4
-  numberOfBatches: 3
-  spawnRadius: 5
+  numberOfBatches: 5
+  spawnRadius: 20
   initialDelay: 2

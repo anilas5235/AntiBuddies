@@ -134,28 +134,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
-  alieGroup: 1
+  allyGroup: 1
+  effectPipeline: {fileID: 0}
+  damage:
+    amount: 8
+    damageType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
+    extraStatDeps:
+    - useEfficiency: 100
+      statType: {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
+  buff: {fileID: 0}
   attackSpeedStat:
     statRefs:
     - statDependency:
         useEfficiency: 100
         statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
-    baseValue: 1
-    currValue: 0
+    baseValue: 0.8
+    currValue: 0.8
     positiveTransform: 0
   rangeStat:
     statRefs:
     - statDependency:
         useEfficiency: 100
         statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
-    baseValue: 1.5
-    currValue: 0
+    baseValue: 2
+    currValue: 2
     positiveTransform: 1
   meleeAttackBehaviour: {fileID: 11400000, guid: 98facdf158d49e74c81a694f09b1ee9f, type: 2}
   weaponColliders:
   - {fileID: 114367337451605291}
-  restPercent: 30
-  contactEffect: {fileID: 7808569503964837938}
+  restPercent: 50
+  ContactTrigger2D: {fileID: 4427026771821003305}
 --- !u!1 &7009135823704326037
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6726787141778080833}
   - component: {fileID: 114367337451605291}
-  - component: {fileID: 7808569503964837938}
+  - component: {fileID: 4427026771821003305}
   m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
@@ -183,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 7009135823704326037}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0.646, y: 0.628, z: 0}
+  m_LocalPosition: {x: 1.172, y: 1.154, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -235,7 +243,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &7808569503964837938
+--- !u!114 &4427026771821003305
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,24 +252,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 7009135823704326037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa37bc23a05049ff8a1576f9496500b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffects:
-    data:
-    - amount: 5
-      effectType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
-      extraStatDeps: []
-  healEffects:
-    data: []
-  statEffects:
-    data: []
-  damagingBuffs:
-    data: []
-  healingBuffs:
-    data: []
-  statBuffs:
-    data: []
-  alieGroup: 1
-  statComponent: {fileID: 0}
-  applyOnlyOncePerObject: 1
+  onlyOncePerObject: 1
+  onContactEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1581536732205122220}
+        m_TargetAssemblyTypeName: Project.Scripts.WeaponSystem.MeleeWeapon, Assembly-CSharp
+        m_MethodName: HandleContact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

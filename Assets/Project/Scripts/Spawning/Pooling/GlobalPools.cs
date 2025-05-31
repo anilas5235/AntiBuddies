@@ -1,32 +1,37 @@
-﻿using Project.Scripts.Utils;
+﻿using System.Collections.Generic;
+using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.Spawning.Pooling
 {
+    [DefaultExecutionOrder(-150)]
     public class GlobalPools : Singleton<GlobalPools>
     {
-        [SerializeField] private GameObjectPool projectilePool;
-        [SerializeField] private GameObjectPool puddlePool;
+        private readonly Dictionary<GameObject, GameObjectPool> _pools = new();
 
-        protected override void Awake()
-        {
-            base.Awake();
-            InitializePools();
-        }
 
-        private void InitializePools()
+        public GameObjectPool GetPoolFor(GameObject type)
         {
-            projectilePool.Init();
-        }
-
-        public GameObjectPool GetPoolFor(AvailablePool type)
-        {
-            return type switch
+            if (!type)
             {
-                AvailablePool.Projectile => projectilePool,
-                AvailablePool.Puddle => puddlePool,
-                _ => throw new System.ArgumentOutOfRangeException(nameof(type), type, null)
-            };
+                Debug.LogWarning("Requested pool for null type.");
+                return null;
+            }
+
+            return _pools.TryGetValue(type, out GameObjectPool pool) ? pool : CreateNewPool(type);
+        }
+
+        private GameObjectPool CreateNewPool(GameObject prefab)
+        {
+            if (!prefab)
+            {
+                return null;
+            }
+
+            GameObjectPool newPool = gameObject.AddComponent<GameObjectPool>();
+            newPool.SetPrefab(prefab);
+            _pools.Add(prefab, newPool);
+            return newPool;
         }
     }
 }

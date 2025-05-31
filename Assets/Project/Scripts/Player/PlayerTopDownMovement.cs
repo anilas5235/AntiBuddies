@@ -71,13 +71,18 @@ namespace Project.Scripts.Player
         {
             Vector2 targetVelocity = _moveInput.normalized * moveSpeed.CurrValue;
             _rb2d.linearVelocity =
-                Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, 
+                Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity,
                     Time.fixedDeltaTime * maxAcceleration * moveSpeed.CurrValue);
         }
 
         public void OnStatInit(StatComponent statComponent)
         {
             moveSpeed.Init(statComponent);
+        }
+
+        private void OnValidate()
+        {
+            moveSpeed.UpdateValue();
         }
     }
 }

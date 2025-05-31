@@ -15,4 +15,4 @@ MonoBehaviour:
   batches:
   - {fileID: 11400000, guid: 548c50bb851bada4982aeb601a47b4a9, type: 2}
   - {fileID: 11400000, guid: eb2ffbf5eefbbbb4d9d62643eacd96a4, type: 2}
-  timeBetweenWaves: 10
+  timeBetweenWaves: 4

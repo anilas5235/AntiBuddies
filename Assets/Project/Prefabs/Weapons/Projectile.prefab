@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3148985571149448578}
   - component: {fileID: 7101522813916109232}
   - component: {fileID: 1151533923913155828}
-  - component: {fileID: 3013282507325978839}
+  - component: {fileID: 6653208809495484435}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -80,7 +80,6 @@ MonoBehaviour:
   allowedContacts: 1
   spriteRenderer: {fileID: 7101522813916109232}
   rb: {fileID: 5197039053017321834}
-  effectComponent: {fileID: 3013282507325978839}
 --- !u!212 &7101522813916109232
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -172,7 +171,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.35
---- !u!114 &3013282507325978839
+--- !u!114 &6653208809495484435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,21 +180,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 5625872554786471411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db232dd538c44ac088a0883766ccdf2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffects:
-    data: []
-  healEffects:
-    data: []
-  statEffects:
-    data: []
-  damagingBuffs:
-    data: []
-  healingBuffs:
-    data: []
-  statBuffs:
-    data: []
-  alieGroup: 0
-  applyOnlyOncePerObject: 1
-  applyToSource: 0
+  triggerTag: 
+  checkAlieGroup: 1
+  alieGroup: 2
+  onContactEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3148985571149448578}
+        m_TargetAssemblyTypeName: Project.Scripts.WeaponSystem.Projectile.Projectile,
+          Assembly-CSharp
+        m_MethodName: HandleContact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

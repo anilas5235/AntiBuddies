@@ -6,6 +6,6 @@ namespace Project.Scripts.EffectSystem.Effects.Data
 {
     internal interface IApplyDynamicEffect
     {
-        public int Apply(GameObject other, AlieGroup alieGroup, IStatGroup statGroup, GameObject source);
+        public int Apply(GameObject other, AllyGroup allyGroup, IStatGroup statGroup, GameObject source);
     }
 }

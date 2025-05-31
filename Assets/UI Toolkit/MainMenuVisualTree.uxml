@@ -1,0 +1,10 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=9130f97b6a287444fb4eab2a74dfbe89&amp;type=3#MainMenuStyle" />
+    <engine:VisualElement style="flex-grow: 1;">
+        <engine:GroupBox style="top: 20%; left: 25%; right: auto; width: 50%; height: 50%; justify-content: space-around;">
+            <engine:Button text="Start" enabled="true" name="Play" class="button" />
+            <engine:Button text="Options" name="Options" class="button" />
+            <engine:Button text="Quit" name="Quit" class="button" />
+        </engine:GroupBox>
+    </engine:VisualElement>
+</engine:UXML>

@@ -9,6 +9,8 @@ namespace Project.Scripts.StatSystem.Stats
     {
         [SerializeField] private StatDependency statDependency = new();
         public IStat Stat { get; private set; }
+        
+        public bool IsValid => statDependency.IsValid || Stat != null;
 
         public void Init(IStatGroup statComponent)
         {
@@ -16,10 +18,6 @@ namespace Project.Scripts.StatSystem.Stats
             StatType statType = statDependency.StatType;
             if (!statType) throw new ArgumentNullException(nameof(statType), "cannot be null.");
             Stat = statComponent.GetStat(statType);
-            if (Stat == null)
-            {
-                Debug.LogWarning($"Stat {statType} not found in StatComponent.");
-            }
         }
 
         public float GetValue()

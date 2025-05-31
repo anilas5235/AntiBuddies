@@ -9,13 +9,16 @@ namespace Project.Scripts.EffectSystem.Effects.Type
     [Serializable]
     public class StatDependency
     {
-        [FormerlySerializedAs("usePercent")] [SerializeField,Range(0,500)] private int useEfficiency = 100;
+        [SerializeField,Range(0,500)] private int useEfficiency;
         [SerializeField] private StatType statType;
         public bool IsPercentage => statType.IsPercentage;
         public StatType StatType => statType;
         
+        public bool IsValid => statType;
+        
         public StatDependency()
         {
+            useEfficiency = 100;
         }
 
         public StatDependency(StatType statType, int useEfficiency = 100)

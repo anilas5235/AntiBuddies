@@ -28,6 +28,7 @@ namespace Project.Scripts.StatSystem.Editor
             EditorGUILayout.PropertyField(statRefs, new GUIContent("Stat References"), true);
 
             EditorGUILayout.EndVertical();
+            
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValue();
         }
 
-        private void UpdateValue()
+        internal void UpdateValue()
         {
             currValue = StatUtils.AggregateStatRefs(baseValue, statRefs, positiveTransform);
             OnValueChange?.Invoke();
