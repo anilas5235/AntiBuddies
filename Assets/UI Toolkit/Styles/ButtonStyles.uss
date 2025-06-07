@@ -1,0 +1,42 @@
+.button {
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    align-self: stretch;
+    align-content: flex-start;
+    border-color: black;
+    background-color: black;
+    color: lightgray;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 5px;
+    transition-duration: 0.3s;
+}
+
+.button.bigButton {
+    font-size: 60px;
+    border-width: 8px;
+    border-radius: 25px;
+}
+
+.button.midButton {
+    font-size: 40px;
+    border-width: 6px;
+    border-radius: 20px;
+}
+
+.button.smallButton {
+    font-size: 20px;
+    border-width: 4px;
+    border-radius: 15px;
+}
+
+.button:hover {
+    scale: 1.02 1.01 1;
+    background-color: antiquewhite;
+    border-color: lightgrey;
+    color: black;
+}
+
+.button:focus{
+    border-color: lightgrey;
+}

@@ -53,7 +53,7 @@ namespace Project.Scripts.Spawning.Pooling
 
         private IPoolable CreateNewInstance()
         {
-            GameObject obj = Instantiate(prefab);
+            GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
             currentTotal++;
             IPoolable poolable = obj.GetComponent<IPoolable>();
             poolable.Init(this);
