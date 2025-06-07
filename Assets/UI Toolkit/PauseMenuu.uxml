@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/ButtonStyles.uss?fileID=7433441132597879392&amp;guid=6c6d66a8221ddb44289387cb0f760faa&amp;type=3#ButtonStyles" />
+    <engine:VisualElement style="flex-grow: 1; background-color: rgba(28, 28, 28, 0.79);">
+        <engine:VisualElement style="flex-grow: 1; width: 40%; justify-content: center; align-self: auto; padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left: 50px;">
+            <engine:Button text="Resume" name="Resume" class="button midButton" />
+            <engine:Button text="Main Menu" name="MainMenu" class="button midButton" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
