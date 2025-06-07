@@ -1,7 +1,7 @@
 using Project.Scripts.EffectSystem.Components;
 using UnityEngine;
 
-namespace Project.Scripts.UI
+namespace Project.Scripts.UI.HUD
 {
     [RequireComponent(typeof(HealthComponent))]
     public class HUDHealth : MonoBehaviour

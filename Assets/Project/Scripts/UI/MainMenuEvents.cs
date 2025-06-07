@@ -26,6 +26,7 @@ namespace Project.Scripts.UI
             _playButton.clicked += OnPlayButtonClick;
             _optionsButton.clicked += OnOptionsButtonClick;
             _quitButton.clicked += OnExitButtonClick;
+            _playButton.Focus();
         }
         
         private void OnDisable()

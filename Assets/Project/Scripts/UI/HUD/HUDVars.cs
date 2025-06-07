@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Scripts.UI
+namespace Project.Scripts.UI.HUD
 {
     [CreateAssetMenu(fileName = "HUDVars", menuName = "UI/HUDVars")]
     public class HUDVars : ScriptableObject
