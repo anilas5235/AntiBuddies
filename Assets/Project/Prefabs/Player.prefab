@@ -225,8 +225,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 564561616764115069}
-        m_TargetAssemblyTypeName: Project.ResourceSystem.ResourcePickUp, Assembly-CSharp
-        m_MethodName: HandleContact
+        m_TargetAssemblyTypeName: Project.Scripts.ResourceSystem.ResourcePickUp,
+          Assembly-CSharp
+        m_MethodName: HandleInnerContact
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -250,8 +251,6 @@ GameObject:
   - component: {fileID: 8293573683347230753}
   - component: {fileID: 3356991902276083124}
   - component: {fileID: 4282238287893853404}
-  - component: {fileID: 5331183102116683151}
-  - component: {fileID: 1453159354197933115}
   - component: {fileID: 6393263254011947306}
   - component: {fileID: 564561616764115069}
   - component: {fileID: 1660039489744883330}
@@ -277,6 +276,7 @@ Transform:
   m_Children:
   - {fileID: 4939956795979444460}
   - {fileID: 950662932907279521}
+  - {fileID: 2697870985755318554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2116360303484522427
@@ -359,9 +359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: a03df7e9bf216b84b819ae79516eb98d, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 1453159354197933115}
+  m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Default
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &4282238287893853404
@@ -502,52 +502,6 @@ MonoBehaviour:
     minValue: -2147483648
     baseStatValue: 0
     tempStatBonus: 0
---- !u!114 &5331183102116683151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029995827079385713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!114 &1453159354197933115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029995827079385713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: a03df7e9bf216b84b819ae79516eb98d, type: 3}
-  m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: 0}
-  m_SubmitAction: {fileID: 0}
-  m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: 0}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
-  m_ScrollDeltaPerTick: 6
 --- !u!114 &6393263254011947306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,6 +534,7 @@ MonoBehaviour:
     baseValue: 1.3
     currValue: 1.3
     positiveTransform: 1
+  circleCollider: {fileID: 2638978342917428936}
 --- !u!114 &1660039489744883330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +548,104 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudVars: {fileID: 11400000, guid: 4d488c76ebabd2b47a8d41c12b28cccf, type: 2}
+--- !u!1 &7425060869049423961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2697870985755318554}
+  - component: {fileID: 2638978342917428936}
+  - component: {fileID: 631501016603102559}
+  m_Layer: 0
+  m_Name: PickUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2697870985755318554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7425060869049423961}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8794693308980230054}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &2638978342917428936
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7425060869049423961}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1.3
+--- !u!114 &631501016603102559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7425060869049423961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onlyOncePerObject: 1
+  onContactEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 564561616764115069}
+        m_TargetAssemblyTypeName: Project.Scripts.ResourceSystem.ResourcePickUp,
+          Assembly-CSharp
+        m_MethodName: HandleOuterContact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7670451574764322797
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,4 +694,6 @@ MonoBehaviour:
   numberOfSlots: 6
   currentNumberOfSlots: 0
   weaponSlotPrefab: {fileID: 4847109733002469394, guid: 24ab6752f857f1144bf800314df430ba, type: 3}
-  defaultWeaponData: []
+  defaultWeaponData:
+  - {fileID: 11400000, guid: e02202dd553a52d499c7ceb5bdcb2a66, type: 2}
+  - {fileID: 11400000, guid: 70f6dd9407021584d856891c43768010, type: 2}
