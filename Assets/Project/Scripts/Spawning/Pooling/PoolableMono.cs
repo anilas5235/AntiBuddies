@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Project.Scripts.Spawning.Pooling
 {
     public abstract class PoolableMono : MonoBehaviour, IPoolable
     {
+        private void Awake()
+        {
+            Reset();
+        }
+
         public GameObjectPool Pool { get; set; }
 
         public GameObject GetGameObject() => gameObject;

@@ -92,9 +92,10 @@ namespace Project.Scripts.WeaponSystem.Slot
             Gizmos.color = Color.yellow;
             foreach (Vector3 position in CalculateSlotPositions(numberOfSlots))
             {
-                Gizmos.DrawWireSphere(position, radius);
-                Gizmos.DrawLine(position - scaledUp, position + scaledUp);
-                Gizmos.DrawLine(position - scaledRight, position + scaledRight);
+                Vector3 pos = position + transform.position; // Adjust position to be relative to the manager's position
+                Gizmos.DrawWireSphere(pos, radius);
+                Gizmos.DrawLine(pos - scaledUp, pos + scaledUp);
+                Gizmos.DrawLine(pos - scaledRight, pos + scaledRight);
             }
         }
 #endif

@@ -1,4 +1,4 @@
-.statBar {    
+.statBar {
     align-self: flex-start;
 }
 
@@ -8,11 +8,11 @@
 .expBar {
 }
 
-.healthBar .unity-progress-bar__progress{
-    background-color: #ff0307; 
+.healthBar .unity-progress-bar__progress {
+    background-color: #ff0307;
 }
 
-.expBar .unity-progress-bar__progress{
+.expBar .unity-progress-bar__progress {
     background-color: #3aff03;
 }
 
@@ -20,24 +20,24 @@
     justify-content: flex-end;
 }
 
-.unity-progress-bar__container {
+.statBar .unity-progress-bar__container {
     width: 100%;
-    height: 50px;    
+    height: 50px;
     max-height: 50px;
 }
 
-.unity-progress-bar__progress {    
+.statBar .unity-progress-bar__progress {
     margin: 0;
 }
 
-.unity-progress-bar__background {
+.statBar .unity-progress-bar__background {
     background-color: #4c4c4c;
     border-radius: 4px;
     border-width: 6px;
     border-color: #171717;
-} 
+}
 
-.unity-progress-bar__title {
+.statBar .unity-progress-bar__title {
     color: aliceblue;
     font-size: 20px;
 }

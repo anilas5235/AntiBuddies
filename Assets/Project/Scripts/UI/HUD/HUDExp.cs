@@ -1,7 +1,7 @@
 using Project.Scripts.ResourceSystem;
 using UnityEngine;
 
-namespace Project.Scripts.UI
+namespace Project.Scripts.UI.HUD
 {
     [RequireComponent(typeof(ExpManager))]
     public class HUDExp : MonoBehaviour
