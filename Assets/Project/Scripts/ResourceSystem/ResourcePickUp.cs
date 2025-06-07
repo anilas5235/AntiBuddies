@@ -1,58 +1,54 @@
 using Project.Scripts.StatSystem.Stats;
-using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.ResourceSystem
 {
-    public class ResourcePickUp : MonoBehaviour, IHandleContact
+    public class ResourcePickUp : MonoBehaviour
     {
         [SerializeField] private ValueStatRef attractRange;
-        private int _pickUpLayer;
+        [SerializeField] private CircleCollider2D circleCollider;
 
-        private void Awake()
+        private void OnEnable()
         {
-            _pickUpLayer = LayerMask.GetMask("PickUp");
+            attractRange.OnValueChange += UpdateColliderRadius;
+            UpdateColliderRadius();
         }
 
-        public void HandleContact(GameObject contact)
+        private void OnDisable()
         {
-            if (!contact.CompareTag("PickUp")) return;
-            if (contact.TryGetComponent(out IPickUpable pickUpable))
+            attractRange.OnValueChange -= UpdateColliderRadius;
+        }
+
+        private void UpdateColliderRadius()
+        {
+            if (circleCollider)
             {
-                pickUpable.PickUp();
+                circleCollider.radius = attractRange.CurrValue;
             }
         }
 
-        private void FixedUpdate()
+        public void HandleInnerContact(GameObject contact)
         {
-            Attract();
+            if (!contact.CompareTag("PickUp")) return;
+            if (contact.TryGetComponent(out IPickUpable pickUp))
+            {
+                pickUp.PickUp();
+            }
         }
 
-        private void Attract()
+        public void HandleOuterContact(GameObject contact)
         {
-            Collider2D[] result = Physics2D.OverlapCircleAll(transform.position, attractRange.CurrValue, _pickUpLayer);
-            foreach (Collider2D obj in result)
+            if (!contact.CompareTag("PickUp")) return;
+            if (contact.TryGetComponent(out IAttractable attractable))
             {
-                if (!obj || !obj.gameObject.activeInHierarchy) continue;
-
-                if (obj.CompareTag("PickUp") && obj.TryGetComponent(out IAttractable attractable))
-                {
-                    attractable.AttractTo(gameObject);
-                }
+                attractable.AttractTo(gameObject);
             }
         }
 
         private void OnValidate()
         {
             attractRange.UpdateValue();
+            UpdateColliderRadius();
         }
-
-#if UNITY_EDITOR
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, attractRange.CurrValue);
-        }
-#endif
     }
 }
