@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: TestItem
   m_EditorClassIdentifier: 
-  cost: 0
+  icon: {fileID: 634301963, guid: 1d770d1018a1b434f8386ae57bef3f4d, type: 3}
+  cost: 10
   description: TestItem
   behaviours:
   - {fileID: 11400000, guid: 3a0f02d3edb4fd94b9cb164df95900bb, type: 2}
