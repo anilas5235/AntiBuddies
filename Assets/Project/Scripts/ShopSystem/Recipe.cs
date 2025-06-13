@@ -8,16 +8,11 @@ namespace Project.Scripts.ShopSystem
     {
         [SerializeField] private Item item1;
         [SerializeField] private Item item2;
-        [SerializeField] private Item resultItem;
+        [SerializeField] public Item ResultItem { get; private set; }
 
         public bool IsValid(Item itemA, Item itemB)
         {
             return (itemA == item1 && itemB == item2) || (itemA == item2 && itemB == item1);
-        }
-
-        public Item GetResultItem()
-        {
-            return resultItem;
         }
     }
 }

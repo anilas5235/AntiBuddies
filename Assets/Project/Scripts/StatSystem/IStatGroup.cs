@@ -6,5 +6,7 @@ namespace Project.Scripts.StatSystem
     public interface IStatGroup
     {
         IStat GetStat(StatType statType);
+        void ModifyStat(StatModification statModification);
+
     }
 }

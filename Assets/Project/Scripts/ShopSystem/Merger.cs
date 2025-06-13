@@ -1,4 +1,5 @@
 using Project.Scripts.ItemSystem;
+using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.ShopSystem
@@ -13,10 +14,9 @@ namespace Project.Scripts.ShopSystem
             {
                 if (recipe.IsValid(item1, item2))
                 {
-                    // Item1.behaviours().OnRemoved(PlayerEffectRelay);
-                    // Item2.behaviours().OnRemoved(PlayerEffectRelay);
-                    // recipe.GetResultItem().behaviours().OnAdded(PlayerEffectRelay);
-                    // Add item to inventory
+                    GlobalVariables.Instance.PlayerInventory.Remove(item1);
+                    GlobalVariables.Instance.PlayerInventory.Remove(item2);
+                    GlobalVariables.Instance.PlayerInventory.Add(recipe.ResultItem);
                 }
             }
         }

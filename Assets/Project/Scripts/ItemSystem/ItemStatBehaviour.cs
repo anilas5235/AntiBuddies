@@ -1,5 +1,5 @@
-﻿using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects;
+﻿using Project.Scripts.StatSystem.Stats;
+using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.ItemSystem
@@ -7,16 +7,22 @@ namespace Project.Scripts.ItemSystem
     [CreateAssetMenu(fileName = "ItemStatBehaviour", menuName = "ItemSystem/StatBehaviour")]
     public class ItemStatBehaviour : ItemBehaviour
     {
-        // [SerializeField] private StatData statData;
-        public override void OnAdded(EffectRelay effectRelay)
+        [SerializeField] StatModification[] statModification;
+        
+        public override void OnAdded()
         {
-            // effectRelay.Apply(statData.GetPackage(null, AlieGroup.Neutral));
-            
+            foreach (var modification in statModification)
+            {
+                GlobalVariables.Instance.PlayerStatGroup.ModifyStat(modification);
+            }
         }
 
-        public override void OnRemoved(EffectRelay effectRelay)
+        public override void OnRemoved()
         {
-            // effectRelay.Apply(statData.GetPackage(null, AlieGroup.Neutral).Invert());
+            foreach (var modification in statModification)
+            {
+                GlobalVariables.Instance.PlayerStatGroup.ModifyStat(modification.Inverse());
+            }
         }
     }
 }

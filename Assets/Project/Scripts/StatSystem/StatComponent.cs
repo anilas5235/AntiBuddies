@@ -48,6 +48,12 @@ namespace Project.Scripts.StatSystem
             stat?.ModifyStat(statPackage);
         }
 
+        public void ModifyStat(StatModification statModification)
+        {
+            IStat stat = GetStat(statModification.StatType);
+            stat?.ModifyStat(statModification);
+        }
+
         public void ResetStats()
         {
             foreach (Stat liveStat in stats)
