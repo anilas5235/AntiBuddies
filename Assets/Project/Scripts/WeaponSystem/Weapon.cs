@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Components;
+using Project.Scripts.EffectSystem.Effects.Data.Definition;
 using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.WeaponSystem.Slot;
@@ -11,33 +13,48 @@ namespace Project.Scripts.WeaponSystem
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
         [SerializeField] private TargetingBehaviour targetingBehaviour;
-        [SerializeField] protected AlieGroup alieGroup;
+        [SerializeField] protected AllyGroup allyGroup = AllyGroup.Player;
+        [SerializeField] protected EffectPipeline effectPipeline;
+
+        [SerializeField] protected DamageDefinition damage = new();
+        [SerializeField] protected DamageBuffData buff;
 
         [SerializeField] private ValueStatRef attackSpeedStat;
         [SerializeField] private ValueStatRef rangeStat;
 
         private Transform _target;
         private WeaponSlot _weaponSlot;
+        protected bool SearchingForTarget = true;
         protected Coroutine Coroutine;
         protected StatComponent StatComponent;
+        private float _defaultAngle;
+        private bool _isFlip;
+        
+        protected internal float FlipMultiplier => _isFlip ? -1 : 1;
         public float Range => rangeStat.CurrValue;
-        public float AttackSpeed => attackSpeedStat.CurrValue;
+        protected float AttackSpeed => attackSpeedStat.CurrValue;
 
         protected virtual void OnEnable()
         {
             _weaponSlot = GetComponentInParent<WeaponSlot>();
+            _defaultAngle = _weaponSlot.GetDefaultWeaponAngle();
             StatComponent = GetComponentInParent<StatComponent>();
-            
+
             attackSpeedStat.Init(StatComponent);
             rangeStat.Init(StatComponent);
         }
 
         public void Attack()
         {
-            if (Coroutine != null) return;
+            if (Coroutine != null || !_target) return;
             Coroutine = StartCoroutine(AttackRoutine(CalcAttackInterval()));
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Debug.Log("OnTriggerEnter2D weapon " + other.name);
+        }
+
         protected virtual float CalcAttackInterval()
         {
             return attackSpeedStat.CurrValue;
@@ -45,31 +62,55 @@ namespace Project.Scripts.WeaponSystem
 
         private void FixedUpdate()
         {
-            if (_target && Vector3.Distance(transform.position, _target.position) > Range) _target = null;
-            _target ??= targetingBehaviour.FindTarget(transform, Range);
-            if (!_target) return;
+            if (_target)
+            {
+                if (Vector3.Distance(transform.position, _target.position) > Range ||
+                    !_target.gameObject.activeInHierarchy) SearchForTarget();
+            }
+            else
+            {
+                SearchForTarget();
+            }
+
             UpdateRotation();
             Attack();
         }
 
-        protected virtual void UpdateRotation()
+        private void SearchForTarget()
+        {
+            if (!SearchingForTarget) return;
+            _target = targetingBehaviour.FindTarget(transform, Range);
+        }
+
+        private void UpdateRotation()
         {
             // Rotate the weapon to face the target in 2D space => only rotate Z axis
             float angle = CalculateAngleToTarget();
+            _isFlip = Mathf.Abs(angle) > 90;
+            if (_isFlip) angle -= 180;
             transform.localRotation = Quaternion.Euler(0, 0, angle);
+            transform.localScale = new Vector3(FlipMultiplier, 1, 1);
         }
 
         protected virtual float CalculateAngleToTarget()
         {
+            if (!_target) return _defaultAngle;
             Vector3 direction = _weaponSlot.transform.InverseTransformPoint(_target.position);
             return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         }
 
         public void DestroyWeapon()
         {
+            StopCoroutine(Coroutine);
             Destroy(gameObject);
         }
 
         protected abstract IEnumerator AttackRoutine(float interval);
+
+        private void OnValidate()
+        {
+            attackSpeedStat.UpdateValue();
+            rangeStat.UpdateValue();
+        }
     }
 }

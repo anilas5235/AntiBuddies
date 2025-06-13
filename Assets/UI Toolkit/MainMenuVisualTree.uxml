@@ -1,0 +1,11 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/ButtonStyles.uss?fileID=7433441132597879392&amp;guid=6c6d66a8221ddb44289387cb0f760faa&amp;type=3#ButtonStyles" />
+    <engine:VisualElement style="flex-grow: 1; align-content: auto; align-items: auto;">
+        <engine:VisualElement style="flex-grow: 1; width: 40%; align-self: flex-start; justify-content: center; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+            <engine:Button text="Continue" name="Continue" selectable="true" class="button bigButton" style="display: none;" />
+            <engine:Button text="Start" enabled="true" name="Play" selectable="false" focusable="true" class="button bigButton" />
+            <engine:Button text="Options" name="Options" selectable="true" class="button bigButton" style="display: none;" />
+            <engine:Button text="Quit" name="Quit" selectable="false" focusable="true" class="button bigButton" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,4 +1,6 @@
 ﻿using System;
+using Project.Scripts.EffectSystem.Effects.Data;
+using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
 
@@ -68,23 +70,23 @@ namespace Project.Scripts.StatSystem.Stats
             return 1f + multiplier / 100f;
         }
 
-        public void ModifyStat(StatModification statModification)
+        public void ModifyStat(StatPackage package)
         {
-            if (statModification.StatType != statType) return;
+            if (package.StatType != statType) return;
 
-            switch (statModification.ModType)
+            switch (package.StatMod)
             {
-                case StatModification.Type.BaseValue:
-                    baseStatValue += statModification.Value;
+                case StatPackage.StatModification.BaseValue:
+                    baseStatValue += package.Amount;
                     break;
-                case StatModification.Type.TempValue:
-                    tempStatBonus += statModification.Value;
+                case StatPackage.StatModification.TempValue:
+                    tempStatBonus += package.Amount;
                     break;
-                case StatModification.Type.MaxValue:
-                    maxValue = statModification.Value;
+                case StatPackage.StatModification.MaxValue:
+                    maxValue = package.Amount;
                     break;
-                case StatModification.Type.MinValue:
-                    minValue = statModification.Value;
+                case StatPackage.StatModification.MinValue:
+                    minValue = package.Amount;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

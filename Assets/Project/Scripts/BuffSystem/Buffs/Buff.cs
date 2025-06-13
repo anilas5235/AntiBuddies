@@ -1,52 +1,43 @@
 ﻿using System;
-using Project.Scripts.BuffSystem.Buffs.ExitBehaviour;
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.BuffSystem.Components;
-using Project.Scripts.BuffSystem.Data;
-using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
-using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {
     [Serializable]
-    public sealed class Buff<T> : IBuff where T : EffectType
+    public abstract class Buff : IBuff
     {
-        public string Name { get; }
-        public GameObject Source => _effect.Source;
-        public BuffManager BuffManager { get; private set; }
-        public BuffData<T> Data { get; }
-        private IStackBehaviour StackBehaviour { get; }
-        public BuffGroup BuffGroup { get; set; }
-        private IPackageTarget<T> Target { get; }
-        private readonly float _duration;
-        private float _remainingDuration;
-        private readonly EffectPackage<T> _effect;
-        private readonly ITickBehaviour _tickBehavior;
-        private readonly IExitBehaviour _exitBehavior;
-
-        public Buff(EffectPackage<T> effect, float duration, IPackageTarget<T> target,
-            IStackBehaviour stackBehaviour, ITickBehaviour tickBehavior, IExitBehaviour exitBehavior, BuffData<T> data)
+        protected static string ConstructName(EffectType effectType, IStackBehaviour stackBehaviour,
+            ITickBehaviour tickBehaviour)
         {
-            Target = target;
-            _exitBehavior = exitBehavior;
-            Data = data;
-            _effect = effect;
-            _duration = duration;
-            _tickBehavior = tickBehavior;
-            StackBehaviour = stackBehaviour;
-            Name = ConstructName(effect, stackBehaviour, tickBehavior);
-            ResetDuration();
+            string stackBehaviourName = stackBehaviour != null ? stackBehaviour.GetType().Name : "NoStackBehaviour";
+            string tickBehaviourName = tickBehaviour != null ? tickBehaviour.GetType().Name : "NoTickBehaviour";
+            return $"{effectType.Name}_{stackBehaviourName}_{tickBehaviourName}";
         }
 
-        private static string ConstructName(EffectPackage<T> effect, IStackBehaviour stackBehaviour,
-            ITickBehaviour tickBehavior)
+        public bool AffectsAllies { get; }
+        public string Name { get; }
+        public BuffManager BuffManager { get; private set; }
+        protected IStackBehaviour StackBehaviour { get; }
+        public BuffGroup BuffGroup { get; set; }
+        public IPackageHub Hub { get; set; }
+        protected float Duration  { get; }
+        private float _remainingDuration;
+        protected ITickBehaviour TickBehavior  { get; }
+
+        protected Buff(string buffName, float duration, IPackageHub hub, IStackBehaviour stack,
+            ITickBehaviour tick, bool affectsAllies)
         {
-            string name = $"{effect.EffectType.Name}_{stackBehaviour.Name}";
-            if (tickBehavior != null) name += $"_{tickBehavior.Name}";
-            return name;
+            Hub = hub;
+            Duration = duration;
+            TickBehavior = tick;
+            AffectsAllies = affectsAllies;
+            StackBehaviour = stack;
+            Name = buffName;
+            ResetDuration();
         }
 
         public void OnBuffAdded()
@@ -57,24 +48,28 @@ namespace Project.Scripts.BuffSystem.Buffs
         public void OnBuffTick(float deltaTime)
         {
             ReduceDuration(deltaTime);
-            _tickBehavior?.OnBuffTick(this, deltaTime);
+            TickBehavior?.OnBuffTick(this, deltaTime);
 
             if (IsBuffExpired()) RemoveBuff();
         }
 
-        public void OnBuffApply() => Target.Apply(_effect);
-        public void OnInverseBuffApply() => Target.Apply(_effect.Invert());
+        public virtual void OnBuffApply()
+        {
+            if (Hub == null)
+            {
+                throw new NullReferenceException($"Buff {Name} has no Hub to apply effects to.");
+            }
+        }
 
-        public void OnBuffRemove() => _exitBehavior?.OnExit(this);
+        public virtual void OnBuffRemove()
+        {
+        }
 
         public bool IsBuffExpired() => _remainingDuration <= 0;
 
-        private void ResetDuration() => _remainingDuration = _duration;
+        private void ResetDuration() => _remainingDuration = Duration;
 
-        public void ReduceDuration(float amount)
-        {
-            _remainingDuration -= amount;
-        }
+        public void ReduceDuration(float amount) => _remainingDuration -= amount;
 
         public bool ShouldBuffBeAdded(BuffManager buffManager)
         {
@@ -82,7 +77,10 @@ namespace Project.Scripts.BuffSystem.Buffs
             return StackBehaviour.ShouldBuffBeAdded(this, buffManager);
         }
 
-        public void Refresh() => ResetDuration();
+        public virtual void Refresh()
+        {
+            ResetDuration();
+        }
 
         public void RemoveBuff()
         {
@@ -90,5 +88,7 @@ namespace Project.Scripts.BuffSystem.Buffs
             BuffGroup.UnregisterBuff(this);
             BuffManager.RemoveBuffFromDictionary(this);
         }
+
+        public abstract IBuff GetCopy();
     }
 }

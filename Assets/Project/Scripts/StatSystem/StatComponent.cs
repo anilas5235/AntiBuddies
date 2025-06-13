@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Project.Scripts.EffectSystem.Effects.Data;
+using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
@@ -42,9 +43,9 @@ namespace Project.Scripts.StatSystem
             return _statDict.GetValueOrDefault(statType);
         }
 
-        public void ModifyStat(EffectPackage<StatType> statPackage)
+        public void ModifyStat(StatPackage statPackage)
         {
-            IStat stat = GetStat(statPackage.EffectType);
+            IStat stat = GetStat(statPackage.StatType);
             stat?.ModifyStat(statPackage);
         }
 

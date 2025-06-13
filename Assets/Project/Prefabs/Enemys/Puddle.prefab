@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4899480555218850068}
   - component: {fileID: 1253394331397966347}
   - component: {fileID: -1871986820936156073}
-  - component: {fileID: 5532534441183630602}
+  - component: {fileID: 5622249107833275324}
+  - component: {fileID: 4802040615320445222}
   m_Layer: 0
   m_Name: Puddle
   m_TagString: Untagged
@@ -139,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa000549cb94460b3dae725d11b26ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5
+  lifeTime: 15
   timeToLive: 5
   spriteRenderer: {fileID: 4899480555218850068}
---- !u!114 &5532534441183630602
+--- !u!114 &5622249107833275324
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,22 +152,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 2467287288266850996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db232dd538c44ac088a0883766ccdf2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffects:
-    data: []
-  healEffects:
-    data: []
-  statEffects:
-    data: []
-  damagingBuffs:
-    data: []
-  healingBuffs:
-    data: []
-  statBuffs:
-    data:
-    - {fileID: 11400000, guid: 2b1b060c30fa4064bb8254e94cc5cdf0, type: 2}
-  alieGroup: 2
-  applyOnlyOncePerObject: 1
-  applyToSource: 0
+  onlyOncePerObject: 1
+  onContactEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4802040615320445222}
+        m_TargetAssemblyTypeName: Project.Scripts.Enemy.StatBuffApplier, Assembly-CSharp
+        m_MethodName: HandleContact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4802040615320445222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2467287288266850996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2405a2584054c959fa6d9133cec295b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statBuffData: {fileID: 11400000, guid: 2b1b060c30fa4064bb8254e94cc5cdf0, type: 2}
+  allyGroup: 0

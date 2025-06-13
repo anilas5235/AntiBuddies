@@ -8,12 +8,14 @@ using Random = UnityEngine.Random;
 namespace Project.Behaviors.Actions
 {
     [Serializable, GeneratePropertyBag]
-    [NodeDescription(name: "PositionInRect", story: "Random 2DPos [Position] in Rect", category: "Action", id: "b15dbb724ccdea7c7ff04699fc35917e")]
+    [NodeDescription(name: "PositionInRect", story: "Random 2DPos [Position] in Rect", category: "Action",
+        id: "b15dbb724ccdea7c7ff04699fc35917e")]
     public partial class PositionInRectAction : Action
     {
-    [SerializeReference] public BlackboardVariable<Vector2> Position;
+        [SerializeReference] public BlackboardVariable<Vector2> Position;
         [SerializeReference] public BlackboardVariable<Vector2> Size = new(Vector2.one);
-        [SerializeReference] public BlackboardVariable<Vector2> Offset;
+        [SerializeReference] public BlackboardVariable<Transform> Transform;
+        [SerializeReference] public BlackboardVariable<float> Radius = new(1f);
 
         protected override Status OnStart()
         {
@@ -23,7 +25,12 @@ namespace Project.Behaviors.Actions
         protected override Status OnUpdate()
         {
             Vector2 rect = Size.Value;
-            Position.Value = new Vector2(Random.Range(-rect.x,rect.x),Random.Range(-rect.y,rect.y)) + Offset.Value;
+            float halfWidth = rect.x / 2;
+            Position.Value = (Vector2)Transform.Value.position + (Random.insideUnitCircle * Radius);
+            Position.Value = new Vector2(
+                Mathf.Clamp(Position.Value.x, -halfWidth, halfWidth),
+                Mathf.Clamp(Position.Value.y, -halfWidth, halfWidth)
+            );
             return Status.Success;
         }
 
@@ -32,4 +39,3 @@ namespace Project.Behaviors.Actions
         }
     }
 }
-
