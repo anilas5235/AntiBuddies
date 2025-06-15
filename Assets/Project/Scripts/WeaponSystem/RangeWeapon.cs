@@ -10,13 +10,10 @@ namespace Project.Scripts.WeaponSystem
     {
         private static GameObjectPool _projectilePool;
 
-        [SerializeField] private WeaponFlipper weaponFlipper;
         [SerializeField] private RangeAttackBehaviour attackBehaviour;
         [SerializeField] private ProjectileData projectileData;
         [SerializeField] private int projectileCount = 1;
         [SerializeField] private Transform projectileSpawnPoint;
-        
-        internal Transform ProjectileSpawnPoint => projectileSpawnPoint;
         protected override void OnEnable()
         {
             base.OnEnable();
