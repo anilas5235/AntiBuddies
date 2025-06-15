@@ -19,5 +19,13 @@ namespace Project.Scripts.Utils
                 Destroy(this);
             }
         }
+        
+        protected virtual void OnDestroy()
+        {
+            if (Instance == this)
+            {
+                Instance = null;
+            }
+        }
     }
 }

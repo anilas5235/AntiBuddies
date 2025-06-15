@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -83,6 +84,11 @@ namespace Project.Scripts.Spawning.Pooling
             prefab = newPrefab;
             _initialized = false;
             Init();
+        }
+
+        private void OnDestroy()
+        {
+            _pool.Clear();
         }
     }
 }

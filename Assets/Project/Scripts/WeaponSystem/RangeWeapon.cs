@@ -19,7 +19,7 @@ namespace Project.Scripts.WeaponSystem
         protected override void OnEnable()
         {
             base.OnEnable();
-            _projectilePool ??= GlobalPools.Instance.GetPoolFor(projectileData.prefab);
+            if(!_projectilePool) _projectilePool = GlobalPools.Instance.GetPoolFor(projectileData.prefab);
         }
 
         protected override IEnumerator AttackRoutine(float interval)

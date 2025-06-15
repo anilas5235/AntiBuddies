@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 6393263254011947306}
   - component: {fileID: 564561616764115069}
   - component: {fileID: 1660039489744883330}
+  - component: {fileID: 4793252300442441189}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -319,7 +320,19 @@ MonoBehaviour:
       statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4793252300442441189}
+        m_TargetAssemblyTypeName: Project.Scripts.Player.PlayerEvents, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &8293573683347230753
 Rigidbody2D:
   serializedVersion: 5
@@ -548,6 +561,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudVars: {fileID: 11400000, guid: 4d488c76ebabd2b47a8d41c12b28cccf, type: 2}
+--- !u!114 &4793252300442441189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029995827079385713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4e149e5a2242729edc3065426a769b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7425060869049423961
 GameObject:
   m_ObjectHideFlags: 0

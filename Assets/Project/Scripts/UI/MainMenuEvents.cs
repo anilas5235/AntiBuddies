@@ -48,7 +48,7 @@ namespace Project.Scripts.UI
 
         private void OnPlayButtonClick()
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("GameScene");
         }
     }
 }
