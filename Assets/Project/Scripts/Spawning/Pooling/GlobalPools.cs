@@ -33,5 +33,11 @@ namespace Project.Scripts.Spawning.Pooling
             _pools.Add(prefab, newPool);
             return newPool;
         }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            _pools.Clear();
+        }
     }
 }

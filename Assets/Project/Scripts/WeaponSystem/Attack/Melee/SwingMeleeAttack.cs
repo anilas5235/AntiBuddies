@@ -10,7 +10,7 @@ namespace Project.Scripts.WeaponSystem.Attack.Melee
 
         public override void AttackUpdate(MeleeWeapon weapon, float attackDelta)
         {
-            weapon.AngleOffset = (Mathf.PingPong(attackDelta, 2) - 1) * swingAngle * weapon.FlipMultiplier;
+            weapon.AngleOffset = (Mathf.PingPong(attackDelta, 2) - 1) * swingAngle;
         }
     }
 }

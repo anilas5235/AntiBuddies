@@ -8,6 +8,7 @@ namespace Project.Scripts.UI
     public class UIManager : Singleton<UIManager>
     {
         [SerializeField] private GameObject pauseMenu;
+        [SerializeField] private GameObject endRun;
         private bool _uiActive;
 
         private readonly List<GameObject> _activeUIs = new();
@@ -23,6 +24,18 @@ namespace Project.Scripts.UI
             {
                 TogglePauseMenu();
             }
+        }
+        
+        public void ShowEndRunMenu()
+        {
+            if (!endRun)
+            {
+                Debug.LogWarning("End run menu is not assigned in the UIManager.");
+                return;
+            }
+
+            endRun.SetActive(true);
+            AddActiveUI(endRun);
         }
 
         public void TogglePauseMenu()
@@ -66,11 +79,13 @@ namespace Project.Scripts.UI
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0f;
             }
             else
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1f;
             }
         }
     }

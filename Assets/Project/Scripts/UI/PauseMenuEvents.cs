@@ -22,7 +22,6 @@ namespace Project.Scripts.UI
         {
             _resumeButton.clicked += OnResumeButtonClick;
             _returnButton.clicked += OnReturnButtonClick;
-            Time.timeScale = 0f; // Pause the game
             _resumeButton.Focus(); // Set focus on the resume button
         }
 
@@ -30,7 +29,6 @@ namespace Project.Scripts.UI
         {
             _resumeButton.clicked -= OnResumeButtonClick;
             _returnButton.clicked -= OnReturnButtonClick;
-            Time.timeScale = 1f; // Resume the game
         }
 
         private void OnResumeButtonClick()

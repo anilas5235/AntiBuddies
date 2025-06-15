@@ -14,12 +14,10 @@ namespace Project.Scripts.WeaponSystem
         [SerializeField] private ProjectileData projectileData;
         [SerializeField] private int projectileCount = 1;
         [SerializeField] private Transform projectileSpawnPoint;
-        
-        internal Transform ProjectileSpawnPoint => projectileSpawnPoint;
         protected override void OnEnable()
         {
             base.OnEnable();
-            _projectilePool ??= GlobalPools.Instance.GetPoolFor(projectileData.prefab);
+            if(!_projectilePool) _projectilePool = GlobalPools.Instance.GetPoolFor(projectileData.prefab);
         }
 
         protected override IEnumerator AttackRoutine(float interval)
@@ -30,12 +28,17 @@ namespace Project.Scripts.WeaponSystem
                 projectile.SetData(projectileData, damage.CreatePackage(gameObject, StatComponent),
                     buff?.GetBuff(null, gameObject, StatComponent));
                 projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
-                projectile.ProjectileSetUp(attackBehaviour.GetDirection(this) * FlipMultiplier,
+                projectile.ProjectileSetUp(attackBehaviour.GetDirection(this),
                     allyGroup, projectileData.contacts);
             }
 
             yield return new WaitForSeconds(interval);
             Coroutine = null;
+        }
+        
+        public Vector3 GetStraightShotDirection()
+        {
+            return transform.right;
         }
     }
 }
