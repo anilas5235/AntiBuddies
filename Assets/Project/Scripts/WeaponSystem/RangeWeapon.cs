@@ -10,6 +10,7 @@ namespace Project.Scripts.WeaponSystem
     {
         private static GameObjectPool _projectilePool;
 
+        [SerializeField] private WeaponFlipper weaponFlipper;
         [SerializeField] private RangeAttackBehaviour attackBehaviour;
         [SerializeField] private ProjectileData projectileData;
         [SerializeField] private int projectileCount = 1;
@@ -30,12 +31,17 @@ namespace Project.Scripts.WeaponSystem
                 projectile.SetData(projectileData, damage.CreatePackage(gameObject, StatComponent),
                     buff?.GetBuff(null, gameObject, StatComponent));
                 projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
-                projectile.ProjectileSetUp(attackBehaviour.GetDirection(this) * FlipMultiplier,
+                projectile.ProjectileSetUp(attackBehaviour.GetDirection(this),
                     allyGroup, projectileData.contacts);
             }
 
             yield return new WaitForSeconds(interval);
             Coroutine = null;
+        }
+        
+        public Vector3 GetStraightShotDirection()
+        {
+            return transform.right;
         }
     }
 }

@@ -28,9 +28,6 @@ namespace Project.Scripts.WeaponSystem
         protected Coroutine Coroutine;
         protected StatComponent StatComponent;
         private float _defaultAngle;
-        private bool _isFlip;
-        
-        protected internal float FlipMultiplier => _isFlip ? -1 : 1;
         public float Range => rangeStat.CurrValue;
         protected float AttackSpeed => attackSpeedStat.CurrValue;
 
@@ -86,15 +83,16 @@ namespace Project.Scripts.WeaponSystem
         {
             // Rotate the weapon to face the target in 2D space => only rotate Z axis
             float angle = CalculateAngleToTarget();
-            _isFlip = Mathf.Abs(angle) > 90;
-            if (_isFlip) angle -= 180;
             transform.localRotation = Quaternion.Euler(0, 0, angle);
-            transform.localScale = new Vector3(FlipMultiplier, 1, 1);
         }
 
         protected virtual float CalculateAngleToTarget()
         {
-            if (!_target) return _defaultAngle;
+            if (!_target)
+            {
+                return Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.z, _defaultAngle, Time.deltaTime * 180f);
+            }
+
             Vector3 direction = _weaponSlot.transform.InverseTransformPoint(_target.position);
             return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         }

@@ -71,6 +71,7 @@ MonoBehaviour:
     baseValue: 10
     currValue: 10
     positiveTransform: 1
+  weaponFlipper: {fileID: 0}
   attackBehaviour: {fileID: 11400000, guid: 17c118038b4068049a754033d6e0ade4, type: 2}
   projectileData: {fileID: 11400000, guid: 14a307630c66be44ba1c30e7975bf775, type: 2}
   projectileCount: 1
@@ -116,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4250629533486609936}
   - component: {fileID: 2733281410680518339}
+  - component: {fileID: 4293350120187619120}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -194,3 +196,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4293350120187619120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5687712978582478919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e168e2745540b9a7522c437a3b7cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

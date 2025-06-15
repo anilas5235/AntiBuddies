@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.Utils;
 using Project.Scripts.WeaponSystem.Attack.Melee;
 using UnityEngine;
@@ -19,7 +18,7 @@ namespace Project.Scripts.WeaponSystem
         {
             SetColliderEnabled(false);
         }
-        
+
         private void SetColliderEnabled(bool b)
         {
             ContactTrigger2D.enabled = b;
@@ -28,12 +27,12 @@ namespace Project.Scripts.WeaponSystem
                 col.enabled = b;
             }
         }
-        
+
         public void HandleContact(GameObject contact)
         {
             ContactToHubAdapter hubAdapter = new(contact, allyGroup);
             if (!hubAdapter.IsValid) return;
-            hubAdapter.Apply(damage.CreatePackage(gameObject,StatComponent));
+            hubAdapter.Apply(damage.CreatePackage(gameObject, StatComponent));
         }
 
         protected override float CalculateAngleToTarget()
