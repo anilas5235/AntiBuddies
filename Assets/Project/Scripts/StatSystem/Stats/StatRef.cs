@@ -5,19 +5,19 @@ using UnityEngine;
 namespace Project.Scripts.StatSystem.Stats
 {
     [Serializable]
-    public class StatRef
+    public class StatRef : INeedStatGroup
     {
         [SerializeField] private StatDependency statDependency = new();
         public IStat Stat { get; private set; }
         
         public bool IsValid => statDependency.IsValid || Stat != null;
 
-        public void Init(IStatGroup statComponent)
+        public void OnStatInit(IStatGroup statGroup)
         {
-            if (statComponent == null) return;
+            if (statGroup == null) return;
             StatType statType = statDependency.StatType;
             if (!statType) throw new ArgumentNullException(nameof(statType), "cannot be null.");
-            Stat = statComponent.GetStat(statType);
+            Stat = statGroup.GetStat(statType);
         }
 
         public float GetValue()

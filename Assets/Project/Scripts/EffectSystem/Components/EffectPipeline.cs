@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class EffectPipeline : MonoBehaviour, INeedStatComponent
+    public class EffectPipeline : MonoBehaviour, INeedStatGroup
     {
         private readonly List<IEffectPipelineComponent> _components = new();
         private IStatGroup _statGroup;
@@ -37,9 +37,9 @@ namespace Project.Scripts.EffectSystem.Components
             _components.Clear();
         }
 
-        public void OnStatInit(StatComponent statComponent)
+        public void OnStatInit(IStatGroup statGroup)
         {
-            _statGroup = statComponent;
+            _statGroup = statGroup;
         }
     }
 }

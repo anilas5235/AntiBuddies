@@ -9,7 +9,7 @@ namespace Project.Scripts.Player
     /// Handles top-down movement for the player using Rigidbody2D and input system.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerTopDownMovement : MonoBehaviour, INeedStatComponent
+    public class PlayerTopDownMovement : MonoBehaviour, INeedStatGroup
     {
         /// <summary>
         /// Maximum acceleration applied to the player movement.
@@ -58,10 +58,10 @@ namespace Project.Scripts.Player
             _rb2d.linearVelocity = Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, maxDistanceDelta);
         }
 
-        public void OnStatInit(StatComponent statComponent)
+        public void OnStatInit(IStatGroup statGroup)
         {
             // Initialize the move speed reference from the stat component.
-            moveSpeed.Init(statComponent);
+            moveSpeed.OnStatInit(statGroup);
         }
        
         private void OnValidate()

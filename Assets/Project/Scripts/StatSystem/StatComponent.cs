@@ -31,8 +31,8 @@ namespace Project.Scripts.StatSystem
 
         private void CallOnInitStats()
         {
-            INeedStatComponent[] comps = GetComponentsInChildren<INeedStatComponent>();
-            foreach (INeedStatComponent component in comps)
+            INeedStatGroup[] comps = GetComponentsInChildren<INeedStatGroup>();
+            foreach (INeedStatGroup component in comps)
             {
                 component.OnStatInit(this);
             }

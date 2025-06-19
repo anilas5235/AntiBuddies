@@ -37,8 +37,8 @@ namespace Project.Scripts.WeaponSystem
             _defaultAngle = _weaponSlot.GetDefaultWeaponAngle();
             StatComponent = GetComponentInParent<StatComponent>();
 
-            attackSpeedStat.Init(StatComponent);
-            rangeStat.Init(StatComponent);
+            attackSpeedStat.OnStatInit(StatComponent);
+            rangeStat.OnStatInit(StatComponent);
         }
 
         public void Attack()

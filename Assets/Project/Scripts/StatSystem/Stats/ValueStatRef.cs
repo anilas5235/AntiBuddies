@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.Scripts.StatSystem.Stats
 {
     [Serializable]
-    public class ValueStatRef
+    public class ValueStatRef : INeedStatGroup
     {
         [SerializeField] private List<StatRef> statRefs;
         [SerializeField] private float baseValue = 1f;
@@ -29,17 +29,6 @@ namespace Project.Scripts.StatSystem.Stats
             }
         }
 
-        public void Init(StatComponent statComponent)
-        {
-            foreach (StatRef statRef in statRefs)
-            {
-                statRef.Init(statComponent);
-                statRef.Stat.OnStatChange += UpdateValue;
-            }
-
-            UpdateValue();
-        }
-
         internal void UpdateValue()
         {
             currValue = StatUtils.AggregateStatRefs(baseValue, statRefs, positiveTransform);
@@ -56,6 +45,17 @@ namespace Project.Scripts.StatSystem.Stats
 
             statRefs.Add(statRef);
             statRef.Stat.OnStatChange += UpdateValue;
+            UpdateValue();
+        }
+
+        public void OnStatInit(IStatGroup statGroup)
+        {
+            foreach (StatRef statRef in statRefs)
+            {
+                statRef.OnStatInit(statGroup);
+                statRef.Stat.OnStatChange += UpdateValue;
+            }
+
             UpdateValue();
         }
     }

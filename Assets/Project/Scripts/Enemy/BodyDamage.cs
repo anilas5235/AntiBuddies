@@ -7,24 +7,24 @@ using UnityEngine;
 
 namespace Project.Scripts.Enemy
 {
-    public class BodyDamage : MonoBehaviour, IHandleContact, INeedStatComponent
+    public class BodyDamage : MonoBehaviour, IHandleContact, INeedStatGroup
     {
         [SerializeField] private DamageDefinition damage = new();
         [SerializeField] private DamageBuffData buffData;
         [SerializeField] private AllyGroup allyGroup = AllyGroup.Enemy;
-        private StatComponent _statComponent;
+        private IStatGroup _statGroup;
 
         public void HandleContact(GameObject contact)
         {
             ContactToHubAdapter hubAdapter = new(contact, allyGroup);
             if (!hubAdapter.IsValid) return;
-            hubAdapter.Apply(damage.CreatePackage(gameObject, _statComponent));
-            hubAdapter.Apply(buffData?.GetBuff(null, gameObject, _statComponent));
+            hubAdapter.Apply(damage.CreatePackage(gameObject, _statGroup));
+            hubAdapter.Apply(buffData?.GetBuff(null, gameObject, _statGroup));
         }
 
-        public void OnStatInit(StatComponent statComponent)
+        public void OnStatInit(IStatGroup statGroup)
         {
-            _statComponent = statComponent;
+            _statGroup = statGroup;
         }
     }
 }

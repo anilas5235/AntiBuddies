@@ -6,16 +6,16 @@ using UnityEngine;
 
 namespace Project.Scripts.Enemy
 {
-    public class Enemy : PoolableMono, INeedStatComponent
+    public class Enemy : PoolableMono, INeedStatGroup
     {
         [SerializeField] private ValueStatRef speedStat;
         [SerializeField] private BehaviorGraphAgent behaviorGraphAgent;
-        private StatComponent _statComponent;
+        private IStatGroup _statGroup;
 
-        public void OnStatInit(StatComponent statComponent)
+        public void OnStatInit(IStatGroup statGroup)
         {
-            _statComponent = statComponent;
-            speedStat.Init(_statComponent);
+            _statGroup = statGroup;
+            speedStat.OnStatInit(_statGroup);
         }
 
         private void OnEnable()

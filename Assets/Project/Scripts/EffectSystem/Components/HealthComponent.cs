@@ -11,7 +11,7 @@ using UnityEngine.Events;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class HealthComponent : MonoBehaviour, IDamageable, IHealable, INeedStatComponent
+    public class HealthComponent : MonoBehaviour, IDamageable, IHealable, INeedStatGroup
     {
         [SerializeField] private int currentHealth = 10;
         [SerializeField] private StatRef maxHpStat;
@@ -73,9 +73,9 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void FullHeal() => CurrentHealth = MaxHealth;
 
-        public void OnStatInit(StatComponent statComponent)
+        public void OnStatInit(IStatGroup statGroup)
         {
-            maxHpStat.Init(statComponent);
+            maxHpStat.OnStatInit(statGroup);
         }
         
         private void HandleMaxHealthChange()

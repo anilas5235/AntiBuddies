@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 
 namespace Project.Scripts.EffectSystem.Components
 {
-    public class EffectRelay : MonoBehaviour, IPackageHub, INeedStatComponent
+    public class EffectRelay : MonoBehaviour, IPackageHub, INeedStatGroup
     {
         [SerializeField] protected AllyGroup allyGroup;
 
@@ -21,7 +21,7 @@ namespace Project.Scripts.EffectSystem.Components
         [SerializeField] private BuffManager buffManager;
         [SerializeField] private EffectPipeline effectPipeline;
         [SerializeField] private StatRef dodgeStat;
-        private StatComponent _statComponent;
+        private IStatGroup _statGroup;
 
         public event Action<int, DamageType> OnDamageReceived;
         public event Action<int, HealType> OnHealReceived;
@@ -46,7 +46,7 @@ namespace Project.Scripts.EffectSystem.Components
             }
 
             int damage = package.Amount;
-            if (_statComponent) damage = package.ReceptionScale(damage, _statComponent);
+            if (_statGroup != null) damage = package.ReceptionScale(damage, _statGroup);
             damage = healthComponent.TakeDamage(damage);
             OnDamageReceived?.Invoke(damage, package.DamageType);
             onDamageReceived?.Invoke();
@@ -67,13 +67,13 @@ namespace Project.Scripts.EffectSystem.Components
 
         public void Apply(StatPackage package)
         {
-            _statComponent.ModifyStat(package);
+            _statGroup.ModifyStat(package);
         }
 
-        public void OnStatInit(StatComponent statComponent)
+        public void OnStatInit(IStatGroup statGroup)
         {
-            _statComponent = statComponent;
-            dodgeStat.Init(statComponent);
+            _statGroup = statGroup;
+            dodgeStat.OnStatInit(statGroup);
         }
 
         public bool IsAlie(AllyGroup group) => group == allyGroup;

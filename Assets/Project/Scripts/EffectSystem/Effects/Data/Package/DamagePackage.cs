@@ -28,9 +28,9 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
             OnDamageApplied?.Invoke(amount);
         }
 
-        public int ReceptionScale(int damage, StatComponent statComponent)
+        public int ReceptionScale(int damage, IStatGroup statGroup)
         {
-            return damageType.ReceptionScale(damage, statComponent);
+            return damageType.ReceptionScale(damage, statGroup);
         }
     }
 }
