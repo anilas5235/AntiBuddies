@@ -5,11 +5,20 @@ using UnityEngine.InputSystem;
 
 namespace Project.Scripts.Player
 {
+    /// <summary>
+    /// Handles top-down movement for the player using Rigidbody2D and input system.
+    /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerTopDownMovement : MonoBehaviour, INeedStatComponent
     {
+        /// <summary>
+        /// Maximum acceleration applied to the player movement.
+        /// </summary>
         [Range(0.0001f, 50f)] public float maxAcceleration = 2f;
 
+        /// <summary>
+        /// Reference to the movement speed stat.
+        /// </summary>
         [SerializeField] private ValueStatRef moveSpeed;
 
         private Rigidbody2D _rb2d;
@@ -20,6 +29,10 @@ namespace Project.Scripts.Player
             _rb2d = GetComponent<Rigidbody2D>();
         }
 
+        /// <summary>
+        /// Called by the input system to update movement input.
+        /// </summary>
+        /// <param name="inputValue">The input value representing movement direction.</param>
         public void OnMove(InputValue inputValue)
         {
             _moveInput = inputValue.Get<Vector2>().normalized;
@@ -30,21 +43,30 @@ namespace Project.Scripts.Player
             HandleMovement();
         }
 
+        /// <summary>
+        /// Applies movement to the Rigidbody2D based on input and stats.
+        /// </summary>
         private void HandleMovement()
         {
-            Vector2 targetVelocity = _moveInput * moveSpeed.CurrValue;
-            _rb2d.linearVelocity =
-                Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity,
-                    Time.fixedDeltaTime * maxAcceleration * moveSpeed.CurrValue);
+            float currentStatSpeed = moveSpeed.CurrValue;
+            Vector2 targetVelocity = _moveInput * currentStatSpeed;
+        
+            // Calculate the maximum change in velocity allowed this frame (acceleration constraint).
+            float maxDistanceDelta = Time.fixedDeltaTime * maxAcceleration * currentStatSpeed;
+        
+            // Smoothly move the Rigidbody2D's velocity towards the target velocity.
+            _rb2d.linearVelocity = Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, maxDistanceDelta);
         }
 
         public void OnStatInit(StatComponent statComponent)
         {
+            // Initialize the move speed reference from the stat component.
             moveSpeed.Init(statComponent);
         }
-
+       
         private void OnValidate()
         {
+            // Updates the move speed value in the editor when values change.
             moveSpeed.UpdateValue();
         }
     }
