@@ -29,6 +29,7 @@ namespace Project.Scripts.StatSystem.Stats
         /// </summary>
         public bool IsValid => statDependency.IsValid && Stat != null;
         
+        /// <inheritdoc/>
         public void OnStatInit(IStatGroup statGroup)
         {
             if (statGroup == null || !statDependency.IsValid) return;

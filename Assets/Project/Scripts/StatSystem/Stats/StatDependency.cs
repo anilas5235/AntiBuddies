@@ -1,9 +1,8 @@
 ﻿using System;
 using Project.Scripts.EffectSystem.Effects.Type;
-using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 
-namespace Project.Scripts.StatSystem
+namespace Project.Scripts.StatSystem.Stats
 {
     /// <summary>
     /// Represents a dependency on a stat, allowing retrieval of its value based on a specified efficiency.
@@ -21,11 +20,6 @@ namespace Project.Scripts.StatSystem
         /// The type of the stat this dependency refers to.
         /// </summary>
         [SerializeField] private StatType statType;
-        
-        /// <summary>
-        /// Indicates whether the stat is a percentage type.
-        /// </summary>
-        public bool IsPercentage => statType.IsPercentage;
         
         /// <summary>
         /// The type of the stat this dependency refers to.

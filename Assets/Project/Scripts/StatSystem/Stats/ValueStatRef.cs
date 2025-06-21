@@ -60,6 +60,7 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValue();
         }
        
+        /// <inheritdoc/>
         public void OnStatInit(IStatGroup statGroup)
         {
             _statGroup = statGroup;

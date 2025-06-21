@@ -54,11 +54,13 @@ namespace Project.Scripts.StatSystem
             }
         }
         
+        /// <inheritdoc/>
         public IStat GetStat(StatType statType)
         {
             return _statDict.GetValueOrDefault(statType);
         }
        
+        /// <inheritdoc/>
         public void ModifyStat(StatPackage statPackage)
         {
             IStat stat = GetStat(statPackage.StatType);

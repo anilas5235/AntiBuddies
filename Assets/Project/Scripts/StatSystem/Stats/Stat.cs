@@ -65,14 +65,22 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValues();
         }
 
+        /// <inheritdoc/>
         public StatType StatType => statType;
+        /// <inheritdoc/>
         public event Action OnStatChange;
+        /// <inheritdoc/>
         public int Value => clampedValue;
+        /// <inheritdoc/>
         public bool IsPercentage => statType.IsPercentage;
+        /// <inheritdoc/>
         public int FreeValue => statValue;
+        /// <inheritdoc/>
         public int MaxValue => maxValue;
+        /// <inheritdoc/>
         public int MinValue => minValue;
 
+        /// <inheritdoc/>
         public void UpdateValues()
         {
             // Calculate the stat value with bonuses and percent multipliers.
@@ -81,6 +89,7 @@ namespace Project.Scripts.StatSystem.Stats
             OnStatChange?.Invoke();
         }
 
+        /// <inheritdoc/>
         public void ModifyStat(StatPackage package)
         {
             if (package.StatType != statType) return;
@@ -106,6 +115,7 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValues();
         }
 
+        /// <inheritdoc/>
         public void Reset()
         {
             Debug.Log("Resetting stat: " + statType);
@@ -117,6 +127,7 @@ namespace Project.Scripts.StatSystem.Stats
             UpdateValues();
         }
 
+        /// <inheritdoc/>
         public void ResetTempStat()
         {
             tempStatBonus = 0;
