@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Project.Scripts.StatSystem.Editor
 {
+    /// <summary>
+    /// Custom property drawer for <see cref="ValueStatRef"/>.
+    /// Displays base value, current value, transform type, and stat references in the inspector.
+    /// </summary>
     [CustomPropertyDrawer(typeof(ValueStatRef))]
     public class ValueStatRefDrawer: PropertyDrawer
     {

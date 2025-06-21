@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Project.Scripts.EffectSystem.Effects.Data;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem.Stats;
@@ -8,11 +6,23 @@ using UnityEngine;
 
 namespace Project.Scripts.StatSystem
 {
+    /// <summary>
+    /// Represents a component that manages all stats of an entity.
+    /// Should only exist once per entity.
+    /// </summary>
     [DefaultExecutionOrder(-50)]
     public class StatComponent : MonoBehaviour, IStatGroup
     {
+        /// <summary>
+        /// List of all stats managed by this component.
+        /// Managed and represented in the editor.
+        /// </summary>
         [SerializeField] private List<Stat> stats;
 
+        /// <summary>
+        /// Dictionary mapping StatType to IStat for quick access to stats managed by this component.
+        /// initialized in Awake.
+        /// </summary>
         private readonly Dictionary<StatType, IStat> _statDict = new();
 
         private void Awake()
@@ -21,6 +31,9 @@ namespace Project.Scripts.StatSystem
             CallOnInitStats();
         }
 
+        /// <summary>
+        /// Initializes the stat dictionary from the stats list.
+        /// </summary>
         private void InitStats()
         {
             foreach (Stat stat in stats)
@@ -29,6 +42,9 @@ namespace Project.Scripts.StatSystem
             }
         }
 
+        /// <summary>
+        /// Calls OnStatInit on all child components that need stat initialization.
+        /// </summary>
         private void CallOnInitStats()
         {
             INeedStatGroup[] comps = GetComponentsInChildren<INeedStatGroup>();
@@ -37,18 +53,21 @@ namespace Project.Scripts.StatSystem
                 component.OnStatInit(this);
             }
         }
-
+        
         public IStat GetStat(StatType statType)
         {
             return _statDict.GetValueOrDefault(statType);
         }
-
+       
         public void ModifyStat(StatPackage statPackage)
         {
             IStat stat = GetStat(statPackage.StatType);
             stat?.ModifyStat(statPackage);
         }
 
+        /// <summary>
+        /// Resets all stats to their initial state.
+        /// </summary>
         public void ResetStats()
         {
             foreach (Stat liveStat in stats)
@@ -56,9 +75,22 @@ namespace Project.Scripts.StatSystem
                 liveStat.Reset();
             }
         }
+        
+        /// <summary>
+        /// Resets all temporary bonuses of the stats.
+        /// </summary>
+        public void ResetTempStats()
+        {
+            foreach (Stat liveStat in stats)
+            {
+                liveStat.ResetTempStat();
+            }
+        }
 
         private void OnValidate()
         {
+            // Validate that all stats have a unique StatType and are initialized correctly.
+            // This will only run in the editor.
             List<StatType> statTypes = new();
             foreach (Stat stat in stats)
             {
@@ -76,17 +108,7 @@ namespace Project.Scripts.StatSystem
                 }
 
                 statTypes.Add(stat.StatType);
-
                 stat.UpdateValues();
-            }
-        }
-
-        public void ResetStatOfType(StatType statType)
-        {
-            IEnumerable<Stat> s = stats.Where(x => x.StatType == statType);
-            foreach (Stat stat in s)
-            {
-                stat.Reset();
             }
         }
     }

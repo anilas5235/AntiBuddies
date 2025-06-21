@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
-using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.StatSystem.Stats;
 using UnityEditor;
 using UnityEngine;
-// Required for SerializedProperty utilities
 
 namespace Project.Scripts.StatSystem.Editor
 {
+    /// <summary>
+    /// Custom property drawer for the <see cref="Stat"/> class.
+    /// Displays a foldout with editable and read-only fields for stat properties.
+    /// </summary>
     [CustomPropertyDrawer(typeof(Stat))]
     public class StatDrawer : PropertyDrawer
     {
@@ -16,7 +18,7 @@ namespace Project.Scripts.StatSystem.Editor
 
         private static readonly float Spacing =
             EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-
+    
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             SerializedProperty statType = property.FindPropertyRelative("statType");
@@ -83,23 +85,6 @@ namespace Project.Scripts.StatSystem.Editor
                 EditorGUI.PropertyField(position, tempStatBonus);
 
                 position.y += Spacing;
-
-                // Add a button to reset the stat
-                if (GUI.Button(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight),
-                        "Reset Stat"))
-                {
-                    if (statType.objectReferenceValue)
-                    {
-                        // Call the Reset method on the Stat object
-                        StatComponent target = property.serializedObject.targetObject as StatComponent;
-                        if (target)
-                        {
-                            target.ResetStatOfType(statType.objectReferenceValue as StatType);
-                        }
-                    }
-                }
-
-                position.y += Spacing;
                 EditorGUI.indentLevel--;
             }
 
@@ -108,7 +93,7 @@ namespace Project.Scripts.StatSystem.Editor
                 property.serializedObject.ApplyModifiedProperties();
             }
         }
-
+        
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             string propertyPath = property.propertyPath;

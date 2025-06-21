@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Project.Scripts.StatSystem.Editor
 {
+    /// <summary>
+    /// Custom property drawer for <see cref="StatRef"/>.
+    /// Displays stat type and efficiency fields in the inspector.
+    /// </summary>
     [CustomPropertyDrawer(typeof(StatRef))]
     public class StatRefDrawer : PropertyDrawer
     {
@@ -32,7 +36,7 @@ namespace Project.Scripts.StatSystem.Editor
             currentRect.y += lineHeight + spacing;
             EditorGUI.PropertyField(currentRect, useEfficiency, new GUIContent("Use Efficiency"));
         }
-
+        
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             // Calculate height for two fields and spacing
