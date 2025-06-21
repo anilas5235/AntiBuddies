@@ -6,30 +6,28 @@ using UnityEngine.UIElements;
 namespace Project.Scripts.UI
 {
     [RequireComponent(typeof(UIDocument))]
-    public class MainMenuEvents : MonoBehaviour
+    public class MainMenuEvents : AbstractUIEvents
     {
-        private UIDocument _uiDocument;
         private Button _playButton;
         private Button _optionsButton;
         private Button _quitButton;
 
-        private void Awake()
+        protected override void UpdateUiRefs(VisualElement root)
         {
-            _uiDocument = GetComponent<UIDocument>();
-            _playButton = _uiDocument.rootVisualElement.Q<Button>("Play");
-            _optionsButton = _uiDocument.rootVisualElement.Q<Button>("Options");
-            _quitButton = _uiDocument.rootVisualElement.Q<Button>("Quit");
+            _playButton = root.Q<Button>("Play");
+            _optionsButton = root.Q<Button>("Options");
+            _quitButton = root.Q<Button>("Quit");
         }
 
-        private void OnEnable()
+        protected override void SubscribeEvents()
         {
             _playButton.clicked += OnPlayButtonClick;
             _optionsButton.clicked += OnOptionsButtonClick;
             _quitButton.clicked += OnExitButtonClick;
             _playButton.Focus();
         }
-        
-        private void OnDisable()
+
+        protected override void UnsubscribeEvents()
         {
             _playButton.clicked -= OnPlayButtonClick;
             _optionsButton.clicked -= OnOptionsButtonClick;

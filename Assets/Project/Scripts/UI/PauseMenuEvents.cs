@@ -5,27 +5,25 @@ using UnityEngine.UIElements;
 namespace Project.Scripts.UI
 {
     [RequireComponent(typeof(UIDocument))]
-    public class PauseMenuEvents : MonoBehaviour
+    public class PauseMenuEvents : AbstractUIEvents
     {
-        private UIDocument _uiDocument;
         private Button _resumeButton;
         private Button _returnButton;
 
-        private void Awake()
+        protected override void UpdateUiRefs(VisualElement root)
         {
-            _uiDocument = GetComponent<UIDocument>();
-            _resumeButton = _uiDocument.rootVisualElement.Q<Button>("Resume");
-            _returnButton = _uiDocument.rootVisualElement.Q<Button>("Return");
+            _resumeButton = root.Q<Button>("Resume");
+            _returnButton = root.Q<Button>("Return");
         }
 
-        private void OnEnable()
+        protected override void SubscribeEvents()
         {
             _resumeButton.clicked += OnResumeButtonClick;
             _returnButton.clicked += OnReturnButtonClick;
-            _resumeButton.Focus(); // Set focus on the resume button
+            _resumeButton.Focus();
         }
 
-        private void OnDisable()
+        protected override void UnsubscribeEvents()
         {
             _resumeButton.clicked -= OnResumeButtonClick;
             _returnButton.clicked -= OnReturnButtonClick;
@@ -38,7 +36,6 @@ namespace Project.Scripts.UI
 
         private void OnReturnButtonClick()
         {
-            // return to the main menu
             SceneManager.LoadScene("MainMenu");
         }
     }

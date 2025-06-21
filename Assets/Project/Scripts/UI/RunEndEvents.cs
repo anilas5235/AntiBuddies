@@ -4,27 +4,25 @@ using UnityEngine.UIElements;
 
 namespace Project.Scripts.UI
 {
-    public class RunEndEvents : MonoBehaviour
+    public class RunEndEvents : AbstractUIEvents
     {
-        private UIDocument _uiDocument;
         private Button _restartButton;
         private Button _menuButton;
 
-        private void Awake()
+        protected override void UpdateUiRefs(VisualElement root)
         {
-            _uiDocument = GetComponent<UIDocument>();
-            _restartButton = _uiDocument.rootVisualElement.Q<Button>("Restart");
-            _menuButton = _uiDocument.rootVisualElement.Q<Button>("Menu");
+            _restartButton = root.Q<Button>("Restart");
+            _menuButton = root.Q<Button>("Menu");
         }
 
-        private void OnEnable()
+        protected override void SubscribeEvents()
         {
             _restartButton.clicked += OnRestartButtonClick;
             _menuButton.clicked += OnMenuButtonClick;
-            _restartButton.Focus(); // Set focus on the restart button
+            _restartButton.Focus();
         }
 
-        private void OnDisable()
+        protected override void UnsubscribeEvents()
         {
             _restartButton.clicked -= OnRestartButtonClick;
             _menuButton.clicked -= OnMenuButtonClick;
@@ -37,7 +35,6 @@ namespace Project.Scripts.UI
 
         private void OnMenuButtonClick()
         {
-            // Return to the main menu
             SceneManager.LoadScene("MainMenu");
         }
     }
