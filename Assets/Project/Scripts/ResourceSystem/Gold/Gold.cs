@@ -71,7 +71,6 @@ namespace Project.Scripts.ResourceSystem.Gold
         {
             if (!destination || _destTransform)
             {
-                Debug.LogWarning("Cannot attract to null destination or already attracted.");
                 return false;
             }
 
