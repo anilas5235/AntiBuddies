@@ -53,7 +53,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
 
         public void HandleContact(GameObject contact)
         {
-            ContactToHubAdapter hubAdapter = new(contact, _alliedGroup, _extraEffectHandler);
+            ContactEffectProcessor hubAdapter = new(contact, _alliedGroup, _extraEffectHandler);
             if (!hubAdapter.IsValid || hubAdapter.Alie) return;
             hubAdapter.Apply(_damagePackage);
             hubAdapter.Apply(_damageBuff?.GetCopy());

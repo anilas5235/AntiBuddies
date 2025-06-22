@@ -43,7 +43,7 @@ namespace Project.Scripts.Enemy
         public void HandleContact(GameObject contact)
         {
             // Adapter checks if the contact is valid and applies damage and buffs if so.
-            ContactToHubAdapter hubAdapter = new(contact, alliedGroup, extraEffectHandler);
+            ContactEffectProcessor hubAdapter = new(contact, alliedGroup, extraEffectHandler);
             if (!hubAdapter.IsValid) return;
             hubAdapter.Apply(damage.CreatePackage(gameObject, _statGroup));
             hubAdapter.Apply(buffData, gameObject, _statGroup);
