@@ -6,13 +6,34 @@ using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem
 {
+    /// <summary>
+    /// Represents a ranged weapon that fires projectiles.
+    /// </summary>
     public class RangeWeapon : Weapon
     {
+        /// <summary>
+        /// The pool used to reuse projectile instances.
+        /// </summary>
         private static GameObjectPool _projectilePool;
 
+        /// <summary>
+        /// The behaviour that defines how this ranged weapon attacks.
+        /// </summary>
         [SerializeField] private RangeAttackBehaviour attackBehaviour;
+
+        /// <summary>
+        /// The data for the projectile to be fired.
+        /// </summary>
         [SerializeField] private ProjectileData projectileData;
+
+        /// <summary>
+        /// The number of projectiles fired per attack.
+        /// </summary>
         [SerializeField] private int projectileCount = 1;
+
+        /// <summary>
+        /// The transform at which projectiles are spawned.
+        /// </summary>
         [SerializeField] private Transform projectileSpawnPoint;
 
         protected override void OnEnable()
@@ -21,11 +42,13 @@ namespace Project.Scripts.WeaponSystem
             if (!_projectilePool) _projectilePool = GlobalPools.Instance.GetPoolFor(projectileData.prefab);
         }
 
+        /// <inheritdoc/>
         protected override IEnumerator AttackRoutine(float interval)
         {
             for (int i = 0; i < projectileCount; i++)
             {
                 IProjectile projectile = (IProjectile)_projectilePool.GetObject();
+                // Create dynamic settings for the projectile
                 DynamicProjectileSettings settings = new(
                     damage,
                     buff,
@@ -44,6 +67,10 @@ namespace Project.Scripts.WeaponSystem
             Coroutine = null;
         }
 
+        /// <summary>
+        /// Gets the direction for a straight shot.
+        /// </summary>
+        /// <returns>The direction vector for a straight shot.</returns>
         public Vector3 GetStraightShotDirection()
         {
             return transform.right;
