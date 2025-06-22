@@ -148,8 +148,7 @@ namespace Project.Scripts.BuffSystem.Buffs
         public void RemoveBuff()
         {
             OnBuffRemove();
-            BuffGroup.UnregisterBuff(this);
-            BuffManager.RemoveBuffFromDictionary(this);
+            BuffManager.RemoveBuff(this);
         }
 
         /// <inheritdoc/>
