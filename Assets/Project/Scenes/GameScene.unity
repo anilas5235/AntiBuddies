@@ -1842,6 +1842,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: stats.Array.data[11].statValue
+      value: 391
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: stats.Array.data[11].clampedValue
+      value: 391
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282238287893853404, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
+      propertyPath: stats.Array.data[11].baseStatValue
+      value: 391
+      objectReference: {fileID: 0}
     - target: {fileID: 8794693308980230054, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

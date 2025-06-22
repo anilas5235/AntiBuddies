@@ -1,16 +1,39 @@
 using Project.Scripts.Spawning.Pooling;
 using UnityEngine;
 
-namespace Project.Scripts.ResourceSystem
+namespace Project.Scripts.ResourceSystem.Gold
 {
+    /// <summary>
+    /// Represents a gold pickup object that can be attracted and collected by the player.
+    /// </summary>
     public class Gold : PoolableMono, IPickUpable, IAttractable
     {
+        /// <summary>
+        /// Amount of gold this pickup represents.
+        /// </summary>
         [SerializeField] private int amount = 1;
+
+        /// <summary>
+        /// The transform to which this gold is currently being attracted.
+        /// </summary>
         private Transform _destTransform;
+
+        /// <summary>
+        /// Time since this gold started being attracted.
+        /// </summary>
         private float _attractedSince;
+
+        /// <summary>
+        /// Base speed at which the gold is attracted.
+        /// </summary>
         private const float AttractedSpeed = 10f;
+
+        /// <summary>
+        /// Maximum speed at which the gold can be attracted.
+        /// </summary>
         private const float MaxAttractedSpeed = 100f;
 
+        /// <inheritdoc/>
         public override void Reset()
         {
             amount = 1;
@@ -18,6 +41,7 @@ namespace Project.Scripts.ResourceSystem
             _attractedSince = 0f;
         }
 
+        /// <inheritdoc/>
         public void PickUp()
         {
             if (amount <= 0)
@@ -37,13 +61,22 @@ namespace Project.Scripts.ResourceSystem
 
             _attractedSince += Time.fixedDeltaTime;
 
+            // Move towards the destination at a speed that increases over time, up to a maximum.
             transform.Translate((_destTransform.position - transform.position).normalized *
                                 (Time.fixedDeltaTime * Mathf.Min(MaxAttractedSpeed, AttractedSpeed * _attractedSince)));
         }
 
-        public void AttractTo(GameObject destination)
+        /// <inheritdoc/>
+        public bool AttractTo(GameObject destination)
         {
-            _destTransform ??= destination.transform;
+            if (!destination || _destTransform)
+            {
+                Debug.LogWarning("Cannot attract to null destination or already attracted.");
+                return false;
+            }
+           
+            _destTransform = destination.transform;
+            return true;
         }
     }
 }

@@ -491,6 +491,14 @@ MonoBehaviour:
     minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: e5b244f5799def84db3e00f5b60c75c1, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
   - statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
     statValue: 0
     clampedValue: 0
@@ -654,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onlyOncePerObject: 1
+  onlyOncePerObject: 0
   onContactEnter:
     m_PersistentCalls:
       m_Calls:
