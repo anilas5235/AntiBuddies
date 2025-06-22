@@ -2,8 +2,15 @@
 
 namespace Project.Scripts.UtilComponents
 {
+    /// <summary>
+    /// Selects a random sprite from a list and assigns it to the SpriteRenderer on Awake.
+    /// </summary>
+    [RequireComponent(typeof(SpriteRenderer))]
     public class SelectRandomSprite : MonoBehaviour
     {
+        /// <summary>
+        /// Array of possible sprites to select from.
+        /// </summary>
         [SerializeField] private Sprite[] sprites;
 
         private void Awake()
@@ -14,17 +21,13 @@ namespace Project.Scripts.UtilComponents
                 return;
             }
 
+            // Pick a random sprite and assign it to the SpriteRenderer.
             int randomIndex = Random.Range(0, sprites.Length);
             SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-            if (spriteRenderer)
-            {
-                spriteRenderer.sprite = sprites[randomIndex];
-                spriteRenderer.sortingOrder -= randomIndex;
-            }
-            else
-            {
-                Debug.LogError("No SpriteRenderer found on the GameObject.");
-            }
+
+            spriteRenderer.sprite = sprites[randomIndex];
+            // Optionally adjust sorting order for visual variety.
+            spriteRenderer.sortingOrder -= randomIndex;
         }
     }
 }
