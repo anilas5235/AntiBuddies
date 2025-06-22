@@ -105,6 +105,7 @@ namespace Project.Scripts.EffectSystem.Components
             int amount = package.Amount;
             amount = healthComponent.Heal(amount);
             OnHealReceived?.Invoke(amount, package.HealType);
+            FloatingTextSpawner.Instance.SpawnFloatingNumber(amount, package.HealType.Color, gameObject);
         }
 
         /// <summary>

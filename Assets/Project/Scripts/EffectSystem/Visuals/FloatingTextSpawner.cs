@@ -1,4 +1,3 @@
-using Project.Scripts.EffectSystem.Effects.Type;
 using Project.Scripts.Spawning.Pooling;
 using Project.Scripts.Utils;
 using UnityEngine;

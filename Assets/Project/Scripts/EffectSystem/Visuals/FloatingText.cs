@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Project.Scripts.Spawning.Pooling;
+﻿using Project.Scripts.Spawning.Pooling;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Visuals
