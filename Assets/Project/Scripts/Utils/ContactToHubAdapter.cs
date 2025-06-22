@@ -9,15 +9,15 @@ namespace Project.Scripts.Utils
     public class ContactToHubAdapter : IPackageHub
     {
         private GameObject ContactObject { get; }
-        private EffectPipeline EffectPipeline { get; }
+        private ExtraEffectHandler ExtraEffectHandler { get; }
         private IPackageHub Hub { get; }
         public bool Alie { get; }
 
         public bool IsValid { get; } = true;
 
-        public ContactToHubAdapter(GameObject contactObject, AllyGroup allyGroup, EffectPipeline effectPipeline = null)
+        public ContactToHubAdapter(GameObject contactObject, AlliedGroup alliedGroup, ExtraEffectHandler extraEffectHandler = null)
         {
-            EffectPipeline = effectPipeline;
+            ExtraEffectHandler = extraEffectHandler;
             ContactObject = contactObject;
             if (!ContactObject)
             {
@@ -32,31 +32,31 @@ namespace Project.Scripts.Utils
                 return;
             }
 
-            Alie = Hub.IsAlie(allyGroup);
+            Alie = Hub.IsAlie(alliedGroup);
         }
 
         public void Apply(DamagePackage package)
         {
             if (!IsValid || package == null || Alie) return;
             Hub.Apply(package);
-            EffectPipeline?.Execute(Hub, EffectPipelineMode.Damage);
+            ExtraEffectHandler?.Execute(Hub, EffectTrigger.Damage);
         }
 
         public void Apply(HealPackage package)
         {
             if (!IsValid || package == null || !Alie) return;
             Hub.Apply(package);
-            EffectPipeline?.Execute(Hub, EffectPipelineMode.Heal);
+            ExtraEffectHandler?.Execute(Hub, EffectTrigger.Heal);
         }
 
         public void Apply(StatPackage package)
         {
             if (!IsValid|| package == null) return;
             Hub.Apply(package);
-            EffectPipeline?.Execute(Hub, EffectPipelineMode.Stat);
+            ExtraEffectHandler?.Execute(Hub, EffectTrigger.Stat);
         }
 
-        public bool IsAlie(AllyGroup group)
+        public bool IsAlie(AlliedGroup group)
         {
             if (!IsValid) return false;
             return Hub.IsAlie(group);

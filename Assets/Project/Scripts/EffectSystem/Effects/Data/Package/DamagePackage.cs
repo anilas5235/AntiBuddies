@@ -32,5 +32,10 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
         {
             return damageType.ReceptionScale(damage, statGroup);
         }
+
+        public Color GetDamageColor()
+        {
+            return _isCritical ? Color.yellow : damageType.Color;
+        }
     }
 }

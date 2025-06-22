@@ -4,6 +4,7 @@ using Project.Scripts.EffectSystem.Effects.Data.Definition;
 using Project.Scripts.StatSystem;
 using Project.Scripts.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.Enemy
 {
@@ -11,12 +12,12 @@ namespace Project.Scripts.Enemy
     {
         [SerializeField] private DamageDefinition damage = new();
         [SerializeField] private DamageBuffData buffData;
-        [SerializeField] private AllyGroup allyGroup = AllyGroup.Enemy;
+        [SerializeField] private AlliedGroup alliedGroup = AlliedGroup.Enemy;
         private IStatGroup _statGroup;
 
         public void HandleContact(GameObject contact)
         {
-            ContactToHubAdapter hubAdapter = new(contact, allyGroup);
+            ContactToHubAdapter hubAdapter = new(contact, alliedGroup);
             if (!hubAdapter.IsValid) return;
             hubAdapter.Apply(damage.CreatePackage(gameObject, _statGroup));
             hubAdapter.Apply(buffData?.GetBuff(null, gameObject, _statGroup));

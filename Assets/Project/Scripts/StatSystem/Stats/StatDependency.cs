@@ -53,7 +53,7 @@ namespace Project.Scripts.StatSystem.Stats
         {
             if(stat == null) return 0f;
             // Multiply stat value by efficiency percentage.
-            return stat.Value * useEfficiency / 100f;
+            return useEfficiency == 100 ? stat.Value :  stat.Value * useEfficiency / 100f;
         }
         
         /// <summary>

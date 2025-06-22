@@ -1,7 +1,6 @@
 using System.Collections;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
-using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
 
 namespace Project.Scripts.Player
@@ -13,7 +12,7 @@ namespace Project.Scripts.Player
 
         public PlayerEffectRelay()
         {
-            allyGroup = AllyGroup.Player;
+            alliedGroup = AlliedGroup.Player;
         }
 
         public override void Apply(DamagePackage package)
@@ -23,7 +22,7 @@ namespace Project.Scripts.Player
             StartEyeFrame();
         }
 
-        protected override Color GetDamageColor(DamageType damageType)
+        protected override Color GetDamageColor(DamagePackage damagePackage)
         {
             return Color.red;
         }

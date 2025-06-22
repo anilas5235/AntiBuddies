@@ -18,7 +18,8 @@ namespace Project.Scripts.WeaponSystem.Projectile
 
         private DamagePackage _damagePackage;
         private DamageBuff _damageBuff;
-        private AllyGroup _allyGroup;
+        private AlliedGroup _alliedGroup;
+        private ExtraEffectHandler _extraEffectHandler;
 
         public override void Reset()
         {
@@ -28,30 +29,31 @@ namespace Project.Scripts.WeaponSystem.Projectile
             _damageBuff = null;
         }
 
-        public void SetData(ProjectileData projectileData, DamagePackage damagePackage, DamageBuff damageBuff)
+        public void SetData(ProjectileData projectileData, DamagePackage damagePackage, 
+            DamageBuff damageBuff, ExtraEffectHandler extraEffectHandler)
         {
             data = projectileData;
             speed = data.speed;
-            allowedContacts = 1;
             spriteRenderer.sprite = data.sprite;
             transform.localScale = data.scale;
             _damagePackage = damagePackage;
             _damageBuff = damageBuff;
+            _extraEffectHandler = extraEffectHandler;
         }
 
-        public void ProjectileSetUp(Vector2 direction, AllyGroup allyGroup, int contacts)
+        public void ProjectileSetUp(Vector2 direction, AlliedGroup alliedGroup, int contacts)
         {
             if (direction == Vector2.zero) return;
             direction = direction.normalized;
             transform.right = direction;
             rb.linearVelocity = direction * speed;
             allowedContacts = contacts;
-            _allyGroup = allyGroup;
+            _alliedGroup = alliedGroup;
         }
 
         public void HandleContact(GameObject contact)
         {
-            ContactToHubAdapter hubAdapter = new(contact, _allyGroup);
+            ContactToHubAdapter hubAdapter = new(contact, _alliedGroup, _extraEffectHandler);
             if (!hubAdapter.IsValid || hubAdapter.Alie) return;
             hubAdapter.Apply(_damagePackage);
             hubAdapter.Apply(_damageBuff?.GetCopy());

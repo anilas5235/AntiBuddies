@@ -7,14 +7,15 @@ using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.WeaponSystem.Slot;
 using Project.Scripts.WeaponSystem.Targeting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.WeaponSystem
 {
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
         [SerializeField] private TargetingBehaviour targetingBehaviour;
-        [SerializeField] protected AllyGroup allyGroup = AllyGroup.Player;
-        [SerializeField] protected EffectPipeline effectPipeline;
+        [SerializeField] protected AlliedGroup alliedGroup = AlliedGroup.Player;
+        [SerializeField] protected ExtraEffectHandler extraEffectHandler;
 
         [SerializeField] protected DamageDefinition damage = new();
         [SerializeField] protected DamageBuffData buff;

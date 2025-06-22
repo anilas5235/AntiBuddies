@@ -185,10 +185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d45194f74049fe9cb74286650cbb1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allyGroup: 1
+  alliedGroup: 1
   healthComponent: {fileID: 4307234338099689046}
   buffManager: {fileID: 1508122211642880128}
-  effectPipeline: {fileID: 6393263254011947306}
+  extraEffectHandler: {fileID: 6393263254011947306}
   dodgeStat:
     statDependency:
       useEfficiency: 100

@@ -30,7 +30,7 @@ namespace Project.Scripts.WeaponSystem
 
         public void HandleContact(GameObject contact)
         {
-            ContactToHubAdapter hubAdapter = new(contact, allyGroup);
+            ContactToHubAdapter hubAdapter = new(contact, alliedGroup,extraEffectHandler);
             if (!hubAdapter.IsValid) return;
             hubAdapter.Apply(damage.CreatePackage(gameObject, StatComponent));
         }
