@@ -6,12 +6,25 @@ using UnityEngine;
 
 namespace Project.Scripts.Enemy
 {
+    /// <summary>
+    /// Represents an enemy entity with stat and behavior graph integration.
+    /// </summary>
     public class Enemy : PoolableMono, INeedStatGroup
     {
+        /// <summary>
+        /// Reference to the speed stat for this enemy.
+        /// </summary>
         [SerializeField] private ValueStatRef speedStat;
+        /// <summary>
+        /// The behavior graph agent controlling this enemy's AI.
+        /// </summary>
         [SerializeField] private BehaviorGraphAgent behaviorGraphAgent;
+        /// <summary>
+        /// The stat group associated with this enemy.
+        /// </summary>
         private IStatGroup _statGroup;
 
+        /// <inheritdoc/>
         public void OnStatInit(IStatGroup statGroup)
         {
             _statGroup = statGroup;
@@ -30,11 +43,17 @@ namespace Project.Scripts.Enemy
             speedStat.OnValueChange -= OnSpeedStatChange;
         }
 
+        /// <summary>
+        /// Called when the speed stat value changes; updates the behavior graph variable.
+        /// </summary>
         private void OnSpeedStatChange()
         {
             behaviorGraphAgent.SetVariableValue("Speed", speedStat.CurrValue);
         }
 
+        /// <summary>
+        /// Handles the enemy's death and returns it to the pool.
+        /// </summary>
         public void Die()
         {
             ReturnToPool();
@@ -42,9 +61,11 @@ namespace Project.Scripts.Enemy
 
         private void OnValidate()
         {
+            // Ensure the speed stat is represented correctly in the editor.
             speedStat.UpdateValue();
         }
 
+        /// <inheritdoc/>
         public override void Reset()
         {
         }

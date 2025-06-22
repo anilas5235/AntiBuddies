@@ -1,12 +1,14 @@
 ﻿using Project.Scripts.BuffSystem.Buffs;
+using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.StatSystem;
 using UnityEngine;
 
 namespace Project.Scripts.Utils
 {
-    public class ContactToHubAdapter : IPackageHub
+    public class ContactToHubAdapter
     {
         private GameObject ContactObject { get; }
         private ExtraEffectHandler ExtraEffectHandler { get; }
@@ -15,7 +17,8 @@ namespace Project.Scripts.Utils
 
         public bool IsValid { get; } = true;
 
-        public ContactToHubAdapter(GameObject contactObject, AlliedGroup alliedGroup, ExtraEffectHandler extraEffectHandler = null)
+        public ContactToHubAdapter(GameObject contactObject, AlliedGroup alliedGroup,
+            ExtraEffectHandler extraEffectHandler)
         {
             ExtraEffectHandler = extraEffectHandler;
             ContactObject = contactObject;
@@ -51,23 +54,37 @@ namespace Project.Scripts.Utils
 
         public void Apply(StatPackage package)
         {
-            if (!IsValid|| package == null) return;
+            if (!IsValid || package == null) return;
             Hub.Apply(package);
             ExtraEffectHandler?.Execute(Hub, EffectTrigger.Stat);
         }
 
-        /// <inheritdoc/>
-        public bool IsAlie(AlliedGroup group)
-        {
-            return IsValid && Hub.IsAlie(group);
-        }
-
         public void Apply(IBuff buff)
         {
-            if (!IsValid|| buff == null) return;
+            if (!IsValid || buff == null) return;
             if (!buff.AffectsAllies && Alie) return;
-            buff.Hub = Hub;
             Hub.Apply(buff);
+        }
+
+        public void Apply(StatBuffData statBuffData)
+        {
+            if (!IsValid || !statBuffData) return;
+            IBuff buff = statBuffData.GetBuff(Hub);
+            Apply(buff);
+        }
+
+        public void Apply(DamageBuffData damageBuffData, GameObject source, IStatGroup statGroup = null)
+        {
+            if (!IsValid || !damageBuffData) return;
+            IBuff buff = damageBuffData.GetBuff(Hub, source, statGroup);
+            Apply(buff);
+        }
+
+        public void Apply(HealingBuffData healingBuffData)
+        {
+            if (!IsValid || !healingBuffData) return;
+            IBuff buff = healingBuffData.GetBuff(Hub);
+            Apply(buff);
         }
     }
 }
