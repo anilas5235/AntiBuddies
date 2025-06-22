@@ -82,6 +82,7 @@ namespace Project.Scripts.EffectSystem.Components
                     extraEffectHandler.Execute(this, EffectTrigger.SelfDodge);
                 }
 
+                FloatingTextSpawner.Instance.SpawnFloatingText("DODGE", Color.white, gameObject);
                 return;
             }
             
@@ -92,7 +93,7 @@ namespace Project.Scripts.EffectSystem.Components
             extraEffectHandler?.Execute(this, EffectTrigger.TakeDamage);
             OnDamageReceived?.Invoke(damage, package.DamageType);
             onDamageReceived?.Invoke();
-            FloatingNumberSpawner.Instance.SpawnFloatingNumber(damage, GetDamageColor(package), gameObject);
+            FloatingTextSpawner.Instance.SpawnFloatingNumber(damage, GetDamageColor(package), gameObject);
         }
 
         /// <summary>
