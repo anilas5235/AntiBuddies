@@ -26,11 +26,18 @@ namespace Project.Scripts.WeaponSystem
             for (int i = 0; i < projectileCount; i++)
             {
                 IProjectile projectile = (IProjectile)_projectilePool.GetObject();
-                projectile.SetData(projectileData, damage.CreatePackage(gameObject, StatComponent),
-                    buff?.GetBuff(null, gameObject, StatComponent), extraEffectHandler);
+                DynamicProjectileSettings settings = new(
+                    damage,
+                    buff,
+                    extraEffectHandler,
+                    attackBehaviour.GetDirection(this),
+                    alliedGroup,
+                    0, // for future use
+                    gameObject,
+                    StatGroup
+                );
+                projectile.SetData(projectileData, settings);
                 projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
-                projectile.ProjectileSetUp(attackBehaviour.GetDirection(this),
-                    alliedGroup, projectileData.contacts);
             }
 
             yield return new WaitForSeconds(interval);

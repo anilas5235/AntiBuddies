@@ -27,7 +27,7 @@ namespace Project.Scripts.WeaponSystem
         private WeaponSlot _weaponSlot;
         protected bool SearchingForTarget = true;
         protected Coroutine Coroutine;
-        protected StatComponent StatComponent;
+        protected IStatGroup StatGroup;
         private float _defaultAngle;
         public float Range => rangeStat.CurrValue;
         protected float AttackSpeed => attackSpeedStat.CurrValue;
@@ -36,10 +36,10 @@ namespace Project.Scripts.WeaponSystem
         {
             _weaponSlot = GetComponentInParent<WeaponSlot>();
             _defaultAngle = _weaponSlot.GetDefaultWeaponAngle();
-            StatComponent = GetComponentInParent<StatComponent>();
+            StatGroup = GetComponentInParent<StatComponent>();
 
-            attackSpeedStat.OnStatInit(StatComponent);
-            rangeStat.OnStatInit(StatComponent);
+            attackSpeedStat.OnStatInit(StatGroup);
+            rangeStat.OnStatInit(StatGroup);
         }
 
         public void Attack()

@@ -2,6 +2,9 @@
 
 namespace Project.Scripts.WeaponSystem.Projectile
 {
+    /// <summary>
+    /// Blocks projectiles that enter its trigger collider.
+    /// </summary>
     public class ProjectileBlocker : MonoBehaviour
     {
         private void OnTriggerEnter2D(Collider2D other)

@@ -32,7 +32,7 @@ namespace Project.Scripts.WeaponSystem
         {
             ContactEffectProcessor hubAdapter = new(contact, alliedGroup, extraEffectHandler);
             if (!hubAdapter.IsValid) return;
-            hubAdapter.Apply(damage.CreatePackage(gameObject, StatComponent));
+            hubAdapter.Apply(damage.CreatePackage(gameObject, StatGroup));
         }
 
         protected override float CalculateAngleToTarget()
