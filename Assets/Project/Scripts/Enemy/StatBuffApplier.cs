@@ -15,10 +15,12 @@ namespace Project.Scripts.Enemy
         /// The stat buff data to apply on contact.
         /// </summary>
         [SerializeField] private StatBuffData statBuffData;
+
         /// <summary>
         /// The allied group this object belongs to, used for filtering contacts.
         /// </summary>
         [SerializeField] private AlliedGroup alliedGroup = AlliedGroup.Enemy;
+
         /// <summary>
         /// The extra effect handler for executing additional effects on contact.
         /// </summary>

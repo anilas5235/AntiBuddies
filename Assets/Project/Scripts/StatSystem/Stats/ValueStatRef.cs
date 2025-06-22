@@ -15,7 +15,7 @@ namespace Project.Scripts.StatSystem.Stats
         [SerializeField] private float baseValue = 1f;
         [SerializeField] private float currValue;
         [SerializeField] private bool positiveTransform = true;
-        
+
         private IStatGroup _statGroup;
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Project.Scripts.StatSystem.Stats
             statRef.Stat.OnStatChange += UpdateValue;
             UpdateValue();
         }
-       
+
         /// <inheritdoc/>
         public void OnStatInit(IStatGroup statGroup)
         {

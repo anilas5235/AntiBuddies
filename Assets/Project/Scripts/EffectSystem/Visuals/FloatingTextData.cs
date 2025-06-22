@@ -13,15 +13,17 @@ namespace Project.Scripts.EffectSystem.Visuals
         /// The text to display.
         /// </summary>
         public string text;
+
         /// <summary>
         /// The color of the floating text.
         /// </summary>
         public Color color;
+
         /// <summary>
         /// How long the floating text should be displayed.
         /// </summary>
         public float lifeTime;
-       
+
         /// <param name="text">The text to display.</param>
         /// <param name="color">The color of the text.</param>
         /// <param name="lifeTime">The display duration.</param>

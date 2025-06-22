@@ -21,8 +21,8 @@ namespace Project.Scripts.BuffSystem.Buffs
         /// <param name="stack">The stack behaviour.</param>
         /// <param name="tick">The tick behaviour.</param>
         public DamageBuff(DamagePackage damagePackage, float duration, IPackageHub hub, IStackBehaviour stack,
-            ITickBehaviour tick) 
-            :base(damagePackage.DamageType.Name, duration, hub, stack, tick, false)
+            ITickBehaviour tick)
+            : base(damagePackage.DamageType.Name, duration, hub, stack, tick, false)
         {
             _damagePackage = damagePackage;
         }

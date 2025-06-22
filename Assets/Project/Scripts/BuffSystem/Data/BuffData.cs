@@ -29,7 +29,8 @@ namespace Project.Scripts.BuffSystem.Data
         /// <summary>
         /// Number of ticks per second for ticking buffs.
         /// </summary>
-        [SerializeField] [Tooltip("only relevant if ticking")] private int ticksPerSecond;
+        [SerializeField] [Tooltip("only relevant if ticking")]
+        private int ticksPerSecond;
 
         /// <summary>
         /// Gets the interval in seconds between each tick.

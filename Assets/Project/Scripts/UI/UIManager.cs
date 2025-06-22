@@ -46,7 +46,7 @@ namespace Project.Scripts.UI
                 TogglePauseMenu();
             }
         }
-        
+
         /// <summary>
         /// Shows the end run menu and adds it to the list of active UIs.
         /// </summary>

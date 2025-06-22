@@ -29,13 +29,14 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
         /// <summary>
         /// Event triggered when damage is applied, passing the amount dealt.
         /// </summary>
-        public event Action<int> OnDamageApplied; 
-       
+        public event Action<int> OnDamageApplied;
+
         /// <param name="amount">The amount of damage.</param>
         /// <param name="source">The source GameObject of the damage.</param>
         /// <param name="damageType">The type of damage.</param>
         /// <param name="isCritical">Whether the damage is critical.</param>
-        public DamagePackage(int amount, GameObject source, DamageType damageType, bool isCritical = false) : base(amount)
+        public DamagePackage(int amount, GameObject source, DamageType damageType, bool isCritical = false) :
+            base(amount)
         {
             this.damageType = damageType;
             _isCritical = isCritical;
@@ -51,7 +52,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
         /// Gets the source GameObject of the damage.
         /// </summary>
         public GameObject Source => source;
-        
+
         /// <summary>
         /// Invokes the <see cref="OnDamageApplied"/> event with the specified amount.
         /// </summary>

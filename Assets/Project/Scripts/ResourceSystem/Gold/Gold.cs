@@ -74,7 +74,7 @@ namespace Project.Scripts.ResourceSystem.Gold
                 Debug.LogWarning("Cannot attract to null destination or already attracted.");
                 return false;
             }
-           
+
             _destTransform = destination.transform;
             return true;
         }

@@ -12,7 +12,8 @@ namespace Project.Scripts.StatSystem.Stats
         [SerializeField] private StatDependency statDependency = new();
 
         public StatRef()
-        { }
+        {
+        }
 
         public StatRef(StatDependency statDependency)
         {
@@ -28,7 +29,7 @@ namespace Project.Scripts.StatSystem.Stats
         /// Returns true if the stat dependency is valid and the stat is assigned.
         /// </summary>
         public bool IsValid => statDependency.IsValid && Stat != null;
-        
+
         /// <inheritdoc/>
         public void OnStatInit(IStatGroup statGroup)
         {

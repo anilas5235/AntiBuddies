@@ -16,6 +16,7 @@ namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
                 presentBuff.Refresh();
                 return false;
             }
+
             // Otherwise, allow the new buff to be added.
             return true;
         }

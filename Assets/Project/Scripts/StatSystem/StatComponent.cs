@@ -53,13 +53,13 @@ namespace Project.Scripts.StatSystem
                 component.OnStatInit(this);
             }
         }
-        
+
         /// <inheritdoc/>
         public IStat GetStat(StatType statType)
         {
             return _statDict.GetValueOrDefault(statType);
         }
-       
+
         /// <inheritdoc/>
         public void ModifyStat(StatPackage statPackage)
         {
@@ -77,7 +77,7 @@ namespace Project.Scripts.StatSystem
                 liveStat.Reset();
             }
         }
-        
+
         /// <summary>
         /// Resets all temporary bonuses of the stats.
         /// </summary>

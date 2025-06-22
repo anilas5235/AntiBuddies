@@ -6,7 +6,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(!other.isTrigger) return;
+            if (!other.isTrigger) return;
             IProjectile projectile = other.GetComponent<IProjectile>();
             projectile?.ReturnToPool();
         }

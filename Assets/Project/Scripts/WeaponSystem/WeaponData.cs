@@ -19,7 +19,7 @@ namespace Project.Scripts.WeaponSystem
             Explosive,
             Elemental,
         }
-        
+
         private enum WeaponType
         {
             Melee,

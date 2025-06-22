@@ -19,7 +19,7 @@ namespace Project.Scripts.UI
         {
             _uiDocument = GetComponent<UIDocument>();
         }
-        
+
         protected virtual void OnEnable()
         {
             UpdateUiRefs(_uiDocument.rootVisualElement);

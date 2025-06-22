@@ -16,10 +16,12 @@ namespace Project.Scripts.EffectSystem.Components
         /// The current health value.
         /// </summary>
         [SerializeField] private int currentHealth = 10;
+
         /// <summary>
         /// Reference to the max health stat.
         /// </summary>
         [SerializeField] private StatRef maxHpStat;
+
         /// <summary>
         /// The maximum health value.
         /// </summary>
@@ -45,14 +47,17 @@ namespace Project.Scripts.EffectSystem.Components
         /// The current health as a percentage of max health.
         /// </summary>
         public float HealthPercentage => (float)CurrentHealth / MaxHealth;
+
         /// <summary>
         /// Event triggered when health changes.
         /// </summary>
         public event Action OnHealthChange;
+
         /// <summary>
         /// Event triggered when the entity dies.
         /// </summary>
         public event Action OnDeath;
+
         /// <summary>
         /// Unity event triggered when the entity dies.
         /// </summary>
@@ -63,7 +68,7 @@ namespace Project.Scripts.EffectSystem.Components
             FullHeal();
             maxHpStat.Stat.OnStatChange += HandleMaxHealthChange;
         }
-        
+
         private void OnDisable()
         {
             maxHpStat.Stat.OnStatChange -= HandleMaxHealthChange;
@@ -80,7 +85,7 @@ namespace Project.Scripts.EffectSystem.Components
             CurrentHealth -= amount;
             return amount;
         }
-        
+
         /// <summary>
         /// Heals the entity.
         /// </summary>
@@ -100,6 +105,7 @@ namespace Project.Scripts.EffectSystem.Components
         /// </summary>
         /// <returns>True if dead, otherwise false.</returns>
         public bool IsDead() => CurrentHealth <= 0;
+
         /// <summary>
         /// Checks if the entity is alive.
         /// </summary>
@@ -128,7 +134,7 @@ namespace Project.Scripts.EffectSystem.Components
         {
             maxHpStat.OnStatInit(statGroup);
         }
-        
+
         /// <summary>
         /// Handles changes to the max health stat.
         /// </summary>

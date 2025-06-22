@@ -14,6 +14,7 @@ namespace Project.Scripts.EffectSystem.Components
         /// <param name="mode">The trigger mode.</param>
         /// <returns>True if the extra effect should be applied, otherwise false.</returns>
         bool ShouldAdd(EffectTrigger mode);
+
         /// <summary>
         /// Applies the extra effect to the given package hub and stat group.
         /// </summary>

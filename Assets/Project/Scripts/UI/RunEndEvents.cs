@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -13,6 +12,7 @@ namespace Project.Scripts.UI
         /// Reference to the Restart button.
         /// </summary>
         private Button _restartButton;
+
         /// <summary>
         /// Reference to the Menu button.
         /// </summary>

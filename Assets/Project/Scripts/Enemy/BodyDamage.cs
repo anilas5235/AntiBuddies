@@ -17,18 +17,22 @@ namespace Project.Scripts.Enemy
         /// The definition of the damage to apply on contact.
         /// </summary>
         [SerializeField] private DamageDefinition damage = new();
+
         /// <summary>
         /// Optional buff data to apply along with the damage.
         /// </summary>
         [SerializeField] private DamageBuffData buffData;
+
         /// <summary>
         /// The allied group this object belongs to, used for filtering contacts.
         /// </summary>
         [SerializeField] private AlliedGroup alliedGroup = AlliedGroup.Enemy;
+
         /// <summary>
         /// The extra effect handler for executing additional effects on contact.
         /// </summary>
         [SerializeField, Tooltip("Optional")] private ExtraEffectHandler extraEffectHandler;
+
         /// <summary>
         /// The stat group associated with this object.
         /// </summary>

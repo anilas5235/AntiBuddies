@@ -10,7 +10,9 @@ namespace Project.Scripts.WeaponSystem.Projectile
     public interface IProjectile : IPoolable, IHandleContact
 
     {
-        public void SetData(ProjectileData projectileData, DamagePackage damagePackage, DamageBuff damageBuff, ExtraEffectHandler extraEffectHandler);
+        public void SetData(ProjectileData projectileData, DamagePackage damagePackage, DamageBuff damageBuff,
+            ExtraEffectHandler extraEffectHandler);
+
         public void ProjectileSetUp(Vector2 direction, AlliedGroup alliedGroup, int contacts);
     }
 }

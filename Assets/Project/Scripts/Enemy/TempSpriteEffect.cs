@@ -19,7 +19,7 @@ namespace Project.Scripts.Enemy
         protected override void LiveTick()
         {
             // Fade out the sprite as timeToLive approaches zero.
-            if(timeToLive > 1f) return;
+            if (timeToLive > 1f) return;
             SetSpriteAlpha(timeToLive);
         }
 

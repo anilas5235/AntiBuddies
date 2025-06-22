@@ -14,6 +14,7 @@ namespace Project.Scripts.UI
         /// Reference to the Resume button.
         /// </summary>
         private Button _resumeButton;
+
         /// <summary>
         /// Reference to the Return button.
         /// </summary>

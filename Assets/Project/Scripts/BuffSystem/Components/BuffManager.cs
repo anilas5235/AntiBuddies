@@ -28,7 +28,7 @@ namespace Project.Scripts.BuffSystem.Components
                 return;
             }
 
-            if(!buff.ShouldBuffBeAdded(this)) return;
+            if (!buff.ShouldBuffBeAdded(this)) return;
             CentralBuffTicker.Instance.RegisterBuff(buff);
             AddBuffToDictionary(buff);
         }
@@ -51,7 +51,7 @@ namespace Project.Scripts.BuffSystem.Components
 
             buff.OnBuffAdded();
         }
-        
+
         /// <summary>
         /// Removes a buff from the manager and unregisters it from the buff group.
         /// </summary>
@@ -67,7 +67,7 @@ namespace Project.Scripts.BuffSystem.Components
             buff.BuffGroup.UnregisterBuff(buff);
             RemoveBuffFromDictionary(buff);
         }
-        
+
         /// <summary>
         /// Removes a buff from the internal dictionary.
         /// </summary>
@@ -77,7 +77,7 @@ namespace Project.Scripts.BuffSystem.Components
             if (!_buffs.TryGetValue(buff.Name, out List<IBuff> buffList)) return;
             buffList.Remove(buff);
         }
-       
+
         /// <summary>
         /// Tries to get the first buff of a given type name.
         /// </summary>

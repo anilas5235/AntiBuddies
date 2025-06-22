@@ -33,7 +33,7 @@ namespace Project.Scripts.UI.HUD
         /// Current gold amount.
         /// </summary>
         public int gold;
-        
+
         private int _level;
 
         /// <summary>

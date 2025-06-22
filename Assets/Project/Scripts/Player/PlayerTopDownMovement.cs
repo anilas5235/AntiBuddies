@@ -25,6 +25,7 @@ namespace Project.Scripts.Player
         /// Cached reference to the Rigidbody2D component.
         /// </summary>
         private Rigidbody2D _rb2d;
+
         /// <summary>
         /// Stores the current movement input direction.
         /// </summary>
@@ -56,10 +57,10 @@ namespace Project.Scripts.Player
         {
             float currentStatSpeed = moveSpeed.CurrValue;
             Vector2 targetVelocity = _moveInput * currentStatSpeed;
-        
+
             // Calculate the maximum change in velocity allowed this frame (acceleration constraint).
             float maxDistanceDelta = Time.fixedDeltaTime * maxAcceleration * currentStatSpeed;
-        
+
             // Smoothly move the Rigidbody2D's velocity towards the target velocity.
             _rb2d.linearVelocity = Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, maxDistanceDelta);
         }
@@ -70,7 +71,7 @@ namespace Project.Scripts.Player
             // Initialize the move speed reference from the stat component.
             moveSpeed.OnStatInit(statGroup);
         }
-       
+
         private void OnValidate()
         {
             // Updates the move speed value in the editor when values change.

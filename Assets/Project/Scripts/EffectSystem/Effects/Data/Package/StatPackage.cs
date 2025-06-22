@@ -55,7 +55,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
         /// </summary>
         /// <returns>The resulting <see cref="StatPackage"/> with negated amount.</returns>
         public StatPackage Inverse() => new(-Amount, StatType, statMod); // Negate amount for inverse effect
-        
+
         /// <summary>
         /// Multiplies the amount of package by a specified multiplier.
         /// </summary>

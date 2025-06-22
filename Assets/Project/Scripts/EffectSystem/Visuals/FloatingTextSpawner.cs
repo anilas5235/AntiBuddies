@@ -13,19 +13,22 @@ namespace Project.Scripts.EffectSystem.Visuals
         /// The prefab used for floating text visuals.
         /// </summary>
         [SerializeField] private GameObject floatingNumberPrefab;
+
         /// <summary>
         /// The duration each floating text is displayed.
         /// </summary>
         [SerializeField] private float displayDuration = 1.0f;
+
         /// <summary>
         /// The offset applied to the spawn position.
         /// </summary>
         [SerializeField] private Vector2 offset = new(0, 0.5f);
+
         /// <summary>
         /// If true, disables spawning of floating texts.
         /// </summary>
         [SerializeField] private bool stopSpawn;
-        
+
         private GameObjectPool _floatingNumberPool;
 
         private void OnEnable()

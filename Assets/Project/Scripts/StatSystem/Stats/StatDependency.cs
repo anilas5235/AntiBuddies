@@ -14,28 +14,28 @@ namespace Project.Scripts.StatSystem.Stats
         /// <summary>
         /// The efficiency percentage used to scale the stat value.
         /// </summary>
-        [SerializeField,Range(0,500)] private int useEfficiency;
-        
+        [SerializeField, Range(0, 500)] private int useEfficiency;
+
         /// <summary>
         /// The type of the stat this dependency refers to.
         /// </summary>
         [SerializeField] private StatType statType;
-        
+
         /// <summary>
         /// The type of the stat this dependency refers to.
         /// </summary>
         public StatType StatType => statType;
-        
+
         /// <summary>
         /// Returns true if the stat type is assigned.
         /// </summary>
         public bool IsValid => statType;
-        
+
         public StatDependency()
         {
             useEfficiency = 100;
         }
-        
+
         /// <param name="statType">The stat type this dependency refers to.</param>
         /// <param name="useEfficiency">The efficiency percentage (default 100).</param>
         public StatDependency(StatType statType, int useEfficiency = 100)
@@ -43,7 +43,7 @@ namespace Project.Scripts.StatSystem.Stats
             this.statType = statType;
             this.useEfficiency = useEfficiency;
         }
-        
+
         /// <summary>
         /// Gets the value from a stat, scaled by the efficiency percentage.
         /// </summary>
@@ -51,11 +51,11 @@ namespace Project.Scripts.StatSystem.Stats
         /// <returns>The scaled stat value.</returns>
         public float GetValue(IStat stat)
         {
-            if(stat == null) return 0f;
+            if (stat == null) return 0f;
             // Multiply stat value by efficiency percentage.
-            return useEfficiency == 100 ? stat.Value :  stat.Value * useEfficiency / 100f;
+            return useEfficiency == 100 ? stat.Value : stat.Value * useEfficiency / 100f;
         }
-        
+
         /// <summary>
         /// Gets the value from a stat group, scaled by the efficiency percentage.
         /// </summary>

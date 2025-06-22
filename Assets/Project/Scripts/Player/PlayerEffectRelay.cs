@@ -14,6 +14,7 @@ namespace Project.Scripts.Player
         /// Number of fixed update frames for temporary invulnerability after taking damage.
         /// </summary>
         private const float EyeFrames = 10;
+
         /// <summary>
         /// Coroutine reference for managing eye frames.
         /// </summary>

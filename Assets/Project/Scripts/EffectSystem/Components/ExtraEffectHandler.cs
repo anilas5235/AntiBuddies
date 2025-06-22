@@ -15,6 +15,7 @@ namespace Project.Scripts.EffectSystem.Components
         /// List of extraEffects to execute.
         /// </summary>
         private readonly List<IExtraEffect> _components = new();
+
         /// <summary>
         /// The stat group associated with this handler.
         /// </summary>
@@ -60,7 +61,7 @@ namespace Project.Scripts.EffectSystem.Components
         {
             _components.Clear();
         }
-       
+
         public void OnStatInit(IStatGroup statGroup)
         {
             _statGroup = statGroup;

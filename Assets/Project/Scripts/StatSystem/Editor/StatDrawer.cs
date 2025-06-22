@@ -18,7 +18,7 @@ namespace Project.Scripts.StatSystem.Editor
 
         private static readonly float Spacing =
             EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-    
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             SerializedProperty statType = property.FindPropertyRelative("statType");
@@ -93,7 +93,7 @@ namespace Project.Scripts.StatSystem.Editor
                 property.serializedObject.ApplyModifiedProperties();
             }
         }
-        
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             string propertyPath = property.propertyPath;

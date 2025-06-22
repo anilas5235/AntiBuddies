@@ -5,8 +5,8 @@ namespace Project.Scripts.UtilComponents
 {
     public class FlashColor : MonoBehaviour
     {
-        [SerializeField] private Color color = new(1,.5f,.5f,.9f);
-        [SerializeField,Range(.0001f,3)] private float duration = 0.1f;
+        [SerializeField] private Color color = new(1, .5f, .5f, .9f);
+        [SerializeField, Range(.0001f, 3)] private float duration = 0.1f;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
         private Color _originalColor;
@@ -16,7 +16,7 @@ namespace Project.Scripts.UtilComponents
         {
             _originalColor = spriteRenderer.color;
         }
-        
+
         private void OnDisable()
         {
             Stop();
@@ -25,7 +25,7 @@ namespace Project.Scripts.UtilComponents
         public void Flash()
         {
             Stop();
-            if(!gameObject.activeInHierarchy) return;
+            if (!gameObject.activeInHierarchy) return;
             _coroutine = StartCoroutine(FlashCoroutine(duration));
         }
 
@@ -35,7 +35,7 @@ namespace Project.Scripts.UtilComponents
             {
                 StopCoroutine(_coroutine);
                 spriteRenderer.color = _originalColor;
-            } 
+            }
         }
 
         private IEnumerator FlashCoroutine(float flashDuration)

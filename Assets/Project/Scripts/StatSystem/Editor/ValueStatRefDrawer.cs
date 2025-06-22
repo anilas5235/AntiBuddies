@@ -9,7 +9,7 @@ namespace Project.Scripts.StatSystem.Editor
     /// Displays base value, current value, transform type, and stat references in the inspector.
     /// </summary>
     [CustomPropertyDrawer(typeof(ValueStatRef))]
-    public class ValueStatRefDrawer: PropertyDrawer
+    public class ValueStatRefDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -32,7 +32,6 @@ namespace Project.Scripts.StatSystem.Editor
             EditorGUILayout.PropertyField(statRefs, new GUIContent("Stat References"), true);
 
             EditorGUILayout.EndVertical();
-            
         }
     }
 }

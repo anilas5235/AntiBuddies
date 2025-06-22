@@ -18,7 +18,7 @@ namespace Project.Scripts.StatSystem.Editor
 
             float lineHeight = EditorGUIUtility.singleLineHeight;
             float spacing = EditorGUIUtility.standardVerticalSpacing;
-            
+
             position.x -= 10; // Add padding
             position.width -= 10;
 
@@ -36,7 +36,7 @@ namespace Project.Scripts.StatSystem.Editor
             currentRect.y += lineHeight + spacing;
             EditorGUI.PropertyField(currentRect, useEfficiency, new GUIContent("Use Efficiency"));
         }
-        
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             // Calculate height for two fields and spacing

@@ -16,7 +16,7 @@ namespace Project.Scripts.BuffSystem.Buffs.TickBehaviour
         /// The interval in seconds between each tick.
         /// </summary>
         private readonly float _tickInterval;
-        
+
         /// <param name="tickInterval">The interval in seconds between each tick.</param>
         public Ticking(float tickInterval)
         {
@@ -36,6 +36,7 @@ namespace Project.Scripts.BuffSystem.Buffs.TickBehaviour
             {
                 buff.OnBuffApply();
             }
+
             // Retain leftover time that didn't complete a full interval.
             _timeSinceLastTick %= _tickInterval;
         }

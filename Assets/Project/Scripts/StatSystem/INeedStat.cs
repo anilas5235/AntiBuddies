@@ -1,6 +1,6 @@
 ﻿namespace Project.Scripts.StatSystem
 {
-    public interface INeedStatGroup 
+    public interface INeedStatGroup
     {
         /// <summary>
         /// Called to initialize stat references on components or script that need stats.

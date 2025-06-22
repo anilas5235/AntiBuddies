@@ -5,7 +5,7 @@ namespace Project.Scripts.UtilComponents
     public class SelectRandomSprite : MonoBehaviour
     {
         [SerializeField] private Sprite[] sprites;
-        
+
         private void Awake()
         {
             if (sprites.Length == 0)

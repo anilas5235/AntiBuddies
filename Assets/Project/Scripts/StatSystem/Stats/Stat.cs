@@ -15,12 +15,12 @@ namespace Project.Scripts.StatSystem.Stats
         /// The type of the stat, defining its properties and behavior.
         /// </summary>
         [SerializeField] private StatType statType;
-        
+
         /// <summary>
         /// The current value of the stat, which include bonuses and multipliers.
         /// </summary>
         [SerializeField] private int statValue;
-        
+
         /// <summary>
         /// The clamped value of the stat, showing the final value after applying min and max limits.
         /// </summary>
@@ -35,7 +35,7 @@ namespace Project.Scripts.StatSystem.Stats
         /// The maximum value the stat should have.
         /// </summary>
         [SerializeField] private int maxValue;
-        
+
         /// <summary>
         /// The minimum value the stat should have.
         /// </summary>
@@ -45,14 +45,14 @@ namespace Project.Scripts.StatSystem.Stats
         /// The base value of the stat, which is the initial value before any bonuses or multipliers are applied.
         /// </summary>
         [SerializeField] private int baseStatValue;
-        
+
         /// <summary>
         /// Temporary bonus to the stat value, which can be modified by effects or other game mechanics.
         /// </summary>
         [SerializeField] private int tempStatBonus;
-        
+
         // Track the previous value of statType, only relevant in the editor
-        private StatType _previousStatType; 
+        private StatType _previousStatType;
 
         /// <param name="statType">The type of the stat.</param>
         /// <param name="statValue">Initial value for the stat.</param>
@@ -67,16 +67,22 @@ namespace Project.Scripts.StatSystem.Stats
 
         /// <inheritdoc/>
         public StatType StatType => statType;
+
         /// <inheritdoc/>
         public event Action OnStatChange;
+
         /// <inheritdoc/>
         public int Value => clampedValue;
+
         /// <inheritdoc/>
         public bool IsPercentage => statType.IsPercentage;
+
         /// <inheritdoc/>
         public int FreeValue => statValue;
+
         /// <inheritdoc/>
         public int MaxValue => maxValue;
+
         /// <inheritdoc/>
         public int MinValue => minValue;
 
@@ -84,7 +90,8 @@ namespace Project.Scripts.StatSystem.Stats
         public void UpdateValues()
         {
             // Calculate the stat value with bonuses and percent multipliers.
-            statValue = Mathf.RoundToInt((baseStatValue + tempStatBonus) * StatUtils.MakePositiveMultiplier(percentMultiplier));
+            statValue = Mathf.RoundToInt((baseStatValue + tempStatBonus) *
+                                         StatUtils.MakePositiveMultiplier(percentMultiplier));
             clampedValue = Mathf.Clamp(statValue, MinValue, MaxValue);
             OnStatChange?.Invoke();
         }

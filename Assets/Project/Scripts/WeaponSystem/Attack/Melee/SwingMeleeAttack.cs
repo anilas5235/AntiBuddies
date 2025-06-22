@@ -3,7 +3,6 @@
 namespace Project.Scripts.WeaponSystem.Attack.Melee
 {
     [CreateAssetMenu(fileName = "SwingAttack", menuName = "WeaponSystem/Attacks/SwingAttack")]
-
     public class SwingMeleeAttack : MeleeAttackBehaviour
     {
         [SerializeField] private float swingAngle = 45f;

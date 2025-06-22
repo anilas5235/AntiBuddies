@@ -18,7 +18,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
         /// Gets the effect amount.
         /// </summary>
         public int Amount => amount;
-       
+
         /// <param name="amount">The value or magnitude of the effect.</param>
         protected EffectPackage(int amount)
         {

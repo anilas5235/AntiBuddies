@@ -15,10 +15,12 @@ namespace Project.Scripts.Enemy
         /// Reference to the speed stat for this enemy.
         /// </summary>
         [SerializeField] private ValueStatRef speedStat;
+
         /// <summary>
         /// The behavior graph agent controlling this enemy's AI.
         /// </summary>
         [SerializeField] private BehaviorGraphAgent behaviorGraphAgent;
+
         /// <summary>
         /// The stat group associated with this enemy.
         /// </summary>

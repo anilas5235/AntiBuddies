@@ -72,7 +72,7 @@ namespace Project.Scripts.BuffSystem.Components
             {
                 throw new ArgumentNullException(nameof(buff));
             }
-            
+
             if (buff.BuffGroup != null)
             {
                 throw new InvalidOperationException("Buff is already registered in a group.");

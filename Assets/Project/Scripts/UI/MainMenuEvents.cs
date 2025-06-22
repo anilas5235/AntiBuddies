@@ -15,10 +15,12 @@ namespace Project.Scripts.UI
         /// Reference to the Play button.
         /// </summary>
         private Button _playButton;
+
         /// <summary>
         /// Reference to the Options button.
         /// </summary>
         private Button _optionsButton;
+
         /// <summary>
         /// Reference to the Quit button.
         /// </summary>

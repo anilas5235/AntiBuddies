@@ -9,7 +9,7 @@ namespace Project.Scripts.WeaponSystem.Targeting
 
         public override Transform FindTarget(Transform location, float range)
         {
-            Collider2D[] results = Physics2D.OverlapCircleAll(location.position, range,layerMask);
+            Collider2D[] results = Physics2D.OverlapCircleAll(location.position, range, layerMask);
             Transform closestTarget = null;
             float closestDistance = Mathf.Infinity;
 

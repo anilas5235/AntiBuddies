@@ -51,7 +51,7 @@ namespace Project.Scripts.BuffSystem.Components
         /// Gets whether the group is full.
         /// </summary>
         public bool IsFull => !HasSpace;
-        
+
         /// <summary>
         /// Registers a buff to this group and subscribes it to ticking.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Project.Scripts.BuffSystem.Components
         public bool RegisterBuff([NotNull] IBuff buff)
         {
             // Check if the buff is already registered in another group or if the group is full.
-            if(IsFull || buff.BuffGroup != null) return false;
+            if (IsFull || buff.BuffGroup != null) return false;
             OnBuffTick += buff.OnBuffTick;
             buff.BuffGroup = this;
             buffCount++;

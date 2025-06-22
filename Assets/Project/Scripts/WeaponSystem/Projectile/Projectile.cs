@@ -29,7 +29,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
             _damageBuff = null;
         }
 
-        public void SetData(ProjectileData projectileData, DamagePackage damagePackage, 
+        public void SetData(ProjectileData projectileData, DamagePackage damagePackage,
             DamageBuff damageBuff, ExtraEffectHandler extraEffectHandler)
         {
             data = projectileData;

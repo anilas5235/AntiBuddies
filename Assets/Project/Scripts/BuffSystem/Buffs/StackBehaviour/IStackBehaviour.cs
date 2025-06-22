@@ -13,6 +13,6 @@ namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
         /// <param name="buff">The buff to potentially add.</param>
         /// <param name="buffManager">The buff manager handling the buffs.</param>
         /// <returns>True if the buff should be added; otherwise, false.</returns>
-        bool ShouldBuffBeAdded(IBuff buff,BuffManager buffManager);
+        bool ShouldBuffBeAdded(IBuff buff, BuffManager buffManager);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Project.Scripts.EffectSystem.Effects.Interfaces
 {
-    
     /// <summary>
     /// Interface for components that can be healed.
     /// </summary>

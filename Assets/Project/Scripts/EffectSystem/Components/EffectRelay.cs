@@ -72,8 +72,8 @@ namespace Project.Scripts.EffectSystem.Components
             int damage = package.Amount;
             // Scale damage based on stat group if available.
             if (_statGroup != null) damage = package.ReceptionScale(damage, _statGroup);
-            if(damage <= 0) return;
-            
+            if (damage <= 0) return;
+
             // Dodge logic: If dodge stat is valid and succeeds, trigger dodge effects and return.
             if (dodgeStat.IsValid && dodgeStat.GetValue() >= Random.Range(1, 100))
             {
@@ -85,10 +85,10 @@ namespace Project.Scripts.EffectSystem.Components
                 FloatingTextSpawner.Instance.SpawnFloatingText("DODGE", Color.white, gameObject);
                 return;
             }
-            
+
             // Apply damage to the health component.
             damage = healthComponent.TakeDamage(damage);
-            
+
             // Trigger Event and effects for damage taken.
             extraEffectHandler?.Execute(this, EffectTrigger.TakeDamage);
             OnDamageReceived?.Invoke(damage, package.DamageType);
@@ -116,7 +116,7 @@ namespace Project.Scripts.EffectSystem.Components
         {
             _statGroup.ModifyStat(package);
         }
-        
+
         public void OnStatInit(IStatGroup statGroup)
         {
             _statGroup = statGroup;

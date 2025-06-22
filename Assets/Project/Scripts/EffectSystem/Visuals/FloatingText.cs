@@ -12,6 +12,7 @@ namespace Project.Scripts.EffectSystem.Visuals
         /// The range for randomizing the X offset of the floating text.
         /// </summary>
         private const float XOffsetRange = .7f;
+
         /// <summary>
         /// The fixed Y offset for the floating text.
         /// </summary>
@@ -21,6 +22,7 @@ namespace Project.Scripts.EffectSystem.Visuals
         /// The data describing the floating text's appearance and value.
         /// </summary>
         [SerializeField] private FloatingTextData data;
+
         /// <summary>
         /// The TextMesh component used to display the text.
         /// </summary>
@@ -41,7 +43,7 @@ namespace Project.Scripts.EffectSystem.Visuals
             pos.y += YOffset;
             transform.position = pos;
             lifeTime = floatingTextData.lifeTime;
-            
+
             UpdateText();
         }
 
