@@ -21,7 +21,13 @@ namespace Project.Scripts.Player
         /// </summary>
         [SerializeField] private ValueStatRef moveSpeed;
 
+        /// <summary>
+        /// Cached reference to the Rigidbody2D component.
+        /// </summary>
         private Rigidbody2D _rb2d;
+        /// <summary>
+        /// Stores the current movement input direction.
+        /// </summary>
         private Vector2 _moveInput;
 
         private void Awake()
@@ -58,6 +64,7 @@ namespace Project.Scripts.Player
             _rb2d.linearVelocity = Vector2.MoveTowards(_rb2d.linearVelocity, targetVelocity, maxDistanceDelta);
         }
 
+        /// <inheritdoc/>
         public void OnStatInit(IStatGroup statGroup)
         {
             // Initialize the move speed reference from the stat component.
