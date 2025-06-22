@@ -1,9 +1,5 @@
 using System;
-using Project.Scripts.EffectSystem.Effects.Data;
-using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
-using Project.Scripts.EffectSystem.Effects.Type;
-using Project.Scripts.EffectSystem.Visuals;
 using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;

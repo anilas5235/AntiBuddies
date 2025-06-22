@@ -11,7 +11,7 @@ namespace Project.Scripts.BuffSystem.Buffs
 
         public HealBuff(HealPackage healPackage, float duration, IPackageHub hub, IStackBehaviour stack,
             ITickBehaviour tick)
-            : base(ConstructName(healPackage.HealType, stack, tick), duration, hub, stack, tick, true)
+            : base(ConstructName(healPackage.HealType.Name, stack, tick), duration, hub, stack, tick, true)
         {
             _healPackage = healPackage;
         }

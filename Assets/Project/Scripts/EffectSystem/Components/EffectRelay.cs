@@ -9,7 +9,6 @@ using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Project.Scripts.EffectSystem.Components
@@ -122,11 +121,7 @@ namespace Project.Scripts.EffectSystem.Components
             dodgeStat.OnStatInit(statGroup);
         }
 
-        /// <summary>
-        /// Checks if the given group matches this entity's allied group.
-        /// </summary>
-        /// <param name="group">The group to check.</param>
-        /// <returns>True if the group matches, otherwise false.</returns>
+        /// <inheritdoc/>
         public bool IsAlie(AlliedGroup group) => group == alliedGroup;
 
         /// <summary>

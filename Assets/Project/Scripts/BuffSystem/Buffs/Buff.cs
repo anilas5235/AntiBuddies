@@ -10,12 +10,12 @@ namespace Project.Scripts.BuffSystem.Buffs
     [Serializable]
     public abstract class Buff : IBuff
     {
-        protected static string ConstructName(EffectType effectType, IStackBehaviour stackBehaviour,
+        protected static string ConstructName(string effectName, IStackBehaviour stackBehaviour,
             ITickBehaviour tickBehaviour)
         {
             string stackBehaviourName = stackBehaviour != null ? stackBehaviour.GetType().Name : "NoStackBehaviour";
             string tickBehaviourName = tickBehaviour != null ? tickBehaviour.GetType().Name : "NoTickBehaviour";
-            return $"{effectType.Name}_{stackBehaviourName}_{tickBehaviourName}";
+            return $"{effectName}_{stackBehaviourName}_{tickBehaviourName}";
         }
 
         public bool AffectsAllies { get; }

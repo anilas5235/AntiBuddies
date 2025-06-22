@@ -10,7 +10,7 @@ namespace Project.Scripts.BuffSystem.Buffs
         private readonly DamagePackage _damagePackage;
 
         public DamageBuff(DamagePackage damagePackage, float duration, IPackageHub hub, IStackBehaviour stack,
-            ITickBehaviour tick) : base(ConstructName(damagePackage.DamageType, stack, tick),
+            ITickBehaviour tick) : base(ConstructName(damagePackage.DamageType.Name, stack, tick),
             duration, hub, stack, tick, false)
         {
             _damagePackage = damagePackage;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Type;
+using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 
 namespace Project.Scripts.EffectSystem.Effects.Data.Definition

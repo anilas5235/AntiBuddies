@@ -13,7 +13,7 @@ namespace Project.Scripts.BuffSystem.Buffs
 
         public StatBuff(StatPackage statPackage, float duration, IPackageHub hub, IStackBehaviour stack,
             ITickBehaviour tick, bool affectsAlly = false)
-            : base(ConstructName(statPackage.StatType, stack, tick), duration, hub, stack, tick, affectsAlly)
+            : base(ConstructName(statPackage.StatType.Name, stack, tick), duration, hub, stack, tick, affectsAlly)
         {
             _statPackage = statPackage;
             _statPackageInverse = statPackage.Inverse();

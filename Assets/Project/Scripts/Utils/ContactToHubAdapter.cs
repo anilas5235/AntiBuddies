@@ -56,10 +56,10 @@ namespace Project.Scripts.Utils
             ExtraEffectHandler?.Execute(Hub, EffectTrigger.Stat);
         }
 
+        /// <inheritdoc/>
         public bool IsAlie(AlliedGroup group)
         {
-            if (!IsValid) return false;
-            return Hub.IsAlie(group);
+            return IsValid && Hub.IsAlie(group);
         }
 
         public void Apply(IBuff buff)
