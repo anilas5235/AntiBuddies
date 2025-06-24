@@ -1,6 +1,4 @@
-﻿using Project.Scripts.EffectSystem.Components;
-
-namespace Project.Scripts.EffectSystem.Effects.Interfaces
+﻿namespace Project.Scripts.EffectSystem.Components
 {
     /// <summary>
     /// Interface for checking if a group is considered an ally.

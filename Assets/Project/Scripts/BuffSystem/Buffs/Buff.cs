@@ -2,7 +2,7 @@
 using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
 using Project.Scripts.BuffSystem.Components;
-using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.Components;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {

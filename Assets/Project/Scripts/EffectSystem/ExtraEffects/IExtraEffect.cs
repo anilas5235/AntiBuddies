@@ -1,4 +1,4 @@
-﻿using Project.Scripts.EffectSystem.Effects.Interfaces;
+﻿using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.StatSystem;
 
 namespace Project.Scripts.EffectSystem.ExtraEffects

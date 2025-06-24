@@ -1,5 +1,5 @@
 ﻿using Project.Scripts.BuffSystem.Buffs;
-using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.Components;
 
 namespace Project.Scripts.BuffSystem.Components
 {

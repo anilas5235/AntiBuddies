@@ -1,5 +1,4 @@
 using System;
-using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;

@@ -1,4 +1,4 @@
-﻿namespace Project.Scripts.EffectSystem.Effects.Interfaces
+﻿namespace Project.Scripts.EffectSystem.Components
 {
     /// <summary>
     /// Interface for components that can take damage and have a life/death state.

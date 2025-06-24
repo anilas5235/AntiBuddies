@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.StatSystem;
 using UnityEngine;
 

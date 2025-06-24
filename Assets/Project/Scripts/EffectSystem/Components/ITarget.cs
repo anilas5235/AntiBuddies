@@ -1,4 +1,4 @@
-﻿namespace Project.Scripts.EffectSystem.Effects.Interfaces
+﻿namespace Project.Scripts.EffectSystem.Components
 {
     /// <summary>
     /// Interface for applying a package or effect to a target.

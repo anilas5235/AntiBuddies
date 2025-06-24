@@ -1,7 +1,7 @@
 ﻿using Project.Scripts.BuffSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
 
-namespace Project.Scripts.EffectSystem.Effects.Interfaces
+namespace Project.Scripts.EffectSystem.Components
 {
     /// <summary>
     /// Interface for a hub that can receive and apply multiple types of effect packages and buffs.

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Project.Scripts.EffectSystem.Effects.Interfaces
+﻿namespace Project.Scripts.EffectSystem.Components
 {
     /// <summary>
     /// Interface for components that can be healed.

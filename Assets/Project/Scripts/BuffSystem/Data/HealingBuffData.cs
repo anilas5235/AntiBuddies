@@ -1,7 +1,7 @@
 ﻿using Project.Scripts.BuffSystem.Buffs;
+using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Definition;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
-using Project.Scripts.EffectSystem.Effects.Interfaces;
 using UnityEngine;
 
 namespace Project.Scripts.BuffSystem.Data

@@ -1,7 +1,7 @@
 ﻿using Project.Scripts.BuffSystem.Buffs.StackBehaviour;
 using Project.Scripts.BuffSystem.Buffs.TickBehaviour;
+using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
-using Project.Scripts.EffectSystem.Effects.Interfaces;
 
 namespace Project.Scripts.BuffSystem.Buffs
 {
