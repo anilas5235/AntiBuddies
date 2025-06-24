@@ -1,12 +1,12 @@
 ﻿using Project.Scripts.BuffSystem.Buffs;
 using Project.Scripts.BuffSystem.Data;
-using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
+using Project.Scripts.EffectSystem.ExtraEffects;
 using Project.Scripts.StatSystem;
 using UnityEngine;
 
-namespace Project.Scripts.Utils
+namespace Project.Scripts.EffectSystem.Components
 {
     /// <summary>
     /// Processes and applies effects, buffs, and stat changes to a contacted GameObject
@@ -71,7 +71,7 @@ namespace Project.Scripts.Utils
         {
             if (!IsValid || package == null || Alie) return;
             Hub.Apply(package);
-            ExtraEffectHandler?.Execute(Hub, EffectTrigger.Damage);
+            ExtraEffectHandler?.Execute(Hub, ExtraEffectHandler.TriggerType.Damage);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Project.Scripts.Utils
         {
             if (!IsValid || package == null || !Alie) return;
             Hub.Apply(package);
-            ExtraEffectHandler?.Execute(Hub, EffectTrigger.Heal);
+            ExtraEffectHandler?.Execute(Hub, ExtraEffectHandler.TriggerType.Heal);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Project.Scripts.Utils
         {
             if (!IsValid || package == null) return;
             Hub.Apply(package);
-            ExtraEffectHandler?.Execute(Hub, EffectTrigger.Stat);
+            ExtraEffectHandler?.Execute(Hub, ExtraEffectHandler.TriggerType.Stat);
         }
 
         /// <summary>

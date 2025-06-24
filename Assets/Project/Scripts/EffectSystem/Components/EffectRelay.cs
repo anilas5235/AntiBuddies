@@ -4,6 +4,7 @@ using Project.Scripts.BuffSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.EffectSystem.Effects.Type;
+using Project.Scripts.EffectSystem.ExtraEffects;
 using Project.Scripts.EffectSystem.Visuals;
 using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
@@ -79,7 +80,7 @@ namespace Project.Scripts.EffectSystem.Components
             {
                 if (extraEffectHandler)
                 {
-                    extraEffectHandler.Execute(this, EffectTrigger.SelfDodge);
+                    extraEffectHandler.Execute(this, ExtraEffectHandler.TriggerType.SelfDodge);
                 }
 
                 FloatingTextSpawner.Instance.SpawnFloatingText("DODGE", Color.white, gameObject);
@@ -90,7 +91,7 @@ namespace Project.Scripts.EffectSystem.Components
             damage = healthComponent.TakeDamage(damage);
 
             // Trigger Event and effects for damage taken.
-            extraEffectHandler?.Execute(this, EffectTrigger.TakeDamage);
+            extraEffectHandler?.Execute(this, ExtraEffectHandler.TriggerType.TakeDamage);
             OnDamageReceived?.Invoke(damage, package.DamageType);
             onDamageReceived?.Invoke();
             FloatingTextSpawner.Instance.SpawnFloatingNumber(damage, GetDamageColor(package), gameObject);

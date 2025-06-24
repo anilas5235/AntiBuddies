@@ -1,5 +1,6 @@
 ﻿using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Components;
+using Project.Scripts.EffectSystem.ExtraEffects;
 using Project.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;

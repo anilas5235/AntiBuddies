@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.Utils;
 using Project.Scripts.WeaponSystem.Attack.Melee;
 using UnityEngine;

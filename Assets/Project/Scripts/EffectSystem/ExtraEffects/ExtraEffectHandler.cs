@@ -3,7 +3,7 @@ using Project.Scripts.EffectSystem.Effects.Interfaces;
 using Project.Scripts.StatSystem;
 using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Components
+namespace Project.Scripts.EffectSystem.ExtraEffects
 {
     /// <summary>
     /// Manages extraEffects that are associated with an entity.
@@ -46,11 +46,11 @@ namespace Project.Scripts.EffectSystem.Components
         /// </summary>
         /// <param name="hub">The package hub to apply effects to.</param>
         /// <param name="mode">The trigger mode.</param>
-        public void Execute(IPackageHub hub, EffectTrigger mode)
+        public void Execute(IPackageHub hub, TriggerType mode)
         {
             foreach (IExtraEffect component in _components)
             {
-                if (component.ShouldAdd(mode)) component.ApplyTo(hub, _statGroup);
+                if (component.ApplyCondition(mode)) component.ApplyTo(hub, _statGroup);
             }
         }
 
@@ -65,6 +65,19 @@ namespace Project.Scripts.EffectSystem.Components
         public void OnStatInit(IStatGroup statGroup)
         {
             _statGroup = statGroup;
+        }
+        
+        /// <summary>
+        /// Specifies the trigger mode for extra effects in the effect handler.
+        /// </summary>
+        public enum TriggerType
+        {
+            Damage,
+            TakeDamage,
+            Heal,
+            Stat,
+            SelfDodge,
+            Critical,
         }
     }
 }
