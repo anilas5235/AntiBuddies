@@ -3,7 +3,7 @@ using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.StatSystem;
 using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.ExtraEffects
+namespace Project.Scripts.EffectSystem.Effects.ExtraEffects
 {
     /// <summary>
     /// Manages extraEffects that are associated with an entity.

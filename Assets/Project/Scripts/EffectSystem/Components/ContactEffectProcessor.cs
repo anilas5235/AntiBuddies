@@ -1,7 +1,7 @@
 ﻿using Project.Scripts.BuffSystem.Buffs;
 using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
-using Project.Scripts.EffectSystem.ExtraEffects;
+using Project.Scripts.EffectSystem.Effects.ExtraEffects;
 using Project.Scripts.StatSystem;
 using UnityEngine;
 

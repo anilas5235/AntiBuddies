@@ -2,7 +2,7 @@
 using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Definition;
-using Project.Scripts.EffectSystem.ExtraEffects;
+using Project.Scripts.EffectSystem.Effects.ExtraEffects;
 using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.WeaponSystem.Slot;

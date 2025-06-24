@@ -1,7 +1,7 @@
 ﻿using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.StatSystem;
 
-namespace Project.Scripts.EffectSystem.ExtraEffects
+namespace Project.Scripts.EffectSystem.Effects.ExtraEffects
 {
     /// <summary>
     /// Interface for extra effect components that can be added to an effect handler.

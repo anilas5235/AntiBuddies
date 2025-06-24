@@ -3,7 +3,7 @@ using Project.Scripts.BuffSystem.Buffs;
 using Project.Scripts.BuffSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.Data.Type;
-using Project.Scripts.EffectSystem.ExtraEffects;
+using Project.Scripts.EffectSystem.Effects.ExtraEffects;
 using Project.Scripts.EffectSystem.Visuals;
 using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
