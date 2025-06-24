@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Effects.Type
+namespace Project.Scripts.EffectSystem.Effects.Data.Type
 {
     /// <summary>
     /// ScriptableObject representing a type of healing effect.

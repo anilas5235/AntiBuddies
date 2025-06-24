@@ -1,6 +1,5 @@
 ﻿using System;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
-using Project.Scripts.EffectSystem.Effects.Type;
 
 namespace Project.Scripts.StatSystem.Stats
 {

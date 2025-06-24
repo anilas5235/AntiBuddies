@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Effects.Type
+namespace Project.Scripts.EffectSystem.Effects.Data.Type
 {
     /// <summary>
     /// Abstract base class for all effect types, providing a name and description.

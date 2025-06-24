@@ -4,7 +4,7 @@ using Project.Scripts.StatSystem;
 using Project.Scripts.StatSystem.Stats;
 using UnityEngine;
 
-namespace Project.Scripts.EffectSystem.Effects.Type
+namespace Project.Scripts.EffectSystem.Effects.Data.Type
 {
     /// <summary>
     /// ScriptableObject representing a type of damage, including associated scaling and resistance stats.
