@@ -1,4 +1,5 @@
 using System.Collections;
+using Project.Scripts.ItemSystem;
 using UnityEngine;
 
 namespace Project.Scripts.Spawning
@@ -7,7 +8,6 @@ namespace Project.Scripts.Spawning
     {
         [SerializeField] WaveGroup waveGroup;
         public GameObject spawnerHandlerPrefab;
-
         void Start()
         {
             StartCoroutine(ManageWaves());
@@ -25,6 +25,15 @@ namespace Project.Scripts.Spawning
                 yield return StartCoroutine(spawnerHandler.StartSpawners());
                 WaitForSeconds waitWave = new WaitForSeconds(wave.timeBetweenWaves);
                 yield return waitWave;
+
+                // Show shop and pause game
+                Time.timeScale = 0f;
+                bool shopClosed = false;
+                ShopUI.Instance.OnShopClosed += () => shopClosed = true;
+                ShopUI.Instance.Show();
+                // Wait until shop is closed
+                yield return new WaitUntil(() => shopClosed);
+                Time.timeScale = 1f;
             }
         }
     }
