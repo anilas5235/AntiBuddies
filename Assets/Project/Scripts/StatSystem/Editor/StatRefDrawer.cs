@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Project.Scripts.StatSystem.Editor
 {
+    /// <summary>
+    /// Custom property drawer for <see cref="StatRef"/>.
+    /// Displays stat type and efficiency fields in the inspector.
+    /// </summary>
     [CustomPropertyDrawer(typeof(StatRef))]
     public class StatRefDrawer : PropertyDrawer
     {
@@ -14,7 +18,7 @@ namespace Project.Scripts.StatSystem.Editor
 
             float lineHeight = EditorGUIUtility.singleLineHeight;
             float spacing = EditorGUIUtility.standardVerticalSpacing;
-            
+
             position.x -= 10; // Add padding
             position.width -= 10;
 

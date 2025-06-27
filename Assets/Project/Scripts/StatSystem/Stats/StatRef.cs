@@ -1,28 +1,49 @@
 ﻿using System;
-using Project.Scripts.EffectSystem.Effects.Type;
 using UnityEngine;
 
 namespace Project.Scripts.StatSystem.Stats
 {
+    /// <summary>
+    /// Represents a reference to a stat, allowing retrieval of its value based on a dependency.
+    /// </summary>
     [Serializable]
-    public class StatRef
+    public class StatRef : INeedStatGroup
     {
         [SerializeField] private StatDependency statDependency = new();
-        public IStat Stat { get; private set; }
-        
-        public bool IsValid => statDependency.IsValid || Stat != null;
 
-        public void Init(IStatGroup statComponent)
+        public StatRef()
         {
-            if (statComponent == null) return;
-            StatType statType = statDependency.StatType;
-            if (!statType) throw new ArgumentNullException(nameof(statType), "cannot be null.");
-            Stat = statComponent.GetStat(statType);
         }
 
+        public StatRef(StatDependency statDependency)
+        {
+            this.statDependency = statDependency ?? new StatDependency();
+        }
+
+        /// <summary>
+        /// The referenced stat instance.
+        /// </summary>
+        public IStat Stat { get; private set; }
+
+        /// <summary>
+        /// Returns true if the stat dependency is valid and the stat is assigned.
+        /// </summary>
+        public bool IsValid => statDependency.IsValid && Stat != null;
+
+        /// <inheritdoc/>
+        public void OnStatInit(IStatGroup statGroup)
+        {
+            if (statGroup == null || !statDependency.IsValid) return;
+            Stat = statGroup.GetStat(statDependency.StatType);
+        }
+
+        /// <summary>
+        /// Gets the value from the referenced stat using the dependency.
+        /// </summary>
+        /// <returns>The value of the stat.</returns>
         public float GetValue()
         {
-            return statDependency.GetValue(Stat);
+            return IsValid ? statDependency.GetValue(Stat) : 0f;
         }
     }
 }

@@ -1,8 +1,18 @@
 ﻿namespace Project.Scripts.WeaponSystem
 {
-    public interface IWeapon 
+    /// <summary>
+    /// Interface for all weapon types.
+    /// </summary>
+    public interface IWeapon
     {
-        public void Attack();
-        public void DestroyWeapon();
+        /// <summary>
+        /// Executes the weapon's attack action.
+        /// </summary>
+        void Attack();
+
+        /// <summary>
+        /// Destroys the weapon and performs any necessary cleanup.
+        /// </summary>
+        void DestroyWeapon();
     }
 }

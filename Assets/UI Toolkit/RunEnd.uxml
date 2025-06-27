@@ -1,0 +1,11 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/ButtonStyles.uss?fileID=7433441132597879392&amp;guid=6c6d66a8221ddb44289387cb0f760faa&amp;type=3#ButtonStyles" />
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/TextStyles.uss?fileID=7433441132597879392&amp;guid=f5e7a96795f5b154584f5d2dfee4cf19&amp;type=3#TextStyles" />
+    <engine:VisualElement style="flex-grow: 1; transform-origin: bottom; justify-content: flex-end; background-color: rgb(28, 28, 28);">
+        <engine:Label text="Run End" class="big text" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; -unity-font-style: bold; margin-bottom: 796px;" />
+        <engine:VisualElement name="VisualElement" style="flex-grow: 0; align-content: stretch; flex-direction: row; height: 10%; align-self: stretch; justify-content: flex-start; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; align-items: center; transform-origin: center; translate: 0 0;">
+            <engine:Button text="Restart" name="Restart" class="button midButton" style="flex-grow: 1; margin-right: 20px; margin-left: 20px;" />
+            <engine:Button text="Main Menu" enable-rich-text="true" name="Menu" class="button midButton" style="flex-grow: 1; margin-left: 20px; margin-right: 20px; -unity-font-definition: url(&quot;project://database/Assets/TextMesh%20Pro/Examples%20&amp;%20Extras/Fonts/Bangers.ttf?fileID=12800000&amp;guid=5dd49b3eacc540408c98eee0de38e0f1&amp;type=3#Bangers&quot;);" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

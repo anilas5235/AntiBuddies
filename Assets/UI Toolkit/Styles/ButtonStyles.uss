@@ -10,6 +10,7 @@
     align-items: stretch;
     margin: 5px;
     transition-duration: 0.3s;
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Examples%20&%20Extras/Fonts/Bangers.ttf?fileID=12800000&guid=5dd49b3eacc540408c98eee0de38e0f1&type=3#Bangers");
 }
 
 .button.bigButton {
@@ -37,6 +38,6 @@
     color: black;
 }
 
-.button:focus{
+.button:focus {
     border-color: lightgrey;
 }

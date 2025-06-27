@@ -84,5 +84,10 @@ namespace Project.Scripts.Spawning.Pooling
             _initialized = false;
             Init();
         }
+
+        private void OnDestroy()
+        {
+            _pool.Clear();
+        }
     }
 }

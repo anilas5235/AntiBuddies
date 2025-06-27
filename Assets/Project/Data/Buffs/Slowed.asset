@@ -18,3 +18,4 @@ MonoBehaviour:
   ticksPerSecond: 0
   amount: -30
   statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+  affectsAllies: 0

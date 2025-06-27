@@ -6,6 +6,10 @@ using Action = Unity.Behavior.Action;
 
 namespace Project.Behaviors.Actions
 {
+    /// <summary>
+    /// Action node that moves a 2D GameObject towards a target position at a specified speed.
+    /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable, GeneratePropertyBag]
     [NodeDescription(name: "Move2DPosition", story: "[Target] 2D Move To [Position]", category: "Action",
         id: "30d8f82469548575ac4fb470969915df")]
@@ -20,6 +24,7 @@ namespace Project.Behaviors.Actions
 
         protected override Status OnStart()
         {
+            // Initializes the movement by checking for required components and if the destination is already reached.
             if (!Target.Value)
             {
                 return Status.Failure;
@@ -53,17 +58,26 @@ namespace Project.Behaviors.Actions
             if (_rigidbody2D) SetVelocity(Vector2.zero);
         }
 
+        /// <summary>
+        /// Calculates the normalized direction vector from the target to the destination.
+        /// </summary>
         private Vector2 GetMovementVector()
         {
             return (Position.Value - (Vector2)Target.Value.transform.position).normalized;
         }
 
+        /// <summary>
+        /// Checks if the target is within the distance threshold of the destination.
+        /// </summary>
         private bool IsDestinationReached()
         {
             return Vector2.Distance(Target.Value.transform.position, Position.Value)
                    <= DistanceThreshold.Value;
         }
 
+        /// <summary>
+        /// Sets the Rigidbody2D's linear velocity.
+        /// </summary>
         private void SetVelocity(Vector2 velocity)
         {
             _rigidbody2D.linearVelocity = velocity;

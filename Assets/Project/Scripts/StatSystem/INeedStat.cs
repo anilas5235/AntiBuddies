@@ -1,7 +1,11 @@
 ﻿namespace Project.Scripts.StatSystem
 {
-    public interface INeedStatComponent 
+    public interface INeedStatGroup
     {
-        public void OnStatInit(StatComponent statComponent);
+        /// <summary>
+        /// Called to initialize stat references on components or script that need stats.
+        /// </summary>
+        /// <param name="statGroup">The stat Group to initialize from.</param>
+        public void OnStatInit(IStatGroup statGroup);
     }
 }

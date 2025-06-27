@@ -185,10 +185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d45194f74049fe9cb74286650cbb1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allyGroup: 1
+  alliedGroup: 1
   healthComponent: {fileID: 4307234338099689046}
   buffManager: {fileID: 1508122211642880128}
-  effectPipeline: {fileID: 6393263254011947306}
+  extraEffectHandler: {fileID: 6393263254011947306}
   dodgeStat:
     statDependency:
       useEfficiency: 100
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 6393263254011947306}
   - component: {fileID: 564561616764115069}
   - component: {fileID: 1660039489744883330}
-  - component: {fileID: 4022054345705741037}
+  - component: {fileID: 4793252300442441189}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -320,7 +320,19 @@ MonoBehaviour:
       statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4793252300442441189}
+        m_TargetAssemblyTypeName: Project.Scripts.Player.PlayerEvents, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &8293573683347230753
 Rigidbody2D:
   serializedVersion: 5
@@ -479,6 +491,14 @@ MonoBehaviour:
     minValue: -100
     baseStatValue: 0
     tempStatBonus: 0
+  - statType: {fileID: 11400000, guid: e5b244f5799def84db3e00f5b60c75c1, type: 2}
+    statValue: 0
+    clampedValue: 0
+    percentMultiplier: 0
+    maxValue: 2147483647
+    minValue: -2147483648
+    baseStatValue: 0
+    tempStatBonus: 0
   - statType: {fileID: 11400000, guid: bcc181ffbbc82ab49991cda4da047633, type: 2}
     statValue: 0
     clampedValue: 0
@@ -549,7 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudVars: {fileID: 11400000, guid: 4d488c76ebabd2b47a8d41c12b28cccf, type: 2}
---- !u!114 &4022054345705741037
+--- !u!114 &4793252300442441189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -558,10 +578,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2029995827079385713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60a6a80b204a44159f8a0751e34c465f, type: 3}
+  m_Script: {fileID: 11500000, guid: ba4e149e5a2242729edc3065426a769b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSize: 10
 --- !u!1 &7425060869049423961
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a990a9e2f31448bb1abe7f88a370eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onlyOncePerObject: 1
+  onlyOncePerObject: 0
   onContactEnter:
     m_PersistentCalls:
       m_Calls:
@@ -710,4 +729,3 @@ MonoBehaviour:
   weaponSlotPrefab: {fileID: 4847109733002469394, guid: 24ab6752f857f1144bf800314df430ba, type: 3}
   defaultWeaponData:
   - {fileID: 11400000, guid: e02202dd553a52d499c7ceb5bdcb2a66, type: 2}
-  - {fileID: 11400000, guid: 70f6dd9407021584d856891c43768010, type: 2}

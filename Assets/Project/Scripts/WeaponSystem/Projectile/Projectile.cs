@@ -1,65 +1,80 @@
-﻿using Project.Scripts.BuffSystem.Buffs;
-using Project.Scripts.EffectSystem.Components;
-using Project.Scripts.EffectSystem.Effects.Data.Package;
-using Project.Scripts.Spawning.Pooling;
-using Project.Scripts.Utils;
+﻿using Project.Scripts.Spawning.Pooling;
 using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem.Projectile
 {
+    /// <summary>
+    /// Represents a projectile that can be fired and interact with other objects.
+    /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class Projectile : PoolableMono, IProjectile
     {
+        /// <summary>
+        /// The configuration data for this projectile.
+        /// </summary>
         [SerializeField] private ProjectileData data;
-        [SerializeField] private float speed = 10f;
+
+        /// <summary>
+        /// The number of allowed contacts before the projectile is destroyed.
+        /// </summary>
         [SerializeField] private int allowedContacts = 1;
+
+        /// <summary>
+        /// The sprite renderer for the projectile's appearance.
+        /// </summary>
         [SerializeField] private SpriteRenderer spriteRenderer;
+
+        /// <summary>
+        /// The Rigidbody2D component for physics interactions.
+        /// </summary>
         [SerializeField] private Rigidbody2D rb;
 
-        private DamagePackage _damagePackage;
-        private DamageBuff _damageBuff;
-        private AllyGroup _allyGroup;
+        /// <summary>
+        /// The dynamic runtime settings for this projectile, including direction, damage, buffs, and effects.
+        /// </summary>
+        private DynamicProjectileSettings _dynamicData;
 
+        /// <inheritdoc/>
         public override void Reset()
         {
+            // Reset projectile's velocity and clear references
             rb.linearVelocity = Vector2.zero;
-            speed = 0;
-            _damagePackage = null;
-            _damageBuff = null;
+            data = null;
+            _dynamicData = null;
         }
 
-        public void SetData(ProjectileData projectileData, DamagePackage damagePackage, DamageBuff damageBuff)
-        {
-            data = projectileData;
-            speed = data.speed;
-            allowedContacts = 1;
-            spriteRenderer.sprite = data.sprite;
-            transform.localScale = data.scale;
-            _damagePackage = damagePackage;
-            _damageBuff = damageBuff;
-        }
-
-        public void ProjectileSetUp(Vector2 direction, AllyGroup allyGroup, int contacts)
-        {
-            if (direction == Vector2.zero) return;
-            direction = direction.normalized;
-            transform.right = direction;
-            rb.linearVelocity = direction * speed;
-            allowedContacts = contacts;
-            _allyGroup = allyGroup;
-        }
-
+        /// <inheritdoc/>
         public void HandleContact(GameObject contact)
         {
-            ContactToHubAdapter hubAdapter = new(contact, _allyGroup);
-            if (!hubAdapter.IsValid || hubAdapter.Alie) return;
-            hubAdapter.Apply(_damagePackage);
-            hubAdapter.Apply(_damageBuff?.GetCopy());
+            if(_dynamicData == null) return;
+            // Try to apply effects to the contact; if not valid or allied, do nothing
+            if (!_dynamicData.ApplyEffects(contact))
+            {
+                return;
+            }
+
             allowedContacts--;
+            // Return to pool if no contacts remain
             if (allowedContacts <= 0)
             {
                 ReturnToPool();
             }
+        }
+
+        /// <inheritdoc/>
+        public void SetData(ProjectileData projectileData, DynamicProjectileSettings settings)
+        {
+            data = projectileData;
+            _dynamicData = settings;
+            spriteRenderer.sprite = data.sprite;
+            transform.localScale = data.scale;
+            Vector2 direction = settings.Direction.normalized;
+            // Set the projectile's facing direction
+            transform.right = direction;
+            // Set the projectile's velocity
+            rb.linearVelocity = direction * data.speed;
+            // Add any additional allowed contacts from dynamic settings
+            allowedContacts = data.contacts + settings.AdditionalContacts;
         }
     }
 }
