@@ -82,7 +82,6 @@ namespace Project.Scripts.EffectSystem.Components
         {
             if (!IsValid || package == null || !Alie) return;
             Hub.Apply(package);
-            ExtraEffectHandler?.Execute(Hub, ExtraEffectHandler.TriggerType.Heal);
         }
 
         /// <summary>
@@ -93,7 +92,6 @@ namespace Project.Scripts.EffectSystem.Components
         {
             if (!IsValid || package == null) return;
             Hub.Apply(package);
-            ExtraEffectHandler?.Execute(Hub, ExtraEffectHandler.TriggerType.Stat);
         }
 
         /// <summary>
