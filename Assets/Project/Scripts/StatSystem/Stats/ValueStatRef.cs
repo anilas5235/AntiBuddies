@@ -23,6 +23,11 @@ namespace Project.Scripts.StatSystem.Stats
         /// The current calculated value after applying all stat references.
         /// </summary>
         public float CurrValue => currValue;
+        
+        /// <summary>
+        /// The current value as a percentage.
+        /// </summary>
+        public float CurrValueAsPercentage => currValue/100f;
 
         /// <summary>
         /// Event triggered when the value changes.

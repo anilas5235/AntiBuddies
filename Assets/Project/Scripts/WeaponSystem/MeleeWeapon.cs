@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Project.Scripts.EffectSystem.Components;
+using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.Utils;
 using Project.Scripts.WeaponSystem.Attack.Melee;
 using UnityEngine;
@@ -64,7 +65,9 @@ namespace Project.Scripts.WeaponSystem
         public void HandleContact(GameObject contact)
         {
             ContactEffectProcessor hubAdapter = new(contact, alliedGroup, extraEffectHandler);
-            hubAdapter.Apply(damage.CreatePackage(gameObject, StatGroup));
+            DamagePackage package = damage.CreatePackage(gameObject, StatGroup);
+            package.OnDamageApplied += GlobalVariables.Instance.PlayerEffectRelay.OnLifeStealCallback;
+            hubAdapter.Apply(package);
         }
 
         /// <inheritdoc/>

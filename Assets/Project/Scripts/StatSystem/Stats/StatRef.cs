@@ -46,5 +46,10 @@ namespace Project.Scripts.StatSystem.Stats
         {
             return IsValid ? statDependency.GetValue(Stat) : 0f;
         }
+        
+        public float GetValueAsPercentage()
+        {
+            return IsValid ? statDependency.GetValue(Stat) / 100f : 0f;
+        }
     }
 }

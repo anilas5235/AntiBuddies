@@ -212,6 +212,11 @@ MonoBehaviour:
   - amount: 1
     statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
     statMod: 0
+  lifeStealHealType: {fileID: 11400000, guid: deab062f20ee75f4699c1605093b9963, type: 2}
+  lifeSteal:
+    statDependency:
+      useEfficiency: 100
+      statType: {fileID: 11400000, guid: dfe087d8d19350f47befefa18d5553d0, type: 2}
 --- !u!114 &460446360464912619
 MonoBehaviour:
   m_ObjectHideFlags: 0

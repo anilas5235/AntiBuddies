@@ -94,6 +94,7 @@ namespace Project.Scripts.EffectSystem.Components
             extraEffectHandler?.Execute(this, ExtraEffectHandler.TriggerType.TakeDamage);
             OnDamageReceived?.Invoke(damage, package.DamageType);
             onDamageReceived?.Invoke();
+            package.DamageApplied(damage);
             FloatingTextSpawner.Instance.SpawnFloatingNumber(damage, GetDamageColor(package), gameObject);
         }
 
@@ -108,7 +109,6 @@ namespace Project.Scripts.EffectSystem.Components
             if (amount <= 0) return;
             OnHealReceived?.Invoke(amount, package.HealType);
             FloatingTextSpawner.Instance.SpawnFloatingNumber(amount, package.HealType.Color, gameObject);
-            extraEffectHandler?.Execute(this, ExtraEffectHandler.TriggerType.Heal);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Project.Scripts.EffectSystem.Components
             _statGroup.ModifyStat(package);
         }
 
-        public void OnStatInit(IStatGroup statGroup)
+        public virtual void OnStatInit(IStatGroup statGroup)
         {
             _statGroup = statGroup;
             dodgeStat.OnStatInit(statGroup);

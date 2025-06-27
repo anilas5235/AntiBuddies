@@ -1,5 +1,6 @@
 ﻿using System;
 using Project.Scripts.ItemSystem;
+using Project.Scripts.Player;
 using Project.Scripts.ResourceSystem;
 using Project.Scripts.StatSystem;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace Project.Scripts.Utils
     {
         public GameObject Player { get; private set; }
         public IStatGroup PlayerStatGroup { get; private set; }
+        
+        public PlayerEffectRelay PlayerEffectRelay { get; private set; }
         public Inventory PlayerInventory { get; private set; }
         public ResourceManager ResourceManager { get; private set; }
 
@@ -31,7 +34,7 @@ namespace Project.Scripts.Utils
         {
             base.Awake();
             Player = GameObject.FindGameObjectWithTag("Player");
-            if (Player == null)
+            if (!Player)
             {
                 Debug.LogError("Player not found in the scene.");
                 return;
@@ -41,11 +44,16 @@ namespace Project.Scripts.Utils
             if (PlayerStatGroup == null)
             {
                 Debug.LogError("PlayerStatGroup not found in the scene.");
-                return;
+            }
+            
+            PlayerEffectRelay = Player.GetComponentInChildren<PlayerEffectRelay>();
+            if (!PlayerEffectRelay)
+            {
+                Debug.LogError("PlayerEffectRelay component not found on Player.");
             }
 
             PlayerInventory = Player.GetComponent<Inventory>();
-            if (PlayerInventory == null)
+            if (!PlayerInventory)
                 Debug.LogError("PlayerInventory component not found on Player.");
             ResourceManager = ResourceManager.Instance;
         }

@@ -75,7 +75,6 @@ namespace Project.Scripts.EffectSystem.Effects.ExtraEffects
         {
             Damage,
             TakeDamage,
-            Heal,
             SelfDodge,
             Critical,
         }

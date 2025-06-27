@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Package;
+using Project.Scripts.EffectSystem.Effects.Data.Type;
 using Project.Scripts.ResourceSystem;
+using Project.Scripts.StatSystem;
+using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.Utils;
 using UnityEngine;
 
@@ -18,6 +21,10 @@ namespace Project.Scripts.Player
         /// List of stat packages applied on level up.
         /// </summary>
         [SerializeField] private List<StatPackage> levelUpStatPackages;
+
+        [SerializeField] private HealType lifeStealHealType;
+
+        [SerializeField] private StatRef lifeSteal;
 
         /// <summary>
         /// Number of fixed update frames for temporary invulnerability after taking damage.
@@ -45,8 +52,8 @@ namespace Project.Scripts.Player
 
         private void OnDisable()
         {
-            if(ExpManager.Instance) ExpManager.Instance.OnLevelUp -= OnLevelUp;
-            if(GlobalVariables.Instance) GlobalVariables.Instance.OnWaveStart -= OnWaveStart;
+            if (ExpManager.Instance) ExpManager.Instance.OnLevelUp -= OnLevelUp;
+            if (GlobalVariables.Instance) GlobalVariables.Instance.OnWaveStart -= OnWaveStart;
         }
 
         /// <summary>
@@ -104,6 +111,20 @@ namespace Project.Scripts.Player
             }
 
             _eyeFrameCoroutine = null;
+        }
+
+        public void OnLifeStealCallback(int amount)
+        {
+            int heal = Mathf.RoundToInt(amount * lifeSteal.GetValueAsPercentage());
+            if (heal <= 0) return;
+            HealPackage healPackage = new(heal, lifeStealHealType);
+            Apply(healPackage);
+        }
+
+        public override void OnStatInit(IStatGroup statGroup)
+        {
+            base.OnStatInit(statGroup);
+            lifeSteal.OnStatInit(statGroup);
         }
     }
 }
