@@ -111,7 +111,7 @@ namespace Project.Scripts.ShopSystem
         public void OnShopClose()
         {
             costMultiplier += CostStep;
-            rerollCost = Mathf.CeilToInt(costMultiplier * RerollStep);
+            rerollCost = Mathf.CeilToInt(costMultiplier * RerollBase);
         }
     }
 }
