@@ -22,8 +22,14 @@ namespace Project.Scripts.Player
         /// </summary>
         [SerializeField] private List<StatPackage> levelUpStatPackages;
 
+        /// <summary>
+        /// The type of healing applied when life steal occurs.
+        /// </summary>
         [SerializeField] private HealType lifeStealHealType;
 
+        /// <summary>
+        /// Reference to the life steal stat.
+        /// </summary>
         [SerializeField] private StatRef lifeSteal;
 
         /// <summary>
@@ -113,6 +119,9 @@ namespace Project.Scripts.Player
             _eyeFrameCoroutine = null;
         }
 
+        /// <summary>
+        /// Callback for life steal events, applying healing based on the amount of life stolen.
+        /// </summary>
         public void OnLifeStealCallback(int amount)
         {
             int heal = Mathf.RoundToInt(amount * lifeSteal.GetValueAsPercentage());
@@ -121,6 +130,7 @@ namespace Project.Scripts.Player
             Apply(healPackage);
         }
 
+        /// <inheritdoc/>
         public override void OnStatInit(IStatGroup statGroup)
         {
             base.OnStatInit(statGroup);
