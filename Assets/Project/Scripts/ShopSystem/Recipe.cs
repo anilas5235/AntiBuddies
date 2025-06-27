@@ -15,6 +15,11 @@ namespace Project.Scripts.ShopSystem
             return (itemA == item1 && itemB == item2) || (itemA == item2 && itemB == item1);
         }
 
+        public bool IsPresent(Item item)
+        {
+            return item1 == item || item2 == item;
+        }
+
         public Item ResultItem => resultItem;
     }
 }

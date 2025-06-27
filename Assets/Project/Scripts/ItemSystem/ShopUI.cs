@@ -179,16 +179,24 @@ namespace Project.Scripts.ItemSystem
                 bool isSelected = false;
                 if (_selectedIndex1 == null && _selectedIndex2 == null)
                 {
-                    // No selection: outline items present in any recipe
+                    // No selection: outline items if they can be merged
                     if (i < inv.Items.Count && inv.Items[i] != null &&
-                        _merger.Recipes.Any(r => r.IsValid(inv.Items[i], inv.Items[i])))
+                        _merger.Recipes.Any(r => r.IsPresent(inv.Items[i])))
                     {
-                        slot.AddToClassList("outline");
+                        for (int j = 0; j < inv.Items.Count; j++)
+                        {
+                            if (i == j) continue;
+                            if (inv.Items[j] != null && _merger.Recipes.Any(r => r.IsValid(inv.Items[i], inv.Items[j])))
+                            {
+                                slot.AddToClassList("outline");
+                                break;
+                            }
+                        }
                     }
                 }
                 else if (_selectedIndex1 != null && _selectedIndex2 == null)
                 {
-                    // One selected
+                    // One selected item: mark selected and outline valid merges
                     if (i == _selectedIndex1) {
                         slot.AddToClassList("selected");
                         isSelected = true;
