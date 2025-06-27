@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acad62349e9546e39edb96d908b79662, type: 3}
-  m_Name: GreenVirsBatch1
+  m_Name: GreenBatch 3
   m_EditorClassIdentifier: Assembly-CSharp:Project.Scripts.Spawning:Batch
   enemyPrefab: {fileID: 1711102263862150332, guid: 169a02d1fb54a724ebfbadbdf0a73ab2, type: 3}
-  spawnPerBatch: 4
-  spawnDelay: 2
-  numberOfBatches: 3
-  spawnRadius: 4
+  spawnPerBatch: 20
+  spawnDelay: 1.19
+  spawnRadius: 20
   initialDelay: 2

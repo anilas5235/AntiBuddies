@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec8da058f97edcf458bad1a116c40488, type: 3}
-  m_Name: Wave2
+  m_Name: Wave 2
   m_EditorClassIdentifier: 
   batches:
-  - {fileID: 11400000, guid: 32424cc825ab8674e9595d5408fa4413, type: 2}
-  timeBetweenWaves: 10
+  - {fileID: 11400000, guid: caeeb856ba065944188d23d6f488190f, type: 2}
+  - {fileID: 11400000, guid: caeeb856ba065944188d23d6f488190f, type: 2}
+  - {fileID: 11400000, guid: 9e781694e154f874b920b48fac2ea912, type: 2}
+  timeBetweenWaves: 4

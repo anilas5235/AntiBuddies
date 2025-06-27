@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Blood Catalyst
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b449d013eb89e794db29840b4320369e, type: 3}
   cost: 0
-  behaviours:
-  - {fileID: 11400000, guid: e40f92429690f79439086eb27bee023f, type: 2}
-  - {fileID: 11400000, guid: 937dc9832cddc884a9cea8ea6511b2aa, type: 2}
-  - {fileID: 11400000, guid: 77953b3001c1c724ead30e06f72d2c7c, type: 2}
+  statPackages:
+  - amount: 6
+    statType: {fileID: 11400000, guid: dfe087d8d19350f47befefa18d5553d0, type: 2}
+    statMod: 0
+  - amount: 3
+    statType: {fileID: 11400000, guid: 1e3b73a2a12e3ef4ab712e845e56d54b, type: 2}
+    statMod: 0
+  - amount: 2
+    statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statMod: 0
   rarity: 4
   description: Healing through violence and science.

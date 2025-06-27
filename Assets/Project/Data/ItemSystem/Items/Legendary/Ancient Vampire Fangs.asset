@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Ancient Vampire Fangs
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e18c05a374466604a9df1cd041d5fa93, type: 3}
   cost: 130
-  behaviours:
-  - {fileID: 11400000, guid: 8ed00f92e46c35e4aa660c572c75f57d, type: 2}
-  - {fileID: 11400000, guid: 937ffc4b19fcd234f93a765e3020f3aa, type: 2}
-  - {fileID: 11400000, guid: eb8e60d92053b6f48b0f598d87a3bf92, type: 2}
+  statPackages:
+  - amount: 12
+    statType: {fileID: 11400000, guid: dfe087d8d19350f47befefa18d5553d0, type: 2}
+    statMod: 0
+  - amount: 6
+    statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    statMod: 0
+  - amount: 5
+    statType: {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
+    statMod: 0
   rarity: 3
   description: Drinks deeper, heals faster. The original predator.

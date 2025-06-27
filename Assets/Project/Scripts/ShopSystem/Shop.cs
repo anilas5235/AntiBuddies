@@ -12,7 +12,7 @@ namespace Project.Scripts.ShopSystem
     public class Shop : Singleton<Shop>
     {
         private const float RerollStep = 1.2f;
-        private const float CostStep = 0.10f;
+        private const float CostStep = 0.20f;
         private const int RerollBase = 3;
 
         [SerializeField] Item[] commonItems;

@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Protein Bar
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 36a3fcea79d27c34f955f5896af97dfb, type: 3}
   cost: 20
-  behaviours:
-  - {fileID: 11400000, guid: 2cfcc044ec5ba654bb5d420984d988f8, type: 2}
-  - {fileID: 11400000, guid: 12b0b5ae51371cd46807b3a99446b98e, type: 2}
+  statPackages:
+  - amount: 5
+    statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statMod: 0
+  - amount: 1
+    statType: {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
+    statMod: 0
   rarity: 0
   description: Tastes like cardboard, but your muscles don't care.

@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acad62349e9546e39edb96d908b79662, type: 3}
-  m_Name: RedVirusBatch1
+  m_Name: SlimeBatch
   m_EditorClassIdentifier: Assembly-CSharp:Project.Scripts.Spawning:Batch
-  enemyPrefab: {fileID: 4919007744789787044, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
-  spawnPerBatch: 3
-  spawnDelay: 4
-  numberOfBatches: 3
-  spawnRadius: 5
-  initialDelay: 1
+  enemyPrefab: {fileID: 8993275561615036061, guid: 42574e0640e87d946874b3359352ca2e, type: 3}
+  spawnPerBatch: 15
+  spawnDelay: 0.92
+  spawnRadius: 20
+  initialDelay: 5

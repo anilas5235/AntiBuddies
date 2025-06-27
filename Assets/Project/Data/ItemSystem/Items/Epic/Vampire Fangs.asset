@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Vampire Fangs
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7e051f510608efc4e951ccb2a2c155a6, type: 3}
   cost: 70
-  behaviours:
-  - {fileID: 11400000, guid: 7de06a3266770b34b94aba038b0c2379, type: 2}
-  - {fileID: 11400000, guid: 41c7dbf945669a54ca9613bf257718a5, type: 2}
-  - {fileID: 11400000, guid: 3a20daea232524d4c97f8dd353323fe7, type: 2}
+  statPackages:
+  - amount: 8
+    statType: {fileID: 11400000, guid: dfe087d8d19350f47befefa18d5553d0, type: 2}
+    statMod: 0
+  - amount: 4
+    statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    statMod: 0
+  - amount: 3
+    statType: {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
+    statMod: 0
   rarity: 2
   description: "These don't just look sharp \u2014 they drink life with every strike."

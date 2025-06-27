@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Gilded Clover
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 0943c28542b5356449604fe34c0f6456, type: 3}
   cost: 47
-  behaviours:
-  - {fileID: 11400000, guid: 59b51e1b73236274699a8a0e3b9728bc, type: 2}
+  statPackages:
+  - amount: 12
+    statType: {fileID: 11400000, guid: 5df89aa858657d349841d99de210f860, type: 2}
+    statMod: 0
   rarity: 1
   description: Shimmering with oddly specific luck.

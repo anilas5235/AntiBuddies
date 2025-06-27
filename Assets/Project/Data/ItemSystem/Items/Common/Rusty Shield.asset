@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Rusty Shield
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9a0348460676dc942ab19a3051b6e6f9, type: 3}
   cost: 15
-  behaviours:
-  - {fileID: 11400000, guid: 4a0ff712de5e9f746afedefd008c00cd, type: 2}
-  - {fileID: 11400000, guid: 34f0d2ae790d3e949ac114961abc166d, type: 2}
+  statPackages:
+  - amount: 2
+    statType: {fileID: 11400000, guid: 7fac75f7b0c7e9f49b1f04e927d25dfc, type: 2}
+    statMod: 0
+  - amount: -2
+    statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    statMod: 0
   rarity: 0
   description: An old but reliable piece of metal. Better than nothing.

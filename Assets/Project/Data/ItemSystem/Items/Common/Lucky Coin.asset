@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Lucky Coin
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f6e36a2a175c4ed4284002c534c9f1d9, type: 3}
   cost: 22
-  behaviours:
-  - {fileID: 11400000, guid: fd0106e9ad4187049a447764bdcfe313, type: 2}
-  - {fileID: 11400000, guid: 0def9691928977245a476959f91f477c, type: 2}
+  statPackages:
+  - amount: 8
+    statType: {fileID: 11400000, guid: 5df89aa858657d349841d99de210f860, type: 2}
+    statMod: 0
+  - amount: -1
+    statType: {fileID: 11400000, guid: 7fac75f7b0c7e9f49b1f04e927d25dfc, type: 2}
+    statMod: 0
   rarity: 0
   description: Looks fake. Still brings fortune.

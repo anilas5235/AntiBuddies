@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Adrenaline Syringe
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6826db77858742d49b65fb454d3b3ce2, type: 3}
   cost: 25
-  behaviours:
-  - {fileID: 11400000, guid: 51a194c05908ed048ada2442aed00e35, type: 2}
-  - {fileID: 11400000, guid: 5f8c24e48389cd9469818e5b788d0873, type: 2}
+  statPackages:
+  - amount: 5
+    statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    statMod: 0
+  - amount: 3
+    statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    statMod: 0
   rarity: 0
   description: "Pumps you up \u2014 literally."

@@ -1478,7 +1478,7 @@ MonoBehaviour:
   maxCommonItems: 10
   luckStat:
     statDependency:
-      useEfficiency: 500
+      useEfficiency: 100
       statType: {fileID: 11400000, guid: 5df89aa858657d349841d99de210f860, type: 2}
 --- !u!114 &1320047035
 MonoBehaviour:

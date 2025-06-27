@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: First Aid Kit
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 36dbb56da5df5e3448b1f0adfe66cc66, type: 3}
   cost: 44
-  behaviours:
-  - {fileID: 11400000, guid: 87e741f296b054a439bde7e21381424b, type: 2}
-  - {fileID: 11400000, guid: 2cfcc044ec5ba654bb5d420984d988f8, type: 2}
-  - {fileID: 11400000, guid: 6e3b24ef690691f4cb0bbd9f6ddfc8d0, type: 2}
+  statPackages:
+  - amount: 4
+    statType: {fileID: 11400000, guid: 1e3b73a2a12e3ef4ab712e845e56d54b, type: 2}
+    statMod: 0
+  - amount: 5
+    statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statMod: 0
+  - amount: -2
+    statType: {fileID: 11400000, guid: dfe087d8d19350f47befefa18d5553d0, type: 2}
+    statMod: 0
   rarity: 1
   description: Pre-packaged healing for when you're too busy fighting to care.

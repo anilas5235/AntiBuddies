@@ -12,12 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
   m_Name: Adrenal Boost Core
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9b96a618b64e1b045a2cbfb92b6b5c51, type: 3}
   cost: 0
-  behaviours:
-  - {fileID: 11400000, guid: 51a194c05908ed048ada2442aed00e35, type: 2}
-  - {fileID: 11400000, guid: 3a20daea232524d4c97f8dd353323fe7, type: 2}
-  - {fileID: 11400000, guid: bfa1a311aecc3fc41aa9e609006fd500, type: 2}
-  - {fileID: 11400000, guid: 446f197a2a5be694b88c09a368558a0c, type: 2}
+  statPackages:
+  - amount: 5
+    statType: {fileID: 11400000, guid: 2c18c95ad566fd24baeac15830c1956b, type: 2}
+    statMod: 0
+  - amount: 3
+    statType: {fileID: 11400000, guid: 36f3132b02c32b64ebe95d538fd59668, type: 2}
+    statMod: 0
+  - amount: 3
+    statType: {fileID: 11400000, guid: 0a598501be032e9409e71d717462458d, type: 2}
+    statMod: 0
+  - amount: 2
+    statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
+    statMod: 0
   rarity: 4
   description: "Your body isn\u2019t meant to move like this."

@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetingBehaviour: {fileID: 11400000, guid: bf1c434a61743224eafb74d325291da3, type: 2}
-  allyGroup: 1
-  effectPipeline: {fileID: 0}
+  alliedGroup: 1
+  extraEffectHandler: {fileID: 0}
   damage:
-    amount: 8
+    amount: 4
     damageType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
     extraStatDeps:
     - useEfficiency: 100
