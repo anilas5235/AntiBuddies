@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem.Attack.Range
     /// <summary>
     /// Implements a straight shot ranged attack behaviour.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "StraightShot", menuName = "WeaponSystem/Attacks/StraightShot")]
     public class StraightShot : RangeAttackBehaviour
     {

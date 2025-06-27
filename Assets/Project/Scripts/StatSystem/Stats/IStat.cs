@@ -6,6 +6,7 @@ namespace Project.Scripts.StatSystem.Stats
     /// <summary>
     /// Interface representing a stat in the stat system.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IStat
     {
         /// <summary>

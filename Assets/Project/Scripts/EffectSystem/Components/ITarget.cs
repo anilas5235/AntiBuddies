@@ -4,6 +4,7 @@
     /// Interface for applying a package or effect to a target.
     /// </summary>
     /// <typeparam name="TFor">The type of package or effect to apply.</typeparam>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface ITarget<in TFor>
     {
         /// <summary>

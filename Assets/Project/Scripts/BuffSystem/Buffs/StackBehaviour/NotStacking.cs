@@ -5,6 +5,7 @@ namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
     /// <summary>
     /// Implements a stack behaviour where the buff cannot be stacked.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class NotStacking : IStackBehaviour
     {
         /// <inheritdoc/>

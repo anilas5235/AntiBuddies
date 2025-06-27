@@ -9,6 +9,7 @@ namespace Project.Scripts.EffectSystem.Effects.ExtraEffects
     /// Manages extraEffects that are associated with an entity.
     /// These effects are triggered by scenarios like dodging or dealing damage to a target.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class ExtraEffectHandler : MonoBehaviour, INeedStatGroup
     {
         /// <summary>

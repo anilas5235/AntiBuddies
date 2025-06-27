@@ -7,6 +7,7 @@ namespace Project.Scripts.StatSystem.Editor
     /// Custom inspector for <see cref="StatComponent"/>.
     /// Provides a button to reset all stats in the inspector.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CustomEditor(typeof(StatComponent))]
     public class StatComponentCustomEditor : UnityEditor.Editor
     {

@@ -3,6 +3,7 @@
     /// <summary>
     /// Represents the group affiliation of an entity.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public enum AlliedGroup : byte
     {
         Enemy = 0,

@@ -6,6 +6,7 @@ namespace Project.Scripts.UI.HUD
     /// <summary>
     /// Updates the HUD gold display in response to gold changes.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class HUDGold : MonoBehaviour
     {
         /// <summary>

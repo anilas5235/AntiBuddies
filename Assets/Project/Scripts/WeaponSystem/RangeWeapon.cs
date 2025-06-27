@@ -9,6 +9,7 @@ namespace Project.Scripts.WeaponSystem
     /// <summary>
     /// Represents a ranged weapon that fires projectiles.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class RangeWeapon : Weapon
     {
         /// <summary>

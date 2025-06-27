@@ -16,6 +16,7 @@ namespace Project.Scripts.EffectSystem.Components
     /// <summary>
     /// Handles the application and relay of effects, such as damage, healing, stats, and buffs.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class EffectRelay : MonoBehaviour, IPackageHub, INeedStatGroup
     {
         /// <summary>

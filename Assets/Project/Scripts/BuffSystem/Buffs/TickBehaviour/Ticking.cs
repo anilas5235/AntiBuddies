@@ -5,6 +5,7 @@ namespace Project.Scripts.BuffSystem.Buffs.TickBehaviour
     /// <summary>
     /// Implements tick behaviour where the buff is applied at regular intervals.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class Ticking : ITickBehaviour
     {
         /// <summary>

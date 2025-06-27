@@ -6,6 +6,7 @@ namespace Project.Scripts.UI.HUD
     /// ScriptableObject holding HUD variable values for health, level, and gold.
     /// Used to update UI elements in the HUD using UI binding.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "HUDVars", menuName = "UI/HUDVars")]
     public class HUDVars : ScriptableObject
     {

@@ -8,6 +8,7 @@ namespace Project.Scripts.StatSystem.Editor
     /// Custom property drawer for <see cref="ValueStatRef"/>.
     /// Displays base value, current value, transform type, and stat references in the inspector.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CustomPropertyDrawer(typeof(ValueStatRef))]
     public class ValueStatRefDrawer : PropertyDrawer
     {

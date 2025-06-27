@@ -7,6 +7,7 @@ namespace Project.Scripts.ResourceSystem
     /// <summary>
     /// Manages the player's gold resource and related events.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class ResourceManager : Singleton<ResourceManager>
     {
         /// <summary>

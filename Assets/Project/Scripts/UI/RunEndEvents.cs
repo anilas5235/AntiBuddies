@@ -6,6 +6,7 @@ namespace Project.Scripts.UI
     /// <summary>
     /// Handles end-of-run UI events such as restarting the game or returning to the main menu.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class RunEndEvents : AbstractUIEvents
     {
         /// <summary>

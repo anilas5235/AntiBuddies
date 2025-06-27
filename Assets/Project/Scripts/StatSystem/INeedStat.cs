@@ -1,5 +1,9 @@
 ﻿namespace Project.Scripts.StatSystem
 {
+    /// <summary>
+    /// Interface for components that require stat group initialization.
+    /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface INeedStatGroup
     {
         /// <summary>

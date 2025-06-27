@@ -5,6 +5,7 @@ namespace Project.Scripts.StatSystem.Stats
     /// <summary>
     /// ScriptableObject representing a type of stat, including value range and percentage flag.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "StatType", menuName = "EffectSystem/Types/StatType")]
     public class StatType : ScriptableObject
     {

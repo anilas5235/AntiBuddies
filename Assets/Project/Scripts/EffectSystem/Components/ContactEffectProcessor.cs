@@ -11,6 +11,7 @@ namespace Project.Scripts.EffectSystem.Components
     /// Processes and applies effects, buffs, and stat changes to a contacted GameObject
     /// by interacting with its IPackageHub and handling ally/enemy logic.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class ContactEffectProcessor
     {
         /// <summary>

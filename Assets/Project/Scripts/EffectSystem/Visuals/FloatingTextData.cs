@@ -6,6 +6,7 @@ namespace Project.Scripts.EffectSystem.Visuals
     /// <summary>
     /// Holds the data required to display.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class FloatingTextData
     {

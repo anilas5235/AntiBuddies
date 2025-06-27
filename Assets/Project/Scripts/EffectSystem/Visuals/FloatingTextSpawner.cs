@@ -7,6 +7,7 @@ namespace Project.Scripts.EffectSystem.Visuals
     /// <summary>
     /// Spawns floating text visuals at specified positions, using pooling for efficiency.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class FloatingTextSpawner : Singleton<FloatingTextSpawner>
     {
         /// <summary>

@@ -5,6 +5,7 @@ namespace Project.Scripts.UtilComponents
     /// <summary>
     /// Selects a random sprite from a list and assigns it to the SpriteRenderer on Awake.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(SpriteRenderer))]
     public class SelectRandomSprite : MonoBehaviour
     {

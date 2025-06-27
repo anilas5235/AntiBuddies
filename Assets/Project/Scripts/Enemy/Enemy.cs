@@ -9,6 +9,7 @@ namespace Project.Scripts.Enemy
     /// <summary>
     /// Represents an enemy entity with stat and behavior graph integration.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class Enemy : PoolableMono, INeedStatGroup
     {
         /// <summary>

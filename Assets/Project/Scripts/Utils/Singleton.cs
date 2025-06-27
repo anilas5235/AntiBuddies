@@ -6,6 +6,7 @@ namespace Project.Scripts.Utils
     ///   <para>Base class for MonoBehaviour singletons. Only one instance will exist at runtime.
     ///  There is no instance creation logic, so you must ensure the singleton is created in the scene.</para>
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [DefaultExecutionOrder(-100)]
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {

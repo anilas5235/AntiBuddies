@@ -7,6 +7,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
     /// <summary>
     /// Represents a package containing all data required to apply a healing effect.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class HealPackage : EffectPackage
     {

@@ -3,13 +3,13 @@ using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.ExtraEffects;
 using Project.Scripts.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Project.Scripts.Enemy
 {
     /// <summary>
     /// Applies a stat buff to other objects upon contact, using allied group filtering.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class StatBuffApplier : MonoBehaviour, IHandleContact
     {
         /// <summary>

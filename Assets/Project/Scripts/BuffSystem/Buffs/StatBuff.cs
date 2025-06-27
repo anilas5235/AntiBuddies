@@ -8,6 +8,7 @@ namespace Project.Scripts.BuffSystem.Buffs
     /// <summary>
     /// Buff that applies a stat package to the target and removes it on expiration.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class StatBuff : Buff
     {
         /// <summary>

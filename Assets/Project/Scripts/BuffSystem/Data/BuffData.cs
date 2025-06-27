@@ -9,6 +9,7 @@ namespace Project.Scripts.BuffSystem.Data
     /// Abstract ScriptableObject base for all buff data assets.
     /// Provides configuration for duration, stacking, and ticking behaviour.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public abstract class BuffData : ScriptableObject
     {
         /// <summary>

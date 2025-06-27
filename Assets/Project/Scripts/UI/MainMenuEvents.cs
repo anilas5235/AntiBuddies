@@ -8,6 +8,7 @@ namespace Project.Scripts.UI
     /// <summary>
     /// Handles main menu button events such as play, options, and quit.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(UIDocument))]
     public class MainMenuEvents : AbstractUIEvents
     {

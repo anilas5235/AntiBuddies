@@ -5,6 +5,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Type
     /// <summary>
     /// Abstract base class for all effect types, providing a name and description.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public abstract class EffectType : ScriptableObject
     {
         /// <summary>

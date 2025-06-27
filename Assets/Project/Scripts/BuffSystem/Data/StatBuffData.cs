@@ -9,6 +9,7 @@ namespace Project.Scripts.BuffSystem.Data
     /// <summary>
     /// ScriptableObject for configuring a stat-modifying buff.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "StatBuffData", menuName = "BuffSystem/Data/StatBuff")]
     public class StatBuffData : BuffData
     {

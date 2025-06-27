@@ -9,6 +9,7 @@ namespace Project.Scripts.StatSystem
     /// Represents a component that manages all stats of an entity.
     /// Should only exist once per entity.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [DefaultExecutionOrder(-50)]
     public class StatComponent : MonoBehaviour, IStatGroup
     {

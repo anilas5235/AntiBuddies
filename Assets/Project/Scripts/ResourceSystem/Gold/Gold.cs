@@ -6,6 +6,7 @@ namespace Project.Scripts.ResourceSystem.Gold
     /// <summary>
     /// Represents a gold pickup object that can be attracted and collected by the player.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class Gold : PoolableMono, IPickUpable, IAttractable
     {
         /// <summary>

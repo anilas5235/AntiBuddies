@@ -4,7 +4,6 @@ using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Definition;
 using Project.Scripts.EffectSystem.Effects.ExtraEffects;
 using Project.Scripts.StatSystem;
-using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem.Projectile
@@ -12,6 +11,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
     /// <summary>
     /// Holds dynamic, runtime-specific settings for a projectile, such as direction, damage, buffs, effects, and source.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class DynamicProjectileSettings
     {

@@ -3,6 +3,8 @@
     /// <summary>
     /// Interface for components that can be healed.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IHealable
     {
         /// <summary>

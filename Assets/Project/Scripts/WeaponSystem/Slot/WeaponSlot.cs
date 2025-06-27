@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem.Slot
     /// <summary>
     /// Represents a slot that can hold and manage a weapon instance.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class WeaponSlot : MonoBehaviour
     {
         /// <summary>

@@ -8,6 +8,7 @@ namespace Project.Scripts.BuffSystem.Buffs
     /// <summary>
     /// Buff that applies a damage package to the target.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class DamageBuff : Buff
     {
         /// <summary>

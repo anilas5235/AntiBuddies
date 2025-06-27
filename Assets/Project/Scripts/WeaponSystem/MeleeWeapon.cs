@@ -9,6 +9,7 @@ namespace Project.Scripts.WeaponSystem
     /// <summary>
     /// Represents a melee weapon with attack behaviour and contact handling.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class MeleeWeapon : Weapon, IHandleContact
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Interface for components that can take damage and have a life/death state.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IDamageable
     {
         /// <summary>

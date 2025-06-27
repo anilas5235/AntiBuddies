@@ -7,6 +7,7 @@ namespace Project.Scripts.StatSystem
     /// <summary>
     /// Utility class for stat calculations and aggregations.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public static class StatUtils
     {
         /// <summary>

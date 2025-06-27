@@ -9,6 +9,7 @@ namespace Project.Scripts.BuffSystem.Components
     /// <summary>
     /// Manages all buffs for an entity, handling addition, removal, and lookup.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class BuffManager : MonoBehaviour
     {
         /// <summary>

@@ -14,6 +14,7 @@ namespace Project.Scripts.WeaponSystem
     /// <summary>
     /// Abstract base class for all weapon types, providing common logic for targeting, attacking, and stat handling.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
         /// <summary>

@@ -9,6 +9,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Type
     /// <summary>
     /// ScriptableObject representing a type of damage, including associated scaling and resistance stats.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "AttackType", menuName = "EffectSystem/Types/AttackType")]
     public class DamageType : EffectType
     {

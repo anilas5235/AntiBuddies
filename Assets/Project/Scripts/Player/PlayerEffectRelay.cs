@@ -8,6 +8,7 @@ namespace Project.Scripts.Player
     /// <summary>
     /// Relays effects on the player, handling damage application and temporary invulnerability ("eye frames").
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class PlayerEffectRelay : EffectRelay
     {
         /// <summary>

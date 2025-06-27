@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem
     /// <summary>
     /// Flips the weapon's sprite and orientation based on the parent's rotation.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class WeaponFlipper : MonoBehaviour
     {
         /// <summary>

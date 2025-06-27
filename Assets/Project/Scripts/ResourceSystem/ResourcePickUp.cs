@@ -7,6 +7,7 @@ namespace Project.Scripts.ResourceSystem
     /// <summary>
     /// Handles pickup and attraction logic for resource objects within a certain range.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class ResourcePickUp : MonoBehaviour, INeedStatGroup
     {
         /// <summary>

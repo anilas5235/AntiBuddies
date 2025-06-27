@@ -9,6 +9,7 @@ namespace Project.Scripts.BuffSystem.Data
     /// <summary>
     /// ScriptableObject for configuring a healing buff.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "HealingBuffData", menuName = "BuffSystem/Data/HealingBuff")]
     public class HealingBuffData : BuffData
     {

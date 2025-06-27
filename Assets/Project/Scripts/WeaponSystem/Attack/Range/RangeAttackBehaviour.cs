@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem.Attack.Range
     /// <summary>
     /// Abstract base class for ranged attack behaviours.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public abstract class RangeAttackBehaviour : ScriptableObject
     {
         /// <summary>

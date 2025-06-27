@@ -3,6 +3,7 @@
     /// <summary>
     /// Interface for all weapon types.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IWeapon
     {
         /// <summary>

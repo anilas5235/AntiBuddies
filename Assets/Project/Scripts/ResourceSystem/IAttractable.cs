@@ -5,6 +5,7 @@ namespace Project.Scripts.ResourceSystem
     /// <summary>
     /// Interface for objects that can be attracted to a target.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IAttractable
     {
         /// <summary>

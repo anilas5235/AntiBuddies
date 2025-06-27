@@ -6,6 +6,7 @@ namespace Project.Scripts.BuffSystem.Buffs
     /// <summary>
     /// Interface for all buffs.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IBuff
     {
         /// <summary>

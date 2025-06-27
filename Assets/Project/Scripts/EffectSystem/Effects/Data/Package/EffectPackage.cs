@@ -6,6 +6,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Package
     /// <summary>
     /// Abstract base class for all effect packages, containing a common amount field.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public abstract class EffectPackage
     {

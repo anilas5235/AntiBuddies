@@ -7,6 +7,7 @@ namespace Project.Scripts.StatSystem.Stats
     /// <summary>
     /// Represents a single stat in the stat system.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class Stat : IStat
     {

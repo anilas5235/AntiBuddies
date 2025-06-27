@@ -8,6 +8,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Definition
     /// <summary>
     /// Defines the data required to create a stat modification effect.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class StatDefinition : EffectDefinition
     {

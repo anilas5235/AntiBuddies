@@ -7,6 +7,7 @@ namespace Project.Scripts.ResourceSystem
     /// <summary>
     /// Manages player experience points (EXP), level progression, and related events.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class ExpManager : Singleton<ExpManager>
     {
         /// <summary>

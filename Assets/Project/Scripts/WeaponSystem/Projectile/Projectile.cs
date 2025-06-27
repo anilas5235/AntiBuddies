@@ -6,6 +6,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
     /// <summary>
     /// Represents a projectile that can be fired and interact with other objects.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(Rigidbody2D))]
     public class Projectile : PoolableMono, IProjectile
     {

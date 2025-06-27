@@ -11,6 +11,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Definition
     /// <summary>
     /// Defines the data required to create a damage effect, including type and stat dependencies.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class DamageDefinition : EffectDefinition
     {

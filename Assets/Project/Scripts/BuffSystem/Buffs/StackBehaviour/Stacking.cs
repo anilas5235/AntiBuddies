@@ -5,6 +5,7 @@ namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
     /// <summary>
     /// Implements a stack behaviour where buffs can always be stacked.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class Stacking : IStackBehaviour
     {
         /// <inheritdoc/>

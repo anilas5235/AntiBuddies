@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem.Attack.Melee
     /// <summary>
     /// Abstract base class for melee attack behaviours.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public abstract class MeleeAttackBehaviour : ScriptableObject
     {
         /// <summary>

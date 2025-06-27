@@ -3,6 +3,7 @@
     /// <summary>
     /// Defines the contract for tick behaviour logic for buffs.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface ITickBehaviour
     {
         /// <summary>

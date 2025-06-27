@@ -6,6 +6,7 @@ namespace Project.Scripts.EffectSystem.Effects.ExtraEffects
     /// <summary>
     /// Interface for extra effect components that can be added to an effect handler.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IExtraEffect
     {
         /// <summary>

@@ -7,6 +7,7 @@ namespace Project.Scripts.UI
     /// Abstract base class for UI event handling components.
     /// Provides a template for subscribing and unsubscribing UI events and updating UI references.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(UIDocument))]
     public abstract class AbstractUIEvents : MonoBehaviour
     {

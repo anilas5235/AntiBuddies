@@ -7,6 +7,7 @@ namespace Project.Scripts.UI
     /// <summary>
     /// Handles pause menu button events such as resume and return to main menu.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(UIDocument))]
     public class PauseMenuEvents : AbstractUIEvents
     {

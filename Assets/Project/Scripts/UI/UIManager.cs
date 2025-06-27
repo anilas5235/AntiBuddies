@@ -8,6 +8,7 @@ namespace Project.Scripts.UI
     /// <summary>
     /// Manages UI elements such as pause and end run menus, and controls UI state and input.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class UIManager : Singleton<UIManager>
     {
         /// <summary>

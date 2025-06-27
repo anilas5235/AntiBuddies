@@ -6,6 +6,7 @@ namespace Project.Scripts.UI.HUD
     /// <summary>
     /// Updates the HUD experience bar and level display in response to experience gain and level up events.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(ExpManager))]
     public class HUDExp : MonoBehaviour
     {

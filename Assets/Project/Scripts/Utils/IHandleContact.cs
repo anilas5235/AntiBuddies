@@ -5,6 +5,7 @@ namespace Project.Scripts.Utils
     /// <summary>
     /// Interface for components that handle contact with other GameObjects.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IHandleContact
     {
         /// <summary>

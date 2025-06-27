@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem.Targeting
     /// <summary>
     /// Abstract base class for targeting behaviours.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public abstract class TargetingBehaviour : ScriptableObject
     {
         /// <summary>

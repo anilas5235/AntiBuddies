@@ -7,7 +7,9 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Definition
 {
     /// <summary>
     /// Defines the data required to create a healing effect.
+    /// <remarks>Author: Niklas Borchers</remarks>
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class HealDefinition : EffectDefinition
     {

@@ -12,6 +12,7 @@ namespace Project.Scripts.Enemy
     /// <summary>
     /// Applies damage and optional buffs to other objects upon contact, using stat group context.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class BodyDamage : MonoBehaviour, IHandleContact, INeedStatGroup
     {
         /// <summary>

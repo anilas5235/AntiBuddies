@@ -9,6 +9,7 @@ namespace Project.Scripts.BuffSystem.Buffs
     /// <summary>
     /// Abstract base class for all buffs. Handles duration, stacking, ticking, and effect application.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public abstract class Buff : IBuff
     {

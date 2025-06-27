@@ -9,6 +9,7 @@ namespace Project.Scripts.BuffSystem.Components
     /// <summary>
     /// Represents a group of buffs that are ticked together and have a maximum capacity.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class BuffGroup
     {

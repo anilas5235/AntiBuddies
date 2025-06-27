@@ -6,6 +6,7 @@ namespace Project.Scripts.StatSystem.Stats
     /// <summary>
     /// Represents a reference to a stat, allowing retrieval of its value based on a dependency.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class StatRef : INeedStatGroup
     {

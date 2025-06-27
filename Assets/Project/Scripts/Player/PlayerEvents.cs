@@ -6,6 +6,7 @@ namespace Project.Scripts.Player
     /// <summary>
     /// Handles player-related events such as death.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class PlayerEvents : MonoBehaviour
     {
         /// <summary>

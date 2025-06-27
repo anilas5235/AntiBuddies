@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem.Targeting
     /// <summary>
     /// Targeting behaviour that finds the closest enemy within a specified range.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "TargetClosest", menuName = "WeaponSystem/Targeting/TargetClosest")]
     public class TargetClosest : TargetingBehaviour
     {

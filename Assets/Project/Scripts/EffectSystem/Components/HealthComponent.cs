@@ -9,6 +9,7 @@ namespace Project.Scripts.EffectSystem.Components
     /// <summary>
     /// Manages health, healing, and death logic for an entity.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class HealthComponent : MonoBehaviour, IDamageable, IHealable, INeedStatGroup
     {
         /// <summary>

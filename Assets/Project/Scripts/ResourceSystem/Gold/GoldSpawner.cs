@@ -8,6 +8,7 @@ namespace Project.Scripts.ResourceSystem.Gold
     /// <summary>
     /// Spawns gold objects at a given position, using pooling and random placement within a radius.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class GoldSpawner : Singleton<GoldSpawner>
     {
         /// <summary>

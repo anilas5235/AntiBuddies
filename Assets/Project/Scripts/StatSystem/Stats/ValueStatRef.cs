@@ -8,6 +8,7 @@ namespace Project.Scripts.StatSystem.Stats
     /// Represents a value that is calculated based on multiple stat references.
     /// It aggregates the values of its stat references to produce a final value.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class ValueStatRef : INeedStatGroup
     {

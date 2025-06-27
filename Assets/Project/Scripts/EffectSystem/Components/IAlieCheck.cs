@@ -3,6 +3,7 @@
     /// <summary>
     /// Interface for checking if a group is considered an ally.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IAlieCheck
     {
         /// <summary>

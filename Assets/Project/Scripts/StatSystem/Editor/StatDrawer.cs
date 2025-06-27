@@ -9,6 +9,7 @@ namespace Project.Scripts.StatSystem.Editor
     /// Custom property drawer for the <see cref="Stat"/> class.
     /// Displays a foldout with editable and read-only fields for stat properties.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CustomPropertyDrawer(typeof(Stat))]
     public class StatDrawer : PropertyDrawer
     {

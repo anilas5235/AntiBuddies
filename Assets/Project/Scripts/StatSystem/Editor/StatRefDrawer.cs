@@ -8,6 +8,7 @@ namespace Project.Scripts.StatSystem.Editor
     /// Custom property drawer for <see cref="StatRef"/>.
     /// Displays stat type and efficiency fields in the inspector.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CustomPropertyDrawer(typeof(StatRef))]
     public class StatRefDrawer : PropertyDrawer
     {

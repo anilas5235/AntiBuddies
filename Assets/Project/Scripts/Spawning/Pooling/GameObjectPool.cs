@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Project.Scripts.Spawning.Pooling
 {
+    /// <summary>
+    /// Manages a pool of GameObjects for efficient reuse, minimizing instantiation and destruction.
+    /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class GameObjectPool : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
@@ -20,6 +24,9 @@ namespace Project.Scripts.Spawning.Pooling
             }
         }
 
+        /// <summary>
+        /// Initializes the pool by filling it with the initial number of objects.
+        /// </summary>
         private void Init()
         {
             if (_initialized)
@@ -37,6 +44,10 @@ namespace Project.Scripts.Spawning.Pooling
             _initialized = true;
         }
 
+        /// <summary>
+        /// Retrieves an object from the pool, activating it for use.
+        /// </summary>
+        /// <returns>An active IPoolable instance.</returns>
         public IPoolable GetObject()
         {
             if (!_initialized)
@@ -51,6 +62,10 @@ namespace Project.Scripts.Spawning.Pooling
             return obj;
         }
 
+        /// <summary>
+        /// Instantiates a new object and adds it to the pool.
+        /// </summary>
+        /// <returns>The newly created IPoolable instance.</returns>
         private IPoolable CreateNewInstance()
         {
             GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
@@ -60,6 +75,10 @@ namespace Project.Scripts.Spawning.Pooling
             return poolable;
         }
 
+        /// <summary>
+        /// Returns an object to the pool, deactivating and resetting it.
+        /// </summary>
+        /// <param name="obj">The IPoolable object to return.</param>
         public void AddToPool(IPoolable obj)
         {
             obj.Reset();
@@ -68,8 +87,15 @@ namespace Project.Scripts.Spawning.Pooling
             currentInPool = _pool.Count;
         }
 
+        /// <summary>
+        /// Indicates whether the pool is empty.
+        /// </summary>
         private bool IsEmpty => _pool.Count == 0;
 
+        /// <summary>
+        /// Fills the pool up to the specified count.
+        /// </summary>
+        /// <param name="count">The desired number of objects in the pool.</param>
         private void FillPoolTo(int count)
         {
             while (_pool.Count < count)
@@ -78,6 +104,10 @@ namespace Project.Scripts.Spawning.Pooling
             }
         }
 
+        /// <summary>
+        /// Sets a new prefab for the pool and reinitializes it.
+        /// </summary>
+        /// <param name="newPrefab">The new prefab to use.</param>
         internal void SetPrefab(GameObject newPrefab)
         {
             prefab = newPrefab;

@@ -5,6 +5,7 @@ namespace Project.Scripts.BuffSystem.Buffs.StackBehaviour
     /// <summary>
     /// Defines the contract for stack behaviour logic for buffs.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IStackBehaviour
     {
         /// <summary>

@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem.Attack.Melee
     /// <summary>
     /// Implements a swinging melee attack behaviour.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "SwingAttack", menuName = "WeaponSystem/Attacks/SwingAttack")]
     public class SwingMeleeAttack : MeleeAttackBehaviour
     {

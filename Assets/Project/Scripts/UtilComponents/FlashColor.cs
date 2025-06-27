@@ -6,6 +6,7 @@ namespace Project.Scripts.UtilComponents
     /// <summary>
     /// Temporarily flashes a SpriteRenderer with a specified color for a short duration.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class FlashColor : MonoBehaviour
     {
         /// <summary>

@@ -6,6 +6,7 @@ namespace Project.Scripts.Enemy
     /// <summary>
     /// Handles temporary sprite effects with alpha fading over time, using pooling.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class TempSpriteEffect : LiveTimePoolableMono
     {
         /// <summary>

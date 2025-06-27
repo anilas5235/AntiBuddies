@@ -5,6 +5,7 @@ namespace Project.Scripts.UtilComponents
     /// <summary>
     /// Switches the material of a SpriteRenderer based on whether the attached Rigidbody2D is idle or moving.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class IdleMoveMatSwitcher : MonoBehaviour
     {
         /// <summary>

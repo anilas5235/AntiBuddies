@@ -7,6 +7,7 @@ namespace Project.Scripts.WeaponSystem.Slot
     /// <summary>
     /// Manages a collection of weapon slots, their positions, and weapon assignment.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class WeaponSlotManager : MonoBehaviour
     {
         /// <summary>

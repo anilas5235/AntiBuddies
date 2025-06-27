@@ -6,6 +6,7 @@ namespace Project.Scripts.WeaponSystem
     /// <summary>
     /// ScriptableObject containing configuration data for a weapon.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "WeaponData", menuName = "WeaponSystem/WeaponData", order = 1)]
     public class WeaponData : ScriptableObject
     {

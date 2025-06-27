@@ -6,6 +6,7 @@ namespace Project.Scripts.BuffSystem.Components
     /// <summary>
     /// Interface for a target that can receive buffs and supports ally checking.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IBuffTarget : ITarget<IBuff>, IAlieCheck
     {
     }

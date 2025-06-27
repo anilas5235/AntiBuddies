@@ -6,6 +6,7 @@ namespace Project.Scripts.EffectSystem.Visuals
     /// <summary>
     /// Displays a floating text visual at a specified position, used for damage, healing, etc.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class FloatingText : LiveTimePoolableMono
     {
         /// <summary>

@@ -6,6 +6,7 @@ namespace Project.Scripts.UI.HUD
     /// <summary>
     /// Updates the HUD health bar and health text in response to health changes.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(HealthComponent))]
     public class HUDHealth : MonoBehaviour
     {

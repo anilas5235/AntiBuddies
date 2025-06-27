@@ -5,6 +5,7 @@ namespace Project.Scripts.ResourceSystem.Gold
     /// <summary>
     /// Drops a specified amount of gold at the object's position.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class GoldDropper : MonoBehaviour
     {
         /// <summary>

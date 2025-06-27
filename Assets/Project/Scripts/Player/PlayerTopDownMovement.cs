@@ -8,6 +8,7 @@ namespace Project.Scripts.Player
     /// <summary>
     /// Handles top-down movement for the player using Rigidbody2D and input system.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerTopDownMovement : MonoBehaviour, INeedStatGroup
     {

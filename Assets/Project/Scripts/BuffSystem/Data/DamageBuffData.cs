@@ -11,6 +11,7 @@ namespace Project.Scripts.BuffSystem.Data
     /// <summary>
     /// ScriptableObject for configuring a damaging buff.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "DamagingBuff", menuName = "BuffSystem/Data/DamagingBuff")]
     public class DamageBuffData : BuffData
     {

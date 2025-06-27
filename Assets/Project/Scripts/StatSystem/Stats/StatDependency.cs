@@ -7,6 +7,7 @@ namespace Project.Scripts.StatSystem.Stats
     /// Represents a dependency on a stat, allowing retrieval of its value based on a specified efficiency.
     /// The efficiency is a percentage that determines how much of the stat's value is used.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable]
     public class StatDependency
     {

@@ -6,6 +6,7 @@ namespace Project.Scripts.StatSystem
     /// <summary>
     /// Interface for a group of stats, allowing retrieval and modification.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IStatGroup
     {
         /// <summary>

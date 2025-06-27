@@ -7,6 +7,7 @@ namespace Project.Scripts.Utils
     /// <summary>
     /// Triggers UnityEvents when other GameObjects enter its 2D collider, with optional per-object filtering.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [RequireComponent(typeof(Collider2D)), DisallowMultipleComponent]
     public class ContactTrigger2D : MonoBehaviour
     {

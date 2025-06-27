@@ -5,6 +5,7 @@ namespace Project.Scripts.EffectSystem.Effects.Data.Type
     /// <summary>
     /// ScriptableObject representing a type of healing effect.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "HealType", menuName = "EffectSystem/Types/HealType")]
     public class HealType : EffectType
     {

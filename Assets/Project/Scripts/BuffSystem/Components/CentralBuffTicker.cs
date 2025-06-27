@@ -11,6 +11,7 @@ namespace Project.Scripts.BuffSystem.Components
     /// <summary>
     /// Singleton that manages ticking of all buff groups in the game.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public class CentralBuffTicker : Singleton<CentralBuffTicker>
     {
         /// <summary>

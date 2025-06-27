@@ -6,6 +6,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
     /// <summary>
     /// Interface for all projectile types.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     public interface IProjectile : IPoolable, IHandleContact
     {
         /// <summary>

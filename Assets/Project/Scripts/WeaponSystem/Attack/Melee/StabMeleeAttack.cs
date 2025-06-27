@@ -5,6 +5,7 @@ namespace Project.Scripts.WeaponSystem.Attack.Melee
     /// <summary>
     /// Implements a stabbing melee attack behaviour.
     /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [CreateAssetMenu(fileName = "StabAttack", menuName = "WeaponSystem/Attacks/StabAttack")]
     public class StabMeleeAttack : MeleeAttackBehaviour
     {
