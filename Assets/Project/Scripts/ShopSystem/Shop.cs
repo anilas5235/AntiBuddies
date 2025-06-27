@@ -15,9 +15,10 @@ namespace Project.Scripts.ShopSystem
         [SerializeField] float rareItemChance = 0.2f;
         [SerializeField] float epicItemChance = 0.05f;
         [SerializeField] float legendaryItemChance = 0.01f;
-        [SerializeField] int itemCount = 3;
+        [SerializeField] int itemCount = 4;
         [SerializeField] int costMultiplier = 1;
         [SerializeField] int rerollCost = 3;
+        public int RerollCost => rerollCost;
         [SerializeField] int maxCommonItems = 10;
         [SerializeField] StatRef luckStat;
         
@@ -26,9 +27,9 @@ namespace Project.Scripts.ShopSystem
 
         public void Reroll()
         {
-            // if (playerMoney >= rerollCost)
+            if (GlobalVariables.Instance.ResourceManager.HasEnoughGold(rerollCost))
             {
-                // playerMoney -= rerollCost;
+                GlobalVariables.Instance.ResourceManager.RemoveGold(rerollCost);
                 GenerateShopItems();
             }
         }
@@ -38,49 +39,67 @@ namespace Project.Scripts.ShopSystem
 
             for (int i = 0; i < itemCount; i++)
             {
-                if (commonItemCount >= maxCommonItems)
-                {
-                    commonItemCount = 0;
-                    shopItems.Add(rareItems[Random.Range(0, rareItems.Length)]);
-                    continue;
-                }
-                float randomValue = Random.Range(0f, 1f);
+                 if (commonItemCount >= maxCommonItems)
+                 {
+                     commonItemCount = 0;
+                     Item slotItem;
+                     if (rareItems != null && rareItems.Length > 0)
+                         slotItem = rareItems[Random.Range(0, rareItems.Length)];
+                     else if (commonItems != null && commonItems.Length > 0)
+                         slotItem = commonItems[Random.Range(0, commonItems.Length)];
+                     else
+                         slotItem = null;
+                     shopItems.Add(slotItem);
+                     ShopUI.Instance.SetItem(i, slotItem);
+                     commonItemCount = 0;
+                     continue;
+                 }
+                 float randomValue = Random.Range(0f, 1f);
 
-                float rareChance = rareItemChance * (luckStat.GetValue() + 200) / 200;
-                float epicChance = epicItemChance * (luckStat.GetValue() + 200) / 200;
-                float legendaryChance = legendaryItemChance * (luckStat.GetValue() + 200) / 200;
+                 float rareChance = rareItemChance * (luckStat.GetValue() + 200) / 200;
+                 float epicChance = epicItemChance * (luckStat.GetValue() + 200) / 200;
+                 float legendaryChance = legendaryItemChance * (luckStat.GetValue() + 200) / 200;
                 
-                if (randomValue < legendaryChance)
+                Item itemToAdd = null;
+                if (legendaryItems != null && legendaryItems.Length > 0 && randomValue < legendaryChance)
                 {
-                    shopItems.Add(legendaryItems[Random.Range(0, legendaryItems.Length)]);
+                    itemToAdd = legendaryItems[Random.Range(0, legendaryItems.Length)];
                     commonItemCount = 0;
                 }
-                else if (randomValue < epicChance + legendaryChance)
+                else if (epicItems != null && epicItems.Length > 0 && randomValue < epicChance + legendaryChance)
                 {
-                    shopItems.Add(epicItems[Random.Range(0, epicItems.Length)]);
+                    itemToAdd = epicItems[Random.Range(0, epicItems.Length)];
                     commonItemCount = 0;
                 }
-                else if (randomValue < rareChance + epicChance + legendaryChance)
+                else if (rareItems != null && rareItems.Length > 0 && randomValue < rareChance + epicChance + legendaryChance)
                 {
-                    shopItems.Add(rareItems[Random.Range(0, rareItems.Length)]);
+                    itemToAdd = rareItems[Random.Range(0, rareItems.Length)];
                     commonItemCount = 0;
                 }
-                else
+                else if (commonItems != null && commonItems.Length > 0)
                 {
-                    shopItems.Add(commonItems[Random.Range(0, commonItems.Length)]);
-                    commonItemCount--;
+                    itemToAdd = commonItems[Random.Range(0, commonItems.Length)];
+                    commonItemCount++;
                 }
-
+                // ensure no null: fallback to common pool
+                if (itemToAdd == null && commonItems != null && commonItems.Length > 0)
+                {
+                    itemToAdd = commonItems[Random.Range(0, commonItems.Length)];
+                }
+                shopItems.Add(itemToAdd);
+                ShopUI.Instance.SetItem(i, itemToAdd);
             }
         }
-        public void BuyItem(Item item)
+        public bool BuyItem(Item item)
         {
-            // if (playerMoney >= item.cost * costMultiplier && GlobalVariables.Instance.PlayerInventory.HasSpace())
+            if (GlobalVariables.Instance.ResourceManager.HasEnoughGold(item.Cost * costMultiplier) && GlobalVariables.Instance.PlayerInventory.HasSpace())
             {
-                // playerMoney -= item.cost * costMultiplier;
+                GlobalVariables.Instance.ResourceManager.RemoveGold(item.Cost * costMultiplier);
                 shopItems.Remove(item);
                 GlobalVariables.Instance.PlayerInventory.Add(item);
+                return true;
             }
+            return false;
         }
     }
 }

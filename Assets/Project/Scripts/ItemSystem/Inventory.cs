@@ -5,8 +5,12 @@ namespace Project.Scripts.ItemSystem
 {
     public class Inventory : MonoBehaviour
     {
-        List<Item> items = new ();
+        [SerializeField] List<Item> items = new ();
         [SerializeField] int maxSize = 10;
+
+        // Expose current items and maximum size for UI display
+        public IReadOnlyList<Item> Items => items;
+        public int MaxSize => maxSize;
 
     	public void Add(Item item)
         {
@@ -16,7 +20,7 @@ namespace Project.Scripts.ItemSystem
                 return;
             }
             items.Add(item);
-            item.OnAdded();
+            item.Buy();
         }
 
         public void Remove(Item item)

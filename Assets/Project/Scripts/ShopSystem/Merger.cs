@@ -8,17 +8,29 @@ namespace Project.Scripts.ShopSystem
     {
         [SerializeField] private Recipe[] recipes;
 
+        public Recipe[] Recipes => recipes;
+
         public void Merge(Item item1, Item item2)
         {
-            foreach (var recipe in recipes)
+            Debug.Log($"Attempting to merge {item1.name} and {item2.name}");
+            bool merged = false;
+            for (int i = 0; i < recipes.Length; i++)
             {
-                if (recipe.IsValid(item1, item2))
+                var recipe = recipes[i];
+                bool valid = recipe.IsValid(item1, item2);
+                Debug.Log($"Checking recipe '{recipe.name}' valid: {valid}");
+                if (valid)
                 {
                     GlobalVariables.Instance.PlayerInventory.Remove(item1);
                     GlobalVariables.Instance.PlayerInventory.Remove(item2);
                     GlobalVariables.Instance.PlayerInventory.Add(recipe.ResultItem);
+                    Debug.Log($"Merge successful: created {recipe.ResultItem.name}");
+                    merged = true;
+                    break;
                 }
             }
+            if (!merged)
+                Debug.Log($"No valid recipe found for {item1.name} and {item2.name}");
         }
     }
 }
