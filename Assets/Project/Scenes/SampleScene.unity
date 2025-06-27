@@ -1679,20 +1679,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96b509d9cde02d442a9ca2e8a81c492c, type: 2}
   - {fileID: 11400000, guid: e3574e6c1c08f8f459d3f3206a6000f2, type: 2}
   - {fileID: 11400000, guid: 16e15681c3ed207458468bb486f27c52, type: 2}
-  - {fileID: 11400000, guid: 4d71498d6ca353f488c42aad5a08a91f, type: 2}
-  - {fileID: 11400000, guid: b715a85947ad626468681930aead73d4, type: 2}
   epicItems:
   - {fileID: 11400000, guid: 039fe2d505a2cc741b3ae937cc6bcead, type: 2}
   - {fileID: 11400000, guid: c65f0a2daf43ba04e9e06b0b798b5641, type: 2}
-  - {fileID: 11400000, guid: 9c8a4d901937493459a292086a802cba, type: 2}
-  - {fileID: 11400000, guid: b8d73bc5fb2172344b376f45cec9d1e8, type: 2}
-  - {fileID: 11400000, guid: b7c44d766fcc2074ea19de2450afe0f1, type: 2}
   legendaryItems:
   - {fileID: 11400000, guid: 6def0c350b3d3104d993041f1474e11c, type: 2}
   - {fileID: 11400000, guid: eca7fc64ccf00ce4082fe2ec9e74c991, type: 2}
-  - {fileID: 11400000, guid: e2289e28bd8a18b448daa8e5c4597564, type: 2}
-  - {fileID: 11400000, guid: 980030d9e65487e4b86a3d604b9c73ce, type: 2}
-  - {fileID: 11400000, guid: b707930937c6dab4db664cb641bedb89, type: 2}
   rareItemChance: 0.2
   epicItemChance: 0.05
   legendaryItemChance: 0.01

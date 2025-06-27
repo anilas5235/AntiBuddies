@@ -8,6 +8,10 @@ namespace Project.Scripts.ShopSystem
 {
     public class Shop : Singleton<Shop>
     {
+        private const float RerollStep = 1.2f;
+        private const float CostStep = 0.10f;
+        private const int RerollBase = 3;
+        
         [SerializeField] Item[] commonItems;
         [SerializeField] Item[] rareItems;
         [SerializeField] Item[] epicItems;
@@ -16,14 +20,15 @@ namespace Project.Scripts.ShopSystem
         [SerializeField] float epicItemChance = 0.05f;
         [SerializeField] float legendaryItemChance = 0.01f;
         [SerializeField] int itemCount = 4;
-        [SerializeField] int costMultiplier = 1;
-        [SerializeField] int rerollCost = 3;
+        [SerializeField] float costMultiplier = 1;
+        [SerializeField] int rerollCost = RerollBase;
         public int RerollCost => rerollCost;
+        public float CostMultiplier => costMultiplier;
         [SerializeField] int maxCommonItems = 10;
         [SerializeField] StatRef luckStat;
-        
-        int commonItemCount;
-        List<Item> shopItems = new ();
+
+        private int _commonItemCount;
+        private readonly List<Item> _shopItems = new ();
 
         public void Reroll()
         {
@@ -31,17 +36,18 @@ namespace Project.Scripts.ShopSystem
             {
                 GlobalVariables.Instance.ResourceManager.RemoveGold(rerollCost);
                 GenerateShopItems();
+                rerollCost = Mathf.CeilToInt(rerollCost * RerollStep);
             }
         }
         public void GenerateShopItems()
         {
-            shopItems.Clear();
+            _shopItems.Clear();
 
             for (int i = 0; i < itemCount; i++)
             {
-                 if (commonItemCount >= maxCommonItems)
+                 if (_commonItemCount >= maxCommonItems)
                  {
-                     commonItemCount = 0;
+                     _commonItemCount = 0;
                      Item slotItem;
                      if (rareItems != null && rareItems.Length > 0)
                          slotItem = rareItems[Random.Range(0, rareItems.Length)];
@@ -49,9 +55,9 @@ namespace Project.Scripts.ShopSystem
                          slotItem = commonItems[Random.Range(0, commonItems.Length)];
                      else
                          slotItem = null;
-                     shopItems.Add(slotItem);
+                     _shopItems.Add(slotItem);
                      ShopUI.Instance.SetItem(i, slotItem);
-                     commonItemCount = 0;
+                     _commonItemCount = 0;
                      continue;
                  }
                  float randomValue = Random.Range(0f, 1f);
@@ -64,42 +70,48 @@ namespace Project.Scripts.ShopSystem
                 if (legendaryItems != null && legendaryItems.Length > 0 && randomValue < legendaryChance)
                 {
                     itemToAdd = legendaryItems[Random.Range(0, legendaryItems.Length)];
-                    commonItemCount = 0;
+                    _commonItemCount = 0;
                 }
                 else if (epicItems != null && epicItems.Length > 0 && randomValue < epicChance + legendaryChance)
                 {
                     itemToAdd = epicItems[Random.Range(0, epicItems.Length)];
-                    commonItemCount = 0;
+                    _commonItemCount = 0;
                 }
                 else if (rareItems != null && rareItems.Length > 0 && randomValue < rareChance + epicChance + legendaryChance)
                 {
                     itemToAdd = rareItems[Random.Range(0, rareItems.Length)];
-                    commonItemCount = 0;
+                    _commonItemCount = 0;
                 }
                 else if (commonItems != null && commonItems.Length > 0)
                 {
                     itemToAdd = commonItems[Random.Range(0, commonItems.Length)];
-                    commonItemCount++;
+                    _commonItemCount++;
                 }
                 // ensure no null: fallback to common pool
                 if (itemToAdd == null && commonItems != null && commonItems.Length > 0)
                 {
                     itemToAdd = commonItems[Random.Range(0, commonItems.Length)];
                 }
-                shopItems.Add(itemToAdd);
+                _shopItems.Add(itemToAdd);
                 ShopUI.Instance.SetItem(i, itemToAdd);
             }
         }
         public bool BuyItem(Item item)
         {
-            if (GlobalVariables.Instance.ResourceManager.HasEnoughGold(item.Cost * costMultiplier) && GlobalVariables.Instance.PlayerInventory.HasSpace())
+            if (GlobalVariables.Instance.ResourceManager.HasEnoughGold(item.GetCost(costMultiplier)) && GlobalVariables.Instance.PlayerInventory.HasSpace())
             {
-                GlobalVariables.Instance.ResourceManager.RemoveGold(item.Cost * costMultiplier);
-                shopItems.Remove(item);
+                GlobalVariables.Instance.ResourceManager.RemoveGold(item.GetCost(costMultiplier));
+                _shopItems.Remove(item);
                 GlobalVariables.Instance.PlayerInventory.Add(item);
                 return true;
             }
             return false;
+        }
+
+        public void OnShopClose()
+        {
+            costMultiplier += CostStep;
+            rerollCost = Mathf.CeilToInt(costMultiplier * RerollStep);
         }
     }
 }

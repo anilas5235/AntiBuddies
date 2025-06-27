@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Project.Scripts.ResourceSystem;
 using Project.Scripts.ShopSystem;
+using Project.Scripts.UI;
 using Project.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Project.Scripts.ItemSystem
 {
-    [RequireComponent(typeof(UIDocument))]
+    [RequireComponent(typeof(UIDocument)), DefaultExecutionOrder(0)]
     public class ShopUI : Singleton<ShopUI>
     {
         [SerializeField] private ShopData Data;
         [SerializeField] private Item[] Items = new Item[4];
-        
+
         private UIDocument _uiDocument;
         private List<Button> _buyButtons;
         private Button _rerollButton;
@@ -26,6 +27,9 @@ namespace Project.Scripts.ItemSystem
         private Button _mergeButton;
         private int? _selectedIndex1;
         private int? _selectedIndex2;
+        private bool _isShopOpen;
+
+        public bool IsShopOpen => _isShopOpen;
 
         public event Action OnShopClosed;
 
@@ -33,16 +37,13 @@ namespace Project.Scripts.ItemSystem
         {
             base.Awake();
             _uiDocument = GetComponent<UIDocument>();
-            _resourceManager = GlobalVariables.Instance.ResourceManager;
+        }
 
+
+        private void OnEnable()
+        {
             // inventory view
             _inventoryView = _uiDocument.rootVisualElement.Q<VisualElement>("InventoryView");
-
-            // initialize and subscribe to gold label
-            _goldAmountLabel = _uiDocument.rootVisualElement.Q<Label>("GoldAmountLabel");
-            OnGoldChanged();
-            _resourceManager.OnGoldChange += OnGoldChanged;
-
             _buyButtons = _uiDocument.rootVisualElement.Query<Button>("Buy").ToList();
             for (int i = 0; i < _buyButtons.Count && i < Items.Length; i++)
             {
@@ -53,15 +54,16 @@ namespace Project.Scripts.ItemSystem
             _rerollButton = _uiDocument.rootVisualElement.Q<Button>("RerollButton");
             _resumeButton = _uiDocument.rootVisualElement.Q<Button>("ResumeButton");
             if (_rerollButton != null)
-                _rerollButton.clicked += () => {
-                    ShopSystem.Shop.Instance.Reroll();
-                    _rerollButton.text = $"Reroll ({ShopSystem.Shop.Instance.RerollCost})";
+                _rerollButton.clicked += () =>
+                {
+                    Shop.Instance.Reroll();
+                    _rerollButton.text = $"Reroll ({Shop.Instance.RerollCost})";
                 };
             if (_resumeButton != null)
-                _resumeButton.clicked += CloseShop;
+                _resumeButton.clicked += UIManager.Instance.ToggleShop;
 
             // Initialize merger and merge button
-            _merger = UnityEngine.Object.FindFirstObjectByType<Merger>();
+            _merger = FindFirstObjectByType<Merger>();
             _mergeButton = _uiDocument.rootVisualElement.Q<Button>("MergeButton");
             if (_mergeButton != null)
             {
@@ -73,6 +75,11 @@ namespace Project.Scripts.ItemSystem
             _selectedIndex2 = null;
 
             Hide();
+
+            _resourceManager = GlobalVariables.Instance.ResourceManager;
+            // initialize and subscribe to gold label
+            _resourceManager.OnGoldChange += OnGoldChanged;
+            OnGoldChanged();
         }
 
         private void Start()
@@ -97,8 +104,8 @@ namespace Project.Scripts.ItemSystem
         {
             if (index >= 0 && index < Items.Length)
             {
-                var item = Items[index];
-                if (item != null && ShopSystem.Shop.Instance.BuyItem(item))
+                Item item = Items[index];
+                if (item && Shop.Instance.BuyItem(item))
                 {
                     SetItem(index, null);
                     RefreshInventory();
@@ -106,41 +113,63 @@ namespace Project.Scripts.ItemSystem
             }
         }
 
-        public void Show()
+        private void Show()
         {
+            _isShopOpen = true;
             _uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;
             if (_rerollButton != null)
-                _rerollButton.text = $"Reroll ({ShopSystem.Shop.Instance.RerollCost})";
-            ShopSystem.Shop.Instance.GenerateShopItems();
+                _rerollButton.text = $"Reroll ({Shop.Instance.RerollCost})";
+            Shop.Instance.GenerateShopItems();
             RefreshInventory();
         }
 
-        public void Hide() => _uiDocument.rootVisualElement.style.display = DisplayStyle.None;
-
-        private void CloseShop()
+        private void Hide()
         {
-            Hide();
-            OnShopClosed?.Invoke();
+            _isShopOpen = false;
+            _uiDocument.rootVisualElement.style.display = DisplayStyle.None;
         }
 
-        private void OnGoldChanged() => _goldAmountLabel.text = _resourceManager.Gold.ToString();
+        public void ToggleShop()
+        {
+            if (_isShopOpen)
+            {
+                Hide();
+                Shop.Instance.OnShopClose();
+                OnShopClosed?.Invoke();
+            }
+            else
+            {
+                Show();
+            }
+        }
+
+        private void OnGoldChanged() => Data.gold = _resourceManager.Gold;
 
         private void RefreshInventory()
         {
             if (_inventoryView == null) return;
             _inventoryView.Clear();
-            var inv = GlobalVariables.Instance.PlayerInventory;
+            Inventory inv = GlobalVariables.Instance.PlayerInventory;
             for (int i = 0; i < inv.MaxSize; i++)
             {
-                var slot = new VisualElement();
-                slot.style.flexGrow = 1;
-                slot.style.flexShrink = 0;
+                VisualElement slot = new()
+                {
+                    style =
+                    {
+                        flexGrow = 1,
+                        flexShrink = 0
+                    }
+                };
                 slot.RegisterCallback<GeometryChangedEvent>(evt => slot.style.height = evt.newRect.width);
                 slot.AddToClassList("inventorySlot");
 
                 // Register click for selection
                 int index = i;
-                slot.RegisterCallback<MouseDownEvent>(evt => { OnInventorySlotClicked(index); evt.StopPropagation(); });
+                slot.RegisterCallback<MouseDownEvent>(evt =>
+                {
+                    OnInventorySlotClicked(index);
+                    evt.StopPropagation();
+                });
 
                 // Style based on selection and recipe availability
                 // Remove previous state classes
@@ -150,7 +179,8 @@ namespace Project.Scripts.ItemSystem
                 if (_selectedIndex1 == null && _selectedIndex2 == null)
                 {
                     // No selection: outline items present in any recipe
-                    if (i < inv.Items.Count && inv.Items[i] != null && _merger.Recipes.Any(r => r.IsValid(inv.Items[i], inv.Items[i])))
+                    if (i < inv.Items.Count && inv.Items[i] != null &&
+                        _merger.Recipes.Any(r => r.IsValid(inv.Items[i], inv.Items[i])))
                     {
                         slot.AddToClassList("outline");
                     }
@@ -160,7 +190,8 @@ namespace Project.Scripts.ItemSystem
                     // One selected
                     if (i == _selectedIndex1)
                         slot.AddToClassList("selected");
-                    else if (i < inv.Items.Count && inv.Items[i] != null && _merger.Recipes.Any(r => r.IsValid(inv.Items[_selectedIndex1.Value], inv.Items[i])))
+                    else if (i < inv.Items.Count && inv.Items[i] != null &&
+                             _merger.Recipes.Any(r => r.IsValid(inv.Items[_selectedIndex1.Value], inv.Items[i])))
                         slot.AddToClassList("outline");
                 }
                 else
@@ -172,18 +203,19 @@ namespace Project.Scripts.ItemSystem
 
                 if (i < inv.Items.Count && inv.Items[i] != null)
                 {
-                    var img = new VisualElement();
+                    VisualElement img = new();
                     img.style.backgroundImage = new StyleBackground(inv.Items[i].Icon);
                     img.AddToClassList("inventorySlotImage");
                     slot.Add(img);
                 }
+
                 _inventoryView.Add(slot);
             }
         }
 
         private void OnInventorySlotClicked(int index)
         {
-            var inv = GlobalVariables.Instance.PlayerInventory;
+            Inventory inv = GlobalVariables.Instance.PlayerInventory;
             if (index < 0 || index >= inv.Items.Count) return;
             if (_selectedIndex1 == index)
                 _selectedIndex1 = null;
@@ -203,9 +235,9 @@ namespace Project.Scripts.ItemSystem
         {
             if (_selectedIndex1.HasValue && _selectedIndex2.HasValue)
             {
-                var invItems = GlobalVariables.Instance.PlayerInventory.Items;
-                var item1 = invItems[_selectedIndex1.Value];
-                var item2 = invItems[_selectedIndex2.Value];
+                IReadOnlyList<Item> invItems = GlobalVariables.Instance.PlayerInventory.Items;
+                Item item1 = invItems[_selectedIndex1.Value];
+                Item item2 = invItems[_selectedIndex2.Value];
                 _merger.Merge(item1, item2);
                 _selectedIndex1 = null;
                 _selectedIndex2 = null;
@@ -213,6 +245,12 @@ namespace Project.Scripts.ItemSystem
                     _mergeButton.SetEnabled(false);
                 RefreshInventory();
             }
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            Data.Clear();
         }
     }
 }

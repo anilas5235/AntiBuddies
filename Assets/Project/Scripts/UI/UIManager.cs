@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Project.Scripts.ItemSystem;
 using Project.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,11 @@ namespace Project.Scripts.UI
         /// Reference to the end run menu GameObject.
         /// </summary>
         [SerializeField] private GameObject endRun;
+        
+        /// <summary>
+        /// Reference to the EndRunData ScriptableObject for managing end run data.
+        /// </summary>
+        [SerializeField] private EndRunData endRunData;
 
         /// <summary>
         /// Indicates if any UI is currently active.
@@ -51,7 +57,7 @@ namespace Project.Scripts.UI
         /// <summary>
         /// Shows the end run menu and adds it to the list of active UIs.
         /// </summary>
-        public void ShowEndRunMenu()
+        public void ShowEndRunMenu(bool win = false)
         {
             if (!endRun)
             {
@@ -60,6 +66,7 @@ namespace Project.Scripts.UI
             }
 
             endRun.SetActive(true);
+            endRunData.SetMessage(win);
             AddActiveUI(endRun);
         }
 
@@ -83,6 +90,19 @@ namespace Project.Scripts.UI
             else
             {
                 RemoveActiveUI(pauseMenu);
+            }
+        }
+
+        public void ToggleShop()
+        {
+            ShopUI.Instance.ToggleShop();
+            if (ShopUI.Instance.IsShopOpen)
+            {
+                AddActiveUI(ShopUI.Instance.gameObject);
+            }
+            else
+            {
+                RemoveActiveUI(ShopUI.Instance.gameObject);
             }
         }
 

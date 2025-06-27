@@ -25,6 +25,8 @@ namespace Project.Scripts.ItemSystem
         public string Description => this.ToString();
         public Sprite Icon => icon;
         public Color Color => RarityColor(rarity);
+        
+        public int GetCost(float costMultiplier) => Mathf.CeilToInt(cost * costMultiplier);
 
         public void Buy()
         {

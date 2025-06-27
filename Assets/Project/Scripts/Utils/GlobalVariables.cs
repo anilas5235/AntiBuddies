@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Project.Scripts.Utils
 {
+    [DefaultExecutionOrder(-50)]
     public class GlobalVariables : Singleton<GlobalVariables>
     {
         public GameObject Player{ get; private set;}

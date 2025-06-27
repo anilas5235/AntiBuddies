@@ -1,9 +1,15 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <engine:Template name="ShopElement" src="project://database/Assets/UI%20Toolkit/ShopElement.uxml?fileID=9197481963319205126&amp;guid=93657f3ad6cdf1c49a9517f2ee3a53d9&amp;type=3#ShopElement" />
     <Style src="project://database/Assets/UI%20Toolkit/Styles/ShopStyle.uss?fileID=7433441132597879392&amp;guid=2a5959c1331f25b479fd120c61d894df&amp;type=3#ShopStyle" />
-    <engine:VisualElement enabled="true" style="flex-grow: 1; background-color: rgb(64, 64, 64); flex-direction: column;">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/TextStyles.uss?fileID=7433441132597879392&amp;guid=f5e7a96795f5b154584f5d2dfee4cf19&amp;type=3#TextStyles" />
+    <engine:VisualElement enabled="true" name="VisualElement" data-source="project://database/Assets/Project/Data/UI/ShopData.asset?fileID=11400000&amp;guid=57f6b43fcb4f9ba44b302961055bf409&amp;type=2#ShopData" style="flex-grow: 1; background-color: rgb(64, 64, 64); flex-direction: column;">
         <engine:VisualElement style="flex-direction: row; justify-content: flex-end; align-items: center; padding: 8px; gap: 4px;">
-            <engine:Label name="GoldAmountLabel" text="0" class="goldAmountLabel" />
+            <engine:Label name="GoldAmountLabel" text="0" class="goldAmountLabel text small">
+                <Bindings>
+                    <engine:DataBinding property="text" data-source-path="gold" binding-mode="ToTarget" />
+                </Bindings>
+            </engine:Label>
+            <engine:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Project/ArtWork/Resource/small-gold-nugget.png?fileID=21300000&amp;guid=3386f8e2413cf2b47b1afbc75cd3b0b0&amp;type=3#small-gold-nugget&quot;); width: 30px; height: 30px;" />
         </engine:VisualElement>
         <engine:VisualElement name="BuyView" data-source="project://database/Assets/Project/Data/UI/ShopData.asset?fileID=11400000&amp;guid=57f6b43fcb4f9ba44b302961055bf409&amp;type=2#ShopData" class="frame" style="flex-grow: 0; height: 50%; width: 95%; flex-direction: row; justify-content: space-between; margin: 2% 2% 0 2%;">
             <engine:Instance template="ShopElement" name="TemplateContainer" enabled="true" focusable="false" data-source-path="ShopElement0" style="flex-grow: 1; align-self: stretch; width: 25%;" />

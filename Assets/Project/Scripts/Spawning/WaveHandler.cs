@@ -1,5 +1,6 @@
 using System.Collections;
 using Project.Scripts.ItemSystem;
+using Project.Scripts.UI;
 using UnityEngine;
 
 namespace Project.Scripts.Spawning
@@ -8,6 +9,7 @@ namespace Project.Scripts.Spawning
     {
         [SerializeField] WaveGroup waveGroup;
         public GameObject spawnerHandlerPrefab;
+
         void Start()
         {
             StartCoroutine(ManageWaves());
@@ -15,26 +17,26 @@ namespace Project.Scripts.Spawning
 
         private IEnumerator ManageWaves()
         {
-            Vector2 computedGroundSize = new Vector2(transform.localScale.x, transform.localScale.y);
-            foreach (var wave in waveGroup.waves)
+            Vector2 computedGroundSize = new(transform.localScale.x, transform.localScale.y);
+            for (int i = 0; i < waveGroup.waves.Count; i++)
             {
+                Wave wave = waveGroup.waves[i];
                 GameObject handlerGO = Instantiate(spawnerHandlerPrefab);
                 SpawnerHandler spawnerHandler = handlerGO.GetComponent<SpawnerHandler>();
                 spawnerHandler.groundSize = computedGroundSize;
                 spawnerHandler.AddSpawners(wave.batches);
                 yield return StartCoroutine(spawnerHandler.StartSpawners());
-                WaitForSeconds waitWave = new WaitForSeconds(wave.timeBetweenWaves);
+                WaitForSeconds waitWave = new(wave.timeBetweenWaves);
                 yield return waitWave;
 
                 // Show shop and pause game
-                Time.timeScale = 0f;
-                bool shopClosed = false;
-                ShopUI.Instance.OnShopClosed += () => shopClosed = true;
-                ShopUI.Instance.Show();
-                // Wait until shop is closed
-                yield return new WaitUntil(() => shopClosed);
-                Time.timeScale = 1f;
+                if (i + 1 >= waveGroup.waves.Count) continue;
+                
+                UIManager.Instance.ToggleShop();
+                yield return new WaitUntil(() => !ShopUI.Instance.IsShopOpen);
             }
+
+            UIManager.Instance.ShowEndRunMenu(true);
         }
     }
 }

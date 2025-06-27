@@ -10,5 +10,7 @@ namespace Project.Scripts.ItemSystem
         Sprite Icon { get; }
         Color Color { get;}
         void Buy();
+        
+        int GetCost(float costMultiplier);
     }
 }

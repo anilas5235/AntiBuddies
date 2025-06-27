@@ -1,6 +1,6 @@
 using Project.Scripts.ResourceSystem;
+using Project.Scripts.ShopSystem;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Project.Scripts.ItemSystem
 {
@@ -12,6 +12,8 @@ namespace Project.Scripts.ItemSystem
         public ShopElement ShopElement2;
         public ShopElement ShopElement3;
 
+        public int gold;
+
         public void Clear()
         {
             ShopElement0 = null;
@@ -22,19 +24,20 @@ namespace Project.Scripts.ItemSystem
 
         public void SetItem(int index, Item item)
         {
+            float costMultiplier = Shop.Instance.CostMultiplier;
             switch (index)
             {
                 case 0:
-                    ShopElement0 = new ShopElement(item);
+                    ShopElement0 = new ShopElement(item,costMultiplier);
                     break;
                 case 1:
-                    ShopElement1 = new ShopElement(item);
+                    ShopElement1 = new ShopElement(item,costMultiplier);
                     break;
                 case 2:
-                    ShopElement2 = new ShopElement(item);
+                    ShopElement2 = new ShopElement(item,costMultiplier);
                     break;
                 case 3:
-                    ShopElement3 = new ShopElement(item);
+                    ShopElement3 = new ShopElement(item,costMultiplier);
                     break;
                 default:
                     Debug.LogWarning("Invalid index for shop element: " + index);

@@ -442,6 +442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 971418134}
   endRun: {fileID: 2020149692}
+  endRunData: {fileID: 11400000, guid: 330952db32f2fbb4d82a10c5034a7ed6, type: 2}
 --- !u!1 &303235641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,6 +1403,135 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 15cef263-9014-4fd5-94d9-4e4a6234a6ef
+--- !u!1 &1320047032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1320047037}
+  - component: {fileID: 1320047036}
+  - component: {fileID: 1320047035}
+  - component: {fileID: 1320047034}
+  - component: {fileID: 1320047033}
+  m_Layer: 0
+  m_Name: Shop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1320047033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320047032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ed196d2ce7421488524284ac574eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipes:
+  - {fileID: 11400000, guid: 7e90163e3f5a64f4ba48a5a40a1546f2, type: 2}
+  - {fileID: 11400000, guid: b69b595c4e7638e4080deef5bd879252, type: 2}
+  - {fileID: 11400000, guid: b8da7261bd11744449d1ecfa69a3ee21, type: 2}
+  - {fileID: 11400000, guid: 2025eb6c237ce3d4fbd192ef5d4db423, type: 2}
+  - {fileID: 11400000, guid: b004deaa0cad04640abf547d7a55db7b, type: 2}
+--- !u!114 &1320047034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320047032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d130883c328e343973a199b76ee522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commonItems:
+  - {fileID: 11400000, guid: 5a00d332815ac144a9a81e15b2fc2e49, type: 2}
+  - {fileID: 11400000, guid: 3a4b611ed85fdb04680bc1925f34afc6, type: 2}
+  - {fileID: 11400000, guid: b7c42eeec58e3b04999cf52b4dc9cbd4, type: 2}
+  - {fileID: 11400000, guid: 87c22d6008841eb4287e89aa060350f4, type: 2}
+  - {fileID: 11400000, guid: 92d67e31e28951947854b11c118b7e33, type: 2}
+  rareItems:
+  - {fileID: 11400000, guid: 96b509d9cde02d442a9ca2e8a81c492c, type: 2}
+  - {fileID: 11400000, guid: e3574e6c1c08f8f459d3f3206a6000f2, type: 2}
+  - {fileID: 11400000, guid: 16e15681c3ed207458468bb486f27c52, type: 2}
+  epicItems:
+  - {fileID: 11400000, guid: 039fe2d505a2cc741b3ae937cc6bcead, type: 2}
+  - {fileID: 11400000, guid: c65f0a2daf43ba04e9e06b0b798b5641, type: 2}
+  legendaryItems:
+  - {fileID: 11400000, guid: 6def0c350b3d3104d993041f1474e11c, type: 2}
+  - {fileID: 11400000, guid: eca7fc64ccf00ce4082fe2ec9e74c991, type: 2}
+  rareItemChance: 0.2
+  epicItemChance: 0.05
+  legendaryItemChance: 0.01
+  itemCount: 4
+  costMultiplier: 1
+  rerollCost: 3
+  maxCommonItems: 10
+  luckStat:
+    statDependency:
+      useEfficiency: 100
+      statType: {fileID: 11400000, guid: 5df89aa858657d349841d99de210f860, type: 2}
+--- !u!114 &1320047035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320047032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a0709ef7a142f08a2724e5bfda2818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 57f6b43fcb4f9ba44b302961055bf409, type: 2}
+  Items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1320047036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320047032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 4a147e58eb304db4386f64ec74b61a34, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 880afdd1da3132f4185fbcdae74ca8f6, type: 3}
+  m_SortingOrder: 5
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+--- !u!4 &1320047037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320047032}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1337746727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,14 +1972,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
-      propertyPath: defaultWeaponData.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7838128060625392467, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
-      propertyPath: 'defaultWeaponData.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 70f6dd9407021584d856891c43768010, type: 2}
     - target: {fileID: 8794693308980230054, guid: 3782d9793b0dca84a86c2cf42ddf77e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1943,10 +2065,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3770703109389566475, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8035423948169962729, guid: a96df9fa99a4f9045b78112e3908474c, type: 3}
       propertyPath: m_Name
       value: GameBackend
@@ -1969,3 +2087,4 @@ SceneRoots:
   - {fileID: 971418137}
   - {fileID: 132470633}
   - {fileID: 2020149695}
+  - {fileID: 1320047037}
