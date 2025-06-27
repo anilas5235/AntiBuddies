@@ -2,8 +2,10 @@ using System;
 using Project.Scripts.BuffSystem.Data;
 using Project.Scripts.EffectSystem.Components;
 using Project.Scripts.EffectSystem.Effects.Data.Definition;
+using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.EffectSystem.Effects.ExtraEffects;
 using Project.Scripts.StatSystem;
+using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.WeaponSystem.Projectile
@@ -26,9 +28,10 @@ namespace Project.Scripts.WeaponSystem.Projectile
         /// <param name="additionalContacts">Additional allowed contacts beyond the base value.</param>
         /// <param name="source">The GameObject that spawned the projectile.</param>
         /// <param name="statGroup">The stat group for calculating effects.</param>
+        /// <param name="firedByPlayer">Indicates if the projectile was fired by the player.</param>
         public DynamicProjectileSettings(DamageDefinition damageDefinition, DamageBuffData damageBuffData,
             ExtraEffectHandler extraEffectHandler, Vector2 direction, AlliedGroup alliedGroup,
-            int additionalContacts, GameObject source, IStatGroup statGroup)
+            int additionalContacts, GameObject source, IStatGroup statGroup, bool firedByPlayer)
         {
             DamageDefinition = damageDefinition;
             DamageBuffData = damageBuffData;
@@ -38,6 +41,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
             AdditionalContacts = additionalContacts;
             Source = source;
             StatGroup = statGroup;
+            FiredByPlayer = firedByPlayer;
         }
 
         /// <summary>
@@ -79,6 +83,11 @@ namespace Project.Scripts.WeaponSystem.Projectile
         /// The stat group for calculating effects.
         /// </summary>
         public IStatGroup StatGroup { get; }
+        
+        /// <summary>
+        /// Indicates if the projectile was fired by the player.
+        /// </summary>
+        public bool FiredByPlayer { get; }
 
         /// <summary>
         /// Applies all configured effects to the contact GameObject.
@@ -90,7 +99,9 @@ namespace Project.Scripts.WeaponSystem.Projectile
             // Create a processor to handle effects and check for valid, non-allied targets
             ContactEffectProcessor processor = new(contact, AlliedGroup, ExtraEffectHandler);
             if (!processor.IsValid || processor.Alie) return false;
-            processor.Apply(DamageDefinition.CreatePackage(Source, StatGroup));
+            DamagePackage package = DamageDefinition.CreatePackage(Source, StatGroup);
+            if(FiredByPlayer) package.OnDamageApplied += GlobalVariables.Instance.PlayerEffectRelay.OnLifeStealCallback;
+            processor.Apply(package);
             processor.Apply(DamageBuffData, Source, StatGroup);
             return true;
         }

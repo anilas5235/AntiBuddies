@@ -58,7 +58,8 @@ namespace Project.Scripts.WeaponSystem
                     alliedGroup,
                     0, // for future use
                     gameObject,
-                    StatGroup
+                    StatGroup,
+                    true // fired by player
                 );
                 projectile.SetData(projectileData, settings);
                 projectile.SetTransform(projectileSpawnPoint.position, transform.rotation);
