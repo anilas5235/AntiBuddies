@@ -6,6 +6,10 @@ using Action = Unity.Behavior.Action;
 
 namespace Project.Behaviors.Actions
 {
+    /// <summary>
+    /// Action node that finds the player GameObject in the scene and stores its Transform in the blackboard.
+    /// </summary>
+    /// <remarks>Author: Niklas Borchers</remarks>
     [Serializable, GeneratePropertyBag]
     [NodeDescription(name: "Find Player", story: "Find [Player]", category: "Action",
         id: "66b8e655f5894e681cc0d37fef049c24")]
