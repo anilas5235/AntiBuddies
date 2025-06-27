@@ -14,7 +14,7 @@
                     </Bindings>
                 </engine:Label>
             </engine:VisualElement>
-            <engine:Label text="Label" name="Description" class="description" style="flex-grow: 1; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;">
+            <engine:Label text="Label" name="Description" class="description mid" style="flex-grow: 1; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;">
                 <Bindings>
                     <engine:DataBinding property="text" data-source-path="description" binding-mode="ToTarget" />
                 </Bindings>
