@@ -20,7 +20,7 @@ namespace Project.Scripts.ItemSystem
                 return;
             }
             items.Add(item);
-            item.Buy();
+            item.OnAdded();
         }
 
         public void Remove(Item item)

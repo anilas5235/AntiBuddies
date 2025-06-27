@@ -16,4 +16,4 @@ MonoBehaviour:
   cost: 0
   description: TestItem
   behaviours:
-  - {fileID: 11400000, guid: 3a0f02d3edb4fd94b9cb164df95900bb, type: 2}
+  - {fileID: 11400000, guid: 005f8038d1514a744b64cc7fdd12c657, type: 2}

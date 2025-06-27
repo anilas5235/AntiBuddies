@@ -16,10 +16,10 @@ namespace Project.Scripts.ItemSystem
         public string Name => name;
         public string Description => description;
         public Sprite Icon => icon;
-        public Color Color => Color.gray; // TODO: Implement color logic
+        public Color Color => Color.gray;
+
         public void Buy()
         {
-            //TODO: Implement the logic for buying the item
         }
         
         public void OnRemoved()
