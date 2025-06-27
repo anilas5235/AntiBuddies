@@ -176,6 +176,7 @@ namespace Project.Scripts.ItemSystem
                 slot.RemoveFromClassList("outline");
                 slot.RemoveFromClassList("selected");
 
+                bool isSelected = false;
                 if (_selectedIndex1 == null && _selectedIndex2 == null)
                 {
                     // No selection: outline items present in any recipe
@@ -188,8 +189,10 @@ namespace Project.Scripts.ItemSystem
                 else if (_selectedIndex1 != null && _selectedIndex2 == null)
                 {
                     // One selected
-                    if (i == _selectedIndex1)
+                    if (i == _selectedIndex1) {
                         slot.AddToClassList("selected");
+                        isSelected = true;
+                    }
                     else if (i < inv.Items.Count && inv.Items[i] != null &&
                              _merger.Recipes.Any(r => r.IsValid(inv.Items[_selectedIndex1.Value], inv.Items[i])))
                         slot.AddToClassList("outline");
@@ -197,8 +200,18 @@ namespace Project.Scripts.ItemSystem
                 else
                 {
                     // Two or more: mark selected
-                    if (i == _selectedIndex1 || i == _selectedIndex2)
+                    if (i == _selectedIndex1 || i == _selectedIndex2) {
                         slot.AddToClassList("selected");
+                        isSelected = true;
+                    }
+                }
+
+                // Set background color based on rarity if not selected
+                if (i < inv.Items.Count && inv.Items[i] != null && !isSelected)
+                {
+                    slot.style.backgroundColor = inv.Items[i].Color;
+                } else {
+                    slot.style.backgroundColor = StyleKeyword.Null;
                 }
 
                 if (i < inv.Items.Count && inv.Items[i] != null)
