@@ -10,8 +10,9 @@ namespace Project.Scripts.ItemSystem
     [CreateAssetMenu(fileName = "ItemStatBehaviour", menuName = "ItemSystem/StatBehaviour")]
     public class ItemStatBehaviour : ItemBehaviour
     {
-        [FormerlySerializedAs("statModification")] [SerializeField] StatPackage[] statPackage;
-        
+        [FormerlySerializedAs("statModification")] [SerializeField]
+        StatPackage[] statPackage;
+
         public override void OnAdded()
         {
             foreach (var modification in statPackage)

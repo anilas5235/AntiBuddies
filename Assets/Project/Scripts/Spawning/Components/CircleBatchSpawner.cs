@@ -8,7 +8,7 @@ namespace Project.Scripts.Spawning.Components
 
         protected override Vector2 GetSpawnPosition(Vector2 basePosition)
         {
-            return SpawnUtils.RandomPointInCircle(basePosition,radius);
+            return SpawnUtils.RandomPointInCircle(basePosition, radius);
         }
 
         public override void SetUp(Batch batch)

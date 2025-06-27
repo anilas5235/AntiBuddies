@@ -67,7 +67,7 @@ namespace Project.Scripts.EffectSystem.Effects.ExtraEffects
         {
             _statGroup = statGroup;
         }
-        
+
         /// <summary>
         /// Specifies the trigger mode for extra effects in the effect handler.
         /// </summary>

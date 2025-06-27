@@ -28,16 +28,16 @@ namespace Project.Scripts.ItemSystem
             switch (index)
             {
                 case 0:
-                    ShopElement0 = new ShopElement(item,costMultiplier);
+                    ShopElement0 = new ShopElement(item, costMultiplier);
                     break;
                 case 1:
-                    ShopElement1 = new ShopElement(item,costMultiplier);
+                    ShopElement1 = new ShopElement(item, costMultiplier);
                     break;
                 case 2:
-                    ShopElement2 = new ShopElement(item,costMultiplier);
+                    ShopElement2 = new ShopElement(item, costMultiplier);
                     break;
                 case 3:
-                    ShopElement3 = new ShopElement(item,costMultiplier);
+                    ShopElement3 = new ShopElement(item, costMultiplier);
                     break;
                 default:
                     Debug.LogWarning("Invalid index for shop element: " + index);

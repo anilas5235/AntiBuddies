@@ -16,7 +16,7 @@ namespace Project.Scripts.Player
     {
         /// <summary>
         /// List of stat packages applied on level up.
-        /// /// </summary>
+        /// </summary>
         [SerializeField] private List<StatPackage> levelUpStatPackages;
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Project.Scripts.Player
                 Apply(package);
             }
         }
-        
+
         /// <summary>
         /// Handles the start of a new wave by fully healing the player.
         /// </summary>

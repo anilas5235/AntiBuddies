@@ -15,7 +15,7 @@ namespace Project.Scripts.Spawning.Components
         [SerializeField] private bool spawnOnEnable = true;
         [SerializeField] private bool DestroyOnFinish = true;
         [SerializeField] protected bool poolingEnabled = true;
-        
+
 
         private GameObjectPool _pool;
         private Coroutine _spawnRoutine;
@@ -105,7 +105,7 @@ namespace Project.Scripts.Spawning.Components
 
         protected virtual void OnFinishedSpawning()
         {
-            if(DestroyOnFinish) Destroy(gameObject);
+            if (DestroyOnFinish) Destroy(gameObject);
         }
 
         public void StartSpawning()

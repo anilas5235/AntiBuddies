@@ -8,9 +8,9 @@ namespace Project.Scripts.ItemSystem
         string Name { get; }
         string Description { get; }
         Sprite Icon { get; }
-        Color Color { get;}
+        Color Color { get; }
         void Buy();
-        
+
         int GetCost(float costMultiplier);
     }
 }

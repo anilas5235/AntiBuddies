@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Project.Scripts.Spawning.Components
 {
-    public class RectSpawner: Spawner
+    public class RectSpawner : Spawner
     {
         [SerializeField] private Vector2 size = new(5f, 5f);
 
@@ -16,6 +16,7 @@ namespace Project.Scripts.Spawning.Components
                     Debug.LogError("Size must be positive.");
                     return;
                 }
+
                 size = value;
             }
         }
@@ -24,13 +25,13 @@ namespace Project.Scripts.Spawning.Components
         {
             return SpawnUtils.RandomPointInRect(basePosition, size);
         }
-        
+
         public override void SetUp(Batch batch)
         {
             base.SetUp(batch);
             size = new Vector2(batch.spawnRadius * 2, batch.spawnRadius * 2);
         }
-        
+
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {

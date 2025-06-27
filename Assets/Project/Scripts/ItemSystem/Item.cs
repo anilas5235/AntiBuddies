@@ -14,6 +14,7 @@ namespace Project.Scripts.ItemSystem
             Legendary,
             Crafted
         }
+
         [SerializeField] private Sprite icon;
         [SerializeField] private int cost;
         [SerializeField] private ItemBehaviour[] behaviours;
@@ -25,13 +26,13 @@ namespace Project.Scripts.ItemSystem
         public string Description => this.ToString();
         public Sprite Icon => icon;
         public Color Color => RarityColor(rarity);
-        
+
         public int GetCost(float costMultiplier) => Mathf.CeilToInt(cost * costMultiplier);
 
         public void Buy()
         {
         }
-        
+
         public void OnRemoved()
         {
             foreach (var behaviour in behaviours)
@@ -69,6 +70,7 @@ namespace Project.Scripts.ItemSystem
                     color = new Color(0.5f, 0.25f, 0); // Brown
                     break;
             }
+
             return color;
         }
 
@@ -79,6 +81,7 @@ namespace Project.Scripts.ItemSystem
             {
                 str += itemBehaviour.ToString();
             }
+
             return str;
         }
     }

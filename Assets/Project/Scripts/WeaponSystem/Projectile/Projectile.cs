@@ -47,7 +47,7 @@ namespace Project.Scripts.WeaponSystem.Projectile
         /// <inheritdoc/>
         public void HandleContact(GameObject contact)
         {
-            if(_dynamicData == null) return;
+            if (_dynamicData == null) return;
             // Try to apply effects to the contact; if not valid or allied, do nothing
             if (!_dynamicData.ApplyEffects(contact))
             {

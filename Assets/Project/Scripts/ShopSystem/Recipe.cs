@@ -14,6 +14,7 @@ namespace Project.Scripts.ShopSystem
         {
             return (itemA == item1 && itemB == item2) || (itemA == item2 && itemB == item1);
         }
+
         public Item ResultItem => resultItem;
     }
 }

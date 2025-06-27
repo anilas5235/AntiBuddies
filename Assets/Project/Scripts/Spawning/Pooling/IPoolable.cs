@@ -42,7 +42,7 @@ namespace Project.Scripts.Spawning.Pooling
         /// Returns the object to its pool.
         /// </summary>
         public void ReturnToPool();
-        
+
         /// <summary>
         /// Sets the transform of the object.
         /// </summary>

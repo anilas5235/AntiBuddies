@@ -9,7 +9,8 @@ namespace Project.Scripts.UI
 
         public void SetMessage(bool win)
         {
-            Message = win ? "Congratulations! You have won the run!" 
+            Message = win
+                ? "Congratulations! You have won the run!"
                 : "You have lost the run. Better luck next time!";
         }
     }

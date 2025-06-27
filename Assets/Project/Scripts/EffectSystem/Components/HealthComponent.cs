@@ -145,6 +145,7 @@ namespace Project.Scripts.EffectSystem.Components
             {
                 Heal(delta);
             }
+
             OnHealthChange?.Invoke();
         }
     }

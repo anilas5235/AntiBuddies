@@ -5,20 +5,21 @@ namespace Project.Scripts.ItemSystem
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField] List<Item> items = new ();
+        [SerializeField] List<Item> items = new();
         [SerializeField] int maxSize = 10;
 
         // Expose current items and maximum size for UI display
         public IReadOnlyList<Item> Items => items;
         public int MaxSize => maxSize;
 
-    	public void Add(Item item)
+        public void Add(Item item)
         {
-			if (items.Count >= maxSize)
+            if (items.Count >= maxSize)
             {
                 Debug.LogWarning("Inventory is full!");
                 return;
             }
+
             items.Add(item);
             item.OnAdded();
         }
@@ -35,6 +36,7 @@ namespace Project.Scripts.ItemSystem
             {
                 item.OnRemoved();
             }
+
             items.Clear();
         }
 

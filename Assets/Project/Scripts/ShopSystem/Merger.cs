@@ -29,6 +29,7 @@ namespace Project.Scripts.ShopSystem
                     break;
                 }
             }
+
             if (!merged)
                 Debug.Log($"No valid recipe found for {item1.name} and {item2.name}");
         }

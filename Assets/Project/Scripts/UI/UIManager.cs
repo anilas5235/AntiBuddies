@@ -21,7 +21,7 @@ namespace Project.Scripts.UI
         /// Reference to the end run menu GameObject.
         /// </summary>
         [SerializeField] private GameObject endRun;
-        
+
         /// <summary>
         /// Reference to the EndRunData ScriptableObject for managing end run data.
         /// </summary>

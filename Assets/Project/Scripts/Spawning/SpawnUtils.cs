@@ -8,12 +8,12 @@ namespace Project.Scripts.Spawning
         {
             return Random.insideUnitCircle * radius + center;
         }
-        
+
         public static Vector2 RandomPointInSquare(Vector2 center, float size)
         {
             return RandomPointInRect(center, new Vector2(size, size));
         }
-        
+
         public static Vector2 RandomPointInRect(Vector2 center, Vector2 size)
         {
             return center + new Vector2(
