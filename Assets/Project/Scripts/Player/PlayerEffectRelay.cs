@@ -45,8 +45,8 @@ namespace Project.Scripts.Player
 
         private void OnDisable()
         {
-            ExpManager.Instance.OnLevelUp -= OnLevelUp;
-            GlobalVariables.Instance.OnWaveStart -= OnWaveStart;
+            if(ExpManager.Instance) ExpManager.Instance.OnLevelUp -= OnLevelUp;
+            if(GlobalVariables.Instance) GlobalVariables.Instance.OnWaveStart -= OnWaveStart;
         }
 
         /// <summary>
