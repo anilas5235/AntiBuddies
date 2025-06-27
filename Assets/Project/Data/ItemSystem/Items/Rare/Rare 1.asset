@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
-  m_Name: TestItem 4
+  m_Name: Rare 1
   m_EditorClassIdentifier: 
-  icon: {fileID: -1589168590, guid: 1d770d1018a1b434f8386ae57bef3f4d, type: 3}
-  cost: 0
-  description: TestItem
+  icon: {fileID: -823650189, guid: 1d770d1018a1b434f8386ae57bef3f4d, type: 3}
+  cost: 15
   behaviours:
   - {fileID: 11400000, guid: 3a0f02d3edb4fd94b9cb164df95900bb, type: 2}
+  rarity: 1

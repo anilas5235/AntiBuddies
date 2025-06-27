@@ -1,4 +1,5 @@
-﻿using Project.Scripts.EffectSystem.Effects.Data.Package;
+﻿using System;
+using Project.Scripts.EffectSystem.Effects.Data.Package;
 using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.Utils;
 using UnityEngine;
@@ -25,6 +26,17 @@ namespace Project.Scripts.ItemSystem
             {
                 GlobalVariables.Instance.PlayerStatGroup.ModifyStat(modification.Inverse());
             }
+        }
+
+        public override string ToString()
+        {
+            string str = "Adds:\n";
+            foreach (var package in statPackage)
+            {
+                str += package.Amount + " " + package.StatType.Name + "\n";
+            }
+
+            return str;
         }
     }
 }
