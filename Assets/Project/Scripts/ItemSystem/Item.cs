@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project.Scripts.ItemSystem
@@ -19,11 +20,14 @@ namespace Project.Scripts.ItemSystem
         [SerializeField] private int cost;
         [SerializeField] private ItemBehaviour[] behaviours;
         [SerializeField] public Rarity rarity;
+        [SerializeField] private string description;
 
 
         public int Cost => cost;
         public string Name => name;
-        public string Description => this.ToString();
+        
+        public string Description => description + "\n\n" + ToString();
+        
         public Sprite Icon => icon;
         public Color Color => RarityColor(rarity);
 

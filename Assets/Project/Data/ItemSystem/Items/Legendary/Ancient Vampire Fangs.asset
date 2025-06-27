@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
+  m_Name: Ancient Vampire Fangs
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  cost: 130
+  behaviours:
+  - {fileID: 11400000, guid: 8ed00f92e46c35e4aa660c572c75f57d, type: 2}
+  - {fileID: 11400000, guid: 937ffc4b19fcd234f93a765e3020f3aa, type: 2}
+  - {fileID: 11400000, guid: eb8e60d92053b6f48b0f598d87a3bf92, type: 2}
+  rarity: 3
+  description: Drinks deeper, heals faster. The original predator.

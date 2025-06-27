@@ -1436,11 +1436,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipes:
-  - {fileID: 11400000, guid: 7e90163e3f5a64f4ba48a5a40a1546f2, type: 2}
-  - {fileID: 11400000, guid: b69b595c4e7638e4080deef5bd879252, type: 2}
-  - {fileID: 11400000, guid: b8da7261bd11744449d1ecfa69a3ee21, type: 2}
-  - {fileID: 11400000, guid: 2025eb6c237ce3d4fbd192ef5d4db423, type: 2}
-  - {fileID: 11400000, guid: b004deaa0cad04640abf547d7a55db7b, type: 2}
+  - {fileID: 11400000, guid: 42254c4a0cb8ecb4d9f9adf9d59420fd, type: 2}
+  - {fileID: 11400000, guid: 4e3d95a1f9cbc7c4ebfdbed92f1d6404, type: 2}
+  - {fileID: 11400000, guid: a5b87b410c8f6684f9a6e475a4542b73, type: 2}
+  - {fileID: 11400000, guid: c2a3e28eb5309c94ab1fb680b0b4b8d1, type: 2}
 --- !u!114 &1320047034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,21 +1453,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commonItems:
-  - {fileID: 11400000, guid: 5a00d332815ac144a9a81e15b2fc2e49, type: 2}
-  - {fileID: 11400000, guid: 3a4b611ed85fdb04680bc1925f34afc6, type: 2}
-  - {fileID: 11400000, guid: b7c42eeec58e3b04999cf52b4dc9cbd4, type: 2}
-  - {fileID: 11400000, guid: 87c22d6008841eb4287e89aa060350f4, type: 2}
-  - {fileID: 11400000, guid: 92d67e31e28951947854b11c118b7e33, type: 2}
+  - {fileID: 11400000, guid: 63a39202bd1af08469e4d56211200e67, type: 2}
+  - {fileID: 11400000, guid: 58e2260ea0130df4ebf391fecf73cc33, type: 2}
+  - {fileID: 11400000, guid: 202278ee99bf0594aa7e0ef36a41af06, type: 2}
+  - {fileID: 11400000, guid: e6328434eb3f6a94ca157e56ad526e1b, type: 2}
+  - {fileID: 11400000, guid: 1aeb9fd7e3a5306498a8b2ef8239c7c0, type: 2}
   rareItems:
-  - {fileID: 11400000, guid: 96b509d9cde02d442a9ca2e8a81c492c, type: 2}
-  - {fileID: 11400000, guid: e3574e6c1c08f8f459d3f3206a6000f2, type: 2}
-  - {fileID: 11400000, guid: 16e15681c3ed207458468bb486f27c52, type: 2}
+  - {fileID: 11400000, guid: 9718f19c6fa1379418d7e5ae4ad1dacc, type: 2}
+  - {fileID: 11400000, guid: 7169cca138a67be4fa07083626f2088b, type: 2}
+  - {fileID: 11400000, guid: 2c45c24cc9bb618489acab03c9f802f0, type: 2}
+  - {fileID: 11400000, guid: b401c9c6aa30d794ba73a22e5fecb914, type: 2}
   epicItems:
-  - {fileID: 11400000, guid: 039fe2d505a2cc741b3ae937cc6bcead, type: 2}
-  - {fileID: 11400000, guid: c65f0a2daf43ba04e9e06b0b798b5641, type: 2}
+  - {fileID: 11400000, guid: 79e95ee88231e3149afccba2e64eaf68, type: 2}
+  - {fileID: 11400000, guid: 1778f751c018f40429091ce2aa9606d4, type: 2}
+  - {fileID: 11400000, guid: 8a87d653605714c439f48be856b72a8f, type: 2}
   legendaryItems:
-  - {fileID: 11400000, guid: 6def0c350b3d3104d993041f1474e11c, type: 2}
-  - {fileID: 11400000, guid: eca7fc64ccf00ce4082fe2ec9e74c991, type: 2}
+  - {fileID: 11400000, guid: 21d902e350e24e442a458d43f0071243, type: 2}
   rareItemChance: 0.2
   epicItemChance: 0.05
   legendaryItemChance: 0.01
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   maxCommonItems: 10
   luckStat:
     statDependency:
-      useEfficiency: 100
+      useEfficiency: 500
       statType: {fileID: 11400000, guid: 5df89aa858657d349841d99de210f860, type: 2}
 --- !u!114 &1320047035
 MonoBehaviour:

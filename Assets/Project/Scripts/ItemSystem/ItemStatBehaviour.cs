@@ -31,12 +31,24 @@ namespace Project.Scripts.ItemSystem
 
         public override string ToString()
         {
-            string str = "Adds:\n";
+            string str = "";
             foreach (var package in statPackage)
             {
-                str += package.Amount + " " + package.StatType.Name + "\n";
-            }
+                if (package.Amount > 0)
+                {
+                    str += "<color=green>";
+                    str += "+";
+                }
+                else
+                {
+                    str += "<color=red>";
+                }
 
+                str += package.Amount;
+                if (package.StatType.IsPercentage)
+                    str += "%";
+                str += "</color> "  + package.StatType.Name + "\n";
+            }
             return str;
         }
     }

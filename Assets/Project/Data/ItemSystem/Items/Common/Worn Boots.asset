@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
+  m_Name: Worn Boots
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  cost: 20
+  behaviours:
+  - {fileID: 11400000, guid: 5f8c24e48389cd9469818e5b788d0873, type: 2}
+  - {fileID: 11400000, guid: bb9e0e7fa132ec241bdb50fd718a2c7f, type: 2}
+  rarity: 0
+  description: Barely holding together, but surprisingly comfy.

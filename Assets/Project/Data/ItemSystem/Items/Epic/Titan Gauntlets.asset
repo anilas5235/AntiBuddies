@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
+  m_Name: Titan Gauntlets
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  cost: 68
+  behaviours:
+  - {fileID: 11400000, guid: 101f0de884d21f5439c86b8cd4f068a6, type: 2}
+  - {fileID: 11400000, guid: 4a0ff712de5e9f746afedefd008c00cd, type: 2}
+  - {fileID: 11400000, guid: bfa1a311aecc3fc41aa9e609006fd500, type: 2}
+  - {fileID: 11400000, guid: 89fd218973b629c4bbb12bb5afad15f1, type: 2}
+  rarity: 2
+  description: A weapon and armor in one. You hit? They stay down.

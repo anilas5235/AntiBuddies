@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
+  m_Name: Adrenal Boost Core
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  cost: 0
+  behaviours:
+  - {fileID: 11400000, guid: 51a194c05908ed048ada2442aed00e35, type: 2}
+  - {fileID: 11400000, guid: 3a20daea232524d4c97f8dd353323fe7, type: 2}
+  - {fileID: 11400000, guid: bfa1a311aecc3fc41aa9e609006fd500, type: 2}
+  - {fileID: 11400000, guid: 446f197a2a5be694b88c09a368558a0c, type: 2}
+  rarity: 4
+  description: "Your body isn\u2019t meant to move like this."

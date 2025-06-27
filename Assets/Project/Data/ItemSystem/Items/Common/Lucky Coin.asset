@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657a72459af3403aaa50b96055ddc6c0, type: 3}
+  m_Name: Lucky Coin
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  cost: 22
+  behaviours:
+  - {fileID: 11400000, guid: fd0106e9ad4187049a447764bdcfe313, type: 2}
+  - {fileID: 11400000, guid: 0def9691928977245a476959f91f477c, type: 2}
+  rarity: 0
+  description: Looks fake. Still brings fortune.
