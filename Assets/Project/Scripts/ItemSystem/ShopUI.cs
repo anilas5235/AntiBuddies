@@ -214,7 +214,5 @@ namespace Project.Scripts.ItemSystem
                 RefreshInventory();
             }
         }
-
-        private void OnDestroy() => _resourceManager.OnGoldChange -= OnGoldChanged;
     }
 }

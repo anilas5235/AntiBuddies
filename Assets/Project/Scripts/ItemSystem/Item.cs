@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Project.Scripts.ItemSystem
 {
@@ -19,6 +20,22 @@ namespace Project.Scripts.ItemSystem
         public void Buy()
         {
             //TODO: Implement the logic for buying the item
+        }
+        
+        public void OnRemoved()
+        {
+            foreach (var behaviour in behaviours)
+            {
+                behaviour.OnRemoved();
+            }
+        }
+
+        public void OnAdded()
+        {
+            foreach (var behaviour in behaviours)
+            {
+                behaviour.OnAdded();
+            }
         }
     }
 }

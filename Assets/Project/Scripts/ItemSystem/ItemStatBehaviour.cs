@@ -1,17 +1,19 @@
-﻿using Project.Scripts.StatSystem.Stats;
+﻿using Project.Scripts.EffectSystem.Effects.Data.Package;
+using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.ItemSystem
 {
     [CreateAssetMenu(fileName = "ItemStatBehaviour", menuName = "ItemSystem/StatBehaviour")]
     public class ItemStatBehaviour : ItemBehaviour
     {
-        [SerializeField] StatModification[] statModification;
+        [FormerlySerializedAs("statModification")] [SerializeField] StatPackage[] statPackage;
         
         public override void OnAdded()
         {
-            foreach (var modification in statModification)
+            foreach (var modification in statPackage)
             {
                 GlobalVariables.Instance.PlayerStatGroup.ModifyStat(modification);
             }
@@ -19,7 +21,7 @@ namespace Project.Scripts.ItemSystem
 
         public override void OnRemoved()
         {
-            foreach (var modification in statModification)
+            foreach (var modification in statPackage)
             {
                 GlobalVariables.Instance.PlayerStatGroup.ModifyStat(modification.Inverse());
             }
