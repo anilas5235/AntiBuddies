@@ -27,17 +27,17 @@ namespace Project.Scripts.EffectSystem.Components
         /// <summary>
         /// Reference to the health component.
         /// </summary>
-        [SerializeField] private HealthComponent healthComponent;
+        [SerializeField] protected HealthComponent healthComponent;
 
         /// <summary>
         /// Reference to the buff manager.
         /// </summary>
-        [SerializeField] private BuffManager buffManager;
+        [SerializeField] protected BuffManager buffManager;
 
         /// <summary>
         /// Reference to the extra effect handler.
         /// </summary>
-        [SerializeField] private ExtraEffectHandler extraEffectHandler;
+        [SerializeField] protected ExtraEffectHandler extraEffectHandler;
 
         /// <summary>
         /// Reference to the dodge stat.

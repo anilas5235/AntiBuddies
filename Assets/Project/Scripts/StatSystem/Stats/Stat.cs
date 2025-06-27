@@ -69,6 +69,9 @@ namespace Project.Scripts.StatSystem.Stats
         public StatType StatType => statType;
 
         /// <inheritdoc/>
+        public event Action<int> OnStatChangeWithDelta;
+
+        /// <inheritdoc/>
         public event Action OnStatChange;
 
         /// <inheritdoc/>
@@ -89,11 +92,13 @@ namespace Project.Scripts.StatSystem.Stats
         /// <inheritdoc/>
         public void UpdateValues()
         {
+            int old = statValue;
             // Calculate the stat value with bonuses and percent multipliers.
             statValue = Mathf.RoundToInt((baseStatValue + tempStatBonus) *
                                          StatUtils.MakePositiveMultiplier(percentMultiplier));
             clampedValue = Mathf.Clamp(statValue, MinValue, MaxValue);
             OnStatChange?.Invoke();
+            OnStatChangeWithDelta?.Invoke(statValue - old);
         }
 
         /// <inheritdoc/>

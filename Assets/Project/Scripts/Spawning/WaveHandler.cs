@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using Project.Scripts.ItemSystem;
 using Project.Scripts.UI;
+using Project.Scripts.Utils;
 using UnityEngine;
 
 namespace Project.Scripts.Spawning
@@ -20,6 +22,7 @@ namespace Project.Scripts.Spawning
             Vector2 computedGroundSize = new(transform.localScale.x, transform.localScale.y);
             for (int i = 0; i < waveGroup.waves.Count; i++)
             {
+                GlobalVariables.Instance.TriggerWaveStart();
                 Wave wave = waveGroup.waves[i];
                 GameObject handlerGO = Instantiate(spawnerHandlerPrefab);
                 SpawnerHandler spawnerHandler = handlerGO.GetComponent<SpawnerHandler>();
@@ -31,9 +34,10 @@ namespace Project.Scripts.Spawning
 
                 // Show shop and pause game
                 if (i + 1 >= waveGroup.waves.Count) continue;
-                
+
                 UIManager.Instance.ToggleShop();
                 yield return new WaitUntil(() => !ShopUI.Instance.IsShopOpen);
+                GlobalVariables.Instance.TriggerWaveEnd();
             }
 
             UIManager.Instance.ShowEndRunMenu(true);

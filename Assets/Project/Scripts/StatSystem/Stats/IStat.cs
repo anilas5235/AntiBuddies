@@ -11,6 +11,12 @@ namespace Project.Scripts.StatSystem.Stats
     {
         /// <summary>
         /// Event triggered when the stat value changes.
+        /// Also gives the delta of the change.
+        /// </summary>
+        public event Action<int> OnStatChangeWithDelta;
+        
+        /// <summary>
+        /// Event triggered when the stat value changes.
         /// </summary>
         public event Action OnStatChange;
 

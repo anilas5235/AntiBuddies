@@ -66,12 +66,12 @@ namespace Project.Scripts.EffectSystem.Components
         private void OnEnable()
         {
             FullHeal();
-            maxHpStat.Stat.OnStatChange += HandleMaxHealthChange;
+            maxHpStat.Stat.OnStatChangeWithDelta += HandleMaxHealthChange;
         }
 
         private void OnDisable()
         {
-            maxHpStat.Stat.OnStatChange -= HandleMaxHealthChange;
+            maxHpStat.Stat.OnStatChangeWithDelta -= HandleMaxHealthChange;
         }
 
         /// <summary>
@@ -138,8 +138,13 @@ namespace Project.Scripts.EffectSystem.Components
         /// <summary>
         /// Handles changes to the max health stat.
         /// </summary>
-        private void HandleMaxHealthChange()
+        private void HandleMaxHealthChange(int delta)
         {
+            // If the max health increases, heal the entity by the delta amount.
+            if (delta > 0)
+            {
+                Heal(delta);
+            }
             OnHealthChange?.Invoke();
         }
     }
