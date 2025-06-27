@@ -26,7 +26,7 @@ namespace Project.Behaviors.Actions
 
         protected override Status OnUpdate()
         {
-            Pool.Value ??= GlobalPools.Instance.GetPoolFor(PoolObject.Value);
+            Pool.Value = GlobalPools.Instance.GetPoolFor(PoolObject.Value);
             return Status.Success;
         }
 
