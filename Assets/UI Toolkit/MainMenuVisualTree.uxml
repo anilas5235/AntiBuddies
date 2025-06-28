@@ -1,11 +1,11 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Styles/ButtonStyles.uss?fileID=7433441132597879392&amp;guid=6c6d66a8221ddb44289387cb0f760faa&amp;type=3#ButtonStyles" />
-    <engine:VisualElement style="flex-grow: 1; align-content: auto; align-items: auto;">
-        <engine:VisualElement style="flex-grow: 1; width: 40%; align-self: flex-start; justify-content: center; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+    <engine:VisualElement style="flex-grow: 1; align-content: flex-end; align-items: auto; background-image: url(&quot;project://database/Assets/Project/ArtWork/UI/Background/MainMenuBackground_1.png?fileID=21300000&amp;guid=f47fa7971fb92ff44995ef2ea2d78894&amp;type=3#MainMenuBackground_1&quot;); justify-content: flex-end; padding-top: 219px; padding-right: 219px; padding-bottom: 219px; padding-left: 219px;">
+        <engine:VisualElement style="flex-grow: 0; width: 30%; align-self: center; justify-content: center; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; align-content: flex-end; background-color: rgb(43, 43, 43); height: 244px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">
             <engine:Button text="Continue" name="Continue" selectable="true" class="button bigButton" style="display: none;" />
-            <engine:Button text="Start" enabled="true" name="Play" selectable="false" focusable="true" class="button bigButton" />
+            <engine:Button text="Start" enabled="true" name="Play" selectable="false" focusable="true" class="button midButton" />
             <engine:Button text="Options" name="Options" selectable="true" class="button bigButton" style="display: none;" />
-            <engine:Button text="Quit" name="Quit" selectable="false" focusable="true" class="button bigButton" />
+            <engine:Button text="Quit" name="Quit" selectable="false" focusable="true" class="button midButton" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
