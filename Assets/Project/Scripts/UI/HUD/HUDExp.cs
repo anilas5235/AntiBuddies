@@ -31,6 +31,7 @@ namespace Project.Scripts.UI.HUD
             // Subscribe to experience gain and level up events.
             _expManager.OnExpGain += UpdateExpBar;
             _expManager.OnLevelUp += UpdateExpBar;
+            UpdateExpBar(); // Initial update to set the current values.
         }
 
         private void OnDisable()
