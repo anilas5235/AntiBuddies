@@ -13,7 +13,11 @@ namespace Project.Scripts.Spawning
 
         public void AddSpawners(List<Batch> batches)
         {
-            foreach (var batch in batches)
+            if (batches == null || batches.Count == 0)
+            {
+                return;
+            }
+            foreach (Batch batch in batches)
             {
                 float effectiveX = (groundSize.x / 2f) - batch.spawnRadius;
                 float effectiveY = (groundSize.y / 2f) - batch.spawnRadius;

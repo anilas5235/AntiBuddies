@@ -49,7 +49,7 @@ MonoBehaviour:
   alliedGroup: 1
   extraEffectHandler: {fileID: 0}
   damage:
-    amount: 1
+    amount: 2
     damageType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
     extraStatDeps:
     - useEfficiency: 50

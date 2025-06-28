@@ -151,7 +151,7 @@ MonoBehaviour:
   exp: 0
   level: 0
   expToLevelUp: 1
-  expLevelUpStepPercentage: 50
+  expLevelUpStepPercentage: 20
 --- !u!114 &4083895781703535373
 MonoBehaviour:
   m_ObjectHideFlags: 0

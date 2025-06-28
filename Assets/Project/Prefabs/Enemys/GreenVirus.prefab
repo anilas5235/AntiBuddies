@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5298582220894262415, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
       propertyPath: goldAmount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5458632804673224790, guid: 423685bce2ead9d43aae473ac8da2542, type: 3}
       propertyPath: m_Sprite
