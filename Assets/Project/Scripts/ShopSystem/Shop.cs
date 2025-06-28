@@ -1,15 +1,18 @@
+using System;
 using System.Collections.Generic;
 using Project.Scripts.ItemSystem;
 using Project.Scripts.StatSystem.Stats;
 using Project.Scripts.Utils;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project.Scripts.ShopSystem
 {
+    [DefaultExecutionOrder(-50)]
     public class Shop : Singleton<Shop>
     {
         private const float RerollStep = 1.2f;
-        private const float CostStep = 0.10f;
+        private const float CostStep = 0.20f;
         private const int RerollBase = 3;
 
         [SerializeField] Item[] commonItems;
@@ -29,6 +32,11 @@ namespace Project.Scripts.ShopSystem
 
         private int _commonItemCount;
         private readonly List<Item> _shopItems = new();
+
+        private void OnEnable()
+        {
+            luckStat.OnStatInit(GlobalVariables.Instance.PlayerStatGroup);
+        }
 
         public void Reroll()
         {

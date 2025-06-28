@@ -194,7 +194,7 @@ MonoBehaviour:
         useEfficiency: 100
         statType: {fileID: 11400000, guid: d7133e065dc28d84cb4a091df8e93666, type: 2}
     baseValue: 2.8
-    currValue: 0
+    currValue: 2.8
     positiveTransform: 1
   behaviorGraphAgent: {fileID: 7679437470409611216}
 --- !u!114 &6999244719332310704
@@ -214,7 +214,8 @@ MonoBehaviour:
     damageType: {fileID: 11400000, guid: a9dce9b431406d54288861a4bc707235, type: 2}
     extraStatDeps: []
   buffData: {fileID: 0}
-  allyGroup: 0
+  alliedGroup: 0
+  extraEffectHandler: {fileID: 0}
 --- !u!114 &5298582220894262415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab831a38f714abc9edfedbdb61d299a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldAmount: 3
+  goldAmount: 1
 --- !u!1 &7691238699623227762
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,10 +370,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b03a9a91ea0baa4a9cc71e92677617b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allyGroup: 0
+  alliedGroup: 0
   healthComponent: {fileID: 821334034517289629}
   buffManager: {fileID: 5022748536055724361}
-  effectPipeline: {fileID: 0}
+  extraEffectHandler: {fileID: 0}
   dodgeStat:
     statDependency:
       useEfficiency: 100

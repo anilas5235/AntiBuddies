@@ -8,7 +8,7 @@ namespace Project.Scripts.Spawning.Components
     public abstract class Spawner : MonoBehaviour
     {
         [SerializeField] private GameObject prefabToSpawn;
-        [SerializeField] private int spawns = 10;
+        [SerializeField] private int spawns;
         [SerializeField] private float initDelay;
         [SerializeField] private float spawnDelay;
         [SerializeField] private bool parentSpawnedObjects;
@@ -91,6 +91,8 @@ namespace Project.Scripts.Spawning.Components
 
             spawns = batch.spawnPerBatch;
             prefabToSpawn = batch.enemyPrefab;
+            initDelay = batch.initialDelay;
+            spawnDelay = batch.spawnDelay;
 
             Init();
         }

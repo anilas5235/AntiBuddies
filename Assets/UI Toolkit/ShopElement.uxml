@@ -3,7 +3,7 @@
     <engine:VisualElement style="flex-grow: 1; visibility: visible; align-self: stretch; align-content: flex-start;">
         <engine:VisualElement name="Frame" data-source-type="Project.Scripts.ItemSystem.ShopElement, Assembly-CSharp" class="frame" style="flex-grow: 1; margin-top: 5px; margin-bottom: 5px; margin-right: 5px; margin-left: 5px;">
             <engine:VisualElement style="flex-grow: 0; flex-direction: row;">
-                <engine:VisualElement name="Icon" style="flex-grow: 0; flex-shrink: 0; height: 100px; width: 100px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-self: flex-start; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px;">
+                <engine:VisualElement name="Icon" style="flex-grow: 0; flex-shrink: 0; height: 150px; width: 150px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-self: flex-start; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
                     <Bindings>
                         <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
                     </Bindings>
@@ -14,7 +14,7 @@
                     </Bindings>
                 </engine:Label>
             </engine:VisualElement>
-            <engine:Label text="Label" name="Description" class="description mid" style="flex-grow: 1; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px;">
+            <engine:Label text="Label" name="Description" class="description mid" style="flex-grow: 1; margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px; flex-wrap: nowrap; white-space: normal;">
                 <Bindings>
                     <engine:DataBinding property="text" data-source-path="description" binding-mode="ToTarget" />
                 </Bindings>

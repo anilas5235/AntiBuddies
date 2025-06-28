@@ -1,4 +1,7 @@
 ﻿using System;
+using Project.Scripts.EffectSystem.Effects.Data.Package;
+using Project.Scripts.Utils;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project.Scripts.ItemSystem
@@ -17,13 +20,16 @@ namespace Project.Scripts.ItemSystem
 
         [SerializeField] private Sprite icon;
         [SerializeField] private int cost;
-        [SerializeField] private ItemBehaviour[] behaviours;
+        [SerializeField] private StatPackage[] statPackages;
         [SerializeField] public Rarity rarity;
+        [SerializeField] private string description;
 
 
         public int Cost => cost;
         public string Name => name;
-        public string Description => this.ToString();
+        
+        public string Description => description + "\n\n" + ToString();
+        
         public Sprite Icon => icon;
         public Color Color => RarityColor(rarity);
 
@@ -35,17 +41,17 @@ namespace Project.Scripts.ItemSystem
 
         public void OnRemoved()
         {
-            foreach (var behaviour in behaviours)
+            foreach (var modification in statPackages)
             {
-                behaviour.OnRemoved();
+                GlobalVariables.Instance.PlayerStatGroup.ModifyStat(modification.Inverse());
             }
         }
 
         public void OnAdded()
         {
-            foreach (var behaviour in behaviours)
+            foreach (var modification in statPackages)
             {
-                behaviour.OnAdded();
+                GlobalVariables.Instance.PlayerStatGroup.ModifyStat(modification);
             }
         }
 
@@ -76,12 +82,24 @@ namespace Project.Scripts.ItemSystem
 
         public override string ToString()
         {
-            String str = "";
-            foreach (var itemBehaviour in behaviours)
+            string str = "";
+            foreach (var package in statPackages)
             {
-                str += itemBehaviour.ToString();
-            }
+                if (package.Amount > 0)
+                {
+                    str += "<color=green>";
+                    str += "+";
+                }
+                else
+                {
+                    str += "<color=red>";
+                }
 
+                str += package.Amount;
+                if (package.StatType.IsPercentage)
+                    str += "%";
+                str += "</color> "  + package.StatType.Name + "\n";
+            }
             return str;
         }
     }
